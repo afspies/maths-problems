@@ -1,0 +1,10 @@
+slug = "koethe"
+title = "Koethe's conjecture"
+question = "Is the sum of two nil left ideals of a ring always nil? Open since 1930"
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "proposed"
+best_result = ""
+doi = ""
+sessions = [
+    "2026-07-22 scaffolded from template",
+]

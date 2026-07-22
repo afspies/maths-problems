@@ -24,6 +24,7 @@ do not edit by hand.**
 | [Zariski cancellation problem (char 0, dim 3)](problems/zariski-cancellation/PROBLEM.md) | 🔵 active | Does A[t] = C[x,y,z,t] force A = C[x,y,z]? | — | — |
 | [Hadamard matrix of order 668](problems/hadamard-668/PROBLEM.md) | 🧩 scaffolded | Construct a 668x668 +-1 matrix H with H H^T = 668 I (smallest open order). | — | — |
 | [Two-variable Jacobian conjecture](problems/jacobian-2var/PROBLEM.md) | 🧩 scaffolded | Is every polynomial map C^2 -> C^2 with constant nonzero Jacobian determinant injective? | — | — |
+| [Koethe's conjecture](problems/koethe/PROBLEM.md) | ⬜ proposed | Is the sum of two nil left ideals of a ring always nil? Open since 1930 | — | — |
 | [Bounded gaps between primes: below 246](problems/prime-gaps/PROBLEM.md) | ⬜ proposed | Lower the unconditional bound liminf (p_{n+1} - p_n) <= 246 by re-attacking the Maynard-Tao variational problem | — | — |
 | [Slice-ribbon and exotic S4 candidates](problems/slice-ribbon/PROBLEM.md) | ⬜ proposed | Is every smoothly slice knot ribbon? Attack via obstruction computations on standing candidate families (GST knots, Gluck twists) | — | — |
 
