@@ -1,0 +1,10 @@
+slug = "artin-tits-word-problem"
+title = "Word problem for the minimal unknown Artin-Tits group"
+question = "Is the word problem decidable for the 4-generator Artin-Tits group with ad=da and braid relations on all other pairs? (Gowers Polymath proposal, March 2026)"
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "proposed"
+best_result = ""
+doi = ""
+sessions = [
+    "2026-07-22 scaffolded from template",
+]

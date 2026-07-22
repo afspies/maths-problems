@@ -24,6 +24,7 @@ do not edit by hand.**
 | [Zariski cancellation problem (char 0, dim 3)](problems/zariski-cancellation/PROBLEM.md) | 🔵 active | Does A[t] = C[x,y,z,t] force A = C[x,y,z]? | — | — |
 | [Hadamard matrix of order 668](problems/hadamard-668/PROBLEM.md) | 🧩 scaffolded | Construct a 668x668 +-1 matrix H with H H^T = 668 I (smallest open order). | — | — |
 | [Two-variable Jacobian conjecture](problems/jacobian-2var/PROBLEM.md) | 🧩 scaffolded | Is every polynomial map C^2 -> C^2 with constant nonzero Jacobian determinant injective? | — | — |
+| [Word problem for the minimal unknown Artin-Tits group](problems/artin-tits-word-problem/PROBLEM.md) | ⬜ proposed | Is the word problem decidable for the 4-generator Artin-Tits group with ad=da and braid relations on all other pairs? (Gowers Polymath proposal, March 2026) | — | — |
 | [Koethe's conjecture](problems/koethe/PROBLEM.md) | ⬜ proposed | Is the sum of two nil left ideals of a ring always nil? Open since 1930 | — | — |
 | [Bounded gaps between primes: below 246](problems/prime-gaps/PROBLEM.md) | ⬜ proposed | Lower the unconditional bound liminf (p_{n+1} - p_n) <= 246 by re-attacking the Maynard-Tao variational problem | — | — |
 | [Rota's basis conjecture](problems/rota-basis/PROBLEM.md) | ⬜ proposed | Can n bases of a rank-n matroid always be rearranged into an n x n grid whose rows are the given bases and whose columns are all bases? | — | — |
