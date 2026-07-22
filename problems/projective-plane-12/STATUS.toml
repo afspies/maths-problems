@@ -1,0 +1,10 @@
+slug = "projective-plane-12"
+title = "Projective plane of order 12"
+question = "Does a projective plane of order 12 (a symmetric 2-(157,13,1) design) exist?"
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "active"
+best_result = ""
+doi = ""
+sessions = [
+    "2026-07-22 session running (playground worktree; results to be merged here)",
+]

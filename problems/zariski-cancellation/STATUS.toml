@@ -1,0 +1,10 @@
+slug = "zariski-cancellation"
+title = "Zariski cancellation problem (char 0, dim 3)"
+question = "Does A[t] = C[x,y,z,t] force A = C[x,y,z]?"
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "active"
+best_result = ""
+doi = ""
+sessions = [
+    "2026-07-22 session running (playground worktree; results to be merged here)",
+]

@@ -1,0 +1,10 @@
+slug = "dixmier-weyl"
+title = "Explicit Dixmier/Poisson counterexamples"
+question = "Construct an explicit non-surjective endomorphism of a Weyl algebra A_n."
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "active"
+best_result = ""
+doi = ""
+sessions = [
+    "2026-07-22 session running (playground worktree; results to be merged here)",
+]

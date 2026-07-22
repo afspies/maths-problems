@@ -1,0 +1,10 @@
+slug = "conway-99-graph"
+title = "Conway's 99-graph problem"
+question = "Does srg(99,14,1,2) exist (every edge in a unique triangle, non-edge in a unique quad)?"
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "scaffolded"
+best_result = ""
+doi = ""
+sessions = [
+    "2026-07-22 scaffolded; handoff chip pending",
+]

@@ -1,0 +1,10 @@
+slug = "hadamard-668"
+title = "Hadamard matrix of order 668"
+question = "Construct a 668x668 +-1 matrix H with H H^T = 668 I (smallest open order)."
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "scaffolded"
+best_result = ""
+doi = ""
+sessions = [
+    "2026-07-22 scaffolded; handoff chip pending",
+]

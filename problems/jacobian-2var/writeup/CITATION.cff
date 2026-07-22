@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Cite this per-problem release; the DOI below is added automatically by tools/release.py."
+title: "Two-variable Jacobian conjecture: results from the maths-problems repository"
+type: dataset
+authors:
+  - family-names: Spies
+    given-names: Alex
+    email: alex@far.ai
+repository-code: "https://github.com/afspies/maths-problems"

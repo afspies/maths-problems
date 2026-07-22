@@ -1,0 +1,10 @@
+slug = "frankl-union-closed"
+title = "Union-closed sets (Frankl) conjecture"
+question = "Does every finite union-closed family (not just {{}}) have an element in half its sets?"
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "active"
+best_result = ""
+doi = ""
+sessions = [
+    "2026-07-22 session running (playground worktree; results to be merged here)",
+]

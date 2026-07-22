@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use results from this repository, cite the per-problem release (see problems/<slug>/writeup/CITATION.cff and its DOI) rather than the repository as a whole where possible."
+title: "maths-problems: agent-assisted attacks on certificate-verifiable open problems"
+type: software
+authors:
+  - family-names: Spies
+    given-names: Alex
+    email: alex@far.ai
+repository-code: "https://github.com/afspies/maths-problems"
+license: MIT

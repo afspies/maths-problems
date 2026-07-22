@@ -1,0 +1,10 @@
+slug = "moore-graph-57"
+title = "The missing Moore graph (degree 57)"
+question = "Does a 57-regular graph on 3250 vertices with girth 5 (srg(3250,57,0,1)) exist?"
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "scaffolded"
+best_result = ""
+doi = ""
+sessions = [
+    "2026-07-22 scaffolded; handoff chip pending",
+]

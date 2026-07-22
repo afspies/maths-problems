@@ -1,0 +1,10 @@
+slug = "hadwiger-nelson"
+title = "Hadwiger-Nelson: chromatic number of the plane >= 6"
+question = "Find a finite unit-distance graph that is not 5-colorable."
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "active"
+best_result = ""
+doi = ""
+sessions = [
+    "2026-07-22 session running (playground worktree; results to be merged here)",
+]

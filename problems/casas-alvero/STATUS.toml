@@ -1,0 +1,10 @@
+slug = "casas-alvero"
+title = "Casas-Alvero conjecture"
+question = "If deg-d monic f shares a root with each of f', ..., f^(d-1), is f = (x-a)^d?"
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "active"
+best_result = ""
+doi = ""
+sessions = [
+    "2026-07-22 session running (playground worktree; results to be merged here)",
+]

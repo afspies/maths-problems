@@ -1,0 +1,10 @@
+slug = "jacobian-2var"
+title = "Two-variable Jacobian conjecture"
+question = "Is every polynomial map C^2 -> C^2 with constant nonzero Jacobian determinant injective?"
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "scaffolded"
+best_result = ""
+doi = ""
+sessions = [
+    "2026-07-22 scaffolded; handoff chip pending",
+]
