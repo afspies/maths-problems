@@ -1,0 +1,10 @@
+slug = "slice-ribbon"
+title = "Slice-ribbon and exotic S4 candidates"
+question = "Is every smoothly slice knot ribbon? Attack via obstruction computations on standing candidate families (GST knots, Gluck twists)"
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "proposed"
+best_result = ""
+doi = ""
+sessions = [
+    "2026-07-22 scaffolded from template",
+]
