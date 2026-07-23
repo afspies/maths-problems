@@ -5,3 +5,5 @@ __pycache__/
 scratch/
 *.egg-info/
 .venv/
+problems/moore-graph-57/angles/semiregular-quotient/sat/generated/
+problems/moore-graph-57/angles/semiregular-quotient/sat/tools/
