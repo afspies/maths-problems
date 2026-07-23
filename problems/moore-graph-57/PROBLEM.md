@@ -16,9 +16,18 @@ has been open ever since.
 
 ## Known structure (bake into any search)
 - Aschbacher/Higman: the graph cannot be vertex-transitive; its automorphism
-  group has order ≤ 375 (Mačaj–Širáň), and much is known about which primes can
-  divide it (aut group is small and of restricted shape — re-derive the exact
-  current state from the literature before searching).
+  group has order ≤ 375 (Mačaj–Širáň 2010).
+- **2026 state (see literature/exclusion-map.md — the campaign's cited map):**
+  Ishida's preprint (arXiv:2606.29183) rules out involutions, so |Aut| is odd —
+  only the 24 odd orders in Mačaj–Širáň's list survive; exact displacement
+  counts are known for elements of order 7/11/13/19 (order 13 acts freely,
+  order 19 fixes exactly one vertex). Makhnev's 2020 nonexistence claim is
+  rebutted (Faber–Keegan); the problem is open. Smith–Montemanni (Axioms 2026)
+  excluded the cyclic group in the derangements ansatz; this campaign's
+  perfectness theorem (writeup/) excludes ALL order-56 groups there.
+- No exhaustive search under any prescribed automorphism has ever been
+  published — that structural gap is what this campaign's equivariant
+  SAT/CP infrastructure targets.
 - Any two adjacent vertices have 0 common neighbors; any two non-adjacent have
   exactly 1 — so the graph is a friendship-like incidence geometry; local
   structure around a vertex is a 57-star plus a partition of the remaining 3192
@@ -34,9 +43,10 @@ has been open ever since.
 - **Algebraic/association-scheme constructions**: search for the graph as a
   fusion/switching of known combinatorial objects (Hoffman–Singleton copies,
   cocliques in known srgs, designs on 3250 points).
-- **Spectral/SDP relaxations**: the eigenvalue structure gives semidefinite
-  feasibility problems for partial adjacency patterns — infeasibility of a
-  relaxation for a local configuration is an exclusion lemma.
+- **Spectral/SDP relaxations**: KNOWN DEAD in plain form — the standard
+  spectral LMIs admit an explicit fractional feasible point (LEARNINGS.md),
+  so only integrality/rank-augmented or high-level moment relaxations
+  could ever bite. Don't rebuild vanilla SDP.
 - **Local-gluing search**: build the neighborhood geometry (57 blocks of 56)
   and treat completion as constraint satisfaction with heavy symmetry breaking.
 - **Probabilistic/entropy heuristics** to estimate where in the space solutions

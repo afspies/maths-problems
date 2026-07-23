@@ -1,0 +1,447 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\id}{e}
+
+\title{A perfectness obstruction to group-of-derangements\\
+constructions of Moore graphs}
+\author{Alex Spies\thanks{FAR AI. \texttt{alex@far.ai}. Drafted with
+machine assistance; all proofs verified by hand, with the theorem's
+predictions corroborated by independent exhaustive computation in the
+small accessible cases (Section~\ref{sec:computation}).}}
+\date{July 2026 --- draft}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A Moore graph of diameter two and degree $k$ decomposes, from any fixed
+vertex, into $k$ blocks of size $k-1$ joined pairwise by perfect
+matchings. Smith and Montemanni recently studied the ansatz in which the
+blocks are identified with a group $H$ of order $k-1$ and all matchings
+are right multiplications, and excluded the cyclic group for $k=57$. We
+prove a general obstruction: if $|H|>2$, any such gain assignment forces
+$H$ to be a perfect group. Since every group of order $56=2^3\cdot 7$ is
+solvable by Burnside's $p^aq^b$ theorem, no group of order $56$ is
+perfect, and the ansatz fails for all thirteen groups of order $56$.
+This closes the non-cyclic case left open by Smith and Montemanni, and
+shows more generally that the group-of-derangements ansatz produces no
+Moore graph beyond the Petersen graph.
+\end{abstract}
+
+\section{Introduction}
+
+A \emph{Moore graph} of diameter $2$ is a $k$-regular graph of girth $5$
+on $k^2+1$ vertices. Hoffman and Singleton~\cite{HS1960} proved that
+such graphs exist only for $k\in\{2,3,7,57\}$; the first three are the
+pentagon, the Petersen graph, and the Hoffman--Singleton graph, each
+unique, while existence for $k=57$ has been open since 1960. A long line
+of work constrains a hypothetical automorphism group of the missing
+graph~\cite{Higman,MacajSiran2010,Ishida2026}. On the constructive side,
+Faber and Keegan~\cite{FK2022} showed that existence for $k=57$ is
+equivalent to a system of fixed-point-freeness conditions on
+$\binom{56}{2}$ permutations of $56$ symbols; Smith and
+Montemanni~\cite{SM2026} specialized to the case in which these
+permutations lie in a common \emph{group of derangements} --- which
+they show must then have order exactly $56$ --- and excluded the cyclic
+group: there is no such construction over $\mathbb{Z}_{56}$. They left
+the twelve non-cyclic groups of order $56$ open, doubted that their
+partial-transversal counting could extend to them, and predicted that a
+general proof would need to consider larger configurations of the
+permutations.
+
+We prove that the ansatz is obstructed for every group that is not
+\emph{perfect} (equal to its own commutator subgroup), whenever the
+group has more than two elements
+(Theorem~\ref{thm:perfect}). All groups of order $56$ are solvable by
+Burnside's theorem, hence not perfect, which settles the open case
+(Corollary~\ref{cor:57}). The scope of the result is deliberately
+narrow: it excludes one natural family of constructions; it says nothing
+about the existence of the degree-$57$ Moore graph in general, nor even
+about matchings realized by other algebraic structures.
+
+\section{The matching decomposition and its gain formulation}
+\label{sec:gain}
+
+Throughout, $\Gamma$ is a Moore graph of diameter $2$ and degree
+$k\ge 3$, and $q=k-1$. Fix a vertex $u$, let $v_1,\dots,v_k$ be its
+neighbours, and for $i$ in the index set $I=\{1,\dots,k\}$ put
+\[
+B_i \;=\; N(v_i)\setminus\{u\},
+\qquad |B_i| = q,
+\]
+so that $V(\Gamma)$ is the disjoint union
+$\{u\}\cup\{v_1,\dots,v_k\}\cup B_1\cup\dots\cup B_k$
+(diameter $2$ and girth $5$ imply every vertex at distance $2$ from $u$
+lies in exactly one $B_i$).
+
+\begin{lemma}\label{lem:blocks}
+For all distinct $i,j\in I$:
+\begin{enumerate}
+\item[(a)] $B_i$ is an independent set;
+\item[(b)] the edges between $B_i$ and $B_j$ form a perfect matching
+$M_{ij}\colon B_i\to B_j$;
+\item[(c)] every triangle of $\Gamma$ avoiding
+$\{u,v_1,\dots,v_k\}$ meets three distinct blocks, and every
+$4$-cycle avoiding $\{u,v_1,\dots,v_k\}$ meets four distinct blocks.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) An edge inside $B_i$ makes a triangle through $v_i$.
+(b) A vertex $x\in B_i$ has degree $k$: one edge to $v_i$ and, since
+$x$ has distance $\le 2$ to each of the $q$ vertices of $B_j$ but
+distance $2$ to $v_j$ (girth $5$ forbids $x\sim v_j$), at least one
+neighbour in each $B_j$, $j\ne i$. That accounts for $1+(k-1)=k$ edges,
+so \emph{exactly} one neighbour in each $B_j$; two would close a
+$4$-cycle through $v_j$.
+(c) Two vertices of a cycle in the same block would give some matching
+two edges at one vertex, or an edge inside a block.
+\end{proof}
+
+\textbf{The ansatz.} Let $H$ be a group of order $q$. Say $\Gamma$
+\emph{admits the group-of-derangements ansatz over $H$} if each block
+can be identified with $H$, $B_i \leftrightarrow H$, so that every
+matching is a right multiplication:
+\[
+M_{ij}(x) \;=\; x\,g_{ij}
+\quad\text{for some } g_{ij}\in H,
+\qquad\text{for all distinct } i,j \in I .
+\]
+Since $M_{ji}=M_{ij}^{-1}$, necessarily $g_{ji}=g_{ij}^{-1}$. (The name
+comes from the equivalent description of $M_{ij}$, as a permutation of
+$H$, lying in the right-regular representation of~$H$. Whether such a
+permutation has fixed points depends on the chosen identifications of
+the blocks with $H$; in the normalization below, girth $5$ forces every
+gain between non-reference blocks to be nonidentity, so those
+matchings become fixed-point-free right multiplications, i.e.\
+derangements.)
+
+\textbf{Normalization.} Re-identifying $B_i$ with $H$ by a right
+translation $x\mapsto x c_i^{-1}$ (any $c_i\in H$) preserves the ansatz
+and replaces the gains by
+\[
+h_{ij} \;=\; c_i\, g_{ij}\, c_j^{-1}:
+\]
+indeed the vertex with new label $y=xc_i^{-1}$ in $B_i$ is matched to
+the vertex with old label $xg_{ij}=y\,c_i g_{ij}$ in $B_j$, whose new
+label is $y\,c_i g_{ij} c_j^{-1}$ --- again a right multiplication.
+Taking $c_1=\id$ and $c_j=g_{1j}$ for $j\ge 2$ gives
+$h_{1j}=g_{1j}g_{1j}^{-1}=\id$, i.e.
+\[
+h_{1j}=\id \text{ for all } j \ne 1,
+\qquad
+h_{ij}=g_{1i}\,g_{ij}\,g_{1j}^{-1} \text{ for } i,j\ne 1 .
+\]
+From now on we assume this normalization and restrict attention to the
+gains $h_{ij}$ indexed by distinct $i,j$ in $J=\{2,\dots,k\}$, a set of
+size $k-1=q$.
+
+\begin{lemma}[gain conditions]\label{lem:VTQ}
+Let $(h_{ij})_{i\ne j\in J}$ be any assignment with $h_{ji}=h_{ij}^{-1}$,
+extended by $h_{1j}=h_{j1}=\id$, and let $\widehat\Gamma$ be the graph
+assembled from the tree $\{u\}\cup\{v_i\}\cup(I\times H)$ (with
+$u\sim v_i$ and $v_i\sim(i,x)$ for all $x\in H$) together with the
+matchings $(i,x)\sim(j,x\,h_{ij})$. Then $\widehat\Gamma$ is a Moore
+graph of degree $k$ if and only if
+$h_{ij}\ne\id$ for all distinct $i,j\in J$ and:
+\begin{itemize}
+\item[(V)] for each $i\in J$:\quad
+$\{\,h_{ij} : j\in J\setminus\{i\}\,\}\;=\;H\setminus\{\id\}$;
+\item[(T)] for all distinct $i,j,l\in J$:\quad
+$h_{ij}\,h_{jl}\,h_{li}\neq \id$;
+\item[(Q)] for all distinct $i,j,l,m\in J$:\quad
+$h_{ij}\,h_{jl}\,h_{lm}\,h_{mi}\neq \id$.
+\end{itemize}
+In particular, a Moore graph of degree $k$ admitting the ansatz yields,
+after the normalization above, an assignment satisfying these
+conditions.
+\end{lemma}
+
+\begin{proof}
+$\widehat\Gamma$ is $k$-regular on $1+k+kq=k^2+1$ vertices, so it is a
+Moore graph iff its girth is at least $5$. (Justification: when the
+girth is at least $5$, the $1+k+k(k-1)=k^2+1$ endpoints of walks of
+length $\le 2$ from a fixed vertex are pairwise distinct, so they
+exhaust the graph --- diameter $2$, with every vertex at distance $2$
+joined by a \emph{unique} path. The girth is then exactly $5$ for
+$k\ge 3$: were it larger, pick adjacent $u,v$, a neighbour $w\ne u$ of
+$v$, and a neighbour $x\ne v$ of $w$; then $x$ is at distance $2$ from
+$u$, and its unique common neighbour $y$ with $u$ closes either the
+triangle $v,w,x$ (if $y=v$) or the $5$-cycle $u,y,x,w,v$ --- a
+contradiction either way.) By construction $u$ and the
+$v_i$ lie on no short cycle: $u$'s neighbourhood $\{v_i\}$ is
+independent, each $v_i$'s neighbourhood $\{u\}\cup B_i$ is independent,
+distinct blocks are disjoint, and matchings are injective. The
+remaining candidates are cycles alternating along matchings through $3$
+resp.\ $4$ \emph{distinct} blocks (a repeated block would force an
+intra-block edge --- none exist --- or two matching edges at one
+vertex); such a cycle through blocks $i_1,\dots,i_r$ ($r=3,4$) closes
+iff the product of its gains is $\id$. A cycle using the normalized
+block $1$ and blocks $i,j\in J$ closes iff $h_{ij}=\id$ (giving the
+condition $h_{ij}\neq\id$); one using block $1$ and blocks
+$j,i,l\in J$ (in cyclic order $1,j,i,l$) closes iff
+$h_{ji}h_{il}=\id$, i.e.\ $h_{ij}=h_{il}$ --- so girth $5$ forces the
+$q-1$ outgoing gains $h_{ij}$ ($j\ne i$) to be pairwise distinct and
+nonidentity, and since $|H\setminus\{\id\}|=q-1$ this is exactly (V).
+Cycles avoiding block $1$ give (T) and (Q). This proves both
+directions at once: girth $\geq 5$ holds iff no gain product of a
+$3$- or $4$-block cycle is trivial iff $h_{ij}\ne\id$, (V), (T), (Q).
+The final claim holds because, by Lemma~\ref{lem:blocks}, a Moore graph
+admitting the ansatz is isomorphic to the $\widehat\Gamma$ of its
+normalized gains, and has girth $5$.
+\end{proof}
+
+\section{The obstruction}
+
+\begin{theorem}\label{thm:perfect}
+Let $H$ be a finite group with $|H|>2$, and let $J$ be an index set
+with $|J|=|H|$. If an assignment $(h_{ij})_{i\neq j\in J}$ over $H$
+satisfies $h_{ji}=h_{ij}^{-1}$ for all $i\ne j$ together with
+\textup{(V)}, \textup{(T)}, \textup{(Q)}, then $H$ is perfect:
+$H=[H,H]$.
+\end{theorem}
+
+\begin{proof}
+Write $q=|H|=|J|$.
+Fix distinct $a,b\in J$ and set $t=h_{ab}$; by (V) at $a$, as $b$
+ranges over $J \setminus \{a\}$, $t$ ranges over all of
+$H\setminus\{\id\}$, so it suffices to derive a conclusion valid for
+each fixed $t$ and then let $t$ vary. For each of the $q-2$ indices
+$i\in J\setminus\{a,b\}$ define
+\[
+x_i=h_{ai},\qquad y_i=h_{ib},\qquad z_i=x_i y_i .
+\]
+
+\emph{Each of the three lists is a permutation of
+$H\setminus\{\id,t\}$, a set of size $q-2$.}
+
+For $(x_i)$: by (V) at $a$, the $q-1$ outgoing gains at $a$ are
+pairwise distinct and exhaust $H\setminus\{\id\}$; removing the one
+aimed at $b$, namely $h_{ab}=t$, leaves exactly
+$\{x_i\}=H\setminus\{\id,t\}$.
+
+For $(y_i)$: by (V) at $b$, the outgoing list
+$\{h_{bj}:j\ne b\}$ equals $H\setminus\{\id\}$; it contains
+$h_{ba}=t^{-1}$, so $\{h_{bi}: i\in J\setminus\{a,b\}\}
+= H\setminus\{\id,t^{-1}\}$. Now $y_i=h_{ib}=h_{bi}^{-1}$, and
+inversion is a bijection of $H$ fixing $\id$ and carrying $t^{-1}$ to
+$t$; hence
+\[
+\{y_i\} \;=\;
+\bigl(H\setminus\{\id,t^{-1}\}\bigr)^{-1}
+\;=\; H\setminus\{\id,t\}.
+\]
+
+For $(z_i)$, three separate girth conditions are used:
+\begin{itemize}
+\item $z_i\neq\id$: by (V) at $i$, the outgoing gains at $i$ are
+pairwise distinct, so $h_{ia}\neq h_{ib}$, i.e.\
+$x_i^{-1}\neq y_i$, i.e.\ $x_iy_i\neq\id$.
+\item $z_i\neq t$: (T) on the triangle $(a,i,b)$ reads
+$h_{ai}h_{ib}h_{ba}\neq\id$, i.e.\ $x_iy_it^{-1}\neq\id$.
+\item $z_i\neq z_j$ for $i\neq j$: (Q) on the $4$-cycle
+$(a,i,b,j)$, traversed in this order, reads
+\[
+h_{ai}\,h_{ib}\,h_{bj}\,h_{ja}
+\;=\;
+x_i\, y_i\, y_j^{-1} x_j^{-1}\;\neq\;\id .
+\]
+On the other hand, \emph{as an identity in $H$, with no commutativity
+used}, $z_iz_j^{-1}=(x_iy_i)(x_jy_j)^{-1}=x_iy_iy_j^{-1}x_j^{-1}$.
+The two expressions coincide verbatim, so $z_iz_j^{-1}\neq\id$.
+\end{itemize}
+Thus $(z_i)$ consists of $q-2$ pairwise distinct elements of the
+$(q-2)$-element set $H\setminus\{\id,t\}$, hence is a permutation
+of it.
+
+\emph{Abelianization.} Let $A=H/[H,H]$ and let
+$\bar h$ denote the image of $h\in H$ in $A$. Set
+\[
+S_t=\prod_{h\in H\setminus\{\id,t\}}\bar h \in A
+\]
+(well defined since $A$ is abelian). Each of the three lists is a
+permutation of $H\setminus\{\id,t\}$, so
+$\prod_i\bar x_i=\prod_i\bar y_i=\prod_i\bar z_i=S_t$. But
+$\bar z_i=\bar x_i\bar y_i$ and $A$ is abelian, so
+\[
+S_t=\prod_i\bar z_i
+=\Bigl(\prod_i\bar x_i\Bigr)\Bigl(\prod_i\bar y_i\Bigr)=S_t^2,
+\]
+whence $S_t=\id$. Writing $P=\prod_{h\in H\setminus\{\id\}}\bar h$ we
+get $\bar t=P\, S_t^{-1} = P$ for the chosen $t$; since $t$ ranges over all of
+$H\setminus\{\id\}$, \emph{every} nonidentity element of $H$ has the
+same image $P$ in $A$.
+
+If $P=\id$ then $A$ is generated by $\{\bar t\}=\{\id\}$, so $A$ is
+trivial and $H$ is perfect. If $P\neq\id$, the quotient map
+$H\to A$ has trivial kernel, hence is injective; but it sends all
+$q-1$ nonidentity elements to the single element $P$, forcing
+$q-1\le 1$, i.e.\ $|H|\le 2$, contradicting the hypothesis.
+\end{proof}
+
+\begin{remark}
+The case $|H|=2$ is genuinely exceptional: for $k=3$, $H=\mathbb{Z}_2$,
+the ansatz is satisfiable and produces the Petersen graph. The theorem
+in fact proves a dichotomy: a solution exists only if $H$ is perfect or
+$|H|\le 2$.
+\end{remark}
+
+\section{Degree \texorpdfstring{$57$}{57}}
+
+\begin{corollary}\label{cor:57}
+No group $H$ of order $56$ admits an assignment
+$(h_{ij})_{i\ne j\in J}$, $|J|=56$, with $h_{ji}=h_{ij}^{-1}$
+satisfying \textup{(V)}, \textup{(T)}, \textup{(Q)}. Consequently the missing
+Moore graph of degree $57$, if it exists, does not arise from the
+group-of-derangements ansatz over any of the thirteen groups of order
+$56$.
+\end{corollary}
+
+\begin{proof}
+$56=2^3\cdot 7$, so by Burnside's $p^aq^b$
+theorem~\cite{Burnside1904} every group of order $56$ is solvable. A
+nontrivial solvable group has $[H,H]\ne H$ (its derived series
+terminates), so no group of order $56$ is perfect, and
+Theorem~\ref{thm:perfect} applies since $56>2$.
+\end{proof}
+
+This closes the case left open by Smith and Montemanni~\cite{SM2026},
+who proved Corollary~\ref{cor:57} for $H=\mathbb{Z}_{56}$ by a
+partial-transversal count (their contradiction $27\equiv 0
+\pmod{56}$ is recovered, in additive notation, as the $t=1$ instance
+of $S_t=\id$ above) and posed the remaining twelve groups as an open
+problem. Their Propositions~1--2 supply the bridge between the matching
+decomposition and the ansatz as stated in Section~\ref{sec:gain}:
+suppose the matchings, viewed after identification of all blocks with
+one $56$-symbol label set as permutations of that set, all lie in a
+subgroup $H\le S_{56}$ acting semiregularly (a \emph{group of
+derangements} in their terminology). Wielandt's lemma (their
+Proposition~1) gives $|H|\mid 56$; pairwise distinctness of the
+outgoing permutations at a fixed block (their Proposition~2, the
+distinctness half of our condition~(V)) exhibits $55$ distinct
+nonidentity elements of $H$, so with the identity $|H|=56$, and $H$
+acts \emph{regularly} on the labels. Labelling the symbols by the orbit
+map $h\mapsto \ell_0^{\,h}$ from any base symbol $\ell_0$ then turns
+the action of every element of $H$, hence every matching, into a right
+multiplication --- exactly the ansatz above.
+
+\begin{remark}[Relation to complete mappings]
+The abelianization step sharpens a classical device from the
+complete-mappings literature. Hall and Paige~\cite{HP1955} showed that
+a complete mapping of a finite group $G$ forces the product of all
+elements of $G$ to lie in $[G,G]$ --- an obstruction living in the
+abelianization exactly as $S_t$ does --- and by the Dénes--Hermann
+theorem~\cite{DH1982} the products of all elements, over all orderings,
+fill a full coset of $[G,G]$. Those obstructions are detected by a single product in the
+abelianization (Hall--Paige proved the corresponding sufficiency only
+for solvable groups; the full converse, the Hall--Paige conjecture, was
+established much later). Here the girth system forces the
+punctured products $S_t$ to be trivial for \emph{every} puncture $t$,
+and it is the variation over $t$ that upgrades ``a distinguished
+coset'' to the collapse $H=[H,H]$. Smith and Montemanni's cyclic
+exclusion is, in this language, the statement that a punctured Cayley
+table of $\mathbb{Z}_{56}$ lacks a partial transversal of the required
+kind.
+\end{remark}
+
+We emphasize again the narrow scope: matchings not arising from a group
+in this way --- e.g.\ arbitrary derangement systems, or the
+``all-involutions'' matchings by which the Hoffman--Singleton graph
+itself can be assembled (Smith and Montemanni exhibit such an assembly
+from involutions that do \emph{not} form a group) --- are untouched.
+The theorem excludes the \emph{group} ansatz at $k=7$ as well (both
+groups of order $6$ are solvable), which is compatible with the
+existence of the Hoffman--Singleton graph precisely because its
+matchings form no group, while at $k=3$ the exemption $|H|=2$ admits
+the Petersen graph.
+
+\begin{remark}
+The smallest nontrivial perfect group is $A_5$, of order $60$. Since the only
+degrees admitting a Moore graph of diameter $2$ are $k\in\{2,3,7,57\}$
+\cite{HS1960}, i.e.\ $|H|=k-1\in\{1,2,6,56\}$, no Moore degree has
+$k-1$ the order of a perfect group with $k-1>2$. Hence
+Theorem~\ref{thm:perfect} shows the group-of-derangements ansatz
+produces exactly one Moore graph of diameter $2$ and degree $\geq 3$
+across all degrees: the Petersen graph.
+\end{remark}
+
+\section{Computational corroboration}\label{sec:computation}
+
+The theorem was checked, as corroboration rather than as part of the
+proof, by exhaustive search at the accessible parameters:
+\begin{itemize}
+\item $k=3$, $H=\mathbb{Z}_2$ (excluded from the theorem's hypothesis):
+feasible; the assembled graph is the Petersen graph, verified in exact
+integer arithmetic: its adjacency matrix $M$ satisfies
+$M^2+M-(k-1)I=\mathbf{1}\mathbf{1}^{\!\top}$.
+\item $k=7$: both groups of order $6$ are correctly infeasible. Two
+independent implementations agree: a pruned DFS, and a deliberately
+simple enumerator sharing no pruning logic that visits every
+(V)-complete assignment --- $1680=14\cdot 5!$ leaves for
+$\mathbb{Z}_6$ and $1200=10\cdot 5!$ for $S_3$ (leaf counts stated
+with the first row fixed and multiplied out) --- finding none that
+satisfy (T) and (Q).
+\item $q=4$ and $q=3$ (no Moore graph exists, but the gain conditions
+make sense): $\mathbb{Z}_4$, $\mathbb{Z}_2^2$ and $\mathbb{Z}_3$ are
+infeasible by brute force, as Theorem~\ref{thm:perfect} demands.
+\end{itemize}
+
+\begin{thebibliography}{9}
+
+\bibitem{HS1960}
+A.~J. Hoffman and R.~R. Singleton,
+\emph{On Moore graphs with diameters 2 and 3},
+IBM J. Res. Develop. \textbf{4} (1960), 497--504.
+
+\bibitem{Burnside1904}
+W.~Burnside,
+\emph{On groups of order $p^\alpha q^\beta$},
+Proc. London Math. Soc. (2) \textbf{1} (1904), 388--392.
+
+\bibitem{FK2022}
+V.~Faber and J.~Keegan,
+\emph{The existence of a Moore graph of degree 57 is still open},
+preprint, arXiv:2210.09577 (2022).
+
+\bibitem{HP1955}
+M.~Hall and L.~J. Paige,
+\emph{Complete mappings of finite groups},
+Pacific J. Math. \textbf{5} (1955), 541--549.
+
+\bibitem{DH1982}
+J.~Dénes and P.~Hermann,
+\emph{On the product of all elements in a finite group},
+Ann. Discrete Math. \textbf{15} (1982), 105--109.
+
+\bibitem{Higman}
+P.~J. Cameron,
+\emph{Permutation Groups},
+LMS Student Texts 45, Cambridge Univ. Press, 1999.
+(Higman's proof that a degree-57 Moore graph is not vertex-transitive.)
+
+\bibitem{MacajSiran2010}
+M.~Mačaj and J.~Širáň,
+\emph{Search for properties of the missing Moore graph},
+Linear Algebra Appl. \textbf{432} (2010), 2381--2398.
+
+\bibitem{Ishida2026}
+K.~Ishida,
+\emph{The order of the automorphism group of the missing Moore graph is odd},
+preprint, arXiv:2606.29183 (2026).
+
+\bibitem{SM2026}
+D.~H. Smith and R.~Montemanni,
+\emph{The Moore graph of diameter 2 and degree 57 via cyclic derangements},
+Axioms \textbf{15} (2026), no.~5, 332.
+
+\end{thebibliography}
+
+\end{document}

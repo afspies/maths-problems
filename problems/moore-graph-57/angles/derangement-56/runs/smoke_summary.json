@@ -1,0 +1,70 @@
+{
+  "z2": {
+    "status": "SAT",
+    "stats": {
+      "status": "SAT",
+      "reason": "complete DFS witness",
+      "nodes": 0,
+      "backtracks": 0,
+      "domain_wipeouts": 0,
+      "hall_union_failures": 0,
+      "max_depth": 0,
+      "free_edges": 0,
+      "fixed_edges": 1,
+      "elapsed_seconds": 3.7499703466892242e-06,
+      "first_row_order": [
+        1
+      ]
+    },
+    "verify_moore": "PASS",
+    "witness": "angles/derangement-56/runs/z2_witness.json"
+  },
+  "z6": {
+    "status": "UNSAT",
+    "stats": {
+      "status": "UNSAT",
+      "reason": "complete DFS exhaustion",
+      "nodes": 3,
+      "backtracks": 4,
+      "domain_wipeouts": 1,
+      "hall_union_failures": 1,
+      "max_depth": 2,
+      "free_edges": 10,
+      "fixed_edges": 5,
+      "elapsed_seconds": 0.00010770803783088923,
+      "first_row_order": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "verify_moore": "not applicable",
+    "witness": null
+  },
+  "s3": {
+    "status": "UNSAT",
+    "stats": {
+      "status": "UNSAT",
+      "reason": "complete DFS exhaustion",
+      "nodes": 6,
+      "backtracks": 7,
+      "domain_wipeouts": 0,
+      "hall_union_failures": 2,
+      "max_depth": 3,
+      "free_edges": 10,
+      "fixed_edges": 5,
+      "elapsed_seconds": 0.00019225000869482756,
+      "first_row_order": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "verify_moore": "not applicable",
+    "witness": null
+  }
+}
