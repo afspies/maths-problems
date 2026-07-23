@@ -53,6 +53,78 @@ character χ, the block is  Ĉ_χ[i,j] = χ(S_ij) = Σ_{g∈S_ij} χ(g).
    Z[ζ₅]; the rationality of the total forces strong symmetry on the
    multiset {S_ii}.
 
+## VERIFIED LEMMA (2026-07-23): abelian lifts force a = 21
+
+Sharpening of constraint 4, found by a GPT-5.6-sol xhigh consult and
+independently re-derived + exactly verified in `verify_mod3_lemma.py`
+(38/38 checks; machinery validated end-to-end on a real HoS order-5
+semiregular quotient).
+
+For g ≠ 0 define f(g) = #{i : g ∈ S_ii}. Fourier inversion +
+the per-character trace identities give
+
+    125 f(g) = 15a + 65 + 15 T(g),   T(g) = Σ_{χ≠1} χ̄(g) m₇(χ) ∈ Z.
+
+Mod 3 (15 ≡ 0, 125 ≡ 2, 65 ≡ 2):  **f(g) ≡ 1 (mod 3)**, hence
+f(g) ≥ 1 for all 124 nonzero g, so tr C = Σ f(g) ≥ 124, i.e.
+15a − 143 ≥ 124 ⟹ a ≥ 18. Intersecting with a ∈ {13, 17, 21}:
+
+    ****  any ABELIAN order-125 semiregular lift has a = 21.  ****
+
+Consequences: (i) the "character-filtered a ∈ {13,17}" search targets
+are DEAD for abelian lifts — a = 21 is the only abelian target;
+(ii) every nonzero g lies in some diagonal set S_ii (the S_ii cover
+G ∖ {0}), with Σ|S_ii| = 172 and each f(g) ∈ {1, 4, 7, …};
+(iii) Parseval on f gives Σ_g f(g)² = (1/125)[172² + Σ_{χ≠1}(15m₇(χ)−208)²]
+— an open lever on the surviving a = 21 case (m₇ mean 1708/124 ≈ 13.8).
+
+Corrected F₅ rank caps (consult's min(a,25−a) was off by one): with
+N = C − 2I mod 5, rank_F5(N) ≤ min(26−a, a+1, 12) — for a = 21 the cap
+is 5; for a = 23 it is 3. (From rank_Q(C−7I) = 26−a, rank_Q(C+8I) = a+1,
+both ≡ N mod 5, plus total isotropy of im N in 1⊥.)
+
+## VERIFIED (2026-07-23, second consult): nonabelian groups + a=21 structure
+
+Rigorized by a second GPT-5.6-sol xhigh job; exact checks re-run by the
+session driver (all pass): `verify_a21_rigidity.py` (constants, PG(2,5)
+incidences, all three pattern enumerations), `verify_nonabelian_characters.py`
+(deg-5 character values for both nonabelian groups, exact cyclotomics).
+
+**Nonabelian theorem.** For both nonabelian order-125 groups (Z = [G,G] =
+Z(G) ≅ Z₅, irreps 25 linear + four of degree 5 with tr ψ = 5λ on Z, 0 off
+Z): central elements satisfy f(z) = 208 − 3μ ≡ 1 (mod 3) (μ = common
+deg-5 block multiplicity, 61 ≤ μ ≤ 69, Galois-forced equal across the
+four blocks; global identity a + L + 20μ = 1729); noncentral cosets
+satisfy 25 F(q̄) = 15a + 65 + 15 T_lin(q̄) ⟹ F(q̄) ≡ 2 (mod 3) on the 24
+nonzero cosets of G/Z. Net: tr C ≥ 52 ⟹ a ≥ 13, plus a ≡ 1 (mod 4)
+(six linear 4-orbits + one 4-orbit of deg-5 irreps):
+**nonabelian lifts force a ∈ {13, 17, 21}** — no further narrowing from
+character data (per-element deg-5 constraints refuted: inversion needs
+tr(π(g⁻¹)D_π), not tr π(g)·tr D_π).
+
+**CAMPAIGN CONSEQUENCE: every order-125 semiregular lift (any group) has
+a ∈ {13, 17, 21}; abelian ⟹ a = 21. Bare-C UNSAT at {13,17,21} kills
+m=125 entirely; a=21 alone kills all abelian groups.** a ∈ {11,15,19,23}
+matter only for the group-free bare-C question, not for lifts.
+
+**Abelian a = 21 diagonal rigidity.** The chain T(g) = 25e(g) − 17,
+ê(χ) = 5 m₇(χ) − 69 (pointwise integrality rigorously forced) implies
+e := (f−1)/3 is constant on scalar-multiplier orbits, mass Σe = 16:
+- Z₅³: e = multiset of 4 points of PG(2,5) (all C(34,4) = 46,376 pass
+  every trace/Galois/window check; m₇ = 13 + K(hyperplane) ∈ [13,17]);
+- Z₂₅×Z₅: order-25 orbits forced 0; six order-5 orbit values sum to 4
+  (126 patterns);
+- Z₁₂₅: UNIQUE forced pattern — f = 13 on the four order-5 elements,
+  f = 1 on the other 120 (e₅ = 4, e₂₅ = e₁₂₅ = 0).
+These pin only per-character trace sums, NOT individual entries — no
+finite hand-certificate; joint realizability of the S_ij needs a
+group-ring/SAT completion (verdict C). Z₁₂₅ is the most-constrained
+lift target (unique aggregate pattern) if a lift-level search is run.
+
+Entrywise pruning facts for any a=21 completion search, from
+(Ĉ_χ−7I)(Ĉ_χ+8I) = 0: diag −8 ≤ h_ii ≤ 7, Σ_j |h_ij|² = (7−h_ii)(8+h_ii),
+all Galois conjugates bounded by 8 (Kronecker-style).
+
 ## Status / next actions
 
 - [ ] When CP-SAT returns quotient matrices: compute a for each; discard
