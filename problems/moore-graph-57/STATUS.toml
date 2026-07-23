@@ -2,9 +2,10 @@ slug = "moore-graph-57"
 title = "The missing Moore graph (degree 57)"
 question = "Does a 57-regular graph on 3250 vertices with girth 5 (srg(3250,57,0,1)) exist?"
 # proposed | scaffolded | active | partial-results | solved | excluded | retired
-status = "active"
-best_result = ""
+status = "partial-results"
+best_result = "NEW THEOREM: derangement ansatz forces H perfect; no order-56 group works (closes Smith-Montemanni 2026 open case) - writeup drafted+refereed"
 doi = ""
 sessions = [
-    "2026-07-22 session running (playground worktree; results to be merged here)",
+    "2026-07-22 verifier+literature+3 angles; perfectness theorem discovered, refereed",
+    "2026-07-23 writeup refereed+fixed; C7 encoder; m=125 cluster harvest (UNKNOWN); imported to this repo",
 ]
