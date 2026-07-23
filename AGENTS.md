@@ -33,7 +33,7 @@ angles/<name>/  one subfolder per attack angle, each with its own README.md
 literature/     notes + refs.bib — every status claim about prior work needs a citation
 certificates/   verified positive objects: object + verify script + expected output
 results/        citable negative results (exhaustions/exclusions) + repro metadata
-writeup/        report.md + CITATION.cff; becomes the DOI-bearing artifact on release
+writeup/        report.md + report.html + CITATION.cff; the DOI-bearing artifact on release
 ```
 
 ## Session lifecycle
@@ -83,8 +83,20 @@ writeup/        report.md + CITATION.cff; becomes the DOI-bearing artifact on re
 ## Publishing and citation
 
 - **Substantive results** (new certificate, new exclusion, completed milestone
-  writeup): publish the HTML report to `tmp.afspies.com/<slug>/` via the
-  `afspies-publish` skill before ending the session.
+  writeup): before ending the session, render the report as a clean **Claude
+  Artifact** and save the same page as `writeup/report.html` so it is versioned
+  with the repo. `writeup/report.md` stays the canonical source; the artifact
+  is its presentation layer.
+- Build the page from the repo styling template
+  `writeup/artifact-template.html` (instantiated from
+  `_template/writeup/artifact-template.html`) — AMS-flavored theorem/proof
+  environments, certificate blocks, and status badges are already defined
+  there. The page must be fully self-contained: inline CSS only, no CDN
+  scripts, fonts, or MathJax (Artifacts block external requests) — write
+  mathematics in Unicode with `<sup>`/`<sub>`/`<var>`, and use
+  `<pre class="mermaid">` for diagrams.
+- The status badge on the page must match `STATUS.toml`. Never let the
+  presentation outrun the epistemic status of the result.
 - **DOIs are per problem subfolder**: `python3 tools/release.py <slug> --version vN`
   bundles `writeup/` + `certificates/` + `PROBLEM.md` and creates/updates a Zenodo
   deposition for that problem (versioned DOI; needs `ZENODO_TOKEN`). The DOI is
