@@ -143,25 +143,66 @@ self-contained writeup; check against the actual S–M PDF before claiming
   first step is extracting the structure of HoS's 21 matchings from S–M
   Fig. 5).
 
+## Session 3 (2026-07-23) — what changed
+
+- **TWO NEW VERIFIED LEMMAS (character machinery, m=125):**
+  (1) abelian order-125 lifts force **a = 21 exactly** (mod-3 Fourier
+  congruence f(g) ≡ 1 ⟹ tr C ≥ 124 ⟹ a ≥ 18, ∩ mod-4 filter);
+  (2) nonabelian order-125 lifts force a ∈ {13,17,21}. NET: bare-C
+  UNSAT at a ∈ {13,17,21} kills ALL order-125 semiregular actions;
+  a=21 alone kills all abelian ones. The old "a ∈ {13,17} first" plan
+  is obsolete — a=21 is the prime target now. All in character_notes.md
+  + four verify_*.py scripts (each re-derived from scratch, exact).
+- **Abelian a=21 diagonal data is multiplier-orbit rigid**: aggregate
+  patterns count 46,376 (Z₅³ = 4-point PG(2,5) multisets) / 126
+  (Z₂₅×Z₅) / 1 (Z₁₂₅ — uniquely forced). No analytic kill; Z₁₂₅ is the
+  most-constrained lift-level search target if one is ever built.
+- **SAT+DRAT pipeline validated** (angles/semiregular-quotient/sat/):
+  8.3M-clause fixed-a instances, cube split a=21→8 / a=17→78 / a=13→488,
+  d=7 gates + proof-checking gate all green. a=23 laptop probe: 8/8
+  cubes TIMEOUT at 120s both variants — no cheap kills at d=57.
+- **a=21 cluster campaign prepared but NOT launched** (Alex deferred):
+  launch kit in gitignored infra-local/ of the main checkout.
+
+### New traps found this session
+
+- **sympy.simplify false-negatives on cyclotomics**: exp-form ζ₅ matrix
+  identities that are exactly zero do NOT simplify to zero; verify over
+  Z[ζ] with integer coefficient vectors mod Φ₅ instead (see
+  verify_mod3_lemma.py). Never let a FAIL from simplify() kill a true
+  identity — and never let simplify() "OK" certify one.
+- **Codex sandbox has no network**: git clone/pip inside codex jobs
+  fails (workspace-write sandbox, no toggle exposed). Pre-stage sources
+  or let the orchestrator shell fetch/build (drat-trim was built
+  session-side). pytest is also absent in the venv — unittest works.
+- **Crashed-wrapper diagnosis**: an empty codex-inline jobs/ dir means
+  the CLI never launched (re-dispatch); a populated jobs/*.json with a
+  silent wrapper means check the .log directly (LEARNINGS trap variant).
+- **Consult-prompt arithmetic must be re-derived, not trusted**: this
+  session's consults caught two real errors in MY framings (offdiag cap
+  8→10, mod-25 projector split false) and I caught two in THEIRS (rank
+  cap off-by-one, 3120 vs 120 noncentral elements). The
+  derive-independently-both-ways loop is earning its cost.
+
 ## Next-session priority queue (in order)
 
-1. m=125, decide the NEXT tool (harvest done; CP-SAT at 12h is not it):
-   (a) bit-blasted pure-SAT encoding + kissat/cadical with DRAT — gives a
-   checkable certificate if UNSAT and doubles as the replication path;
-   (b) restrict to the character-filtered a ∈ {13,17} first (a=21
-   already has a 12h UNKNOWN; 13 and 17 were lost to the deadline kill);
-   (c) or go analytic: cyclotomic integrality on the abelian-lift
-   character blocks (character_notes.md) may kill abelian lifts without
-   any search. Prefer (c)+(a). Re-running plain CP-SAT longer is the
-   weakest option.
-2. Writeup endgame: human pass by Alex; decide venue/arXiv; the one
-   remaining external conditional is nothing (theorem is unconditional);
-   optionally re-verify S–M quotes against a locally archived PDF copy.
-3. All-involutions case per INVOLUTIONS.md (start: S–M Fig. 5 structure).
-4. C₁₃ fixed-point-free: 250 orbits; orbit-matrix level or two-rooted
-   equivariant encoding. C₇: only with eager structural reduction.
-5. If any angle yields UNSAT at full scale: extract DRAT/LRAT proof
-   (kissat/cadical support) for a checkable certificate before claiming.
+1. **Launch the a=21 cube campaign** (kit: infra-local/README.md;
+   decide MOD5 variant — recommendation: --mod5, or both side by side,
+   16 cores 12h still frugal). Harvest ≈ next day. If any cube UNSAT:
+   drat-trim verdict is on the PVC; replicate independently (CP-SAT
+   fixed-a=21 already has a 12h UNKNOWN — a second solver or longer
+   run) before citing. If all 8 UNSAT+verified: ALL abelian order-125
+   semiregular actions are excluded — a citable result (results/ +
+   writeup section).
+2. a=17 (78 cubes) and a=13 (488 cubes) campaigns complete the
+   order-125 kill (nonabelian). Budget ~1 core-day per 8 cubes at 12h;
+   prioritize by cube count ascending.
+3. Writeup endgame for the perfectness theorem: Alex's human pass, then
+   venue/arXiv/release.py. The a=21/{13,17,21} lemmas may warrant a
+   short second note once the computational side lands.
+4. All-involutions case per INVOLUTIONS.md (start: S–M Fig. 5).
+5. C₁₃ fixed-point-free (250 orbits) / C₇ only with eager structure.
+6. Any full-scale UNSAT: DRAT/LRAT certificate before claiming, always.
 
 ## Infrastructure note (from Alex, 2026-07-22)
 

@@ -8,4 +8,5 @@ doi = ""
 sessions = [
     "2026-07-22 verifier+literature+3 angles; perfectness theorem discovered, refereed",
     "2026-07-23 writeup refereed+fixed; C7 encoder; m=125 cluster harvest (UNKNOWN); imported to this repo",
+    "2026-07-23b m=125 lemmas: abelian order-125 lifts force a=21, nonabelian a in {13,17,21} (verified); SAT+DRAT cube pipeline validated; a=21 cluster run prepared (launch deferred)",
 ]

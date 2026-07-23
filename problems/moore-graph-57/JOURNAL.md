@@ -394,3 +394,50 @@ and a NEW mod-3 analytic claim: abelian lifts force a = 21.
   a=21 diagonal data to multiplier-orbit multiplicities (Z₅³: a 4-point
   multiset in PG(2,5); Z₁₂₅: e forced uniquely; Z₂₅×Z₅: six values
   summing to 4) — unverified until that job reports.
+
+### Analytic follow-up consult #2 (job task-mrxmbfks-nld0kj) — results
+Session-replicated (both scratch scripts re-run, all checks pass; promoted
+to verify_a21_rigidity.py + verify_nonabelian_characters.py):
+- **Nonabelian theorem: order-125 nonabelian lifts force a ∈ {13,17,21}.**
+  Central g: f(z) = 208 − 3μ ≡ 1 mod 3 (μ = common deg-5 multiplicity,
+  61 ≤ μ ≤ 69); noncentral cosets: F(q̄) ≡ 2 mod 3; a ≥ 13; Galois mod-4
+  extends (deg-5 irreps form one 4-orbit). My sketch's 3120-noncentral
+  count was wrong (120), constants otherwise held (−1040 correct).
+- **Abelian a=21 rigidity:** e = (f−1)/3 is multiplier-orbit constant,
+  Σe = 16 ⟹ aggregate diagonal patterns: Z₅³ = 4-point multisets in
+  PG(2,5) (46,376, all pass), Z₂₅×Z₅ = 126, Z₁₂₅ = UNIQUE (f = 13 on
+  the four order-5 elements, f = 1 on the other 120). m₇ ∈ [11,17]
+  windows. No analytic kill — verdict (C): needs computational
+  completion. Z₁₂₅ is the most-constrained lift target.
+- **CAMPAIGN REDUCTION: bare-C UNSAT at a ∈ {13,17,21} kills all
+  order-125 semiregular actions; a=21 alone kills all abelian ones.**
+  Commit d2ebbea.
+
+### SAT+DRAT encoder (codex job task-mrxm44zx-64xr2y) — BUILT, gates green
+angles/semiregular-quotient/sat/ (commit f8152d6): one-hot entries +
+deterministic binary product buses (codex rejected the forward-only aux
+variant as unsound) + truth-table ripple adders (hand-rolled; pip
+install blocked in codex sandbox) + row-0 cube DP (consult's square-sum
+formula corrected to 181−h−h²; counts 218/241/169/70/8 nevertheless
+reproduced exactly) + optional theorem-backed mod-5 automata clauses.
+Sizes: 297,840 vars / 8,294,680 clauses per fixed-a instance (374,085 /
+11,617,662 with --mod5). Cubes: a=21 → 8, a=17 → 78, a=13 → 488,
+a=23 → 8. Validation: d=7 analogues (m=25,10,5) SAT + exact int64
+decode-verified; deliberate UNSAT proof drat-trim VERIFIED; cube-union
+soundness confirmed; 5/5 unittest gates pass after session-side
+drat-trim build (codex sandbox has NO network — clone done by
+orchestrator shell from marijnheule/drat-trim, gcc make clean).
+
+### a=23 laptop probes (local, ~35 min wall total)
+run_and_check.py on both a=23 cube dirs (8 cubes each), 120s/cube:
+ALL TIMEOUT in both variants (plain and --mod5). No cheap kills at
+d=57; no variant discrimination at this budget. Probe outputs preserved
+in session task logs; instances regenerable deterministically.
+
+### a=21 cluster campaign: PREPARED, LAUNCH DEFERRED (Alex's call)
+Launch kit (job.yaml + runner.sh + instructions) in the gitignored
+problems/moore-graph-57/infra-local/ of the MAIN checkout (private infra
+per AGENTS.local.md — 8-core single pod, 12h kissat/cube, deadline
+90000s > 2× budget, on-pod drat-trim, durable PVC teeing, no proofs on
+the shared PVC). Alex asked to stop before launching; next session
+launches after the MOD5 variant decision.

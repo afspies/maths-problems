@@ -17,30 +17,40 @@ Work in problems/moore-graph-57/ of the maths-problems repo. Read, in order:
    priority queue; do what "next session should do first" says.
 3. problems/moore-graph-57/JOURNAL.md — recent sessions' detail, if needed.
 
-STATE (as of 2026-07-23): two sessions done (2026-07-22/23, imported from a
-playground worktree — history there on branch alex/musing-elion-d3e5cb).
-- HEADLINE: perfectness-obstruction theorem — no order-56 group supports the
-  group-of-derangements ansatz; closes Smith–Montemanni 2026's open non-cyclic
-  case. Refereed writeup at writeup/perfectness.tex; novelty-searched (appears
-  new). AWAITING: Alex's human pass, then venue decision + possible release.py
-  DOI + arXiv. Do NOT make public claims before that human pass.
-- Exact verifier validated (harness/), 2026 literature map (literature/),
-  C₁₉ + C₇ equivariant encoders built and validated but CEGAR provably
-  non-converging at d=57 (angles/c19-sat, c7-sat) — no long CEGAR runs.
-- Semiregular quotient: candidate orders {1,5,13,25,125}; m=125 (b=26)
-  resists ~30h CP-SAT + 2e9-node DFS, UNKNOWN. a=19,21 have full 12h runs
-  (results/m125-quotient/); a ∈ {11,13,15,17,23} lost to a cluster deadline
-  kill — see the k8s trap in LEARNINGS before launching anything.
+STATE (as of 2026-07-23, three sessions):
+- HEADLINE 1: perfectness-obstruction theorem — no order-56 group supports
+  the group-of-derangements ansatz; closes Smith–Montemanni 2026's open
+  non-cyclic case. Refereed writeup at writeup/perfectness.tex. AWAITING:
+  Alex's human pass, then venue decision + possible release.py DOI + arXiv.
+  Do NOT make public claims before that human pass.
+- HEADLINE 2 (session 3): character-theory lemmas for m=125 semiregular —
+  ABELIAN order-125 lifts force a = 21 exactly (mod-3 Fourier lemma);
+  nonabelian force a ∈ {13,17,21}. So bare-quotient UNSAT at {13,17,21}
+  kills all order-125 semiregular actions; a=21 alone kills all abelian.
+  Verified in angles/semiregular-quotient/verify_*.py (4 scripts, exact);
+  full statements in character_notes.md. Abelian a=21 diagonal data is
+  multiplier-orbit rigid (46,376 / 126 / 1 patterns; Z₁₂₅ unique).
+- SAT+DRAT pipeline for the b=26 quotient VALIDATED (angles/
+  semiregular-quotient/sat/): cube split a=21→8 / a=17→78 / a=13→488,
+  kissat + drat-trim, all gates green. a=23 probe: 8/8 cubes TIMEOUT at
+  120s (both mod-5 variants) — real instances are hard, as expected.
+- a=21 cluster campaign PREPARED BUT NOT LAUNCHED (Alex deferred at
+  session end): private launch kit in infra-local/ (gitignored, main
+  checkout) — job.yaml, runner.sh, step-by-step README. Deadline and
+  durable-teeing traps already engineered around.
+- Also standing: exact verifier (harness/), literature map, C₁₉/C₇
+  encoders (CEGAR non-converging at d=57 — no long CEGAR runs), m=125
+  CP-SAT resistance data (results/m125-quotient/).
 
 Current priorities (LEARNINGS queue is authoritative):
-1. m=125 next tool: analytic cyclotomic integrality on abelian lifts
-   (angles/semiregular-quotient/character_notes.md) and/or bit-blasted
-   SAT + DRAT (proof-carrying, doubles as replication); character-filtered
-   a ∈ {13,17} first. NOT more plain CP-SAT.
-2. Writeup endgame after Alex's pass (venue, release.py, arXiv).
-3. All-involutions subcase per angles/derangement-56/INVOLUTIONS.md
-   (start: extract the structure of HoS's 21 matchings from S–M Fig. 5).
-4. C₁₃ fixed-point-free orbit-matrix formulation (250 orbits).
+1. LAUNCH the a=21 cube campaign per infra-local/README.md (pick MOD5
+   variant; recommendation --mod5 or both). Harvest next day; drat-trim
+   verdicts land on the PVC. All-8-UNSAT-verified ⟹ no abelian
+   order-125 semiregular action — citable (results/ + short writeup).
+2. Then a=17 (78 cubes) and a=13 (488 cubes) to finish order-125.
+3. Perfectness writeup endgame after Alex's pass.
+4. All-involutions subcase per angles/derangement-56/INVOLUTIONS.md.
+5. C₁₃ fixed-point-free orbit-matrix formulation (250 orbits).
 
 Working rules (same as always): exact arithmetic for verification claims;
 verifier before search; codex xhigh consults at decision points, verdicts
