@@ -32,7 +32,7 @@ def main():
         "{{DATE}}": today,
     }
     for path in dest.rglob("*"):
-        if path.is_file() and path.suffix in {".md", ".toml", ".cff", ".bib"}:
+        if path.is_file() and path.suffix in {".md", ".toml", ".cff", ".bib", ".html"}:
             text = path.read_text()
             for key, value in subs.items():
                 text = text.replace(key, value)

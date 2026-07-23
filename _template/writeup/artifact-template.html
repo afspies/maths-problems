@@ -1,0 +1,230 @@
+<!--
+  Artifact styling template for problem writeups.
+
+  Usage: copy the <style> block and the structural skeleton below into the
+  report page, replace the placeholder content with the real writeup
+  (canonical source: report.md), and publish as a Claude Artifact.
+
+  Hard constraints (Artifacts enforce a strict CSP — external requests fail):
+  - Everything inline: no CDN scripts, no external stylesheets, no web fonts,
+    no MathJax/KaTeX. Write mathematics with Unicode (∀ ∃ ∈ ⊆ ⊗ Σ λ …) plus
+    <sup>/<sub>/<var>; use the .eqn block for numbered display equations.
+  - Diagrams: <pre class="mermaid"> renders natively in Artifacts.
+  - No <!DOCTYPE>/<html>/<head>/<body> tags — the publisher wraps the file.
+  - Status badges must match STATUS.toml. Never overstate epistemic status.
+-->
+<title>{{TITLE}} — results</title>
+<style>
+  :root {
+    --paper: #fbfaf7;
+    --ink: #21211d;
+    --muted: #6b6a62;
+    --accent: #1e4f8f;
+    --rule: #ddd9cf;
+    --env-bg: #f3f1ea;
+    --mono-bg: #eef0f2;
+    --ok: #226b3b;
+    --ok-bg: #e4f0e7;
+    --neg: #7a4a12;
+    --neg-bg: #f5ecdc;
+    --open: #5b5b66;
+    --open-bg: #ececef;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #191a1c;
+      --ink: #e6e4dd;
+      --muted: #9b998f;
+      --accent: #7aa7dd;
+      --rule: #3a3b3e;
+      --env-bg: #212226;
+      --mono-bg: #232529;
+      --ok: #7fc796;
+      --ok-bg: #1d2b21;
+      --neg: #d9a866;
+      --neg-bg: #2b2419;
+      --open: #a9a9b4;
+      --open-bg: #26262b;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #fbfaf7; --ink: #21211d; --muted: #6b6a62; --accent: #1e4f8f;
+    --rule: #ddd9cf; --env-bg: #f3f1ea; --mono-bg: #eef0f2;
+    --ok: #226b3b; --ok-bg: #e4f0e7; --neg: #7a4a12; --neg-bg: #f5ecdc;
+    --open: #5b5b66; --open-bg: #ececef;
+  }
+  :root[data-theme="dark"] {
+    --paper: #191a1c; --ink: #e6e4dd; --muted: #9b998f; --accent: #7aa7dd;
+    --rule: #3a3b3e; --env-bg: #212226; --mono-bg: #232529;
+    --ok: #7fc796; --ok-bg: #1d2b21; --neg: #d9a866; --neg-bg: #2b2419;
+    --open: #a9a9b4; --open-bg: #26262b;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Charter, "Bitstream Charter", "Iowan Old Style", Georgia,
+      "Times New Roman", serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    margin: 0 auto;
+    padding: 3rem 1.25rem 4rem;
+    max-width: 46rem;
+  }
+  h1, h2, h3 { line-height: 1.25; font-weight: 600; }
+  h1 { font-size: 1.7rem; margin: 0 0 0.35rem; }
+  h2 { font-size: 1.25rem; margin: 2.2rem 0 0.7rem; }
+  h3 { font-size: 1.05rem; margin: 1.6rem 0 0.5rem; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  var, .mathit { font-style: italic; }
+
+  .subtitle { color: var(--muted); margin: 0 0 0.9rem; }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem;
+    align-items: center; color: var(--muted); font-size: 0.85rem;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--rule);
+  }
+  .badge {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.15rem 0.5rem; border-radius: 3px;
+  }
+  .badge-verified { color: var(--ok); background: var(--ok-bg); }
+  .badge-negative { color: var(--neg); background: var(--neg-bg); }
+  .badge-open     { color: var(--open); background: var(--open-bg); }
+
+  .abstract {
+    margin: 1.4rem 0 0; padding: 0 1.4rem;
+    font-size: 0.97rem;
+  }
+  .abstract .label {
+    display: block; text-align: center; font-variant: small-caps;
+    letter-spacing: 0.08em; margin-bottom: 0.3rem;
+  }
+
+  /* Theorem-style environments. Theorem/lemma/etc. bodies italic (AMS
+     convention); definitions and remarks upright. */
+  .env {
+    margin: 1.2rem 0; padding: 0.75rem 1rem;
+    background: var(--env-bg); border-left: 3px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+  }
+  .env > .label { font-weight: 700; font-style: normal; }
+  .env.theorem, .env.lemma, .env.proposition, .env.corollary,
+  .env.conjecture { font-style: italic; }
+  .env.definition, .env.remark { font-style: normal; }
+
+  .proof { margin: 1rem 0; }
+  .proof > .label { font-style: italic; }
+  .proof::after { content: "∎"; float: right; color: var(--muted); }
+
+  .eqn {
+    display: flex; align-items: center; gap: 1rem;
+    margin: 1rem 0; overflow-x: auto;
+  }
+  .eqn .body { flex: 1; text-align: center; }
+  .eqn .no { color: var(--muted); }
+
+  code, pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.85em;
+  }
+  code { background: var(--mono-bg); padding: 0.1em 0.35em; border-radius: 3px; }
+  pre {
+    background: var(--mono-bg); border: 1px solid var(--rule);
+    border-radius: 5px; padding: 0.8rem 1rem; overflow-x: auto;
+    line-height: 1.45;
+  }
+  pre > code { background: none; padding: 0; }
+  pre.cert { border-left: 3px solid var(--ok); }
+  .filelabel {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.75rem; color: var(--muted); margin-bottom: -0.5rem;
+  }
+
+  .tablewrap { overflow-x: auto; margin: 1.2rem 0; }
+  table { border-collapse: collapse; font-size: 0.92rem; min-width: 60%; }
+  th, td { padding: 0.4rem 0.9rem; text-align: left; }
+  thead th { border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
+  tbody tr:last-child td { border-bottom: 2px solid var(--ink); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  figure { margin: 1.4rem 0; text-align: center; }
+  figure img, figure svg { max-width: 100%; height: auto; }
+  figcaption { font-size: 0.88rem; color: var(--muted); margin-top: 0.4rem; }
+
+  .footer {
+    margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule);
+    font-size: 0.85rem; color: var(--muted);
+  }
+</style>
+
+<h1>{{TITLE}}</h1>
+<p class="subtitle">{{QUESTION}}</p>
+<div class="meta">
+  <span class="badge badge-open">open</span>
+  <!-- badge classes: badge-verified (certificate passes the checked-in
+       verifier) · badge-negative (citable exclusion) · badge-open -->
+  <span><code>problems/{{SLUG}}</code></span>
+  <span>{{DATE}}</span>
+  <span>commit <code>0000000</code></span>
+</div>
+
+<div class="abstract">
+  <span class="label">Abstract</span>
+  One paragraph: what was established, how it was verified, what remains open.
+  Be precise about epistemic status — "verified certificate", "exhaustive
+  search of subspace X", and "heuristic evidence" are different claims.
+</div>
+
+<h2>1 · Result</h2>
+<div class="env theorem">
+  <span class="label">Theorem 1.</span>
+  For every <var>n</var> ≥ 3 there is no object with property
+  <var>P</var> in the family ℱ<sub><var>n</var></sub> ⊆ ℤ<sup><var>n</var></sup>.
+</div>
+<div class="proof">
+  <span class="label">Proof sketch.</span>
+  Pointer to the complete case analysis in <code>results/</code> or the
+  certificate in <code>certificates/</code>, and the verifier that checks it.
+</div>
+<div class="eqn">
+  <span class="body">Σ<sub><var>i</var>=1</sub><sup><var>n</var></sup> λ<sub><var>i</var></sub><sup>2</sup> = tr(<var>A</var><sup>T</sup><var>A</var>)</span>
+  <span class="no">(1)</span>
+</div>
+
+<h2>2 · Verification</h2>
+<p>Exact commands from a clean clone, expected output, runtime. A reader must
+be able to verify the headline claim in minutes.</p>
+<p class="filelabel">harness/verify.py — expected output</p>
+<pre class="cert"><code>$ python3 harness/verify.py certificates/object.json
+VERIFIED: all 4,096 constraints hold exactly (0.8 s)</code></pre>
+
+<h2>3 · Method</h2>
+<p>What was searched, how the space was structured and pruned, what tooling
+ran where (describe compute generically), which model-guided steps mattered.</p>
+<div class="tablewrap">
+  <table>
+    <thead><tr><th>Angle</th><th>Verdict</th><th class="num">CPU-h</th></tr></thead>
+    <tbody>
+      <tr><td>SAT + DRAT</td><td>excluded n ≤ 12</td><td class="num">40</td></tr>
+      <tr><td>Spectral/SDP</td><td>dead end (see §4)</td><td class="num">6</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>4 · What we tried that didn't work</h2>
+<p>Dead ends and <em>why</em> they died (mirrors LEARNINGS.md) — a first-class
+section, not an appendix.</p>
+
+<h2>5 · Relation to prior work</h2>
+<p>Citations resolved from <code>literature/refs.bib</code>; state precisely
+what was previously known and what is new here.</p>
+
+<div class="footer">
+  <p><strong>Cite as:</strong> see <code>writeup/CITATION.cff</code>
+  (DOI added by <code>tools/release.py</code> on release).</p>
+  <p>Repository: <code>problems/{{SLUG}}</code> · generated from
+  <code>writeup/report.md</code> at the commit shown above.</p>
+</div>
