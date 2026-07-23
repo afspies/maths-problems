@@ -1,0 +1,146 @@
+<title>Four-dimensional Mahler volume conjecture — partial results</title>
+<style>
+  :root {
+    --paper: #fbfaf7; --ink: #21211d; --muted: #6b6a62;
+    --accent: #1e4f8f; --rule: #ddd9cf; --env-bg: #f3f1ea;
+    --mono-bg: #eef0f2; --ok: #226b3b; --ok-bg: #e4f0e7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #191a1c; --ink: #e6e4dd; --muted: #9b998f;
+      --accent: #7aa7dd; --rule: #3a3b3e; --env-bg: #212226;
+      --mono-bg: #232529; --ok: #7fc796; --ok-bg: #1d2b21;
+    }
+  }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: Charter, "Bitstream Charter", "Iowan Old Style", Georgia, serif;
+    font-size: 1.04rem; line-height: 1.55; margin: 0 auto;
+    padding: 3rem 1.25rem 4rem; max-width: 48rem;
+  }
+  h1, h2, h3 { line-height: 1.25; font-weight: 600; }
+  h1 { font-size: 1.72rem; margin-bottom: .25rem; }
+  h2 { font-size: 1.25rem; margin-top: 2.2rem; }
+  .subtitle, .meta, .footer { color: var(--muted); }
+  .meta { display: flex; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); }
+  .badge {
+    color: var(--ok); background: var(--ok-bg); padding: .15rem .5rem;
+    border-radius: 3px; font: .72rem ui-monospace, monospace;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+  .abstract { margin: 1.4rem; font-size: .97rem; }
+  .abstract .label { display: block; text-align: center; font-variant: small-caps; }
+  .env {
+    margin: 1.2rem 0; padding: .8rem 1rem; background: var(--env-bg);
+    border-left: 3px solid var(--accent); border-radius: 0 4px 4px 0;
+  }
+  .env .label { font-weight: 700; }
+  .proof .label { font-style: italic; }
+  .proof::after { content: "∎"; float: right; color: var(--muted); }
+  .eqn {
+    margin: 1rem 0; padding: .2rem 1rem; text-align: center;
+    overflow-x: auto; font-family: Georgia, serif;
+  }
+  code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  code { background: var(--mono-bg); padding: .1em .3em; border-radius: 3px; }
+  pre {
+    background: var(--mono-bg); border: 1px solid var(--rule);
+    border-left: 3px solid var(--ok); border-radius: 5px;
+    padding: .8rem 1rem; overflow-x: auto;
+  }
+  .footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: .86rem; }
+</style>
+
+<h1>Four-dimensional Mahler volume conjecture</h1>
+<p class="subtitle">A proof-first first attack: terminal polytopes and a sharp infinite-family theorem</p>
+<div class="meta">
+  <span class="badge">partial results</span>
+  <span><code>problems/mahler-volume-4d</code></span>
+  <span>23 July 2026</span>
+</div>
+
+<div class="abstract">
+  <span class="label">Abstract</span>
+  We audit the new three-dimensional shadow-flow proof, repair its
+  dimension-specific persistence paragraph for dimension four, derive a
+  necessary terminal-incidence inequality, classify simple, simplicial, and
+  pyramid subclasses, and prove the sharp Mahler inequality for every
+  four-dimensional pyramid. The general 4D conjecture remains open.
+</div>
+
+<h2>1 · Sharp result for all 4-pyramids</h2>
+<div class="env">
+  <span class="label">Theorem 1.</span>
+  Every four-dimensional pyramid <var>P</var> satisfies
+  |<var>P</var>| |(<var>P</var>−s(<var>P</var>))°| ≥ 3125/576,
+  with equality exactly for a 4-simplex.
+</div>
+<p class="proof"><span class="label">Proof.</span>
+Affinely write the pyramid as conv(<var>K</var>×{0},(0,1)), with
+s(<var>K</var>)=0. At z=(0,τ), the polar has height
+−1/τ≤r≤1/(1−τ) and horizontal section
+(1+rτ)<var>K</var>°. Since the centroid of <var>K</var>° is zero, the
+centroid–Santaló characterization reduces to the vertical integral; it
+vanishes at τ=1/(d+1). Integration gives
+</p>
+<div class="eqn">
+  ℘(pyr<sub>d</sub> <var>K</var>) =
+  ((d+1)<sup>d+1</sup>/d<sup>d+2</sup>) ℘(<var>K</var>).
+</div>
+<p>For d=4, the audited three-dimensional Mahler theorem gives</p>
+<div class="eqn">
+  ℘(<var>P</var>) ≥ (5<sup>5</sup>/4<sup>6</sup>)
+  (4<sup>4</sup>/(3!)<sup>2</sup>) = 3125/576.
+</div>
+<p>Equality in dimension three forces the base to be a tetrahedron.</p>
+
+<h2>2 · Terminal-polytope bridge</h2>
+<p>For a facet <var>F</var>, admissibility is the family of exact equations
+λ<sup>T</sup>α|<sub>F</sub>=0 over all affine dependences λ of its vertices.
+Choosing a direction parallel to a largest facet gives, for every
+pair-terminal 4-polytope,</p>
+<div class="eqn">2f<sub>03</sub> ≥ 5(f<sub>0</sub>+f<sub>3</sub>)−10.</div>
+<p>The supporting flag identity is
+f<sub>03</sub>−f<sub>02</sub>+2f<sub>2</sub>=2f<sub>3</sub>.</p>
+<div class="env">
+  <span class="label">Theorem 2.</span>
+  A terminal simplicial 4-polytope is a simplex. A pair-terminal simple
+  4-polytope is a simplex. A pair-terminal 4-pyramid is a simplex.
+</div>
+<p>For pyramids the key is exact descent:
+A<sub>(u,0)</sub>(pyr <var>Q</var>) ≅ A<sub>u</sub>(<var>Q</var>)⊕ℝ.
+The polar is again a pyramid over a dual 3-polytope, so the audited 3D
+dual-pair count forces a tetrahedral base.</p>
+
+<h2>3 · Source audit</h2>
+<p>The Meyer–Reisner convexity/rigidity theorem, volume-affinity, compactness,
+and the minimizer/polar chain are dimension-independent. The printed
+Chen–Li–Xi–Xu persistence proof follows intersections of two and three facets
+and is specifically 3D. In 4D, choose four independent active moved facets:
+their limiting intersection and the moved old vertex give a dimension-free
+replacement. The terminal classification—not the analytic reduction—is the
+remaining global obstacle.</p>
+
+<h2>4 · Exact verification</h2>
+<pre><code>$ python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
+...
+Ran 6 tests in 0.494s
+
+OK</code></pre>
+<p>The rational harness checks simplex polarity and product, cube/cross
+polarity, admissible-speed ranks, and the pyramid factor arithmetic. It is a
+falsification tool, not a substitute for classification.</p>
+
+<h2>5 · Limits and next route</h2>
+<p>Generic rigidity is too weak: the cube is rigid generically but not in
+facet-parallel directions. Incidence does not determine affine-dependence
+coefficients, and the present inequality leaves non-simple, non-simplicial,
+non-pyramidal types. The next proof campaign should test descent under wedges
+or truncations and seek rank gains from overlaps among facet constraints.</p>
+
+<div class="footer">
+  <p><strong>Status:</strong> partial results. The full four-dimensional
+  non-symmetric Mahler conjecture remains open.</p>
+  <p>Canonical source: <code>writeup/report.md</code>. References and the
+  detailed audit are under <code>literature/</code>.</p>
+</div>

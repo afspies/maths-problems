@@ -1,0 +1,11 @@
+slug = "mahler-volume-4d"
+title = "Four-dimensional Mahler volume conjecture"
+question = "For every convex body K⊂R^4, prove |K| |(K-s(K))°| ≥ 3125/576, with equality only for simplices."
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "partial-results"
+best_result = "Sharp Mahler inequality for all 4-pyramids; pair-terminal simple, simplicial, and pyramid subclasses classified; necessary flag inequality 2f03 >= 5(f0+f3)-10."
+doi = ""
+sessions = [
+    "2026-07-23 scaffolded from template",
+    "2026-07-23 audited 3D shadow flow, built exact harness, and proved pyramid/simple/simplicial partial results",
+]

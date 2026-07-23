@@ -14,6 +14,7 @@ do not edit by hand.**
 
 | Problem | Status | Question | Best result so far | DOI |
 |---|---|---|---|---|
+| [Four-dimensional Mahler volume conjecture](problems/mahler-volume-4d/PROBLEM.md) | 🟡 partial results | For every convex body K⊂R^4, prove \|K\| \|(K-s(K))°\| ≥ 3125/576, with equality only for simplices. | Sharp Mahler inequality for all 4-pyramids; pair-terminal simple, simplicial, and pyramid subclasses classified; necessary flag inequality 2f03 >= 5(f0+f3)-10. | — |
 | [The missing Moore graph (degree 57)](problems/moore-graph-57/PROBLEM.md) | 🟡 partial results | Does a 57-regular graph on 3250 vertices with girth 5 (srg(3250,57,0,1)) exist? | NEW THEOREM: derangement ansatz forces H perfect; no order-56 group works (closes Smith-Montemanni 2026 open case) - writeup drafted+refereed | — |
 | [Casas-Alvero conjecture](problems/casas-alvero/PROBLEM.md) | 🔵 active | If deg-d monic f shares a root with each of f', ..., f^(d-1), is f = (x-a)^d? | — | — |
 | [Conway's 99-graph problem](problems/conway-99-graph/PROBLEM.md) | 🔵 active | Does srg(99,14,1,2) exist (every edge in a unique triangle, non-edge in a unique quad)? | — | — |
