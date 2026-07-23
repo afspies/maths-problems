@@ -53,6 +53,45 @@ character χ, the block is  Ĉ_χ[i,j] = χ(S_ij) = Σ_{g∈S_ij} χ(g).
    Z[ζ₅]; the rationality of the total forces strong symmetry on the
    multiset {S_ii}.
 
+## VERIFIED LEMMA (2026-07-23): abelian lifts force a = 21
+
+Sharpening of constraint 4, found by a GPT-5.6-sol xhigh consult and
+independently re-derived + exactly verified in `verify_mod3_lemma.py`
+(38/38 checks; machinery validated end-to-end on a real HoS order-5
+semiregular quotient).
+
+For g ≠ 0 define f(g) = #{i : g ∈ S_ii}. Fourier inversion +
+the per-character trace identities give
+
+    125 f(g) = 15a + 65 + 15 T(g),   T(g) = Σ_{χ≠1} χ̄(g) m₇(χ) ∈ Z.
+
+Mod 3 (15 ≡ 0, 125 ≡ 2, 65 ≡ 2):  **f(g) ≡ 1 (mod 3)**, hence
+f(g) ≥ 1 for all 124 nonzero g, so tr C = Σ f(g) ≥ 124, i.e.
+15a − 143 ≥ 124 ⟹ a ≥ 18. Intersecting with a ∈ {13, 17, 21}:
+
+    ****  any ABELIAN order-125 semiregular lift has a = 21.  ****
+
+Consequences: (i) the "character-filtered a ∈ {13,17}" search targets
+are DEAD for abelian lifts — a = 21 is the only abelian target;
+(ii) every nonzero g lies in some diagonal set S_ii (the S_ii cover
+G ∖ {0}), with Σ|S_ii| = 172 and each f(g) ∈ {1, 4, 7, …};
+(iii) Parseval on f gives Σ_g f(g)² = (1/125)[172² + Σ_{χ≠1}(15m₇(χ)−208)²]
+— an open lever on the surviving a = 21 case (m₇ mean 1708/124 ≈ 13.8).
+
+Corrected F₅ rank caps (consult's min(a,25−a) was off by one): with
+N = C − 2I mod 5, rank_F5(N) ≤ min(26−a, a+1, 12) — for a = 21 the cap
+is 5; for a = 23 it is 3. (From rank_Q(C−7I) = 26−a, rank_Q(C+8I) = a+1,
+both ≡ N mod 5, plus total isotropy of im N in 1⊥.)
+
+Nonabelian order-125 groups (session sketch, NOT yet verified): linear
+characters factor through G/[G,G] ≅ Z₅² and the same mod-3 trick gives
+coset counts F(ḡ) ≡ 2 (mod 3) on the 24 nonzero cosets and f(g) ≡ 1
+(mod 3) on the 4 nonzero central g (central characters are scalar by
+Schur), yielding only tr C ≥ 52 ⟹ a ≥ 13 — nonabelian lifts keep
+a ∈ {13, 17, 21} (Galois mod-4 argument extends: 4 | 1729 − a via six
+linear 4-orbits + one 4-orbit of the four degree-5 irreps). Rigorous
+treatment pending.
+
 ## Status / next actions
 
 - [ ] When CP-SAT returns quotient matrices: compute a for each; discard
