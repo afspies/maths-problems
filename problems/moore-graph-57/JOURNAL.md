@@ -343,3 +343,54 @@ structure needed first (C₁₉ lesson).
   in the playground branch only). Large regenerable artifacts (19M-clause
   `d57_cuts.txt`, `c7_cuts.txt`) were NOT migrated — regenerate via each
   angle's `run_d57.py` if ever needed.
+
+## 2026-07-23 — session 3 (m=125: analytic + proof-carrying SAT)
+
+Branch `problem/moore-graph-57/2026-07-23-m125-analytic-sat` (canonical repo,
+worktree). Executing LEARNINGS queue item 1.
+
+### Session-side exact verification (laptop, minutes)
+- `angles/semiregular-quotient/verify_mod5_and_filter.py`: independent
+  re-derivation of the abelian a-filter {13,17,21} (Galois orbits 4/20/100
+  on all three abelian order-125 groups ⟹ a ≡ 1 mod 4) — all checks pass.
+  NEW: mod 5 the quotient equation collapses to (C−2I)² ≡ 0 (x²+x−56 ≡
+  (x−2)² mod 5), so C ≡ 2I + N, N symmetric nilpotent, N·1 ≡ 0. Mod-25
+  "projector split" idea is FALSE (7−17 not a unit mod 25) — caught by the
+  codex consult below.
+
+### Codex xhigh consult #1 (attack design; job task-mrxkyl6j-1uh38n)
+First dispatch lost to a host restart before the CLI launched (empty jobs
+dir — the LEARNINGS wrapper-hang trap has a new variant: check the jobs/
+dir to distinguish "never started" from "finished, wrapper hung").
+Second dispatch completed. Verdicts: one-hot + totalizer SAT encoding;
+existing symmetry breaking sound but incomplete; row-0 pattern DP cube
+split (a=21,23 collapse to ~8 cubes); mod-5 structure correct but their
+rank cap min(a,25−a) was off by one (corrected: min(26−a, a+1, 12));
+offdiag cap is 10 not 8 (my prompt's error, caught against repo files);
+and a NEW mod-3 analytic claim: abelian lifts force a = 21.
+
+### Mod-3 lemma VERIFIED (session, from scratch)
+`angles/semiregular-quotient/verify_mod3_lemma.py` — 38/38 exact checks:
+- Derivation: 125 f(g) = 15a + 65 + 15 T(g) for g ≠ 0 (Fourier inversion
+  + per-character trace identities, T(g) ∈ Z by Galois invariance of m₇);
+  mod 3 ⟹ f(g) ≡ 1, so f ≥ 1 on 124 elements ⟹ tr C = 15a−143 ≥ 124
+  ⟹ a ≥ 18 ⟹ a = 21 after the mod-4 filter.
+- Machinery validated end-to-end on a REAL object: HoS with the Robertson
+  shift automorphism (order 5, FPF) — b=10 quotient, a=8, all four
+  character blocks satisfy (Ĉ−2I)(Ĉ+3I) = 0 exactly over Z[ζ₅]
+  (hand-rolled integer cyclotomic arithmetic; sympy.simplify was NOT
+  trusted — it false-failed on exp-form zeta), f ≡ 5 matches the identity.
+- **LEMMA (new): any abelian order-125 semiregular lift has a = 21.**
+  Kills the planned a ∈ {13,17} abelian targets analytically. Banked in
+  character_notes.md; commit a06e977.
+
+### In flight (background codex jobs, gpt-5.6-sol xhigh)
+- SAT+DRAT encoder build per consult design (angles/semiregular-quotient/
+  sat/): one-hot, totalizer, cubes, optional mod-5 clauses, d=7 validation
+  gates, drat-trim build. No long runs authorized.
+- Analytic follow-up: rigorize nonabelian sketch (central f(g) ≡ 1 mod 3,
+  coset counts F(ḡ) ≡ 2 mod 3 ⟹ only a ≥ 13 so far; degree-5 irrep
+  constants need exact care) + session's tentative reduction of abelian
+  a=21 diagonal data to multiplier-orbit multiplicities (Z₅³: a 4-point
+  multiset in PG(2,5); Z₁₂₅: e forced uniquely; Z₂₅×Z₅: six values
+  summing to 4) — unverified until that job reports.
