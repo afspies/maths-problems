@@ -332,7 +332,9 @@ structure needed first (C₁₉ lesson).
 
 ### Migration into afspies/maths-problems
 - This problem folder moved from the playground worktree (branch
-  `alex/musing-elion-d3e5cb`, final commit 8fa70be) into
+  `alex/musing-elion-d3e5cb`, final commit 8fa70be; backed up to the
+  private playground remote as `archive/moore-graph-57-d3e5cb` @ a3508c7
+  with the two oversized solver-cut files filtered from history) into
   `afspies/maths-problems` `problems/moore-graph-57/` on branch
   `problem/moore-graph-57/2026-07-23-import`, restructured to repo
   conventions: theorem writeup → `writeup/` (perfectness.tex + report.md),
