@@ -18,7 +18,11 @@ constant is claimed. A third session sharpens terminal equality to
 singleton/triangle atoms, proves a terminal-aware subset inequality and a
 balanced fibre-incidence theorem, and establishes exact square-clique and
 fractional-tensor no-go results. The surviving target is the coordinate-hole
-system in tight fibres or a genuinely higher-rank LP bridge.
+system in tight fibres or a genuinely higher-rank LP bridge. A fourth
+session proves that every tight atomic column target is external-private,
+turns the resulting row holes into exact two-packings, and introduces a
+nonseparable weighted-domination blocker lift. Exact obstructions show why
+neither result yet raises the universal constant.
 
 ## Definitions
 
@@ -257,6 +261,44 @@ explicit `C₄`-based skeleton realizes all cardinality and exchange
 conditions but leaves a product vertex undominated, proving that this
 coordinate-hole condition is essential.
 
+## External-private and row hole-packing theorems
+
+In fact, the self-private case cannot occur under the full atomic/additive
+equality hypotheses. Let `L` have `K₁/K₃` conflict components, let its
+canonical capacity weighting be a globally optimal 2-packing, and let `X`
+minimally dominate `V(G)\L` with
+
+`|X|+γ_G(L)=γ(G)`.
+
+If `x∈X` were self-private only, optimality of the supported packing would
+give `w∈N[x]` whose closed neighborhood has packing load two. Saturation
+places `w` on one terminal atom, so a minimum `L`-dominator can be chosen to
+contain `w`. Replacing `x` by `w` preserves complement domination, and the
+overlap saves one vertex globally, a contradiction. Thus every `x∈X` has an
+external private target.
+
+There is a quantitative coordinate consequence. Fix a product row `y`, let
+`A_y` be its set of occupied `H`-coordinates, let `I_y` index its vertically
+dominated cells, and put `e_y=|A_y|-|I_y|`. If `J_y` indexes the columns
+choosing `y` as an external private target and `P_y` is their set of
+singleton holes, then
+
+```text
+|J_y|-γ_H(P_y)≤e_y,
+|J_y|≤ρ(H)+2e_y.                                             (18)
+```
+
+The first inequality replaces the centers indexed by `I_y∪J_y` with `A_y`
+and a minimum dominator of the holes. The second applies the general
+matching-cover bound to `P_y`. At zero row slack, `P_y` is a two-packing.
+Summation gives an order-dependent necessary condition
+`|D|≤|V(G)|ρ(H)` at formal equality, but no order-free constant gain.
+
+Two-sided external privacy alone is insufficient. The perfect code
+`{(i,2i):i∈Z₅}` in `C₅□C₅` has external private neighbors in both coordinate
+directions, while every opposite rectangle corner is covered by the next
+codeword.
+
 ## Limits of rank-one fractional tensors
 
 Every rank-one certificate in (10) obeys
@@ -296,6 +338,61 @@ Forests satisfy both hypotheses. Universally, however, this route has
 unbounded loss: for `G_m=L(K_{2m+1})` and `H=P₄`,
 `fcc((G_m□P₄)²)≤4` while `γ(G_m)γ(P₄)=2m`.
 
+## Bidirectional blocker lift
+
+For nonnegative weights `w` on `K`, let `τ_K(w)` be the minimum `w`-weight
+of an integral dominating set. Define `Λ(G,H)` by maximizing
+
+`Σ_gτ_H(a_{g,·})+Σ_hτ_G(b_{·,h})`
+
+over nonnegative arrays satisfying
+
+`Σ_{g∈N_G[u]}a_{g,v}+Σ_{h∈N_H[v]}b_{u,h}≤1`
+
+for every `(u,v)`. Projecting a product dominator through every closed
+neighborhood in each direction proves
+
+`γ(G□H)≥Λ(G,H)`, while minimum factor dominators give
+`Λ(G,H)≤γ(G)γ(H)`.                                            (19)
+
+Putting unit `b`-weight on both endpoints of `P₄` gives
+
+`Λ(G,P₄)=2γ(G)`
+
+for every `G`, so the lift certifies Vizing exactly on the family that
+defeats pure fractional methods. It is not universally stronger than
+Steiner. If the factors are vertex-transitive of degrees `r,s`,
+
+`Λ=max{|V(G)|γ(H)/(r+1),|V(H)|γ(G)/(s+1)}`.                  (20)
+
+For `G=H=L(K_{2m+1})`, the normalized value is
+`(2m+1)/(4m-1)→1/2`. Pure nonseparable fractional packing is separately a
+STOP because
+`γ_f(G□H)≤min{|V(H)|γ_f(G),|V(G)|γ_f(H)}`; the connected split graph
+against `P₄` puts this ceiling below Steiner.
+
+There is a precise hybrid target inside `Λ`. For an ordinary maximum
+two-packing in `G` and a fractional packing `q` on `H`, with total `Q`, set
+
+`Δ_H(q)=min_{T dominates H}Σ_{v∈T}[1-q(N_H[v])]`.
+
+An explicit feasible blocker solution gives
+
+`Λ(G,H)≥Qγ(G)+ρ(G)Δ_H(q)`.                                   (21)
+
+At the formal Steiner ratios, taking `q` to be half an optimal integer
+2-packing reaches `c` exactly when
+`Δ_H(q)=(1-b)γ(H)`. This deficit is not forced by the ratios:
+`C₅` and augmented split graphs have canonical `Δ=0`, and disjoint-union
+mixtures approach the formal irrational point. Those split graphs also have
+very diffuse alternative packings. In general, if `η_p,η_q` are maximum
+coordinates of fractional packings of totals `P,Q`, then
+
+`γ_f(G□H)≥PQ/(η_p+η_q)`.                                    (22)
+
+The remaining orthogonal target is therefore an explicit
+defect–diffuseness dichotomy, not a pure blocker or pure fractional theorem.
+
 ## Withdrawn 0.5809 claim
 
 With `A=γ(G)`, `B=γ(H)`, `x=A-ρ(G)`, `y=B-ρ(H)`, the valid
@@ -316,15 +413,17 @@ From `problems/vizing-domination/harness` run:
 python3 -m unittest -v
 ```
 
-Twenty exact tests check named graph products, domination and `k`-function
+Twenty-five exact tests check named graph products, domination and `k`-function
 definitions, Steiner's subset inequality, equation (3), the exact
 `Q(√73)` threshold identities, the withdrawn algebra witness, and the
 five-vertex `k=3` counterexample together with corrected inequality (5).
 They also exhaustively verify the matching-cover and capacity-two
 classifications through five vertices, check the all-level hierarchy gadget,
 validate the split-graph fractional examples, and exercise the coordinate-hole
-adversarial skeleton. These are hygiene and adversarial checks, not a finite
-proof of the universal conjecture.
+adversarial skeleton. They also check the atomic external-private example,
+the necessity of additivity, the `C₅□C₅` corner cycle, and small `P₄`
+blocker targets. These are hygiene and adversarial checks, not a finite proof
+of the universal conjecture.
 
 ## Relation to prior work and next gate
 
@@ -334,6 +433,9 @@ The dependency reconstruction is in
 inequality is a dead end. The two-session gate is met by the terminal
 capacity refinement and exact fibre-incidence theorem. Additive packing,
 optimal rank-one concentration, and unrestricted square-clique cover are now
-closed as universal routes. Future work should count external private
-targets in the coordinate-hole system, or develop a genuinely higher-rank
-fractional tensor or center-aware square lift.
+closed as universal routes. The exact external-private and row hole-packing
+theorems further meet the gate, but their first aggregate consequence
+depends on factor order. Pure higher-rank fractional packing and the
+standalone blocker lift are also closed. Future work should seek an
+order-free coupling of hole packings, a near-tight cardinal bound for
+self-private sets, or a second-order blocker/Steiner hybrid.

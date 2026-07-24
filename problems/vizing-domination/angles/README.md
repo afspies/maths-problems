@@ -20,6 +20,10 @@
   eliminates every peeling step, fixes the singleton/triangle counts in
   every column, and forces balanced disjoint row exchanges; a unique-hole
   condition isolates the missing coordinate-level bridge.
+- `external-private-holes/` — **proved bridge:** exact atomic/additive
+  columns have no self-private projection vertices; singleton holes landing
+  in one row satisfy a quantitative subset-domination inequality and become
+  a two-packing at zero row slack.
 - `packing-hierarchy/` — **proved obstruction:** the full additive hierarchy
   of integer `k`-packing subset/product bounds is derived and shown to retain
   Steiner's exact 0.5643 minimax obstruction.
@@ -32,6 +36,10 @@
 - `square-clique-cover/` — **proved orthogonal bound:** fractional clique
   covers of graph squares give a one-sided product theorem and prove Vizing
   for centered-perfect-square factors, but have unbounded universal loss.
+- `bidirectional-blocker/` — **proved nonseparable lift and obstruction:**
+  weighted integral domination blockers certify every `G□P₄` exactly, while
+  vertex-transitive line graphs drive the standalone lift back to `1/2`.
 
-Next work should count external versus self-private column targets in the
-unique-hole system, or develop a genuinely higher-rank/center-aware LP lift.
+Next work should couple the row hole packings across different rows without
+using factor order, or build a second-order hybrid of the blocker lift with
+Steiner/fractional certificates.

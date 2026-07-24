@@ -23,5 +23,8 @@ corrected `k=3` subset inequality on every subset of several small graphs.
 They also exhaust the matching-cover equality classification through five
 vertices, verify its capacity-two `K₁/K₃` refinement, check the all-level
 packing/domination equality gadget, validate exact split-graph fractional
-packings, and exercise the coordinate-hole adversarial skeleton. The suite
-currently contains 20 tests.
+packings, and exercise the coordinate-hole adversarial skeleton. New fixtures
+check the external-private atomic theorem and its additivity obstruction, the
+`C₅□C₅` cycling-corner obstruction, `P₄` blocker targets, zero saturation
+defect on `C₅`, and a diffuse split-graph tensor. The suite currently contains
+25 tests.

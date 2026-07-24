@@ -90,7 +90,10 @@
   terminal equality to singleton and triangle conflict atoms, decompose every
   unit of product-proof slack, classify formal fibre incidence, and prove
   orthogonal fractional-tensor and square-clique-cover bounds with exact
-  universal obstructions. No improved universal constant is claimed.
+  universal obstructions. We further prove that tight atomic columns have
+  external private targets, that their row holes are two-packings, and that
+  a bidirectional weighted-domination lift certifies every product with
+  P<sub>4</sub>. No improved universal constant is claimed.
 </div>
 
 <h2>1 · Setup</h2>
@@ -290,14 +293,45 @@ only forces a nonempty hole set covered by its inside-cell point. A checked
 C<sub>4</sub>-based skeleton satisfies all margin and exchange conditions but
 misses a product vertex, isolating this coordinate-hole condition.</p>
 
-<h2>9 · Two orthogonal LP boundaries</h2>
+<h2>9 · External private targets and hole packings</h2>
+<div class="env theorem">
+  <span class="label">External-private theorem.</span>
+  In a fully tight atomic column, every member <var>x</var> of the minimum
+  complement dominator has an external private target. If <var>x</var> were
+  self-private only, optimality of the supported 2-packing would produce a
+  saturated witness <var>w</var>∈<var>N</var>[<var>x</var>]. The witness
+  extends through its K<sub>1</sub> or K<sub>3</sub> atom to a minimum fibre
+  dominator. Replacing <var>x</var> by <var>w</var> makes the two dominators
+  overlap and gives a dominating set of size γ(<var>G</var>)−1.
+</div>
+<p>Fix a product row <var>y</var>. Let <var>J</var> index columns choosing
+<var>y</var> as an external private target, let <var>P</var> be their
+singleton coordinate holes, and put
+<var>e</var>=|<var>A</var><sub><var>y</var></sub>|−
+|<var>I</var><sub><var>y</var></sub>|. Replacing the relevant partition
+centers by the row points and a minimum dominator of <var>P</var> gives</p>
+<div class="eqn">
+  <span class="body">|<var>J</var>|−γ<sub><var>H</var></sub>(<var>P</var>)≤
+  <var>e</var>, &nbsp;
+  |<var>J</var>|≤ρ(<var>H</var>)+2<var>e</var>.</span>
+  <span class="no">(9)</span>
+</div>
+<p>At zero row slack, <var>P</var> is a two-packing. Summation currently
+gives only the order-dependent condition
+|<var>D</var>|≤|<var>V</var>(<var>G</var>)|ρ(<var>H</var>).
+Symmetric external privacy does not repair this: the perfect code
+{(<var>i</var>,2<var>i</var>):<var>i</var>∈ℤ<sub>5</sub>} in
+C<sub>5</sub>□C<sub>5</sub> cycles every opposite rectangle corner through
+the next codeword.</p>
+
+<h2>10 · Two orthogonal LP boundaries</h2>
 <h3>Rank-one fractional tensors</h3>
 <p>Every certificate in (7) obeys the exact ceiling</p>
 <div class="eqn">
   <span class="body"><var>PQ</var>/κ ≤ min{
   |<var>H</var>|γ<sub>f</sub>(<var>G</var>),
   |<var>G</var>|γ<sub>f</sub>(<var>H</var>)}.</span>
-  <span class="no">(9)</span>
+  <span class="no">(10)</span>
 </div>
 <p>Against P<sub>4</sub>, optimal and fixed-tolerance near-optimal packings
 have κ arbitrarily close to one, independently of the integrality gap. A
@@ -314,7 +348,7 @@ slice count give</p>
 <div class="eqn">
   <span class="body">γ(<var>G</var>□<var>H</var>) ≥
   max{σ(<var>G</var>)γ(<var>H</var>),
-  γ(<var>G</var>)σ(<var>H</var>)}.</span><span class="no">(10)</span>
+  γ(<var>G</var>)σ(<var>H</var>)}.</span><span class="no">(11)</span>
 </div>
 <p>If <var>G</var><sup>2</sup> is perfect and each of its cliques lies in a
 closed neighborhood of <var>G</var>, then σ(<var>G</var>)=γ(<var>G</var>)
@@ -324,17 +358,75 @@ for <var>G</var><sub><var>m</var></sub>=<var>L</var>(K<sub>2<var>m</var>+1</sub>
 and H=P<sub>4</sub>, its product-square clique cover is at most four while
 γ(<var>G</var><sub><var>m</var></sub>)γ(P<sub>4</sub>)=2<var>m</var>.</p>
 
-<h2>10 · Exact verification and next gate</h2>
+<h2>11 · Bidirectional blocker lift</h2>
+<p>For nonnegative weights <var>w</var> on <var>K</var>, let
+τ<sub><var>K</var></sub>(<var>w</var>) be the minimum weighted cost of an
+integral dominating set. Maximize</p>
+<div class="eqn">
+  <span class="body">Σ<sub><var>g</var></sub>τ<sub><var>H</var></sub>
+  (<var>a</var><sub><var>g</var>,·</sub>)+
+  Σ<sub><var>h</var></sub>τ<sub><var>G</var></sub>
+  (<var>b</var><sub>·,<var>h</var></sub>)</span>
+  <span class="no">(12)</span>
+</div>
+<p>over nonnegative arrays satisfying
+Σ<sub><var>g</var>∈<var>N</var>[<var>u</var>]</sub>
+<var>a</var><sub><var>g,v</var></sub>+
+Σ<sub><var>h</var>∈<var>N</var>[<var>v</var>]</sub>
+<var>b</var><sub><var>u,h</var></sub>≤1. Call the optimum Λ(<var>G,H</var>).
+Projecting a product dominator through every closed neighborhood proves</p>
+<div class="eqn">
+  <span class="body">γ(<var>G</var>□<var>H</var>)≥Λ(<var>G,H</var>)≤
+  γ(<var>G</var>)γ(<var>H</var>).</span><span class="no">(13)</span>
+</div>
+<p>Unit column weights on the two endpoints of P<sub>4</sub> give
+Λ(<var>G</var>,P<sub>4</sub>)=2γ(<var>G</var>) for every <var>G</var>.
+The lift is not universally stronger: on vertex-transitive factors of
+degrees <var>r,s</var>, automorphism averaging gives exactly</p>
+<div class="eqn">
+  <span class="body">Λ=max{|<var>G</var>|γ(<var>H</var>)/(<var>r</var>+1),
+  |<var>H</var>|γ(<var>G</var>)/(<var>s</var>+1)}.</span>
+  <span class="no">(14)</span>
+</div>
+<p>For two copies of <var>L</var>(K<sub>2<var>m</var>+1</sub>), the normalized
+value is (2<var>m</var>+1)/(4<var>m</var>−1)→1/2. Pure nonseparable
+fractional packing is separately blocked by the connected split graph
+against P<sub>4</sub>.</p>
+<p>The lift also has a precise fractional complement. For an ordinary maximum
+two-packing in <var>G</var> and a fractional packing <var>q</var> on
+<var>H</var>, with total <var>Q</var>, define Δ<sub><var>H</var></sub>
+(<var>q</var>) as the minimum sum of
+1−<var>q</var>(<var>N</var>[<var>v</var>]) over a dominating set of
+<var>H</var>. An explicit feasible blocker solution gives</p>
+<div class="eqn">
+  <span class="body">Λ(<var>G,H</var>)≥<var>Q</var>γ(<var>G</var>)+
+  ρ(<var>G</var>)Δ<sub><var>H</var></sub>(<var>q</var>).</span>
+  <span class="no">(15)</span>
+</div>
+<p>For the canonical half-2-packing at the formal Steiner ratios, this reaches
+the constant exactly when Δ=(1−<var>b</var>)γ(<var>H</var>). C<sub>5</sub>
+and augmented split-graph mixtures approach the formal ratios with zero
+canonical deficit, so ratios alone cannot prove the threshold. Those split
+graphs have diffuse alternative packings: if <var>η</var><sub><var>p</var></sub>,
+<var>η</var><sub><var>q</var></sub> are the maximum coordinates of packings
+of totals <var>P,Q</var>, then
+γ<sub>f</sub>(<var>G</var>□<var>H</var>)≥
+<var>PQ</var>/(<var>η</var><sub><var>p</var></sub>+
+<var>η</var><sub><var>q</var></sub>). This leaves a concrete
+defect–diffuseness dichotomy.</p>
+
+<h2>12 · Exact verification and next gate</h2>
 <pre><code>$ cd problems/vizing-domination/harness
 $ python3 -m unittest -v
-Ran 20 tests
+Ran 25 tests
 OK</code></pre>
 <p>The checks use integers, rational numbers, and exact elements of
 ℚ(√73). They validate definitions and finite witnesses, not the universal
 conjecture. The gate is met by the capacity-two subset inequality and formal
-fibre-incidence classification. Further work should count external private
-targets in the coordinate-hole system, or develop a genuinely higher-rank
-fractional tensor or center-aware square lift.</p>
+fibre-incidence classification, and strengthened by the external-private and
+row hole-packing theorems. Further work should couple hole packings without
+factor order, control self-private sets in near-tight columns, or prove a
+second-order blocker/Steiner dichotomy.</p>
 
 <div class="footer">
   <p><strong>Status:</strong> partial-results. Vizing’s domination conjecture

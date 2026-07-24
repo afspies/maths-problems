@@ -164,6 +164,20 @@ class GraphHygieneTests(unittest.TestCase):
         self.assertEqual(c * c.scale(12) - c.scale(5) - one, Surd73(Fraction(0)))
         self.assertEqual(Surd73(Fraction(5, 7)) - d.scale(Fraction(3, 7)), c)
         self.assertEqual(b - d, (b - a).scale(Fraction(1, 3)))
+        c5_share = (b - a).scale(4)
+        diagonal_ratio = Surd73(Fraction(41, 64), Fraction(-3, 64))
+        self.assertEqual(
+            c5_share,
+            Surd73(Fraction(-7, 6), Fraction(1, 6)),
+        )
+        self.assertEqual(
+            a,
+            c5_share.scale(Fraction(1, 2)) + (one - c5_share) * diagonal_ratio,
+        )
+        self.assertEqual(
+            b,
+            c5_share.scale(Fraction(3, 4)) + (one - c5_share) * diagonal_ratio,
+        )
 
     def test_k3_counterexample(self) -> None:
         graph = Graph.from_edges(
@@ -257,6 +271,21 @@ class GraphHygieneTests(unittest.TestCase):
         )
         self.assertTrue(augmented.is_fractional_packing_function(augmented_weights))
         self.assertEqual(sum(augmented_weights), 4)
+        diffuse_augmented = (
+            [Fraction(0)] * 6
+            + [Fraction(1, 3)] * 6
+            + [Fraction(0)] * 2
+        )
+        self.assertTrue(augmented.is_fractional_packing_function(diffuse_augmented))
+        self.assertEqual(
+            fractional_tensor_lower_bound(
+                augmented,
+                augmented,
+                diffuse_augmented,
+                diffuse_augmented,
+            ),
+            12,
+        )
 
     def test_incidence_skeleton_requires_coordinate_holes(self) -> None:
         left = cycle(4)
@@ -304,6 +333,107 @@ class GraphHygieneTests(unittest.TestCase):
                 }
             )
         self.assertEqual(vertical_sets, [{0}, {2}])
+
+    def test_external_private_atomic_column(self) -> None:
+        graph = cycle(4)
+        terminal = {0}
+        complement = set(range(graph.n)) - terminal
+        projection = {2}
+        supported = (2, 0, 0, 0)
+
+        self.assertTrue(graph.is_k_packing_function(supported, 2))
+        self.assertEqual(sum(supported), graph.k_packing_number(2))
+        self.assertTrue(graph.dominates(projection, complement))
+        self.assertEqual(graph.domination_number(complement), len(projection))
+        self.assertEqual(
+            len(projection) + graph.domination_number(terminal),
+            graph.domination_number(),
+        )
+        external_private = {
+            y
+            for y in complement - projection
+            if graph.closed_neighborhood(y) & projection == projection
+        }
+        self.assertEqual(external_private, {1, 3})
+
+    def test_external_private_needs_additivity(self) -> None:
+        graph = Graph.from_edges(
+            5,
+            [(u, v) for u in (0, 1) for v in (2, 3, 4)],
+        )
+        terminal = {2}
+        complement = set(range(graph.n)) - terminal
+        projection = {3, 4}
+        supported = (0, 0, 2, 0, 0)
+
+        self.assertTrue(graph.is_k_packing_function(supported, 2))
+        self.assertEqual(sum(supported), graph.k_packing_number(2))
+        self.assertEqual(graph.domination_number(complement), len(projection))
+        self.assertGreater(
+            len(projection) + graph.domination_number(terminal),
+            graph.domination_number(),
+        )
+        for x in projection:
+            private = {
+                y
+                for y in complement
+                if graph.closed_neighborhood(y) & projection == {x}
+            }
+            self.assertEqual(private, {x})
+
+    def test_two_sided_private_corners_can_cycle(self) -> None:
+        factor = cycle(5)
+        product_graph = factor.cartesian_product(factor)
+        chosen_pairs = {(i, 2 * i % 5) for i in range(5)}
+        chosen = {g * factor.n + h for g, h in chosen_pairs}
+
+        self.assertTrue(product_graph.dominates(chosen))
+        for vertex in range(product_graph.n):
+            self.assertEqual(len(product_graph.closed_neighborhood(vertex) & chosen), 1)
+        for i in range(5):
+            point = (i, 2 * i % 5)
+            horizontal_private = ((i + 1) % 5, point[1])
+            vertical_private = (point[0], (point[1] + 1) % 5)
+            corner = (horizontal_private[0], vertical_private[1])
+            next_point = ((i + 1) % 5, (2 * (i + 1)) % 5)
+            self.assertIn(
+                next_point[0] * factor.n + next_point[1],
+                product_graph.closed_neighborhood(corner[0] * factor.n + corner[1]),
+            )
+
+    def test_bidirectional_blocker_certifies_small_p4_pairs(self) -> None:
+        right = path(4)
+        endpoints = {0, 3}
+        self.assertTrue(
+            all(len(right.closed_neighborhood(v) & endpoints) <= 1 for v in range(right.n))
+        )
+        for left in (path(2), path(3), path(4), cycle(4)):
+            self.assertGreaterEqual(
+                left.cartesian_product(right).domination_number(),
+                2 * left.domination_number(),
+            )
+
+    def test_c5_blocker_saturation_defect_can_vanish(self) -> None:
+        graph = cycle(5)
+        weights = (
+            Fraction(1, 2),
+            Fraction(0),
+            Fraction(1, 2),
+            Fraction(0),
+            Fraction(1, 2),
+        )
+        self.assertTrue(graph.is_fractional_packing_function(weights))
+        loads = [
+            sum((weights[u] for u in graph.closed_neighborhood(v)), Fraction(0))
+            for v in range(graph.n)
+        ]
+        best_defect = min(
+            sum((1 - loads[v] for v in chosen), Fraction(0))
+            for size in range(graph.n + 1)
+            for chosen in combinations(range(graph.n), size)
+            if graph.dominates(chosen)
+        )
+        self.assertEqual(best_defect, 0)
 
 
 if __name__ == "__main__":

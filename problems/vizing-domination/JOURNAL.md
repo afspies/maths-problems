@@ -349,3 +349,189 @@ claimed. Continue only on aggregate external-private-target counting,
 higher-rank fractional tensors, or center-aware square lifts. Optimal
 rank-one concentration and unrestricted square-clique cover are certified
 PIVOT/STOP directions.
+
+## 2026-07-24 — external-private holes and blocker hybrids
+
+### Branch and mandate
+
+Continued from synchronized `main` on
+`problem/vizing-domination/2026-07-24-external-holes`. The session remained
+inside `problems/vizing-domination/` plus the generated root board. The goal
+was an order-free bridge from the formal `K₁/K₃` incidence classification,
+with a parallel nonseparable LP attack.
+
+### Parallel GPT-5.6 Sol xhigh reviews
+
+Three Sol agents at xhigh effort worked independently:
+
+1. the incidence agent proved the external-private replacement lemma and the
+   row hole-packing theorem;
+2. a hostile referee audited every replacement, saturation, retained-center,
+   and quantitative step;
+3. an orthogonal agent developed the bidirectional weighted-domination
+   blocker lift and its exact obstructions.
+
+The hostile referee accepted the exact external-private theorem. It corrected
+the proof language from “preserves domination of the terminal set” to
+“preserves domination of its complement,” and supplied an exhaustive
+small-graph check: no counterexample among 217 exact-hypothesis instances
+through five vertices. It rejected an initially proposed cardinal bound on
+self-private vertices: an opposite minimum dominating pair in `C₄` need not
+be a two-packing. The corrected statement controls only their two-packing
+number.
+
+The referee accepted the row hole theorem, emphasizing that the row set must
+dominate every cell indexed by its vertical set. It also accepted the blocker
+complement and diffuseness lemmas. It caught a factor-two attribution error:
+the general estimate `PQ/(η_p+η_q)` gives `2C`, not `4C`, on the symmetric
+hard-split packing. The stronger `4C` is the exact tensor value there because
+its actual denominator is `1/C`; it does not follow from the general lemma.
+The checked-in claims use the corrected distinction.
+
+### External-private theorem
+
+Let `L` be terminal with `K₁/K₃` conflict components, let its canonical
+capacity weighting be a globally optimal integer 2-packing, and let `X`
+minimally dominate `T=V(G)\L` with
+
+`|X|+γ_G(L)=γ(G)`.
+
+Proved that every `x∈X` has an external private target. If `x` were
+self-private only, packing optimality would give a saturated
+`w∈N[x]`. Saturation occurs inside one atom, so a minimum `L`-dominator can
+be chosen to contain `w`. Replacing `x` by `w` preserves domination of `T`;
+the overlap with the `L`-dominator saves one vertex and contradicts
+`γ(G)`.
+
+The five-vertex graph `K_{2,3}` proves additivity essential. With a singleton
+terminal target in the three-side and the other two three-side vertices as
+`X`, all packing/atomic/minimum conditions hold and both members are
+self-private only, but the additive sum is three while `γ=2`.
+
+If the ambient 2-packing exceeds the supported capacity by `Δ`, the
+self-private set `S` satisfies only
+
+`ρ_G(S)≤Δ`.
+
+For every two-packing `P⊆S`, adding its indicator to the supported weights is
+feasible. No cardinal bound is claimed.
+
+### Row hole-packing theorem
+
+For a fixed product row, write
+
+```text
+A=A_y,  I={i:y∈L_i},  e=|A|-|I|.
+```
+
+Let `J` be columns choosing `y` as an external private target and
+`P={a_i:i∈J}` their singleton holes. Replacing the partition centers indexed
+by `I∪J` with `A` and a minimum dominator of `P` proves
+
+```text
+|J|-γ_H(P)≤e,
+|J|≤ρ(H)+2e.
+```
+
+At zero row slack, `P` is a two-packing. Summing gives
+
+`M≤|V(G)|ρ(H)+2v`,
+
+and full formal equality gives `|D|≤|V(G)|ρ(H)`, plus its transpose. At the
+formal ratios this requires
+`|V(G)|≥(c/a)γ(G)≈1.83822γ(G)`. This is stronger than the elementary
+three-disjoint-set count but remains order-dependent, so no new universal
+constant is claimed.
+
+The perfect code `{(i,2i mod 5):i∈Z₅}` in `C₅□C₅` kills a symmetric-corner
+shortcut: each codeword has external private neighbors in both coordinate
+directions, but their rectangle corner is dominated by the next codeword.
+
+### Bidirectional blocker lift
+
+For weighted integral domination blocker
+
+`τ_K(w)=min_{S dominates K}Σ_{x∈S}w_x`,
+
+defined a nonseparable lift `Λ(G,H)` maximizing
+
+`Σ_gτ_H(a_g)+Σ_hτ_G(b^h)`
+
+subject to
+
+`Σ_{g∈N_G[u]}a_{g,v}+Σ_{h∈N_H[v]}b_{u,h}≤1`.
+
+Projection of any product dominator proves
+
+`γ(G□H)≥Λ(G,H)`,
+
+and summing over minimum factor dominators gives
+`Λ(G,H)≤γ(G)γ(H)`. Unit column weights on the endpoints of `P₄` prove
+
+`Λ(G,P₄)=2γ(G)`
+
+for every `G`. Thus the lift reaches Vizing's target exactly on the family
+that defeats pure fractional packing.
+
+Automorphism averaging gives, for vertex-transitive factors of degrees
+`r,s`,
+
+`Λ=max{|G|γ(H)/(r+1),|H|γ(G)/(s+1)}`.
+
+For two copies of `L(K_{2m+1})`, the normalized value tends to `1/2`, so
+the standalone lift is a universal STOP.
+
+### Saturation defect versus diffuseness
+
+For an ordinary maximum two-packing in `G` and a fractional packing `q` on
+`H`, with total `Q`, defined
+
+`Δ_H(q)=min_{T dominates H}Σ_{v∈T}[1-q(N[v])]`
+
+and proved the explicit blocker certificate
+
+`Λ(G,H)≥Qγ(G)+ρ(G)Δ_H(q)`.
+
+At the formal ratios, the canonical half-2-packing reaches Steiner exactly
+at `Δ_H(q)=(1-b)γ(H)`. This threshold is not forced by packing ratios:
+`C₅` and the augmented even split graphs `S_m` have canonical `Δ=0`, and
+disjoint-union mixtures of `C₅,S₂₆,S₂₈` approach the irrational formal
+point.
+
+For fractional packings of totals `P,Q` and maximum coordinates
+`η_p,η_q`, also proved
+
+`γ_f(G□H)≥PQ/(η_p+η_q)`.
+
+The zero-deficit split examples have highly diffuse alternative packings, so
+they do not kill the hybrid. The remaining explicit GO target is a
+defect–diffuseness dichotomy: either optimized blocker deficit beats its
+threshold or diffuse fractional packings beat Steiner.
+
+### Verification and compute
+
+```text
+cd problems/vizing-domination/harness
+python3 -m unittest -v
+# Ran 25 tests — OK
+```
+
+One repository-root `python3 -m unittest -v` invocation discovered zero tests;
+it was not treated as verification. The displayed harness-scoped command was
+then rerun and passed all 25 tests.
+
+The five new exact tests cover the atomic external-private example, the
+`K_{2,3}` additivity obstruction, the `C₅□C₅` corner cycle, the `P₄`
+blocker target on named factors, zero `C₅` saturation deficit, and the
+diffuse split tensor value. These are adversarial hygiene, not evidence for
+the universal conjecture.
+
+Interactive wall time: approximately 90 minutes. External compute: none.
+
+### Gate verdict
+
+The session adds a nontrivial exact equality classification, a quantitative
+row subset-domination inequality, and a new nonseparable product lift. It
+does not certify a constant above `0.5643`. **GO** only for order-free
+cross-row hole coupling, self-private stability using the full atomic
+geometry, or the explicit blocker defect–fractional diffuseness dichotomy.

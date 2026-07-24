@@ -93,3 +93,49 @@ Do not extend the additive `k`-packing hierarchy further.
 
 Do not return to terminal atom ratios, optimal rank-one concentration, or an
 unrestricted square-clique/theta relaxation.
+
+## Session 4 deltas
+
+- In a fully tight atomic column, every member of the minimum complement
+  dominator has an external private target. A self-private-only member can
+  be replaced by a saturated witness that also belongs to a minimum
+  dominator of the terminal atoms, saving one vertex globally.
+- The additivity equality is essential. `K_{2,3}` supplies a five-vertex
+  counterexample as soon as one unit of partition-additivity defect is
+  allowed.
+- With ambient capacity defect, the two-packing number—not the cardinality—
+  of the self-private set is bounded by that defect. Self-private vertices
+  need not themselves form a two-packing; simultaneous replacement can
+  uncover jointly dominated targets.
+- Singleton holes assigned to one row satisfy
+  `|J|-γ_H(P)≤e`, hence `|J|≤ρ(H)+2e`. At zero row slack they form a genuine
+  two-packing. Summation currently yields only the order-dependent condition
+  `|D|≤|V(G)|ρ(H)`.
+- Two-sided external privacy does not force an undominated rectangle corner.
+  The perfect code `{(i,2i):i∈Z₅}` in `C₅□C₅` cycles all corners through the
+  next codeword.
+- Pure nonseparable fractional packing is blocked by the split-graph
+  `□P₄` family. The stronger bidirectional integral blocker lift reaches
+  `γ(G)γ(P₄)` for every `G`, but symmetric line graphs make the standalone
+  lift tend to factor `1/2`.
+- The blocker lift contains the exact complement
+  `Λ≥Qγ(G)+ρ(G)Δ_H(q)`. For the canonical half-2-packing at the formal
+  ratios, its threshold is `Δ_H(q)>(1-b)γ(H)`.
+- `C₅` and augmented split-graph mixtures approach the formal packing ratios
+  with zero canonical saturation deficit, so ratios alone cannot prove that
+  threshold. The same split graphs possess very diffuse alternative
+  packings, leaving a concrete defect–diffuseness dichotomy alive.
+
+## Revised next move after session 4
+
+1. Couple hole two-packings across rows without introducing `|V(G)|`, perhaps
+   through overlap constraints on their source columns.
+2. Seek a structural lower bound on the two-packing number of self-private
+   sets under the full near-tight `K₁/K₃` incidence conditions.
+3. Prove or refute the explicit dichotomy: either some optimized blocker
+   packing has saturation deficit above its threshold, or both factors have
+   packings diffuse enough that `PQ/(η_p+η_q)` beats Steiner.
+
+Do not infer cardinality from the self-private packing bound, do not use a
+bare corner-completion argument, and do not pursue pure higher-rank
+fractional packing.

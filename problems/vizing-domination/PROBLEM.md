@@ -60,11 +60,19 @@ its precise failure is audited in
 - At formal Steiner equality, every fibre set is already terminal, supports
   maximum ordinary and optimal 2-packings, has fixed `K₁/K₃` counts, and
   participates in balanced disjoint row/column exchanges.
+- Exact atomic/additive columns have no self-private projection vertices.
+  Their external private targets force singleton holes, and all holes landing
+  in one row form a two-packing in the other factor; row slack `e` weakens
+  this to the exact bound `|J|≤ρ+2e`.
 - The full additive integer packing/domination hierarchy retains the same
   formal 0.5643 obstruction at every level.
 - Rank-one fractional tensors and unrestricted square-clique LPs both have
   certified universal obstructions; their surviving value is in graph-class
   bounds and in suggesting higher-rank or center-aware lifts.
+- A nonseparable bidirectional weighted-domination blocker certifies Vizing
+  for every `G□P₄`, but vertex-transitive line graphs force that standalone
+  relaxation back toward `1/2`. Pure higher-rank fractional packing is also
+  blocked by the split-graph `□P₄` family.
 
 ## Angle-of-attack menu (be exploratory — draw from different fields)
 
@@ -74,9 +82,9 @@ its precise failure is audited in
   additional obstruction parameter; the parameter-free `k=3` guess is dead.
 - **LP/integer duality:** compare integer `k`-packing defects with fractional
   domination and identify rounding structure that product fibres enforce.
-- **Fractional tensoring:** optimize the exact local-concentration denominator
-  using genuinely nonseparable/higher-rank packings; optimal rank-one
-  concentration tradeoffs are now ruled out.
+- **Hybrid blocker/Steiner certificates:** couple weighted integral
+  domination blockers to the exact fibre defects; both pure fractional
+  higher rank and the standalone blocker have certified obstructions.
 - **Square-graph lifts:** retain which square cliques have a common center,
   since the unrestricted fractional clique cover has unbounded loss.
 - **Extremal constructions:** build graphs/subsets realizing equality in every
@@ -87,12 +95,11 @@ its precise failure is audited in
 
 ## First steps
 
-1. Count external private targets in the tight column projections. External
-   targets force singleton coordinate holes, whereas self-private targets
-   only give a weaker covering condition.
-2. Couple those holes to the disjoint minimum exchanges in each `H`-row and
-   the fixed `K₁/K₃` packing atoms in every column.
-3. In parallel, try a higher-rank fractional tensor or a center-aware
-   square-clique lift.
+1. Seek an order-free coupling among the two-packings of singleton holes in
+   different rows. Bare row summation only gives an order lower bound.
+2. Bound the cardinality of self-private vertices in a near-tight column
+   from their two-packing number and the ambient capacity defect.
+3. In parallel, couple the bidirectional blocker lift to Steiner's defect
+   identity or to the fractional product bound.
 4. Do not pursue the additive `k`-packing hierarchy further: it is now proved
    to preserve the exact obstruction at every level.
