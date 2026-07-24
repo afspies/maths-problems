@@ -468,3 +468,180 @@ git diff --check
 The exact harness passed 5/5 tests in 0.001 seconds.  Python compilation,
 both HTML parses, TOML parsing, board regeneration (18 problems), and
 `git diff --check` completed without error.
+
+## 2026-07-24 — persistent diagonal locality and conformal concentration
+
+### Wide-net attacks
+
+Ran three independent proof attacks: direct diagonal \(\mu hom\), cyclic
+configuration topology, and conformal/GMT/rough compactness.  Audited
+Asano--Ike v3, Greene--Lobb's action construction, Matschke's special
+trapezoids, and the Vrećica--Živaljević compactification argument against
+their primary texts.
+
+The exact unrestricted target is derived global diagonal cohomology:
+\[
+R\Gamma\!\left(\rho^{-1}\Delta_C;
+\mu hom(F_C,T_{-a(\theta,C)}R_\theta F_C)
+|_{\rho^{-1}\Delta_C}\right)\simeq0,
+\qquad0<a(\theta,C)<\pi.
+\]
+After conjugating a null curve to the standard circle, this becomes the
+persistent diagonal-locality statement in
+`angles/diagonal-microlocal/README.md`.
+
+### Universal conformal \(L^2\)-primitive theorem
+
+Let \(f(z)=\sum a_nz^n\) map the disk conformally onto a bounded Jordan
+domain, and put \(c_r(t)=f(re^{it})\).  For
+\(\alpha=(x\,dy-y\,dx)/2\), the positive Fourier coefficients of the
+mean-zero periodic part \(P_r\) of the primitive are
+\[
+\widehat P_r(k)
+=\frac{C_{r,k}}{4i}+\frac{D_{r,k}}{2ik},
+\]
+\[
+C_{r,k}=\sum_{m\geq0}\bar a_ma_{m+k}r^{2m+k},\qquad
+D_{r,k}=\sum_{m\geq0}m\bar a_ma_{m+k}r^{2m+k}.
+\]
+Carathéodory gives \(|f_r|^2\to|f|^2\) uniformly and hence
+\(C_r\to C\) in \(\ell^2\).  The area identity
+\[
+\sum_{m\geq1}m|a_m|^2=|\Omega|/\pi=:E
+\]
+gives \(|D_{r,k}|\leq E\), so dominated convergence after division by
+\(k\) gives \(D_r/k\to D/k\) in \(\ell^2\).  Parseval proves strong
+\(L^2\) convergence of the centered primitives.  The exact relation
+\(y\,dx=\tfrac12d(xy)-\alpha\) transfers the result to Asano--Ike's
+convention.
+
+This yields an exhaustive dichotomy.  If the primitives are asymptotically
+equicontinuous, Arzelà--Ascoli upgrades \(L^2\) to uniform convergence and
+Asano--Ike gives every rectangle.  Otherwise, order-one action lies on
+parameter intervals shrinking to one prime end.  Closing those arcs by
+chords and using the area--winding identity gives
+\[
+\|\operatorname{Wind}\|_\infty\gtrsim\rho^{-2},\qquad
+\operatorname{length}\gtrsim\rho^{-1}.
+\]
+Thus every remaining counterexample route is an action-concentration
+problem.
+
+### Two exact negative results
+
+Square symmetry does not cancel collapsing actions.  Starting with a smooth
+curve carrying a shrinking exact square, apply four disjoint radial
+Hamiltonian twists centered at its vertices.  The maps and inverses converge
+uniformly to the identity and fix the vertices, while the square action
+changes by an arbitrary four-point second difference of the action
+potential.  Hence an exact shrinking square can carry any prescribed
+limiting action.
+
+The same obstruction has a geometric two-fjord realization.  Two disjoint
+\(N\)-turn spiral fjords at opposite square vertices, with
+\(N\asymp\rho^{-2}\), make the sum of the two projected capping windings
+have order-one integral on support of area \(O(\rho^2)\).  The complementary
+fjord sides cancel only in the total Jordan area.
+
+Matschke's Theorem 2.8 gives a separate exact reduction: if a Jordan curve
+has no square, it has a special trapezoid at every parameter scale.  Direct
+coordinates classify its normal, crossed, pair-coalescent, genuine
+trapezoid, and equilateral collision screens.  The tangent-free secant map
+has degree one, but no screen is excluded.  The ordinary
+Fulton--MacPherson extension needs \(C^1\) tangent data and cannot be
+transferred unchanged to arbitrary Jordan curves.
+
+### Required GPT-5.6 Sol xhigh review
+
+GPT-5.6 Sol at xhigh audited the direct microlocal route and returned
+**HOLD** on an unrestricted proof.  It confirmed the exact formulation of
+Remark 4.2, the conjugated diagonal geometry, and the conformal Fourier
+theorem.  It rejected the inference from small local Hamiltonian oscillation
+to equality of microlocal germs: the neighborhoods shrink with the error,
+individual actions remain arbitrary, and \(\mu hom\) does not commute with
+metric limits.
+
+The review identified the sharp missing lemma: arbitrary interior-action
+generators collapsing to the diagonal must pair into persistence bars whose
+lengths tend to zero.  Chord-level action bounds are false; only a bar-level
+\(C^0\) clean-intersection theorem can close the route.
+
+### Sharp realization of conformal concentration
+
+The null double spiral realizes the bad branch at sharp scales.  Its
+logarithmic strip has width
+\[
+h(v)=\frac{\pi}{2v}-\frac{5\pi^2}{8v^2}+O(v^{-3}),
+\]
+so the longitudinal modulus of \(V<v<cV\) is
+\[
+M(V,cV)=\frac{(c^2-1)V^2}{\pi}+O(V).
+\]
+For \(c=e^{2\varepsilon}\), the inward arm has action exactly
+\(\varepsilon\), while the cell has area \(O(V^{-1})\), condenser and
+critical trace capacity \(O(V^{-2})\), and harmonic measure
+\(\exp(-\Theta(V^2))\).  A diagonal choice of conformal radii proves
+\(\eta>0\) for the analytic level curves.  Thus the classical conformal
+compactness routes are sharp and insufficient.
+
+### Exact microlocal eye
+
+Every finite smooth spiral truncation has clean diagonal Floer cohomology
+\(H^*(S^1;\mathbb F_2)\) at action \(0\pmod\pi\).  In the wild limit the
+diagonal phase is
+\[
+t_{AA}(\theta)=s^2\left(\log(\theta/\theta_0)
+-\frac{\sin2\theta}{2\theta}\right)+t_0\pmod\pi,
+\]
+so the reduced microsupport contains the entire action circle over the
+collapsed point.  The two sheets have exact asymptotic separation
+\[
+\delta(\theta)=\frac12\int_\theta^\infty(a^2-b^2)
+=\frac{\pi}{2\theta}+O(\theta^{-2}).
+\]
+A helical-eye toy model shows that \(j_!\) and \(Rj_*\) extensions agree on
+every punctured finite stage but differ in point-supported translated
+morphisms.  The missing theorem is therefore categorical: identify the
+boundary extension chosen by metric-limit quantization.
+
+GPT-5.6 Sol at xhigh performed this second microlocal audit.  Its verdict
+remains **HOLD** on the unrestricted conjecture: the phase and eye-width
+calculations are exact, but finite Floer complexes, projected microsupport,
+and global \(C^0\) barcode continuity do not determine the limiting derived
+extension.
+
+### Configuration continuation
+
+A relative-transversality refinement of Matschke's odd fiber intersection
+produces a compact connected, fixed-type continuum of exact special
+trapezoids spanning every compact positive scale interval.  Hausdorff
+limits extend it to total collision.  Disjoint local insertions show that
+all three non-square screens can nevertheless occur at one one-sided prime
+end, so only a global invariant of the continuum can help.
+
+### Novelty and claim boundary
+
+Targeted searches through 2026-07-24 found no statement of the universal
+conformal \(L^2\)-primitive theorem or its prime-end concentration dichotomy
+in the peg literature.  The Fourier lemma is elementary, so it is described
+only as apparently unstated in this context.  The unrestricted Square Peg
+conjecture remains open.
+
+### Compute and verification
+
+All work ran locally in the repository worktree; no private compute
+infrastructure was used.  The rational harness remains conjecture hygiene.
+Commands run at session end:
+
+```text
+python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
+python3 -m py_compile problems/square-peg/harness/geometry.py problems/square-peg/harness/test_geometry.py
+xmllint --html --noout problems/square-peg/writeup/report.html problems/square-peg/writeup/artifact-template.html
+python3 -c 'import tomllib; tomllib.load(open("problems/square-peg/STATUS.toml","rb")); print("STATUS.toml OK")'
+python3 tools/board.py
+git diff --check
+```
+
+The exact harness passed 5/5 tests in 0.001 seconds.  Python compilation,
+both HTML parses, TOML parsing, board regeneration (19 problems), and
+`git diff --check` completed without error.

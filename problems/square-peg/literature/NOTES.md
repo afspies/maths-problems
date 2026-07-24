@@ -170,3 +170,60 @@ The all-partitions quantifier gives uniform prefix-area convergence by
 extending two prefix partitions with the same tail.  Together with
 Boedihardjo--Geng embedded polygons and Asano--Ike, this yields the critical
 peg theorem in `angles/critical-p2/antonelli-young-bridge.md`.
+
+### Universal conformal \(L^2\) compactness
+
+For a Riemann map \(f(z)=\sum a_nz^n\) of any bounded Jordan domain, the
+area identity \(\sum n|a_n|^2=|\Omega|/\pi\) gives strong \(L^2\)
+convergence of the mean-centered Liouville primitives on the analytic level
+curves \(f(re^{it})\).  The Fourier proof and the resulting exhaustive
+tame/action-concentration dichotomy are in
+`../angles/conformal-l2/README.md`.
+
+Targeted searches found no primary source stating this exact primitive
+theorem in the peg context.  It is elementary enough that the safe
+description is “apparently unstated in this context,” not a priority claim.
+It does not imply Asano--Ike Remark 4.2 because point-supported action
+concentration is invisible in \(L^2\).
+
+### Configuration and microlocal boundary audit
+
+Matschke's Theorem 2.8 implies that a square-free Jordan curve has a special
+trapezoid at every fixed parameter scale.  This supplies exact collision
+screens but does not exclude them.  Vrećica--Živaljević's
+Fulton--MacPherson extension uses the tangent screen of a \(C^1\) curve;
+arbitrary Jordan arcs admit square collision screens and do not provide a
+curve-independent boundary test map.
+
+The exact Asano--Ike target was reconstructed as derived global sections of
+the diagonal restriction, rather than pointwise support vanishing.  The
+required new result is a \(C^0\) clean-intersection theorem at the
+persistence-bar level.  Small Hamiltonian/interleaving size does not control
+individual action branches, and `../results/shrinking-square-action-injection.md`
+constructs exact collapsing squares with arbitrary prescribed limiting
+action.
+
+### Wider configuration and barcode checks
+
+Hugelmeyer proves that a square-free Jordan curve would admit a square
+envelope, another exact global continuation object.  This does not rule out
+the collision screens above; it reinforces that an obstruction must control a
+whole continuum rather than one local blow-up.
+
+A relative-transversality refinement of Matschke's parity argument gives a
+connected, fixed-type continuum of exact special trapezoids spanning every
+compact positive scale interval.  Conversely, disjoint local insertions show
+that pair-coalescent, finite-trapezoid, and equilateral screens can all occur
+at the same one-sided prime end of one Jordan curve.  These are recorded as
+campaign deductions, with no priority claim.
+
+Buhovsky--Humili{\`e}re--Seyfaddini and Kislev--Shelukhin give \(C^0\)
+continuity of Hamiltonian and Lagrangian Floer barcodes in appropriate
+aspherical/monotone settings, up to overall shift.  This does not localize a
+global barcode at the collapsed diagonal; Hamiltonian homeomorphisms can
+carry multiple spectral values on a very small fixed set.  The null spiral
+makes the local failure explicit: finite truncations vanish at interior
+diagonal action, while the limit has full projected action microsupport and
+a vanishing-width two-sheet eye.  Determining its \(!\), \(*\), or
+intermediate boundary extension is strictly stronger than global bottleneck
+continuity.

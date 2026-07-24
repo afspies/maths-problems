@@ -15,7 +15,13 @@ Read, in order:
 8. `angles/unrestricted-zero-trace/README.md`.
 9. `results/null-spiral-no-primitive.md`.
 10. `literature/UNRESTRICTED_AUDIT.md`.
-11. the latest `JOURNAL.md` section.
+11. `angles/conformal-l2/README.md`.
+12. `angles/configuration-degeneration/README.md`.
+13. `results/shrinking-square-action-injection.md`.
+14. `angles/diagonal-microlocal/README.md`.
+15. `results/null-spiral-conformal-concentration.md`.
+16. `results/null-spiral-microlocal-eye.md`.
+17. the latest `JOURNAL.md` section.
 
 The finite-\(p<2\) proof has now received an independent primary-source audit
 and been packaged as `writeup/p-variation-note.md`. The audit verdict is
@@ -72,6 +78,52 @@ The actual unrestricted frontier is now exactly Asano--Ike Remark 4.2:
 > For a null Jordan trace and \(\theta=\pi/2\), prove the diagonal
 > \(\mu hom\)-cohomology vanishing at the critical value without constructing
 > a single-valued continuous primitive.
+
+The latest session proves a universal compactness theorem one topology below
+that target.  For the analytic levels of the Riemann map of any bounded
+Jordan domain, the mean-centered Liouville primitives converge strongly in
+\(L^2(S^1)\).  Either this upgrades to uniform convergence, so Asano--Ike
+applies, or order-one action concentrates at one prime end with winding
+multiplicity \(\gtrsim\rho^{-2}\).
+
+The concentration branch is genuinely realized by the null double spiral.
+In logarithmic coordinates, cells between \(V\) and \(cV\) have fixed action,
+area \(O(V^{-1})\), critical trace capacity \(O(V^{-2})\), and harmonic
+measure \(\exp(-\Theta(V^2))\).  This rules out any repair based only on
+conformal energy, \(L^p\) integrability, harmonic measure, or capacity.
+
+The chord-level version of the remaining problem is false.  Fixed-vertex
+Hamiltonian twists in four shrinking disks preserve an exact shrinking
+square but change its action by an arbitrary four-point second difference.
+Equivalently, two disjoint spiral fjords make the sum of the projected
+capping windings carry order-one area on vanishing support.  Do not try to
+bound individual collapsing actions or force square-symmetric cancellation.
+
+The exact theorem to attack is **persistent diagonal locality**:
+\[
+R\Gamma\!\left(\rho^{-1}\Delta_0;
+\mu hom(F_0,T_aQF_0)|_{\rho^{-1}\Delta_0}\right)=0
+\quad(a\notin\pi\mathbb Z),
+\]
+where \(Q=(\phi\times\phi)^{-1}R_{\pi/2}(\phi\times\phi)\), assuming
+\((C_0\times C_0)\cap Q(C_0\times C_0)=\Delta_0\).  At approximation level
+this must pair arbitrary interior-action collapsing generators into
+persistence bars whose lengths vanish.
+
+The null spiral now supplies the exact local model.  Every finite smooth
+truncation has diagonal cohomology only at \(0\pmod\pi\), but the limit's
+common phase winds through the entire action circle while its two sheets
+have separation \(\pi/(2\theta)+O(\theta^{-2})\).  The decisive question is
+which derived boundary extension the metric completion selects.  A toy
+helical eye shows that \(j_!\) vanishes while \(Rj_*\) can retain a
+point-supported translated morphism, despite identical punctured geometry.
+
+Matschke supplies a second exact input: a square-free Jordan curve has a
+special trapezoid at every parameter scale.  More strongly, one fixed-type
+connected continuum spans every compact positive scale interval.  The
+collision screens are classified in
+`angles/configuration-degeneration/README.md`; all can occur locally at one
+prime end, so any useful obstruction must be global along the continuum.
 
 Do not retry two audited false shortcuts.  Conservative \(C^0\) smoothing
 does not control action potentials: shrinking high-turn radial twists have

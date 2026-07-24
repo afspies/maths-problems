@@ -2,11 +2,13 @@
 
 ## What the next session should do first
 
-- Obtain human/expert priority and soundness feedback on both the packaged
-  finite-\(p<2\) synthesis and the critical Antonelli--Young bridge.
-- For the unrestricted problem, work directly on Asano--Ike Remark 4.2's
-  diagonal cohomology at \(\theta=\pi/2\).  Do not assume every null trace has
-  a continuous area primitive: the explicit double spiral disproves that.
+- Compute the derived boundary extension selected by the metric-limit
+  quantization of the null double spiral.  Every finite truncation already
+  vanishes at interior diagonal action, so another finite calculation is
+  insufficient.
+- Attack the persistent diagonal-locality theorem in
+  `angles/diagonal-microlocal/README.md`.  Individual chord actions cannot be
+  bounded; only a bar-level pairing can work.
 
 ## Results
 
@@ -63,6 +65,37 @@
   \(C^1\) approximants with convergent primitives.  This excludes every
   possible Asano--Ike Theorem 1.1 sequence, not just conformal or polygonal
   approximants.
+- For every bounded Jordan domain, the analytic level curves of the Riemann
+  map have mean-centered Liouville primitives converging strongly in
+  \(L^2\).  The proof is an explicit Fourier decomposition using
+  \(\sum n|a_n|^2=|\Omega|/\pi\).
+- This gives an exhaustive dichotomy.  Either the primitives are
+  asymptotically equicontinuous and hence converge uniformly, giving every
+  rectangle, or order-one action concentrates on intervals shrinking to one
+  prime end.  In the second branch the winding multiplicity grows at least
+  like \(\rho^{-2}\).
+- If a Jordan curve has no square, Matschke's obstruction produces an exact
+  special trapezoid at every parameter scale.  Direct coordinates classify
+  the only possible normal, crossed, pair-coalescent, and equilateral
+  collision screens.
+- Exact shrinking squares can carry arbitrary prescribed limiting action.
+  Four disjoint fixed-vertex Hamiltonian twists change the action by an
+  arbitrary four-point second difference while the maps and their inverses
+  converge uniformly to the identity.
+- The exact unrestricted target is persistent diagonal locality: collapsing
+  interior-action generators must pair into bars of vanishing length so that
+  derived global diagonal \(\mu hom\) vanishes away from \(\pi\mathbb Z\).
+- The conformal concentration branch is nonempty and quantitatively sharp.
+  On the null spiral a fixed action survives while harmonic measure is
+  \(\exp(-\Theta(V^2))\), area is \(O(V^{-1})\), and critical trace capacity
+  is \(O(V^{-2})\).
+- Finite null-spiral truncations have clean diagonal cohomology only at
+  \(0\pmod\pi\), but the limit has the full projected action circle over the
+  collapsed point.  Its sheets form an infinitely winding eye of total width
+  \(\pi/\theta+O(\theta^{-2})\).
+- Under the no-square hypothesis, Matschke's special-trapezoid locus contains
+  a connected fixed-type continuum spanning each compact positive scale
+  interval.
 
 ## Dead ends and cautions
 
@@ -85,6 +118,23 @@
   Duality exchanges degrees \(1\) and \(2\), while the available triangle
   inequality is only for degree \(2\).  The axioms permit the two actions to
   tend to \(0\) and the full enclosed area.
+- Strong \(L^2\) convergence does not control normalization at a point and
+  does not imply diagonal sheaf-cohomology vanishing.  A point-supported
+  action spike disappears in \(L^2\) but can support a skyscraper sheaf.
+- Even critical \(H^{1/2}\) trace capacity is too weak: the null spiral puts
+  fixed action on intervals whose capacity tends to zero.
+- Closed microsupport and \(C^0\) barcode convergence do not identify a
+  collapsed boundary extension.  Toy \(j_!\) and \(Rj_*\) helical eyes agree
+  off the endpoint but have different point-supported translated morphisms.
+- Jordan separation and square symmetry do not cancel the two projected
+  capping windings.  Two disjoint spiral fjords make their sum have order-one
+  integral on support of vanishing area.
+- Small local Hamiltonian oscillation gives a small interleaving estimate,
+  not equality of microlocal germs.  The required neighborhoods shrink with
+  the error, and \(\mu hom\) does not commute with metric limits.
+- Ordinary Fulton--MacPherson collision screens require tangent data.
+  Arbitrary Jordan arcs can have normalized square screens, so the standard
+  compactification has no curve-independent nonzero boundary test map.
 - The finite-\(p\) theorem is likely a short, nearly formal synthesis rather
   than deep novelty.  Targeted search found no explicit statement, but that
   does not establish priority. The independent audit recommends “apparently

@@ -3,7 +3,7 @@ title = "Square Peg conjecture"
 question = "Does every Jordan curve in the plane contain the four vertices of a nondegenerate square?"
 # proposed | scaffolded | active | partial-results | solved | excluded | retired
 status = "partial-results"
-best_result = "New nonrectifiable p<2 and critical p=2 classes get every rectangle; an explicit null double spiral proves the Asano-Ike primitive criterion cannot cover all Jordan curves"
+best_result = "Every conformal exhaustion has an L2 area lift; the null spiral sharply realizes fixed action at zero trace capacity and reduces the unrestricted problem to the derived extension of a vanishing-width microlocal eye"
 doi = ""
 sessions = [
     "2026-07-24 scaffolded from template",
@@ -11,4 +11,5 @@ sessions = [
     "2026-07-24 p=2 frontier: independently hardened and packaged the p<2 synthesis; proved a positive-area 1/2-Holder embedded primitive anomaly",
     "2026-07-24 critical local lift: combined Antonelli-Young all-partitions area with embedded polygons; proved a strict finite-2-variation spiral-comb class",
     "2026-07-24 unrestricted frontier: reduced to null traces and proved an explicit null double spiral admits no convergent approximating Liouville primitive",
+    "2026-07-24 diagonal microlocal: proved universal conformal L2 compactness, sharp zero-capacity concentration, and the vanishing-width eye model; isolated the derived-extension frontier",
 ]

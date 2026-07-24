@@ -62,7 +62,9 @@
   At <var>p</var>=2, a positive-area ½-Hölder Jordan curve gives incompatible
   inner and outer embedded primitive limits. More sharply, a planar-null
   double spiral admits no parameter-aligned C<sup>1</sup> approximation with
-  convergent primitives.
+  convergent primitives. Its conformal exhaustion concentrates fixed action
+  at zero critical trace capacity, producing an explicit vanishing-width
+  microlocal eye. The unrestricted conjecture remains open.
 </div>
 
 <h2>1 · Main theorem</h2>
@@ -171,7 +173,63 @@ the spiral’s origin parameter. Thus the Asano–Ike primitive criterion is not
 universal. This is not a counterexample to Square Peg: the remaining target
 is their weaker diagonal μhom-cohomology vanishing at θ=π/2.</p>
 
-<h2>6 · Exact hygiene checks</h2>
+<h2>6 · Universal conformal L<sup>2</sup> compactness</h2>
+<div class="env"><span class="label">Universal weak-lift theorem.</span>
+  For every bounded Jordan domain, the analytic level curves of its Riemann
+  map have mean-centered Liouville primitives converging strongly in
+  L<sup>2</sup> in the harmonic-measure parameter.
+</div>
+<p>If f(z)=Σa<sub>n</sub>z<sup>n</sup> and
+c<sub>r</sub>(t)=f(re<sup>it</sup>), the positive Fourier coefficients of
+the periodic α-primitive are</p>
+<div class="eqn">
+  P̂<sub>r</sub>(k)=C<sub>r,k</sub>/(4i)+D<sub>r,k</sub>/(2ik),
+  &nbsp; |D<sub>r,k</sub>|≤|Ω|/π.
+</div>
+<p>Carathéodory convergence controls C in ℓ<sup>2</sup>; the 1/k factor
+controls D. Parseval gives strong L<sup>2</sup> convergence. If these
+primitives are asymptotically equicontinuous, convergence is uniform and
+Asano–Ike supplies every rectangle. Otherwise order-one action concentrates
+on shrinking prime-end arcs, whose closed winding multiplicity grows at least
+as the inverse square of their image diameter.</p>
+<div class="env"><span class="label">Sharp concentration model.</span>
+  The null spiral carries fixed action ε on cells with area O(V<sup>−1</sup>),
+  critical trace capacity O(V<sup>−2</sup>), and harmonic measure
+  exp(−Θ(V<sup>2</sup>)).
+</div>
+<p>Its divergent primitive is compressed in harmonic parameter to
+¼ log log(1/|s−s<sub>0</sub>|)+O(1). Thus no estimate based only on finite
+L<sup>p</sup>, conformal W<sup>1,2</sup> energy, harmonic measure, or
+critical capacity can remove the exceptional action.</p>
+
+<h2>7 · Persistent diagonal locality</h2>
+<p>Individual shrinking-square actions are not controlled: four disjoint
+fixed-vertex Hamiltonian twists preserve an exact shrinking square while
+changing its action by an arbitrary four-point second difference. The
+required unrestricted theorem is therefore bar-level.</p>
+<div class="env"><span class="label">Exact open lemma.</span>
+  If L<sub>0</sub>∩Q(L<sub>0</sub>)=Δ<sub>0</sub>, prove that
+  RΓ(ρ<sup>−1</sup>Δ<sub>0</sub>;
+  μhom(F<sub>0</sub>,T<sub>a</sub>QF<sub>0</sub>))=0 for
+  a∉πℤ.
+</div>
+<p>Equivalently, all interior-action generators collapsing to the diagonal
+must pair into persistence bars whose lengths vanish. Small local
+Hamiltonian oscillation alone does not prove this, because microlocal Hom
+need not commute with the shrinking-neighborhood limit.</p>
+<p>For every finite smooth null-spiral truncation, the diagonal complex lies
+only at action 0 mod π. In the limit its common phase winds through the full
+action circle while the sheet gap is
+π/(2θ)+O(θ<sup>−2</sup>). The exact missing datum is the derived boundary
+extension of this infinitely winding, vanishing-width eye: !- and
+*-extensions agree off the endpoint but can have different point-supported
+translated morphisms.</p>
+<p>Matschke’s every-scale trapezoids also strengthen to a connected
+fixed-type continuum spanning every compact positive scale interval. Local
+prime-end topology excludes none of its collision screens, so any useful
+configuration obstruction must be global along this continuum.</p>
+
+<h2>8 · Exact hygiene checks</h2>
 <pre>$ python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
 Ran 5 tests
 OK</pre>
@@ -179,7 +237,7 @@ OK</pre>
 primitives under subdivision, and candidate squares. It does not certify the
 analytic universal theorem.</p>
 
-<h2>7 · Scope</h2>
+<h2>9 · Scope</h2>
 <table>
   <thead><tr><th>Class</th><th>Prior status</th><th>Here</th></tr></thead>
   <tbody>
@@ -188,8 +246,9 @@ analytic universal theorem.</p>
 	    <tr><td>Finite p-variation, p&lt;2</td><td>no explicit peg theorem found</td><td>synthesis proved</td></tr>
 	    <tr><td>½-Hölder + finite quadratic-diameter energy</td><td>signed area: Antonelli–Young</td><td>every rectangle</td></tr>
 	    <tr><td>General finite 2-variation</td><td>area lift not automatic</td><td>strict class + embedded anomaly</td></tr>
-    <tr><td>Null double spiral</td><td>unrestricted frontier</td><td>primitive criterion impossible</td></tr>
-    <tr><td>General Jordan</td><td>open</td><td>still open</td></tr>
+    <tr><td>Every Jordan domain</td><td>no explicit weak lift found</td><td>conformal L<sup>2</sup> lift</td></tr>
+    <tr><td>Null double spiral</td><td>unrestricted frontier</td><td>sharp zero-capacity eye model</td></tr>
+    <tr><td>General Jordan</td><td>open</td><td>bar-level target isolated</td></tr>
   </tbody>
 </table>
 <p>The contribution is a concise combination of published ingredients, not a
@@ -200,6 +259,8 @@ analytic universal theorem.</p>
 <div class="footer">
   Canonical source: <code>writeup/report.md</code>. Detailed proofs:
   <code>angles/p-variation/</code>, <code>angles/critical-p2/</code>, and
-  <code>angles/unrestricted-zero-trace/</code>.
+  <code>angles/unrestricted-zero-trace/</code>,
+  <code>angles/conformal-l2/</code>, and
+  <code>angles/diagonal-microlocal/</code>.
   No DOI has been minted.
 </div>

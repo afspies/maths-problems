@@ -28,7 +28,11 @@ approximations have incompatible Liouville-period limits. Thus finite
 not force primitive convergence. More sharply, an explicit planar-null
 double spiral admits no parameter-aligned \(C^1\) Jordan approximation with
 convergent Liouville primitives. Thus the Asano--Ike primitive criterion
-cannot cover all Jordan curves. The universal conjecture remains open.
+cannot cover all Jordan curves.  Its conformal exhaustion realizes a fixed
+action spike on intervals of exponentially small harmonic measure and
+vanishing critical trace capacity.  At the microlocal level this becomes an
+infinitely winding eye of vanishing phase width.  The universal conjecture
+remains open.
 
 ## Main result
 
@@ -226,6 +230,115 @@ must instead establish Asano--Ike Remark 4.2's weaker diagonal
 The square symmetry \(R_{\pi/2}^2=R_\pi\) does not settle it formally:
 Greene--Lobb duality swaps the two spectral degrees rather than identifying
 their actions.
+
+## Universal conformal \(L^2\) compactness
+
+There is nevertheless a canonical weak area lift for every Jordan domain.
+Let \(f(z)=\sum a_nz^n:\mathbb D\to\Omega\) be conformal and
+\(c_r(t)=f(re^{it})\).  If \(P_r\) is the mean-zero periodic part of the
+\(\alpha=(x\,dy-y\,dx)/2\) primitive, then for \(k>0\)
+\[
+\widehat P_r(k)=\frac{C_{r,k}}{4i}+\frac{D_{r,k}}{2ik},
+\]
+\[
+C_{r,k}=\sum_{m\ge0}\bar a_ma_{m+k}r^{2m+k},\qquad
+D_{r,k}=\sum_{m\ge0}m\bar a_ma_{m+k}r^{2m+k}.
+\]
+Carathéodory gives \(C_r\to C\) in \(\ell^2\), while the conformal area
+formula gives
+\[
+\sum_{m\ge1}m|a_m|^2=|\Omega|/\pi,\qquad
+|D_{r,k}|\le|\Omega|/\pi.
+\]
+Dominated convergence and Parseval therefore give
+\[
+P_r\longrightarrow P\quad\text{strongly in }L^2(S^1).
+\]
+The exact identity \(y\,dx=\tfrac12d(xy)-\alpha\) gives the same result in
+the Asano--Ike convention.
+
+This has a sharp dichotomy.  If the lifted primitives are asymptotically
+equicontinuous, the convergence is uniform and Asano--Ike gives every
+prescribed rectangle.  Otherwise an order-one action concentrates on arcs
+whose parameter length and image diameter tend to zero.  Closing by a chord
+and applying the area--winding formula forces
+\[
+\|\operatorname{Wind}\|_\infty\gtrsim\rho^{-2}.
+\]
+Thus every unresolved conformal case has unbounded winding concentration at
+a prime end.
+
+The null double spiral realizes this branch sharply.  In logarithmic
+coordinates its tail is a strip of width
+\[
+h(v)=\frac{\pi}{2v}-\frac{5\pi^2}{8v^2}+O(v^{-3}).
+\]
+Between heights \(V\) and \(cV\), its longitudinal modulus and reciprocal
+condenser capacity are
+\[
+M(V,cV)=\frac{(c^2-1)V^2}{\pi}+O(V),\qquad
+\operatorname {Cap}(V,cV)\asymp V^{-2}.
+\]
+Taking \(c=e^{2\varepsilon}\), the inward boundary action is exactly
+\(\varepsilon\), while area and conformal energy are \(O(V^{-1})\) and the
+harmonic measure of the tail is \(\exp(-\Theta(V^2))\).  In harmonic
+parameter the divergent primitive grows only like
+\(\frac14\log\log(1/|s-s_0|)\).  Hence \(L^p\), \(W^{1,2}\), harmonic
+measure, and critical trace capacity cannot remove the exceptional action.
+
+## Persistent diagonal locality
+
+Individual shrinking-square actions cannot be controlled.  Four disjoint
+fixed-vertex Hamiltonian twists preserve an exact shrinking square and
+converge uniformly, together with their inverses, to the identity.  Their
+action potentials change the square action by an arbitrary four-point
+second difference.  A two-fjord model gives the same conclusion directly:
+the sum of the two projected capping windings can carry order-one signed
+area on support of vanishing planar area.
+
+Accordingly, the exact missing theorem is bar-level:
+\[
+R\Gamma\!\left(\rho^{-1}\Delta_0;
+\mu hom(F_0,T_aQF_0)|_{\rho^{-1}\Delta_0}\right)=0
+\quad(a\notin\pi\mathbb Z),
+\]
+where
+\[
+Q=(\phi\times\phi)^{-1}R_{\pi/2}(\phi\times\phi)
+\]
+and \(L_0\cap Q(L_0)=\Delta_0\).  At approximation level, arbitrary
+interior-action generators collapsing to the diagonal must pair into
+persistence bars whose lengths vanish.  No audited source supplies this
+\(C^0\) clean-intersection theorem, and small interleaving distance alone
+does not imply it because \(\mu hom\) does not commute with metric limits.
+
+For every finite smooth truncation of the null spiral, the clean diagonal
+complex is \(H^*(S^1;\mathbb F_2)\) entirely at action \(0\pmod\pi\).
+Nevertheless, in the limit its diagonal phase is
+\[
+t_{AA}(\theta)=s^2\left(
+\log\frac{\theta}{\theta_0}
+-\frac{\sin2\theta}{2\theta}\right)+t_0\pmod\pi ,
+\]
+so the reduced microsupport contains the full action circle over the
+collapsed prime end.  The two sheets form a vanishing-width eye with gap
+\[
+\delta(\theta)=\frac{\pi}{2\theta}+O(\theta^{-2}).
+\]
+The missing calculation is therefore the derived boundary extension of
+this eye: \(!\)- and \(*\)-extensions have identical punctured geometry but
+different point-supported translated morphisms.
+
+Matschke's obstruction gives a complementary exact degeneration statement:
+a square-free Jordan curve has a special trapezoid at every parameter
+scale.  These trapezoids have only normal, crossed, pair-coalescent, genuine
+trapezoid, and equilateral collision screens, but ordinary
+Fulton--MacPherson topology excludes none without tangent data.
+More strongly, over every compact positive scale interval the exact
+trapezoid locus contains a fixed-type connected continuum spanning the two
+endpoint scales.  Local prime-end topology still excludes no screen; any
+remaining configuration-space obstruction must be global along that
+continuum.
 
 ## Relation to prior work and novelty boundary
 
