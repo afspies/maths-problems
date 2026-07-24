@@ -175,3 +175,120 @@ def quadric_thinning_can_be_sticky_and_extremal(
         thinning_exponent <= extremality_loss
         and thinning_exponent >= 1 - extremality_loss
     )
+
+
+def high_multiplicity_incidence_fraction(
+    *, total_incidence: Fraction, union_volume: Fraction
+) -> tuple[Fraction, Fraction]:
+    """Threshold and guaranteed incidence mass in the high-multiplicity set.
+
+    If m is supported on a set of volume V and integral m=A, then
+    {m >= A/(2V)} carries at least A/2 incidence mass.
+    """
+    if total_incidence <= 0 or union_volume <= 0:
+        raise ValueError("incidence and volume must be positive")
+    return (
+        total_incidence / (2 * union_volume),
+        total_incidence / 2,
+    )
+
+
+def assigned_catalog_required_carrier_exponent(
+    *,
+    tube_deficit_exponent: Fraction,
+    overlap_exponent: Fraction,
+    qw2_loss_exponent: Fraction,
+    retained_fraction_exponent: Fraction = Fraction(0),
+) -> Fraction:
+    """Exponent h forced in M >= delta^-h for assigned carrier incidences.
+
+    With N>=delta^(-3+tau), retained fraction f>=delta^g,
+    overlap lambda>=delta^a, and QW2 loss A<=delta^-b:
+
+        M >= delta^(-1+tau+g+4a+b)
+          = delta^(-(1-tau-g-4a-b)).
+    """
+    values = (
+        tube_deficit_exponent,
+        overlap_exponent,
+        qw2_loss_exponent,
+        retained_fraction_exponent,
+    )
+    if any(value < 0 for value in values):
+        raise ValueError("all loss exponents must be nonnegative")
+    return max(
+        Fraction(0),
+        1
+        - tube_deficit_exponent
+        - retained_fraction_exponent
+        - 4 * overlap_exponent
+        - qw2_loss_exponent,
+    )
+
+
+def inverse_tangency_mass_lower_bound(
+    *,
+    carriers: int,
+    delta: Fraction,
+    shading_density: Fraction,
+    union_volume: Fraction,
+    jacobian_threshold: Fraction,
+) -> Fraction:
+    """Normalized lower bound for low-Jacobian ordered pair mass.
+
+    Normalizations:
+      |U_i| >= lambda*delta and |U_i| <= delta;
+      each ordered pair's region with two-Jacobian >= theta has volume
+      at most delta^2/theta.
+    """
+    if carriers < 1:
+        raise ValueError("carriers must be positive")
+    values = (delta, shading_density, union_volume, jacobian_threshold)
+    if any(value <= 0 for value in values):
+        raise ValueError("all scale parameters must be positive")
+    total_mass = carriers * shading_density * delta
+    second_moment_lower = total_mass * total_mass / union_volume
+    diagonal_upper = carriers * delta
+    transverse_pair_upper = (
+        carriers * (carriers - 1) * delta * delta / jacobian_threshold
+    )
+    return max(
+        Fraction(0),
+        second_moment_lower - diagonal_upper - transverse_pair_upper,
+    )
+
+
+def hausdorff_cover_cost_lower_bound(
+    *,
+    total_line_incidence: Fraction,
+    radii: list[Fraction],
+    losses: list[Fraction],
+    dimension: Fraction,
+) -> Fraction:
+    """Cauchy lower bound for the fixed-stack Hausdorff covering lemma.
+
+    If the scale-r sublevel estimate is |N_r(V)| >= A(V)^2/L(r), then
+    every cover has s-cost at least
+
+        total_line_incidence^2 / sum_r r^(4-s)L(r).
+
+    Fractional powers are deliberately unsupported: the exact harness uses
+    integer 4-s, while the proof note handles arbitrary real s<4.
+    """
+    if total_line_incidence <= 0:
+        raise ValueError("total incidence must be positive")
+    if len(radii) != len(losses) or not radii:
+        raise ValueError("radii and losses must be nonempty and equally sized")
+    exponent = Fraction(4) - dimension
+    if exponent.denominator != 1 or exponent < 0:
+        raise ValueError("exact harness requires nonnegative integer 4-s")
+    power = exponent.numerator
+    if any(not 0 < radius <= 1 for radius in radii):
+        raise ValueError("radii must lie in (0,1]")
+    if any(loss <= 0 for loss in losses):
+        raise ValueError("losses must be positive")
+    scale_sum = sum(
+        (radius**power) * loss
+        for radius, loss in zip(radii, losses, strict=True)
+    )
+    return total_line_incidence * total_line_incidence / scale_sum

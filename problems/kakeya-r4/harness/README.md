@@ -35,8 +35,13 @@ The second-session extensions add:
 - exact harmonic-number and second-moment union ledgers;
 - the quadratic direction-capacity, catalog-evasion, and sticky
   mass/entropy exponent conversions.
+- high-multiplicity extraction and assigned-catalog entropy ledgers;
+- the inverse low-Jacobian carrier-pair mass bound;
+- the fixed-stack Hausdorff cover cost at exact integer codimensions;
+- an exact trilinear rank-three parabolic pencil and its normal-wedge
+  degeneration identity.
 
-The suite currently contains 27 exact tests. The geometric coarea,
+The suite currently contains 33 exact tests. The geometric coarea,
 Crofton--Bézout, reach, and Remez lemmas are proved in the result notes; the
 harness certifies their algebraic models and exponent bookkeeping, not those
 continuous theorems themselves.

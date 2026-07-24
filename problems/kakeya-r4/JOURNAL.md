@@ -226,3 +226,119 @@ The ledger printed global exponent `3/4`, dimension `13/4`, and bottleneck
 search or substantial compute was used. Work and independent reviews ran in
 the local Codex worktree at negligible laptop scale; no private
 infrastructure details are recorded.
+
+## 2026-07-24 — full-conjecture extraction frontier
+
+### Scope and literature
+
+Continued on branch
+`problem/kakeya-r4/2026-07-24-extraction-dichotomy`. The wide-net audit added
+the regular direction-to-position map results of Fu--Gan and the continuous
+full-line configuration theorem of Murphy--Pakianathan. These give
+full-measure structured subclasses but do not extract regularity from an
+arbitrary Kakeya segment selector. The audit also retained the strict
+separation among the general Hausdorff, maximal-function, sticky,
+restricted, and finite-field benchmarks.
+
+### What small union extracts
+
+Proved the unconditional multiplicity statement: if total shaded incidence
+is `A` and union volume is `V`, the level
+
+`{m>=A/(2V)}`
+
+carries at least `A/2`, and a dyadic multiplicity level costs only
+`1+ceil(log_2(2NV/A))`. This supplies no carrier or ruling.
+
+For a separately supplied bounded-complexity catalog, exact layer-cake and
+polynomial-Wolff accounting show that assigned positive overlap is the
+useful output. A grid of `M≈delta^-1` transverse hyperplane slabs gives the
+countermodel `q≈Mdelta≈1` while every individual overlap is only
+`Theta(delta)`. Thus constant distributed catalog overlap is contaminated by
+ordinary crossings and cannot be called extraction.
+
+Once genuine carrier patches exist, coarea and the second moment give the
+inverse-energy bound
+
+`|union U_i|
+ >=c M²lambda²delta²/
+   (Mdelta+sum_(i<j)min(delta,delta²/kappa_(ij)))`.
+
+The local Jacobian-stratified form forces high low-rank mass when the union
+is small. It still requires a new classification theorem before one may
+deduce a coherent pencil, 2-planiness, or cross-scale persistence.
+
+### Hausdorff upgrade
+
+Proved a weighted covering theorem for one fixed measurable segment family.
+If
+
+`|N_(Cr)(V)|>=c A(V)²/L(r)`
+
+holds for every measurable `V` and dyadic `r`, and
+`sum r^(4-s)L(r)->0`, then `H^s(K)=infinity` for every `s<4`. A fixed
+continuum harmonic transverse stack satisfies the hypothesis with
+`L(r)=1+log(1/r)`.
+
+The exact full-conjecture criterion is now explicit: a cover-by-cover
+extraction theorem retaining `b(r)=r^o(1)` of the incidence mass in one of
+`r^-o(1)` fixed transverse charts would prove Hausdorff dimension four.
+Point-sampled scale nets and independently chosen whole-union stacks do not
+give the required incidence-Carleson control.
+
+### Degenerate quadrics
+
+Classified nonconstant quadratic carriers by Hessian rank. Regular
+irreducible nonlinear rank at most two and regular central rank three are
+pointwise 2-plany. Affine/reducible hyperplanes, conical spines, and
+ill-conditioned coefficient regimes must be charged as separate outputs.
+The genuine smooth ruled nonlinear degenerate exception is the indefinite
+rank-three paraboloid.
+
+For the exact pencil
+
+`P_s=z-y_1y_2-sy_3²`,
+
+the harness verifies its line equations, a concurrent trilinear triple, and
+
+`|grad P_s wedge grad P_t|
+ =2|s-t||x_3||grad P_s wedge e_3|`.
+
+Away from the slab `|x_3|<=rho`, the harmonic stack theorem pays a genuine
+factor `rho`; inside, the directions enter a weakly 2-plany alternative.
+This is an exact two-branch stress model, not a scale-loss-free rigidity
+lemma.
+
+### Independent soundness reviews and verdict
+
+Three GPT-5.6 Sol agents at `xhigh` effort audited the extraction accounting,
+Hausdorff cover summation, Remez--Markov step, degenerate normal forms,
+quasi-uniform sampling, exponent signs, scale loss, circularity, and
+Hausdorff-versus-Minkowski implications. Initial reviews required:
+
+- cell averaging rather than unsupported point sampling;
+- explicit separation of affine/reducible hyperplanes;
+- a real `rho^-1` transverse loss for the parabolic pencil;
+- quantitative regularity and coarea hypotheses;
+- quasi-uniform parameter sampling and outside-slab patch collars.
+
+After repair, the final verdicts were **APPROVE**. The full conjecture remains
+open. The proved advance is a fixed-family Hausdorff theorem, an exact
+extraction no-go/accounting theorem, and a degenerate quadratic
+classification that isolates the remaining full-to-structured bridge.
+
+### Verification and compute
+
+Commands:
+
+```bash
+cd problems/kakeya-r4/harness
+python3 exponent_ledger.py benchmark_ledger.json
+python3 -m unittest -v
+python3 -m py_compile *.py
+git diff --check
+```
+
+All 33 exact tests pass. No numerical tube search or substantial compute was
+used. Work and independent reviews ran in the local Codex worktree at
+negligible laptop scale; no private infrastructure details are recorded.

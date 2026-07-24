@@ -11,7 +11,7 @@ from itertools import combinations
 Vector = tuple[F, F, F, F]
 
 
-def vec(values: tuple[int, int, int, int]) -> Vector:
+def vec(values: tuple[int | F, int | F, int | F, int | F]) -> Vector:
     return tuple(F(x) for x in values)  # type: ignore[return-value]
 
 
@@ -51,6 +51,14 @@ def wedge_squared(a: Vector, b: Vector, c: Vector) -> F:
         )
         total += det * det
     return total
+
+
+def bivector_squared(a: Vector, b: Vector) -> F:
+    """Squared norm of a∧b, as the sum of squared 2x2 minors."""
+    return sum(
+        (a[i] * b[j] - a[j] * b[i]) ** 2
+        for i, j in combinations(range(4), 2)
+    )
 
 
 def norm_squared(a: Vector) -> F:
@@ -181,3 +189,28 @@ def transverse_pencil_seed_derivatives() -> list[Vector]:
         (F(-1, 2), F(1, 2), F(1, 2), F(1, 2)),
         (F(1, 2), F(0), F(1, 2), F(0)),
     ]
+
+
+def rank_three_parabolic_value(x: Vector, s: F) -> F:
+    """P_s=z-y1*y2-s*y3^2 in coordinates (y1,y2,y3,z)."""
+    y_1, y_2, y_3, z = x
+    return z - y_1 * y_2 - s * y_3 * y_3
+
+
+def rank_three_parabolic_gradient(x: Vector, s: F) -> Vector:
+    y_1, y_2, y_3, _ = x
+    return (-y_2, -y_1, -2 * s * y_3, F(1))
+
+
+def rank_three_parabolic_line_directions(s: F) -> list[Vector]:
+    """Three concurrent directions through the origin on P_s=0."""
+    return [
+        vec((1, 0, 0, 0)),
+        vec((0, 1, 0, 0)),
+        (F(1), -s, F(1), F(0)),
+    ]
+
+
+def rank_three_parabolic_line_point(direction: Vector, t: F) -> Vector:
+    """Point at parameter t on a line through the origin."""
+    return tuple(t * coordinate for coordinate in direction)  # type: ignore[return-value]

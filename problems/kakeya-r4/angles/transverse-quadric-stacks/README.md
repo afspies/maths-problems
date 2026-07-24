@@ -7,8 +7,10 @@ The harmonic transverse-grain union lemma is proved in
 full dense-shading union estimate, and hence full Minkowski dimension, for an
 explicit infinite one-parameter family of ruled
 quadratic obstructions satisfying explicit sweep and transversality
-hypotheses. It does not prove a Hausdorff conclusion or extract such a stack
-from an arbitrary Kakeya family.
+hypotheses. The fixed all-scale covering theorem in
+`../../results/fixed-stack-hausdorff.md` upgrades the same continuum stack to
+Hausdorff dimension four. Neither theorem extracts such a stack from an
+arbitrary Kakeya family.
 
 ## Idea
 
@@ -46,3 +48,8 @@ organized into stacks with:
 
 The present theorem assumes these outputs and proves the union estimate. It
 does not infer them from small union volume or from Proposition 3.12.
+
+For Hausdorff dimension the carriers must additionally sample one fixed line
+family across all cover scales, or satisfy the equivalent incidence-Carleson
+condition in `fixed-stack-hausdorff.md`. Unrelated good discretizations at
+each scale are insufficient.

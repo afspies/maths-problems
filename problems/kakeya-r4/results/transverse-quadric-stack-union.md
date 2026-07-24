@@ -245,6 +245,13 @@ directions, whereas the current hypotheses require a dense parameter net in
 every active carrier. A weighted sparse-stack estimate and a separate
 covering argument would be needed for that stronger conclusion.
 
+That separate argument is now supplied in `fixed-stack-hausdorff.md` under
+one additional, essential hypothesis: the scale discretizations sample a
+single fixed continuum line family, or equivalently obey its
+incidence-Carleson condition for every cover. Thus the explicit fixed pencil
+does have Hausdorff dimension four, while unrelated per-scale stacks still
+have only the conclusion stated here.
+
 This is a new structured-subclass theorem, not the general conjecture:
 
 - it assumes, rather than extracts, the ordered quadratic carriers;

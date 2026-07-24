@@ -56,8 +56,17 @@ See `literature/audit-2026-07-24.md`.
   loss). A full family therefore needs carrier entropy around `h^-1`.
 - A harmonically transverse stack of `M≈delta^-1` ruled quadrics has dense
   shaded union at least `lambda²/log(1/delta)`, yielding full Minkowski
-  dimension for that structured subclass. Hausdorff and carrier extraction
-  remain open.
+  dimension for that structured subclass. If the stacks at every scale
+  sample one fixed continuum line family, a weighted covering argument gives
+  Hausdorff dimension four as well. General carrier extraction remains open.
+- A constant distributed catalog overlap is not carrier extraction at
+  `M≈delta^-1`: a hyperplane grid gives the baseline `q≈Mdelta≈1` using
+  only transverse `Theta(delta)` crossings.
+- Every regular irreducible genuinely quadratic Hessian-rank-at-most-two
+  carrier, and every regular central rank-three quadric, is pointwise
+  2-plany. Affine/reducible hyperplanes are a separate output; the genuine
+  smooth quadratic degenerate exception is the indefinite rank-three
+  parabolic class.
 
 ## Angle-of-attack menu (be exploratory — draw from different fields)
 
@@ -68,6 +77,8 @@ See `literature/audit-2026-07-24.md`.
   bounded-complexity grain parameter, beginning with degree-two carriers.
 - `angles/transverse-quadric-stacks/`: organize the necessary
   one-dimensional carrier entropy and exploit harmonic overlap summability.
+- `angles/extraction-dichotomy/`: extract assigned/high-overlap carriers or a
+  classified low-Jacobian alternative from a high-multiplicity level.
 - Future projection/slicing angle: only after an exact exponent implication
   is written; no standalone qualitative projection heuristic counts.
 - Future algebraic classification angle: bounded-degree ruled 3-folds with
@@ -77,9 +88,11 @@ See `literature/audit-2026-07-24.md`.
 
 1. Extend the exact ledger if a corrected paper version or new recurrence is
    used.
-2. Prove an extraction theorem that organizes the roughly `delta^-1`
-   necessary degree-two carriers into transverse stacks, clusters, or a
-   lower-complexity degenerate class.
+2. Prove an extraction theorem that outputs assigned overlap
+   `lambda≫delta` on roughly `delta^-1` degree-two carriers, or an excess
+   over the `Mdelta` crossing baseline, then organizes the low-Jacobian
+   alternative into transverse stacks, 2-plany pieces, conical spines, or
+   rank-three parabolic charts.
 3. In parallel, seek a stability theorem for the trilinear estimate whose
    model-selection entropy is only `delta^o(1)`.
 4. Submit every theorem-shaped claim to an adversarial soundness review before

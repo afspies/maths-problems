@@ -2,8 +2,10 @@
 
 ## Status
 
-Candidate parameter defined; the split quadric is exactly detected. No
-four-dimensional union theorem is proved.
+The split quadric is exactly detected, a transverse ruled-quadric union
+theorem is proved, and its fixed all-scale form has Hausdorff dimension four.
+The missing general step is carrier extraction; the distributed statistic
+must be measured above its `Mdelta` crossing baseline.
 
 ## Scale-aware nonconcentration parameter
 
@@ -144,3 +146,9 @@ grains forces a single explicit QW2 witness of size
 once `q≥2Mdelta`. The fourth power is the exact cost of diffuse membership.
 What remains unproved is the implication from small union volume to either
 large distributed overlap or a transverse-stack decomposition.
+
+The baseline-crossing example in
+`../../results/carrier-extraction-accounting.md` sharpens this sentence:
+when `M≈delta^-1`, even `q≈1` can be made entirely from `Theta(delta)`
+crossings. The useful alternative must produce `q-Mdelta`, assigned
+positive overlap, or another condition ruling out the grid.

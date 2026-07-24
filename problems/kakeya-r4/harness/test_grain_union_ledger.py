@@ -2,9 +2,13 @@ import unittest
 from fractions import Fraction as F
 
 from grain_union_ledger import (
+    assigned_catalog_required_carrier_exponent,
     dyadic_harmonic_bound,
     distributed_catalog_load_exponent,
+    hausdorff_cover_cost_lower_bound,
     harmonic_number,
+    high_multiplicity_incidence_fraction,
+    inverse_tangency_mass_lower_bound,
     normalized_union_lower_bound,
     normalized_weighted_union_lower_bound,
     quadratic_catalog_evasion_exponent,
@@ -124,6 +128,50 @@ class GrainUnionLedgerTests(unittest.TestCase):
                 extremality_loss=F(1, 2), thinning_exponent=F(1, 2)
             )
         )
+
+    def test_small_union_extracts_high_incidence_mass_only(self) -> None:
+        threshold, retained = high_multiplicity_incidence_fraction(
+            total_incidence=F(3, 5), union_volume=F(1, 10)
+        )
+        self.assertEqual(threshold, F(3))
+        self.assertEqual(retained, F(3, 10))
+
+    def test_assigned_catalog_pays_linear_not_fourth_power_entropy(self) -> None:
+        self.assertEqual(
+            assigned_catalog_required_carrier_exponent(
+                tube_deficit_exponent=F(1, 20),
+                retained_fraction_exponent=F(1, 20),
+                overlap_exponent=F(1, 40),
+                qw2_loss_exponent=F(1, 20),
+            ),
+            F(3, 4),
+        )
+
+    def test_small_stack_union_forces_low_jacobian_pair_mass(self) -> None:
+        lower = inverse_tangency_mass_lower_bound(
+            carriers=16,
+            delta=F(1, 16),
+            shading_density=F(1),
+            union_volume=F(1, 8),
+            jacobian_threshold=F(1),
+        )
+        self.assertEqual(lower, F(97, 16))
+        self.assertGreater(lower, 0)
+
+    def test_fixed_stack_cover_cost_diverges_at_subcritical_dimension(self) -> None:
+        # s=3 makes 4-s=1.  For dyadic r<=2^-k0 and logarithmic
+        # L(r)=k+1, the scale sum tends to zero as k0 grows.
+        def bound(k0: int) -> F:
+            radii = [F(1, 2**k) for k in range(k0, k0 + 20)]
+            losses = [F(k + 1) for k in range(k0, k0 + 20)]
+            return hausdorff_cover_cost_lower_bound(
+                total_line_incidence=F(1),
+                radii=radii,
+                losses=losses,
+                dimension=F(3),
+            )
+
+        self.assertGreater(bound(20), bound(10))
 
 
 if __name__ == "__main__":

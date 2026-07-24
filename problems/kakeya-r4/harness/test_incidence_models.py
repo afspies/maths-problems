@@ -2,10 +2,15 @@ import unittest
 from fractions import Fraction as F
 
 from incidence_models import (
+    bivector_squared,
     normalized_wedge_squared,
     plany_model,
     quadric_line_coefficients,
     quadric_value,
+    rank_three_parabolic_gradient,
+    rank_three_parabolic_line_directions,
+    rank_three_parabolic_line_point,
+    rank_three_parabolic_value,
     rank,
     ruled_quadric_lines,
     split_quadric_direction_derivatives,
@@ -13,6 +18,7 @@ from incidence_models import (
     split_quadric_sweep_derivatives,
     trilinear_model,
     transverse_pencil_seed_derivatives,
+    vec,
     wedge_squared,
 )
 
@@ -56,6 +62,33 @@ class IncidenceModelTests(unittest.TestCase):
 
     def test_explicit_transverse_pencil_sweep_has_rank_four(self) -> None:
         self.assertEqual(rank(transverse_pencil_seed_derivatives()), 4)
+
+    def test_rank_three_parabolic_pencil_is_pointwise_trilinear(self) -> None:
+        for s in (F(1), F(3, 2), F(2)):
+            directions = rank_three_parabolic_line_directions(s)
+            self.assertEqual(rank(directions), 3)
+            for direction in directions:
+                for t in (F(-1), F(0), F(2, 3)):
+                    point = rank_three_parabolic_line_point(direction, t)
+                    self.assertEqual(rank_three_parabolic_value(point, s), 0)
+
+    def test_rank_three_pencil_normal_wedge_has_exact_degeneracy_factor(self) -> None:
+        x = vec((F(1, 3), F(-2, 5), F(3, 7), F(0)))
+        s, t = F(1), F(7, 4)
+        left = bivector_squared(
+            rank_three_parabolic_gradient(x, s),
+            rank_three_parabolic_gradient(x, t),
+        )
+        # |grad P_s wedge grad P_t|^2 =
+        # 4(s-t)^2*x3^2*|grad P_s wedge e3|^2.
+        e_3 = vec((0, 0, 1, 0))
+        right = (
+            4
+            * (s - t) ** 2
+            * x[2] ** 2
+            * bivector_squared(rank_three_parabolic_gradient(x, s), e_3)
+        )
+        self.assertEqual(left, right)
 
 
 if __name__ == "__main__":

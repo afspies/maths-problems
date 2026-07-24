@@ -17,8 +17,18 @@
 - `distributed-quadratic-catalog.md`: a layer-cake theorem converting
   diffuse overlap with a finite grain catalog into an explicit large-QW2
   witness, with the exact fourth-power entropy cost.
+- `carrier-extraction-accounting.md`: the unconditional high-multiplicity
+  extraction, exact catalog entropy ledger, a baseline-crossing countermodel,
+  and an inverse low-Jacobian carrier-energy theorem.
+- `degenerate-quadric-classification.md`: pointwise 2-planiness of regular
+  irreducible genuinely quadratic rank-at-most-two and central rank-three
+  carriers, with hyperplanes separated out, plus an exact loss-bearing
+  transverse-versus-plany rank-three parabolic pencil.
+- `fixed-stack-hausdorff.md`: a weighted covering theorem upgrading a fixed
+  all-scale transverse stack from Minkowski to Hausdorff dimension four.
 
 The first two results do not improve the Kakeya dimension bound. The
-transverse-stack theorem gives full lower and upper Minkowski dimension for
-a new structured dense-stack subclass, but does not yet give its Hausdorff
-dimension or extract that structure in general.
+fixed-stack covering theorem now gives Hausdorff dimension four for a new
+structured all-scale transverse-stack subclass. It does not extract that
+structure from a general Kakeya set, so no general or sticky benchmark
+changes.

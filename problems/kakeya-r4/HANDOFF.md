@@ -19,7 +19,7 @@ Work in problems/kakeya-r4/ of the maths-problems repo. Read, in order:
 4. problems/kakeya-r4/JOURNAL.md — recent sessions' detail, if needed.
 
 Current priorities (update each session):
-- The exact harness is built and currently has 27 passing tests. Run it before
+- The exact harness is built and currently has 33 passing tests. Run it before
   changing any exponent claim.
 - Treat `13/4` as the sticky benchmark and the corrected Katz–Zahl `>3.059`
   number as the general Hausdorff benchmark. Do not relabel the `3.0543`
@@ -27,17 +27,33 @@ Current priorities (update each session):
 - Treat the polynomial Wolff/QW2 axiom as known for direction-separated
   tubes (Katz--Rogers), not as a conjectural input. The live Bridge B problem
   is multi-grain organization.
-- Primary task: prove an extraction dichotomy from small union and graininess.
-  Its outputs should be one of: a distributed catalog with explicit `q`; an
-  ordered family of about `delta^-1` harmonically transverse ruled patches;
-  or a classified degenerate/ill-conditioned quadratic branch.
+- Primary task: prove a shaded extraction dichotomy **for every measurable
+  cover group**. Retain `delta^o(1)` of its incidence mass in one of only
+  `delta^-o(1)` fixed continuum carrier charts. Whole-union extraction at
+  unrelated scales proves at most Minkowski information.
+- Any carrier output must cross the ordinary `Mdelta` overlap baseline by
+  assigned overlap `lambda>>delta`, excess `q-Mdelta`, or a geometric
+  exclusion of transverse slab-grid crossings.
 - Use `results/distributed-quadratic-catalog.md` to turn diffuse catalog
   capture into an explicit polynomial, overlap level, and balanced subfamily.
   Use `results/transverse-quadric-stack-union.md` for the transverse branch.
   Do not silently assume either output.
-- The harmonic stack theorem is approved and gives full Minkowski dimension
-  for a structured infinite ruled-quadric subclass. It does not give
-  Hausdorff dimension. A weighted covering upgrade is a separate target.
+- The fixed continuum harmonic-stack theorem now gives Hausdorff dimension
+  four for a structured infinite ruled-quadric subclass. Its smooth explicit
+  pencil actually has positive measure locally by a rank-four inverse
+  function theorem, so use the abstract covering theorem for rougher fixed
+  stacks rather than selling that pencil as a delicate example.
+- `results/fixed-stack-hausdorff.md` gives the exact master criterion:
+  cover-group retention `b(r)=r^o(1)` yields the needed scale-sensitive
+  incidence inequality. It does not supply extraction.
+- `results/carrier-extraction-accounting.md` proves that small union alone
+  extracts only high multiplicity, gives the hyperplane-grid no-go model,
+  and turns an already-extracted small carrier union into low-Jacobian
+  energy.
+- `results/degenerate-quadric-classification.md` handles nonlinear rank at
+  most two and central rank three by 2-planiness, separates hyperplanes and
+  conical spines, and isolates indefinite rank-three parabolics. Its exact
+  pencil pays a real `rho` loss in the transverse branch.
 - Keep Bridge A separate. Before revisiting it, define a common two-scale
   refinement and a bounded-entropy model selector. Proposition 3.12 alone
   supplies neither. Any proposed gain must be relative to the full
@@ -46,5 +62,6 @@ Current priorities (update each session):
   to audit circularity, model entropy, scale loss, strict hypotheses, and
   Hausdorff-versus-Minkowski consequences.
 - The second-session gate is GO on Bridge B. No new general or sticky
-  dimension bound was proved, but there is now a genuine semialgebraic union
-  theorem for an explicit infinite family of ruled obstructions.
+  dimension bound was proved. The third session sharpens the full-conjecture
+  bottleneck to uniform shaded extraction with subpolynomial chart entropy;
+  do not claim that this extraction theorem is known.

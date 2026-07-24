@@ -1,4 +1,4 @@
-<title>Four-dimensional Kakeya — degree-two carrier campaign</title>
+<title>Four-dimensional Kakeya — full-conjecture extraction frontier</title>
 <style>
   :root { --paper:#fbfaf7; --ink:#21211d; --muted:#66645d; --rule:#d9d5ca;
     --blue:#1e4f8f; --box:#f1efe8; --green:#226b3b; --greenbg:#e4f0e7; }
@@ -24,17 +24,19 @@
   th,td{padding:.45rem;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
 </style>
 
-<h1>Four-dimensional Kakeya: degree-two carriers</h1>
-<p class="subtitle">A harmonic union theorem for transverse stacks of ruled quadrics</p>
+<h1>Four-dimensional Kakeya: extraction frontier</h1>
+<p class="subtitle">Exact union, covering, and quadratic-degeneracy theorems</p>
 <p class="meta"><span class="badge">partial-results · bridge B go</span> ·
 24 July 2026 · <code>problems/kakeya-r4</code></p>
 
 <div class="abstract"><span class="label">Abstract.</span>
-The full R⁴ Kakeya conjecture remains open. This campaign proves a
-semialgebraic union theorem for an explicit infinite family of ruled
-quadratic obstructions. Harmonically transverse stacks have dense shaded
-union at least λ²/log(1/δ), yielding full Minkowski dimension for a
-structured subclass. No new general, sticky, or Hausdorff bound is claimed.
+The full R⁴ Kakeya conjecture remains open. Harmonically transverse ruled
+quadratic stacks have dense shaded union at least λ²/log(1/δ). A fixed
+all-scale continuum stack satisfies a scale-sensitive incidence inequality,
+giving Hausdorff dimension four for that structured subclass. Exact
+countermodels show why small union does not itself extract such carriers,
+and a normal-form theorem isolates the remaining degenerate quadratic
+branch. No new general or sticky dimension bound is claimed.
 </div>
 
 <h2>Main theorem</h2>
@@ -62,8 +64,26 @@ locus, together with Crofton–Bézout, gives</p>
 <p style="text-align:center">|<var>U</var><sub>i</sub>∩<var>U</var><sub>j</sub>|
 ≤<var>C</var>δ²<var>M</var>/|<var>i</var>−<var>j</var>|.</p>
 <p>The pairwise losses sum to the harmonic number. The exact second moment
-then proves the displayed union bound. A weighted sparse form is also proved,
-but it is not yet a Hausdorff covering theorem.</p>
+then proves the displayed union bound. A weighted sparse form is also proved.</p>
+
+<h2>Fixed-stack Hausdorff theorem</h2>
+<div class="env"><span class="label">Scale-sensitive incidence criterion.</span>
+For one fixed measurable segment family, let <var>A</var>(<var>V</var>) be
+the longitudinal incidence mass lying in a measurable set <var>V</var>. If
+for every small dyadic <var>r</var>,
+<br><br>
+|N<sub>Cr</sub>(<var>V</var>)| ≥
+<var>cA</var>(<var>V</var>)²/<var>L</var>(<var>r</var>),
+<br><br>
+and Σ<sub>r≤r₀</sub>r<sup>4−s</sup><var>L</var>(r)→0 for every s&lt;4,
+then H<sup>s</sup>(K)=∞ and dim<sub>H</sub>K=4.
+</div>
+<p>A fixed continuum harmonic stack supplies
+<var>L</var>(r)=1+log(1/r). More generally, retaining a fraction
+<var>b</var>(r)=r<sup>o(1)</sup> of every cover group’s incidence mass in
+one admissible chart is sufficient. This cover-by-cover qualifier is
+essential: unrelated stacks extracted from the whole union at each scale do
+not control arbitrary Hausdorff covers.</p>
 
 <h2>Explicit nonvacuous family</h2>
 <p>Put</p>
@@ -79,9 +99,11 @@ rational seed determinant 3/16, while</p>
 ∇<var>P</var><sub>s</sub>∧∇<var>P</var><sub>s′</sub>
 =(s′−s)∇<var>q</var><sub>0</sub>∧∇<var>q</var><sub>1</sub>.
 </p>
-<p>Compact restriction yields the theorem’s uniform hypotheses. Dense Kakeya
-discretizations covered by finitely many such direction charts have full
-lower and upper Minkowski dimension four.</p>
+<p>Compact restriction yields the theorem’s uniform hypotheses. Fixed
+all-scale families covered by finitely many such direction charts have
+Hausdorff dimension four. This smooth explicit sweep actually has positive
+measure locally by the rank-four inverse function theorem; it is a
+nonvacuity model, not a delicate measure-zero construction.</p>
 
 <h2>What the carrier ledgers establish</h2>
 <table>
@@ -100,18 +122,52 @@ lower and upper Minkowski dimension four.</p>
     <td>Degenerate quadrics remain a separate class</td></tr>
 </table>
 
+<h2>Why small union does not extract carriers</h2>
+<p>If <var>A</var> is total shaded incidence and <var>V</var> is union
+volume, the multiplicity function satisfies ∫m²≥A²/V, and a
+high-multiplicity level carries a fixed fraction of A. This output contains
+no polynomial or ruling.</p>
+<p>An exact grid of M≈δ<sup>−1</sup> transverse hyperplane slabs gives
+distributed overlap q≈Mδ≈1: every tube crosses every slab for length
+Θ(δ), but no tube has assigned overlap λ≫δ with any slab. A valid extraction
+theorem must therefore produce assigned overlap, excess q−Mδ, or a geometric
+rule excluding ordinary crossings.</p>
+<div class="env"><span class="label">Inverse carrier energy.</span>
+Once M genuine quadratic patches with |U<sub>i</sub>|≈λδ are supplied,
+<br><br>
+|⋃U<sub>i</sub>| ≥
+cM²λ²δ² /(Mδ+Σ<sub>i&lt;j</sub>min(δ,δ²/κ<sub>ij</sub>)).
+<br><br>
+Thus a small carrier union forces large inverse-normal-Jacobian energy.
+Classifying that energy is the missing theorem.
+</div>
+
+<h2>Degenerate quadratic branch</h2>
+<p>Regular irreducible nonlinear Hessian rank at most two, and regular
+central rank three, are pointwise 2-plany. Affine or reducible hyperplanes
+and conical spines are separate outputs. The genuine smooth ruled nonlinear
+exception is the indefinite rank-three paraboloid.</p>
+<p>For P<sub>s</sub>=z−y<sub>1</sub>y<sub>2</sub>−sy<sub>3</sub>²,</p>
+<p style="text-align:center">
+|∇P<sub>s</sub>∧∇P<sub>t</sub>|
+=2|s−t||x<sub>3</sub>||∇P<sub>s</sub>∧e<sub>3</sub>|.
+</p>
+<p>Away from |x<sub>3</sub>|≤ρ the transverse union estimate loses a real
+factor ρ; inside the slab the directions enter a weakly 2-plany alternative.
+This is an exact stress model, not yet a scale-loss-free rigidity theorem.</p>
+
 <h2>Verification and gate</h2>
 <pre><code>python3 exponent_ledger.py benchmark_ledger.json
 python3 -m unittest -v
-# 27 exact tests pass</code></pre>
+# 33 exact tests pass</code></pre>
 <p>Independent GPT-5.6 Sol xhigh reviews checked reach, coarea, common
-factors, the explicit pencil, exponent signs, circularity, and
-Hausdorff-versus-Minkowski wording. After repairs the final verdict was
-<strong>APPROVE</strong>.</p>
-<p><strong>Gate: GO on Bridge B.</strong> The theorem handles an infinite
-family of ruled obstructions. The general conjecture still requires an
-extraction dichotomy that organizes grains from a small arbitrary union into
-harmonic stacks or a classified degenerate branch.</p>
+factors, the explicit pencils, exponent signs, circularity, the ρ scale loss,
+measurable-cover sampling, and Hausdorff-versus-Minkowski wording. After
+repairs the final verdicts were <strong>APPROVE</strong>.</p>
+<p><strong>Bridge B gate: GO. Full-conjecture gate: OPEN.</strong> The exact
+missing result is uniform shaded extraction with subpolynomial chart entropy,
+positive assigned overlap above the Mδ baseline, and persistence for every
+measurable cover group.</p>
 
 <div class="footer">Canonical source: <code>writeup/report.md</code>.
 Sources: <code>literature/refs.bib</code>. No DOI release was made.</div>
