@@ -1,0 +1,269 @@
+<!--
+  Artifact styling template for problem writeups.
+
+  Usage: copy the <style> block and the structural skeleton below into the
+  report page, replace the placeholder content with the real writeup
+  (canonical source: report.md), and publish as a Claude Artifact.
+
+  Hard constraints (Artifacts enforce a strict CSP — external requests fail):
+  - Everything inline: no CDN scripts, no external stylesheets, no web fonts,
+    no MathJax/KaTeX. Write mathematics with Unicode (∀ ∃ ∈ ⊆ ⊗ Σ λ …) plus
+    <sup>/<sub>/<var>; use the .eqn block for numbered display equations.
+  - Diagrams: <pre class="mermaid"> renders natively in Artifacts.
+  - No <!DOCTYPE>/<html>/<head>/<body> tags — the publisher wraps the file.
+  - Status badges must match STATUS.toml. Never overstate epistemic status.
+-->
+<title>Square Peg conjecture — results</title>
+<style>
+  :root {
+    --paper: #fbfaf7;
+    --ink: #21211d;
+    --muted: #6b6a62;
+    --accent: #1e4f8f;
+    --rule: #ddd9cf;
+    --env-bg: #f3f1ea;
+    --mono-bg: #eef0f2;
+    --ok: #226b3b;
+    --ok-bg: #e4f0e7;
+    --neg: #7a4a12;
+    --neg-bg: #f5ecdc;
+    --open: #5b5b66;
+    --open-bg: #ececef;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #191a1c;
+      --ink: #e6e4dd;
+      --muted: #9b998f;
+      --accent: #7aa7dd;
+      --rule: #3a3b3e;
+      --env-bg: #212226;
+      --mono-bg: #232529;
+      --ok: #7fc796;
+      --ok-bg: #1d2b21;
+      --neg: #d9a866;
+      --neg-bg: #2b2419;
+      --open: #a9a9b4;
+      --open-bg: #26262b;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #fbfaf7; --ink: #21211d; --muted: #6b6a62; --accent: #1e4f8f;
+    --rule: #ddd9cf; --env-bg: #f3f1ea; --mono-bg: #eef0f2;
+    --ok: #226b3b; --ok-bg: #e4f0e7; --neg: #7a4a12; --neg-bg: #f5ecdc;
+    --open: #5b5b66; --open-bg: #ececef;
+  }
+  :root[data-theme="dark"] {
+    --paper: #191a1c; --ink: #e6e4dd; --muted: #9b998f; --accent: #7aa7dd;
+    --rule: #3a3b3e; --env-bg: #212226; --mono-bg: #232529;
+    --ok: #7fc796; --ok-bg: #1d2b21; --neg: #d9a866; --neg-bg: #2b2419;
+    --open: #a9a9b4; --open-bg: #26262b;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Charter, "Bitstream Charter", "Iowan Old Style", Georgia,
+      "Times New Roman", serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    margin: 0 auto;
+    padding: 3rem 1.25rem 4rem;
+    max-width: 46rem;
+  }
+  h1, h2, h3 { line-height: 1.25; font-weight: 600; }
+  h1 { font-size: 1.7rem; margin: 0 0 0.35rem; }
+  h2 { font-size: 1.25rem; margin: 2.2rem 0 0.7rem; }
+  h3 { font-size: 1.05rem; margin: 1.6rem 0 0.5rem; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  var, .mathit { font-style: italic; }
+
+  .subtitle { color: var(--muted); margin: 0 0 0.9rem; }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem;
+    align-items: center; color: var(--muted); font-size: 0.85rem;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--rule);
+  }
+  .badge {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.15rem 0.5rem; border-radius: 3px;
+  }
+  .badge-verified { color: var(--ok); background: var(--ok-bg); }
+  .badge-negative { color: var(--neg); background: var(--neg-bg); }
+  .badge-open     { color: var(--open); background: var(--open-bg); }
+
+  .abstract {
+    margin: 1.4rem 0 0; padding: 0 1.4rem;
+    font-size: 0.97rem;
+  }
+  .abstract .label {
+    display: block; text-align: center; font-variant: small-caps;
+    letter-spacing: 0.08em; margin-bottom: 0.3rem;
+  }
+
+  /* Theorem-style environments. Theorem/lemma/etc. bodies italic (AMS
+     convention); definitions and remarks upright. */
+  .env {
+    margin: 1.2rem 0; padding: 0.75rem 1rem;
+    background: var(--env-bg); border-left: 3px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+  }
+  .env > .label { font-weight: 700; font-style: normal; }
+  .env.theorem, .env.lemma, .env.proposition, .env.corollary,
+  .env.conjecture { font-style: italic; }
+  .env.definition, .env.remark { font-style: normal; }
+
+  .proof { margin: 1rem 0; }
+  .proof > .label { font-style: italic; }
+  .proof::after { content: "∎"; float: right; color: var(--muted); }
+
+  .eqn {
+    display: flex; align-items: center; gap: 1rem;
+    margin: 1rem 0; overflow-x: auto;
+  }
+  .eqn .body { flex: 1; text-align: center; }
+  .eqn .no { color: var(--muted); }
+
+  code, pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.85em;
+  }
+  code { background: var(--mono-bg); padding: 0.1em 0.35em; border-radius: 3px; }
+  pre {
+    background: var(--mono-bg); border: 1px solid var(--rule);
+    border-radius: 5px; padding: 0.8rem 1rem; overflow-x: auto;
+    line-height: 1.45;
+  }
+  pre > code { background: none; padding: 0; }
+  pre.cert { border-left: 3px solid var(--ok); }
+  .filelabel {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.75rem; color: var(--muted); margin-bottom: -0.5rem;
+  }
+
+  .tablewrap { overflow-x: auto; margin: 1.2rem 0; }
+  table { border-collapse: collapse; font-size: 0.92rem; min-width: 60%; }
+  th, td { padding: 0.4rem 0.9rem; text-align: left; }
+  thead th { border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
+  tbody tr:last-child td { border-bottom: 2px solid var(--ink); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  figure { margin: 1.4rem 0; text-align: center; }
+  figure img, figure svg { max-width: 100%; height: auto; }
+  figcaption { font-size: 0.88rem; color: var(--muted); margin-top: 0.4rem; }
+
+  .footer {
+    margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule);
+    font-size: 0.85rem; color: var(--muted);
+  }
+</style>
+
+<h1>Rectangular pegs from Young-regular Jordan curves</h1>
+<p class="subtitle">A finite-variation bridge to the Asano–Ike criterion</p>
+<div class="meta">
+  <span class="badge badge-open">partial result</span>
+  <span><code>problems/square-peg</code></span>
+  <span>2026-07-24</span>
+  <span>unrestricted conjecture open</span>
+</div>
+
+<div class="abstract">
+  <span class="label">Abstract</span>
+  We combine Asano–Ike’s 2026 smooth-approximation criterion with
+  Boedihardjo–Geng’s embedded polygon interpolation and Young integration.
+  Every Jordan parametrization of finite <var>p</var>-variation,
+  <var>p</var> &lt; 2, inscribes every prescribed rectangle. A Dini–Young
+  hypothesis reaches the critical scale. An explicit double spiral shows
+  that the class includes curves that are neither rectifiable nor locally
+  monotone.
+</div>
+
+<h2>1 · Result</h2>
+<div class="env theorem">
+  <span class="label">Theorem 1.</span>
+  Let <var>c</var>: S<sup>1</sup> → ℝ<sup>2</sup> be a Jordan
+  parametrization of finite <var>p</var>-variation for some
+  1 ≤ <var>p</var> &lt; 2. Then <var>c</var>(S<sup>1</sup>) inscribes a
+  θ-rectangle for every θ ∈ (0,π), including a square.
+</div>
+<div class="env corollary">
+  <span class="label">Critical extension.</span>
+  The conclusion also holds when the periodic coordinate moduli satisfy
+  ∫<sub>0</sub><sup>1</sup> ω<sub>x</sub>(r)ω<sub>y</sub>(r)r<sup>−2</sup>dr
+  &lt; ∞.
+</div>
+<div class="eqn">
+  <span class="body">F<sub>n</sub>(t) =
+  ∫<sub>0</sub><sup>t</sup> y<sub>n</sub> dx<sub>n</sub>
+  &nbsp;→&nbsp; ∫<sub>0</sub><sup>t</sup> y dx</span>
+  <span class="no">(1)</span>
+</div>
+
+<h2>2 · Proof architecture</h2>
+<p>Choose <var>p</var> &lt; <var>q</var> &lt; 2.
+Boedihardjo–Geng construct arbitrarily fine affine interpolants that remain
+Jordan and converge in <var>q</var>-variation. Each finite polygon is rounded
+inside pairwise disjoint vertex disks, on the same parameter circle, with an
+arbitrarily small change in 1-variation. Embeddedness is therefore proved,
+not assumed.</p>
+<p>Young–Lœve continuity gives uniform convergence of the normalized
+Liouville primitives on one period. Their period increments converge too, so
+the primitives converge locally uniformly on ℝ. These are exactly the
+hypotheses of Asano–Ike Theorem 1.1.</p>
+
+<h2>3 · Strict nonrectifiable witness</h2>
+<p>For 1 &lt; <var>d</var> &lt; 2, take two rotated spirals</p>
+<div class="eqn">
+  <span class="body">γ<sub>0</sub>(θ)=θ<sup>−1/d</sup>e<sup>iθ</sup>,
+  &nbsp; γ<sub>1</sub>(θ)=e<sup>iδ</sup>γ<sub>0</sub>(θ),
+  &nbsp; θ≥1,</span>
+  <span class="no">(2)</span>
+</div>
+<p>and join their radius-one endpoints by a circular arc. Monotone radius
+proves embeddedness. Length diverges like Σn<sup>−1/d</sup>, while
+<var>p</var>-variation is finite for every <var>p</var> &gt; <var>d</var>.
+Every linear projection oscillates infinitely often at the common origin, so
+the curve is not locally monotone.</p>
+
+<h2>4 · Critical p = 2 frontier</h2>
+<p>Uniform convergence plus bounded 2-variation does not determine signed
+area: a circle of radius n<sup>−1/2</sup> traversed n times shrinks uniformly
+to a point, retains bounded 2-variation, and has constant area with
+multiplicity. This is not a Jordan counterexample; it isolates the missing
+geometric rough-path second level. The Dini condition above is a positive
+critical subclass.</p>
+
+<h2>5 · Exact hygiene checks</h2>
+<p>The finite harness does not prove the analytic theorem. It checks rational
+polygon simplicity, Liouville/shoelace primitives under subdivision, and
+candidate squares exactly.</p>
+<p class="filelabel">repository root</p>
+<pre class="cert"><code>$ python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
+Ran 5 tests
+OK</code></pre>
+
+<h2>6 · Scope and prior work</h2>
+<div class="tablewrap">
+  <table>
+    <thead><tr><th>Class</th><th>Status before this report</th><th>Here</th></tr></thead>
+    <tbody>
+      <tr><td>Rectifiable</td><td>Asano–Ike: every rectangle</td><td>not new</td></tr>
+      <tr><td>Locally monotone</td><td>Asano–Ike: every rectangle</td><td>not new</td></tr>
+      <tr><td>Finite p-variation, p&lt;2</td><td>no explicit peg theorem found</td><td>proved by synthesis</td></tr>
+      <tr><td>General Jordan</td><td>open</td><td>still open</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>The result is a concise combination of published ingredients, not a new
+rough-integration theory. Targeted searches through 2026-07-24 found no
+explicit prior rectangular-peg statement in these terms, but expert priority
+confirmation remains appropriate.</p>
+
+<div class="footer">
+  <p><strong>Cite as:</strong> see <code>writeup/CITATION.cff</code>
+  (no DOI minted).</p>
+  <p>Canonical source: <code>writeup/report.md</code>. Detailed proofs:
+  <code>angles/p-variation/</code> and <code>angles/critical-p2/</code>.</p>
+</div>

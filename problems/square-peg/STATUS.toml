@@ -1,0 +1,11 @@
+slug = "square-peg"
+title = "Square Peg conjecture"
+question = "Does every Jordan curve in the plane contain the four vertices of a nondegenerate square?"
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "partial-results"
+best_result = "Finite-p-variation (p<2) and Dini-Young Jordan curves satisfy Asano-Ike's primitive criterion; explicit nonrectifiable non-locally-monotone double spirals get every rectangle"
+doi = ""
+sessions = [
+    "2026-07-24 scaffolded from template",
+    "2026-07-24 proof-first: audited Asano-Ike/Greene-Lobb; proved Young-regular bridge and critical Dini subclass; verified strict double-spiral witness",
+]

@@ -1,0 +1,135 @@
+<title>Rectangular pegs from Young-regular Jordan curves</title>
+<style>
+  :root {
+    --paper:#fbfaf7; --ink:#21211d; --muted:#6b6a62; --accent:#1e4f8f;
+    --rule:#ddd9cf; --env:#f3f1ea; --code:#eef0f2;
+  }
+  @media (prefers-color-scheme:dark) {
+    :root {
+      --paper:#191a1c; --ink:#e6e4dd; --muted:#9b998f; --accent:#7aa7dd;
+      --rule:#3a3b3e; --env:#212226; --code:#232529;
+    }
+  }
+  body {
+    max-width:46rem; margin:0 auto; padding:3rem 1.25rem 4rem;
+    background:var(--paper); color:var(--ink);
+    font-family:Charter,"Iowan Old Style",Georgia,serif;
+    font-size:1.05rem; line-height:1.55;
+  }
+  h1,h2 { line-height:1.25; font-weight:600; }
+  h1 { font-size:1.7rem; margin-bottom:.25rem; }
+  h2 { font-size:1.25rem; margin-top:2.1rem; }
+  .subtitle,.meta,.footer { color:var(--muted); }
+  .meta { border-bottom:1px solid var(--rule); padding-bottom:1rem; }
+  .badge {
+    font: .72rem ui-monospace,monospace; letter-spacing:.06em;
+    text-transform:uppercase; background:var(--code); padding:.15rem .5rem;
+    margin-right:.7rem; border-radius:3px;
+  }
+  .abstract { margin:1.4rem 1.4rem 0; font-size:.97rem; }
+  .label { font-weight:700; }
+  .env {
+    margin:1.2rem 0; padding:.75rem 1rem; background:var(--env);
+    border-left:3px solid var(--accent); border-radius:0 4px 4px 0;
+    font-style:italic;
+  }
+  .eqn { text-align:center; margin:1rem 0; overflow-x:auto; }
+  code,pre { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+  code { background:var(--code); padding:.1em .35em; border-radius:3px; }
+  pre {
+    background:var(--code); border:1px solid var(--rule); border-radius:5px;
+    padding:.8rem 1rem; overflow-x:auto; font-size:.85rem;
+  }
+  table { border-collapse:collapse; width:100%; font-size:.92rem; }
+  th,td { padding:.45rem .7rem; text-align:left; border-bottom:1px solid var(--rule); }
+  .footer { margin-top:3rem; border-top:1px solid var(--rule); padding-top:1rem; }
+</style>
+
+<h1>Rectangular pegs from Young-regular Jordan curves</h1>
+<p class="subtitle">A finite-variation bridge to the Asano–Ike criterion</p>
+<p class="meta"><span class="badge">partial result</span>
+<code>problems/square-peg</code> · 2026-07-24 · unrestricted conjecture open</p>
+
+<div class="abstract">
+  <span class="label">Abstract.</span>
+  We combine Asano–Ike’s 2026 smooth-approximation criterion with
+  Boedihardjo–Geng’s embedded polygon interpolation and Young integration.
+  Every Jordan parametrization of finite <var>p</var>-variation,
+  <var>p</var>&lt;2, inscribes every prescribed rectangle. A Dini–Young
+  condition reaches the critical scale. An explicit double spiral proves that
+  the class includes curves that are neither rectifiable nor locally monotone.
+</div>
+
+<h2>1 · Main theorem</h2>
+<div class="env"><span class="label">Theorem.</span>
+  Let <var>c</var>:S<sup>1</sup>→ℝ<sup>2</sup> be a Jordan parametrization of
+  finite <var>p</var>-variation for some 1≤<var>p</var>&lt;2. Then
+  <var>c</var>(S<sup>1</sup>) inscribes a θ-rectangle for every
+  θ∈(0,π), including a square.
+</div>
+<div class="env"><span class="label">Critical extension.</span>
+  The conclusion also holds if the periodic coordinate moduli satisfy
+  ∫<sub>0</sub><sup>1</sup>ω<sub>x</sub>(r)ω<sub>y</sub>(r)r<sup>−2</sup>dr&lt;∞.
+</div>
+
+<h2>2 · Why the approximation is genuinely embedded</h2>
+<p>Choose <var>p</var>&lt;<var>q</var>&lt;2.
+Boedihardjo–Geng construct arbitrarily fine affine interpolants that remain
+Jordan and converge in <var>q</var>-variation. Each finite polygon is rounded
+inside pairwise disjoint vertex disks, on the same parameter circle, with an
+arbitrarily small change in 1-variation. No convolution of the original rough
+curve is assumed to remain embedded.</p>
+<p>For <var>c</var>=(<var>x</var>,<var>y</var>), Young–Lœve continuity gives</p>
+<div class="eqn">
+  F<sub>n</sub>(t)=∫<sub>0</sub><sup>t</sup>y<sub>n</sub>dx<sub>n</sub>
+  &nbsp;→&nbsp;∫<sub>0</sub><sup>t</sup>y dx.
+</div>
+<p>The period increments converge too, so the primitives converge locally
+uniformly on ℝ. This is precisely Asano–Ike Theorem 1.1.</p>
+
+<h2>3 · A strict nonrectifiable witness</h2>
+<p>For 1&lt;<var>d</var>&lt;2, join two rotated spirals</p>
+<div class="eqn">
+  γ<sub>0</sub>(θ)=θ<sup>−1/d</sup>e<sup>iθ</sup>, &nbsp;
+  γ<sub>1</sub>(θ)=e<sup>iδ</sup>γ<sub>0</sub>(θ), &nbsp; θ≥1,
+</div>
+<p>by an outer circular arc. Monotone radius proves embeddedness. Its length
+diverges like Σn<sup>−1/d</sup>, but its <var>p</var>-variation is finite for
+every <var>p</var>&gt;<var>d</var>. Every projection oscillates infinitely
+often at the common origin, so it is not locally monotone.</p>
+
+<h2>4 · The critical p=2 obstruction</h2>
+<p>Uniform convergence plus bounded 2-variation does not determine area: a
+circle of radius n<sup>−1/2</sup> traversed n times shrinks uniformly to a
+point but retains constant signed area with multiplicity. This is not a
+Jordan counterexample; it identifies the missing geometric rough-path second
+level. The Dini condition above is a positive critical subclass.</p>
+
+<h2>5 · Exact hygiene checks</h2>
+<pre>$ python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
+Ran 5 tests
+OK</pre>
+<p>The rational harness checks polygon simplicity, Liouville/shoelace
+primitives under subdivision, and candidate squares. It does not certify the
+analytic universal theorem.</p>
+
+<h2>6 · Scope</h2>
+<table>
+  <thead><tr><th>Class</th><th>Prior status</th><th>Here</th></tr></thead>
+  <tbody>
+    <tr><td>Rectifiable</td><td>Asano–Ike: every rectangle</td><td>not new</td></tr>
+    <tr><td>Locally monotone</td><td>Asano–Ike: every rectangle</td><td>not new</td></tr>
+    <tr><td>Finite p-variation, p&lt;2</td><td>no explicit peg theorem found</td><td>synthesis proved</td></tr>
+    <tr><td>General Jordan</td><td>open</td><td>still open</td></tr>
+  </tbody>
+</table>
+<p>The contribution is a concise combination of published ingredients, not a
+new rough-integration theory. Targeted searches through 2026-07-24 found no
+explicit prior rectangular-peg statement in these terms, but expert priority
+confirmation remains appropriate.</p>
+
+<div class="footer">
+  Canonical source: <code>writeup/report.md</code>. Detailed proofs:
+  <code>angles/p-variation/</code> and <code>angles/critical-p2/</code>.
+  No DOI has been minted.
+</div>

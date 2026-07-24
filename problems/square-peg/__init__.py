@@ -1,0 +1,1 @@
+"""Square Peg problem artifacts."""
