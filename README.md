@@ -14,7 +14,7 @@ do not edit by hand.**
 
 | Problem | Status | Question | Best result so far | DOI |
 |---|---|---|---|---|
-| [Four-dimensional Mahler volume conjecture](problems/mahler-volume-4d/PROBLEM.md) | 🟡 partial results | For every convex body K⊂R^4, prove \|K\| \|(K-s(K))°\| ≥ 3125/576, with equality only for simplices. | Sharp inequality for all 4-pyramids; exact 24-cell counterexample to the terminal-pair bridge; rational interval certificate excludes an open non-pyramidal 24-cell critical branch by negative projective second variation. | — |
+| [Four-dimensional Mahler volume conjecture](problems/mahler-volume-4d/PROBLEM.md) | 🟡 partial results | For every convex body K⊂R^4, prove \|K\| \|(K-s(K))°\| ≥ 3125/576, with equality only for simplices. | Sharp inequality for every 4D affine join (including the non-pyramidal 1+2 split), strict gaps for all products/free sums, and exact/interval Hessians excluding two open non-pyramidal 24-cell realization families. | — |
 | [The missing Moore graph (degree 57)](problems/moore-graph-57/PROBLEM.md) | 🟡 partial results | Does a 57-regular graph on 3250 vertices with girth 5 (srg(3250,57,0,1)) exist? | NEW THEOREM: derangement ansatz forces H perfect; no order-56 group works (closes Smith-Montemanni 2026 open case) - writeup drafted+refereed | — |
 | [Vizing’s domination conjecture](problems/vizing-domination/PROBLEM.md) | 🟡 partial results | Do all finite simple graphs satisfy γ(G □ H) ≥ γ(G)γ(H)? | Peeling-defect strengthening + exact equality/stability theorem; corrected k=3 subset/product inequality (no constant above 0.5643 yet) | — |
 | [Casas-Alvero conjecture](problems/casas-alvero/PROBLEM.md) | 🔵 active | If deg-d monic f shares a root with each of f', ..., f^(d-1), is f = (x-a)^d? | — | — |

@@ -149,6 +149,34 @@ def pyramid_mahler_factor(dimension):
     )
 
 
+def product_free_sum_mahler_factor(left_dimension, right_dimension):
+    """Mahler factor for products and free sums in complementary subspaces."""
+    if left_dimension < 1 or right_dimension < 1:
+        raise ValueError("product/free-sum factors must have positive dimensions")
+    dimension = left_dimension + right_dimension
+    return Fraction(
+        factorial(left_dimension) * factorial(right_dimension),
+        factorial(dimension),
+    )
+
+
+def join_mahler_factor(left_dimension, right_dimension):
+    """Mahler factor for the affine join of two convex bodies."""
+    if left_dimension < 0 or right_dimension < 0:
+        raise ValueError("join factors cannot have negative dimension")
+    dimension = left_dimension + right_dimension + 1
+    beta = Fraction(
+        factorial(left_dimension) * factorial(right_dimension),
+        factorial(dimension),
+    )
+    santalo_height = Fraction(
+        (dimension + 1) ** (dimension + 1),
+        (left_dimension + 1) ** (left_dimension + 1)
+        * (right_dimension + 1) ** (right_dimension + 1),
+    )
+    return beta**2 * santalo_height
+
+
 class RationalPolytope:
     """A small full-dimensional rational polytope containing the origin."""
 
@@ -484,6 +512,19 @@ def cross_polytope_4():
 def pyramid_over_cube_3():
     base = [(*vertex, -1) for vertex in product((-1, 1), repeat=3)]
     return RationalPolytope([*base, (0, 0, 0, 3)])
+
+
+def join_segment_square_4():
+    """Santaló-centered join of [-1,1] and [-1,1]^2."""
+    segment = [
+        (-1, 0, 0, Fraction(-3, 5)),
+        (1, 0, 0, Fraction(-3, 5)),
+    ]
+    square = [
+        (0, first, second, Fraction(2, 5))
+        for first, second in product((-1, 1), repeat=2)
+    ]
+    return RationalPolytope([*segment, *square])
 
 
 def cell_24():

@@ -6,10 +6,11 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 
 ## What the next session should do first
 
-- Derive first and second variations of Mahler volume on the full
-  realization-space tangent cone of a 4-polytope. Test the formula on the
-  certified Paffenholz 24-cell saddle, then seek a coordinate-free negative
-  direction theorem for terminal non-simplices.
+- Work only on the connected circuit-support branch. Build a smooth,
+  full-rank realization chart at a bi-centered pair-terminal candidate,
+  quotient the exact Santaló-envelope Hessian by the 24 projective
+  directions, and turn any negative integrable direction into a
+  coordinate-free Gale/stress lemma.
 
 ## Dead ends (and why)
 
@@ -27,6 +28,13 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 - “Bi-centered + pair-terminal implies simplex” is not established. Nearby
   rational realizations are pair-terminal and the exact bi-centering root is
   certified, but openness does not transfer terminal rank to the root.
+- Raw vectors in the paired incidence kernel need not integrate at a singular
+  realization. A proof must use a smooth chart or a higher-order obstruction,
+  and the constrained Hessian must include incidence-stress terms.
+- The covariance trace ceiling is false without terminality/minimality
+  structure; projectively critical planar pentagons already violate the
+  analogous naive bound. Covariance equality alone also does not characterize
+  simplices.
 
 ## Surprises / structure discovered
 
@@ -51,6 +59,21 @@ Keep this short enough to read in two minutes — the journal holds the detail.
   Klartag covariance matrix has a strictly negative \(e_1\)-direction there.
   Nonsingularity and strictness exclude an open four-parameter critical
   branch from local minimality.
+- Mahler volume factorizes exactly under products, free sums, and affine
+  joins. This proves the sharp conjecture for every 4D affine join, including
+  the non-pyramidal segment--polygon split, and gives strict gaps for all
+  \(1+3\) and \(2+2\) products/free sums.
+- Terminality makes facet-supported circuits span the full Gale kernel.
+  Disconnected circuit support is therefore an affine join and is solved.
+  In the connected branch the labeled projective stabilizer is trivial, so
+  the projective orbit has dimension 24.
+- In paired coordinates, the exact quotient tangent count is
+  \(4(f_0+f_3)-f_{03}+\omega-24\), where \(\omega\) is the incidence-stress
+  dimension. This guarantees many nonprojective infinitesimal directions but
+  not their integrability or Hessian sign.
+- Exact second-order jets give the complete Paffenholz realization Hessian
+  \(-61I_4/234\) at the regular 24-cell. Continuity excludes an open
+  non-pyramidal neighborhood from local minimality.
 - Pulling moments were independently cross-checked by a boundary-facet cone
   triangulation. Outward dyadic rounding keeps rigorous rational interval
   arithmetic fast enough for the Krawczyk certificate.

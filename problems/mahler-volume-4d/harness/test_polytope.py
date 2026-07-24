@@ -7,10 +7,23 @@ from polytope import (
     cross_polytope_4,
     cube_4,
     inverse,
+    join_mahler_factor,
+    join_segment_square_4,
     paffenholz_24_cell,
+    product_free_sum_mahler_factor,
     pyramid_mahler_factor,
     pyramid_over_cube_3,
+    rank,
     simplex_volume,
+)
+from variation import (
+    incidence_tangent_dimension,
+    incidence_tangent_matrix,
+    paffenholz_parameter_path,
+    paired_tangent_from_vertex_path,
+    projective_orbit_tangent_vectors,
+    projective_vertex_path,
+    reduced_log_mahler_second,
 )
 
 
@@ -70,6 +83,39 @@ class ExactPolytopeHarnessTests(unittest.TestCase):
         self.assertEqual(
             pyramid_mahler_factor(4) * Fraction(64, 9),
             Fraction(3125, 576),
+        )
+
+    def test_product_free_sum_and_join_factors(self):
+        triangle_product = Fraction(27, 4)
+        segment_product = Fraction(4)
+        tetrahedron_product = Fraction(64, 9)
+        self.assertEqual(
+            product_free_sum_mahler_factor(2, 2) * triangle_product**2,
+            Fraction(243, 32),
+        )
+        self.assertEqual(
+            product_free_sum_mahler_factor(1, 3)
+            * segment_product
+            * tetrahedron_product,
+            Fraction(64, 9),
+        )
+        self.assertEqual(
+            join_mahler_factor(1, 2)
+            * segment_product
+            * triangle_product,
+            Fraction(3125, 576),
+        )
+        self.assertEqual(
+            join_mahler_factor(0, 3) * tetrahedron_product,
+            Fraction(3125, 576),
+        )
+        joined = join_segment_square_4()
+        self.assertEqual(joined.volume_and_centroid()[1], (0, 0, 0, 0))
+        self.assertEqual(joined.polar().volume_and_centroid()[1], (0, 0, 0, 0))
+        self.assertEqual(
+            joined.volume_and_centroid()[0]
+            * joined.polar().volume_and_centroid()[0],
+            join_mahler_factor(1, 2) * segment_product * Fraction(8),
         )
 
     def test_direction_flat_enumeration_matches_known_examples(self):
@@ -140,6 +186,82 @@ class ExactPolytopeHarnessTests(unittest.TestCase):
             polytope.volume_and_centroid(),
             polytope.facet_cone_volume_and_centroid(),
         )
+
+    def test_santalo_reduced_second_variation_sanity_checks(self):
+        polytope = paffenholz_24_cell((0, 0, 0, 0))
+        scaling = reduced_log_mahler_second(
+            polytope,
+            polytope.vertices,
+        )
+        self.assertEqual(scaling["reduced"], 0)
+        self.assertEqual(scaling["santalo_correction"], 0)
+
+        first, second = projective_vertex_path(polytope, (1, 0, 0, 0))
+        projective = reduced_log_mahler_second(polytope, first, second)
+        self.assertEqual(projective["unreduced"], 13)
+        self.assertEqual(projective["santalo_correction"], Fraction(200, 13))
+        self.assertEqual(projective["reduced"], Fraction(-31, 13))
+        self.assertEqual(projective["polar_centroid_first"], (1, 0, 0, 0))
+
+        parameter_first, parameter_second = paffenholz_parameter_path(
+            (1, 0, 0, 0)
+        )
+        parameter = reduced_log_mahler_second(
+            polytope, parameter_first, parameter_second
+        )
+        self.assertEqual(parameter["first"], 0)
+        self.assertEqual(parameter["unreduced"], Fraction(-5, 24))
+        self.assertEqual(
+            parameter["santalo_correction"], Fraction(49, 936)
+        )
+        self.assertEqual(parameter["reduced"], Fraction(-61, 234))
+        for coordinate in range(1, 4):
+            direction = [0, 0, 0, 0]
+            direction[coordinate] = 1
+            unit_first, unit_second = paffenholz_parameter_path(direction)
+            unit = reduced_log_mahler_second(
+                polytope, unit_first, unit_second
+            )
+            self.assertEqual(unit["first"], 0)
+            self.assertEqual(unit["reduced"], Fraction(-61, 234))
+        for first_coordinate in range(4):
+            for second_coordinate in range(first_coordinate + 1, 4):
+                direction = [0, 0, 0, 0]
+                direction[first_coordinate] = direction[second_coordinate] = 1
+                sum_first, sum_second = paffenholz_parameter_path(direction)
+                summed = reduced_log_mahler_second(
+                    polytope, sum_first, sum_second
+                )
+                self.assertEqual(summed["first"], 0)
+                self.assertEqual(summed["reduced"], Fraction(-61, 117))
+
+    def test_24_cell_incidence_tangent_space_contains_projective_orbit(self):
+        regular = paffenholz_24_cell((0, 0, 0, 0))
+        nonregular = paffenholz_24_cell()
+        self.assertEqual(incidence_tangent_dimension(regular), 52)
+        self.assertEqual(incidence_tangent_dimension(nonregular), 50)
+        tangent_matrix = incidence_tangent_matrix(nonregular)
+        projective_vectors = projective_orbit_tangent_vectors(nonregular)
+        self.assertEqual(len(projective_vectors), 24)
+        self.assertEqual(rank(projective_vectors), 24)
+        for vector in projective_vectors:
+            self.assertTrue(
+                all(
+                    sum(
+                        coefficient * entry
+                        for coefficient, entry in zip(row, vector)
+                    )
+                    == 0
+                    for row in tangent_matrix
+                )
+            )
+
+        regular_projective = projective_orbit_tangent_vectors(regular)
+        parameter_first, _ = paffenholz_parameter_path((1, 0, 0, 0))
+        parameter_tangent = paired_tangent_from_vertex_path(
+            regular, parameter_first
+        )
+        self.assertEqual(rank((*regular_projective, parameter_tangent)), 25)
 
 
 if __name__ == "__main__":

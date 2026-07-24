@@ -1,4 +1,4 @@
-# Four-dimensional Mahler volume conjecture: terminality fails, second variation survives
+# Four-dimensional Mahler volume conjecture: sharp reducible families and exact realization descent
 
 **Status:** partial results · **Date:** 2026-07-24
 
@@ -11,12 +11,13 @@ We independently audited the 2026 three-dimensional shadow-flow proof and
 proved that bounded-vertex 4D Mahler minimizers and their Santaló polars are
 terminal. The proposed classification bridge is nevertheless false: an
 exact rational non-simplex 24-cell and its genuine Santaló polar are both
-terminal in every direction. We replace terminality by a stronger
-variational stack. Rational interval Newton isolates a unique bi-centered
-representative in a nonregular 24-cell chart, and an exact covariance bound
-proves it is a projective saddle. This excludes an open critical branch of
-non-pyramidal 24-cells. The earlier sharp theorem for all 4-pyramids remains.
-The full four-dimensional conjecture is not proved.
+terminal in every direction. We prove exact Mahler factorizations for
+products, free sums, and affine joins. These settle every 4D affine join,
+including the non-pyramidal \(1+2\) split, and give strict gaps for all
+products and free sums. An exact Santaló-envelope Hessian is
+\(-61I_4/234\) on the Paffenholz realization chart at the regular 24-cell;
+an independent interval certificate excludes a second nonregular critical
+branch. The full four-dimensional conjecture is not proved.
 
 ## Principal negative result
 
@@ -60,9 +61,40 @@ Thus the exact critical representative is a saddle. Nonsingularity of the
 centroid Jacobian and strictness of the inequality exclude an open
 four-parameter critical branch of nonregular 24-cells from local minimality.
 
-## Result
+## Sharp infinite families
 
-### Theorem 1: all 4-pyramids
+### Theorem 1: every four-dimensional affine join
+
+Every four-dimensional affine join \(K*L\) satisfies
+\[
+\mathcal P(K*L)\ge\frac{3125}{576},
+\]
+with equality if and only if it is a 4-simplex.
+
+For \(K\subset\mathbb R^p\), \(L\subset\mathbb R^q\), and
+\(d=p+q+1\), two beta integrals and the Santaló height
+\(\tau=(q+1)/(d+1)\) give
+\[
+\mathcal P(K*L)=
+\left(\frac{p!q!}{d!}\right)^2
+\frac{(d+1)^{d+1}}
+{(p+1)^{p+1}(q+1)^{q+1}}
+\mathcal P(K)\mathcal P(L).
+\]
+The factor exactly transports sharp simplex constants. The only
+non-pyramidal four-dimensional split is \(1+2\); equality forces a segment
+and a triangle, whose join is a simplex.
+
+Likewise,
+\[
+\mathcal P(K\times L)=\mathcal P(K\oplus L)
+=\frac{p!q!}{(p+q)!}\mathcal P(K)\mathcal P(L).
+\]
+Thus all \(2+2\) products and free sums have product at least \(243/32\),
+and all \(1+3\) examples at least \(64/9\), both strictly above the
+four-dimensional sharp constant.
+
+### Theorem 2: all 4-pyramids
 
 Every 4-dimensional pyramid \(P\) satisfies
 \[
@@ -78,7 +110,7 @@ centroid characterization of the Santaló point give the exact identity
 \]
 At \(d=4\), the audited three-dimensional theorem yields the claim.
 
-### Theorem 2: terminal subclasses
+### Theorem 3: terminal subclasses
 
 If a simplicial 4-polytope is terminal, it is a 4-simplex. If a simple
 4-polytope and its dual realization are terminal, both are simplices. If a
@@ -105,6 +137,38 @@ More precisely,
 \]
 These are necessary conditions, not a complete classification.
 
+## Realization-space structure and second variation
+
+Normalize paired primal/polar coordinates by
+\(x_v\cdot y_F=1\) on every incidence. The linearized incidence equations
+have tangent dimension
+\[
+4(f_0+f_3)-f_{03}+\omega,
+\]
+where \(\omega\) is the incidence-stress dimension. Terminality makes
+facet-supported circuit spaces span the global Gale kernel. A disconnected
+circuit-support graph gives an affine join, settled by Theorem 1. In the
+connected branch the labeled projective stabilizer is scalar, so the
+projective orbit has dimension 24 and the quotient tangent dimension is
+\[
+4(f_0+f_3)-f_{03}+\omega-24.
+\]
+
+For an integrable fixed-chamber path at a bi-centered body, eliminating the
+moving Santaló point subtracts
+\[
+\frac56\langle c'(K^\circ),
+\operatorname{cov}(K^\circ)^{-1}c'(K^\circ)\rangle
+\]
+from the unreduced logarithmic Hessian. Exact rational second-order jets
+give, on Paffenholz's four realization parameters at the regular 24-cell,
+\[
+\nabla^2\log\mathcal P=-\frac{61}{234}I_4.
+\]
+Continuity excludes an open neighborhood of the regular realization from
+local Mahler minimality. This is a genuine nonprojective realization-space
+descent, not merely the earlier projective covariance direction.
+
 ## Verification
 
 Run:
@@ -113,12 +177,12 @@ Run:
 python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ```
 
-Expected: ten tests pass. The harness uses rational arithmetic only. It checks
+Expected: thirteen tests pass. The harness uses rational arithmetic only. It checks
 the centered simplex's polar, incidences, speed dimension, and exact product
 \(3125/576\); verifies cube/cross-polytope polarity; and supplies negative
 speed controls for the cross-polytope, cube, and pyramid over a cube.
 
-The two substantive certificates are:
+The two standalone certificates are:
 
 ```text
 PYTHONPATH=problems/mahler-volume-4d/harness \
@@ -131,6 +195,11 @@ python3 -B problems/mahler-volume-4d/harness/bicenter_certificate.py
 The first uses exact fractions. The second uses outward-rounded dyadic
 rational intervals; its Krawczyk inclusion and negative covariance bound are
 checked, not inferred from the floating-point discovery run.
+
+The unit suite also checks the exact product/join factors, a centered
+segment--square join, the incidence tangent ranks, all 24 projective tangent
+vectors, and the four diagonal plus six polarized entries of the Paffenholz
+realization Hessian.
 
 This computation verifies the finite linear-algebra interfaces. The
 infinite-family results are proofs, not extrapolations from tested examples.
@@ -155,7 +224,8 @@ comes from summing Euler over 3-facets and using polygonal edge links.
 
 Independent GPT-5.6 Sol xhigh reviews checked the algebra, the repaired
 dimension-free persistence proof, the exact 24-cell counterexample, the
-projective polar sign, and the covariance pivot. The reviewer caught that
+projective polar sign, the covariance pivot, both beta factorizations, and
+the realization-Hessian normalization. The reviewer caught that
 terminality at nearby rational points does not certify terminality at the
 exact bi-centering root; no such claim is made here.
 
@@ -165,9 +235,10 @@ Generic-direction rigidity is misleading: the 4-cube has only five admissible
 speeds generically but gains nontrivial speeds in facet-parallel directions.
 More decisively, even exact every-direction pair-terminality does not imply a
 simplex. Incidence alone is insufficient because affine-dependence
-coefficients vary with the realization. The next route must study the full
-Mahler Hessian on realization-space variations, not enumerate terminal face
-lattices.
+coefficients vary with the realization. Raw incidence-kernel vectors at a
+singular realization also need not integrate. The remaining route must build
+smooth realization charts and study the constrained Santaló Hessian, not
+enumerate terminal face lattices.
 
 ## Relation to prior work
 

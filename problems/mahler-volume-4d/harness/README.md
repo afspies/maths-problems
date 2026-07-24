@@ -6,6 +6,12 @@ origin polar, builds admissible-speed matrices, computes rational ranks,
 volumes, centroids and covariance matrices, and enumerates every
 facet-normal-arrangement direction flat.
 
+`variation.py` adds exact second-order jets for integrable fixed-chamber
+vertex paths, reconstructs polar-vertex jets from incidence equations, and
+computes the Hessian after eliminating the moving Santaló point. It also
+builds the paired primal/polar incidence tangent matrix and the 24 standard
+infinitesimal projective motions.
+
 For each constrained facet `F`, a matrix row is an affine dependence `lambda`
 of its vertices, and the verified speed equation is
 `sum(lambda[v] * alpha[v]) == 0`. The block locations come from vertex--facet
@@ -40,6 +46,12 @@ arithmetic. A Krawczyk inclusion certifies the unique bi-centering root in a
 specified box, and an interval covariance calculation proves that the
 projective Hessian has a negative direction there. `explore_bicenter.py` is
 only a floating-point discovery aid and makes no certified claim.
+
+The tests additionally verify the exact product, free-sum, and join Mahler
+factors; the Santaló-centered segment--square join; paired incidence tangent
+dimensions for two 24-cell realizations; and the complete four-dimensional
+Paffenholz Hessian
+\(-61I_4/234\) at the regular 24-cell.
 
 This is a discovery/falsification harness, not a verifier of the full Mahler
 conjecture. A classification proof cannot be replaced by checking finitely

@@ -34,9 +34,14 @@ Partial results:
 - the bridge lemma for all 4-dimensional pyramids;
 - directly, the sharp Mahler inequality with equality classification for all
   4-dimensional pyramids;
+- directly, the sharp inequality with equality classification for every
+  four-dimensional affine join, including the non-pyramidal \(1+2\) split;
+- strict sharp-constant gaps for all \(1+3\) and \(2+2\) Cartesian products
+  and free sums;
 - an exact counterexample to the general terminal-pair bridge; and
-- a rational interval certificate excluding an open critical branch of
-  nonregular 24-cell realizations by a negative projective second variation.
+- two open 24-cell realization neighborhoods excluded by second variation:
+  one by a rational interval projective certificate and one by an exact
+  negative-definite four-parameter realization Hessian at the regular cell.
 
 ## Certificate + verifier
 
@@ -53,7 +58,8 @@ Partial results:
   a cube are negative controls.
 - **Limit:** a finite realized-polytope check cannot certify the global
   Mahler conjecture. The interval certificate proves a specific critical
-  branch is a saddle; a coordinate-free proof over all minimizer
+  branch is a saddle, while exact jets prove a second open family is
+  realization-unstable. A coordinate-free proof over all minimizer
   realizations is still required.
 
 ## Known structure (bake into any search)
@@ -66,8 +72,19 @@ Partial results:
 - A pair-terminal 4-polytope must be non-simple and non-simplicial unless it is
   a simplex.
 - A pair-terminal 4-pyramid is a simplex.
+- Mahler volume factorizes exactly under products, free sums, and affine
+  joins. All four-dimensional joins satisfy the sharp conjecture; products
+  and free sums have a strict gap.
 - Pair-terminality alone does not force a simplex: the checked rational
   24-cell and its genuine Santaló polar are pair-terminal.
+- In paired coordinates \(x_v\cdot y_F=1\), the fixed-incidence tangent
+  dimension is
+  \[
+  4(f_0+f_3)-f_{03}+\omega,
+  \]
+  where \(\omega\) is the incidence-stress dimension. A terminal non-join
+  has a 24-dimensional labeled projective orbit, so the quotient dimension
+  is this number minus 24.
 - A local minimizer in Santaló position is bi-centered and satisfies
   \[
   \operatorname{cov}(K^\circ)\succeq
@@ -86,8 +103,8 @@ Partial results:
 ## Angle-of-attack menu (be exploratory — draw from different fields)
 
 - **Realization-space second variation:** combine facet-coplanarity tangent
-  equations with exact moment Hessians and seek a nonprojective descent
-  direction for every terminal non-simplex.
+  equations with the exact Santaló-envelope Hessian and seek a nonprojective
+  descent direction for every terminal non-simplex.
 - **Incidence/affine rigidity:** use rank structure as one input to the
   second-variation problem; terminality alone is now known insufficient.
 - **Pyramid and wedge reductions:** terminality inheritance under operations
@@ -102,8 +119,10 @@ Partial results:
 ## First steps
 
 1. Read `LEARNINGS.md` and the source audit.
-2. Derive the Mahler Hessian on the full infinitesimal realization space of a
-   4-polytope and test it on the certified Paffenholz 24-cell branch.
-3. Seek a coordinate-free lemma forcing a negative realization-space
-   direction for every pair-terminal non-simplex satisfying the centroid
-   equations. Do not return to terminal face-lattice enumeration.
+2. Construct a smooth full-rank realization chart at a bi-centered
+   pair-terminal candidate, quotient its exact Santaló Hessian by the
+   24-dimensional projective orbit, and retain only integrable tangents.
+3. Seek a coordinate-free stress/Gale lemma forcing a negative quotient
+   direction for every connected pair-terminal non-simplex. The disconnected
+   branch is an affine join and is now solved. Do not return to terminal
+   face-lattice enumeration.

@@ -7,8 +7,13 @@
   independent terminality-descent classification.
 - `projective-second-variation/`: bi-centering, the covariance Hessian, and a
   certified projective saddle in the Paffenholz 24-cell family.
+- `realization-stress/`: paired incidence rigidity, stress dimension,
+  projective-orbit reduction, and the exact Santaló-envelope Hessian.
+- `dual-isotropic/`: determinant and trace covariance targets, with explicit
+  stop/go falsification tests.
 
 The terminal-pair classification route is false. The next rotation should
-derive full realization-space first and second variations and seek a
-coordinate-free descent lemma. Do not enumerate arbitrary 4-polytope face
-lattices.
+build a smooth integrable realization chart for a connected pair-terminal
+candidate and seek a coordinate-free stress/Gale descent lemma. Disconnected
+circuit configurations are affine joins and are now solved. Do not enumerate
+arbitrary 4-polytope face lattices.

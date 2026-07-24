@@ -200,6 +200,8 @@ The final interval command completed in 7.1 seconds:
 ```text
 PYTHONPATH=problems/mahler-volume-4d/harness \
 python3 -B problems/mahler-volume-4d/harness/bicenter_certificate.py
+PYTHONPATH=problems/mahler-volume-4d/harness \
+python3 -B problems/mahler-volume-4d/harness/explore_bicenter.py
 ```
 
 The certified covariance-gap upper bound was
@@ -234,3 +236,121 @@ central bridge with an exact certificate, and it excludes an open
 non-pyramidal 24-cell critical branch by a rigorous second variation.
 Terminal face-lattice classification is now a dead route. The next proof
 campaign must use full realization-space variations.
+
+## 2026-07-24 — join closure and realization-space Hessian
+
+### Parallel proof attacks
+
+Worked on branch
+`problem/mahler-volume-4d/2026-07-24-realization-hessian`, within the problem
+folder plus the generated board. Three independent agents attacked
+realization rigidity, global covariance inequalities, and adversarial route
+selection. GPT-5.6 Sol at xhigh effort reviewed every theorem-shaped claim.
+
+The stress/Gale attack produced paired incidence coordinates
+\(x_v\cdot y_F=1\), with tangent dimension
+\[
+4(f_0+f_3)-f_{03}+\omega,
+\]
+where \(\omega=\dim\ker J^\mathsf T\). Exact ranks for the regular and
+nonregular Paffenholz 24-cells give tangent dimensions 52 and 50,
+respectively; the standard projective subspace has rank 24.
+
+Terminality makes the facet-supported circuit spaces span the global Gale
+kernel. If their support graph is disconnected, the homogeneous
+configuration splits and the polytope is an affine join. Otherwise circuit
+connectivity forces the labeled projective stabilizer to be scalar. Thus a
+terminal non-join has projective orbit dimension 24 and quotient tangent
+dimension
+\[
+4(f_0+f_3)-f_{03}+\omega-24.
+\]
+
+### Exact join, product, and free-sum theorems
+
+Two beta-integral calculations proved
+\[
+\mathcal P(K\times L)=\mathcal P(K\oplus L)
+=\frac{p!q!}{(p+q)!}\mathcal P(K)\mathcal P(L)
+\]
+and, for \(d=p+q+1\),
+\[
+\mathcal P(K*L)=
+\left(\frac{p!q!}{d!}\right)^2
+\frac{(d+1)^{d+1}}
+{(p+1)^{p+1}(q+1)^{q+1}}
+\mathcal P(K)\mathcal P(L).
+\]
+The Santaló height in the join proof is
+\(\tau=(q+1)/(d+1)\). Consequently the sharp conjecture is closed under
+joins. In dimension four, the non-pyramidal split is \(1+2\); the known sharp
+one- and two-dimensional theorems give \(3125/576\), with equality only for
+the segment--triangle join, a 4-simplex.
+
+Products and free sums have strict lower bounds \(243/32\) in the \(2+2\)
+split and \(64/9\) in the \(1+3\) split. The harness independently verifies
+the Santaló-centered segment--square join product \(3125/486\).
+
+### Exact Santaló-envelope Hessian
+
+Implemented `harness/variation.py` using exact second-order rational jets.
+It differentiates volumes on fixed pulling triangulations, reconstructs every
+polar-vertex jet from four incident primal vertices, and checks all remaining
+incidences through second order. At a bi-centered base body, eliminating the
+moving Santaló point subtracts the Schur term
+\[
+\frac56\langle c'(K^\circ),
+\operatorname{cov}(K^\circ)^{-1}c'(K^\circ)\rangle
+\]
+from the unreduced log-volume Hessian.
+
+Sanity checks give zero for affine scaling and reduced projective curvature
+\(-31/13\) at the regular 24-cell. On all four Paffenholz parameter
+directions, polarization gives the complete exact matrix
+\[
+\nabla^2\log M(0)=-\frac{61}{234}I_4.
+\]
+The regular 24-cell is therefore a strict local maximum inside this
+four-parameter realization slice. Continuity excludes an open neighborhood
+of the chart from local Mahler minimality.
+
+### Independent review and route verdict
+
+The xhigh Sol reviewer independently rederived both beta factors, the
+Santaló height, the equality cases, the circuit-graph/projective-orbit
+argument, and the two Hessian normalizations. Its verdict required no
+correction. It emphasized two limitations now recorded in the angle notes:
+vectors in a singular incidence tangent space need not integrate, and the
+correct constrained Hessian includes incidence-stress terms.
+
+The covariance agent derived the exact sufficient target
+\[
+L_KL_{K^\circ}\le L_{\Delta_4}^2
+\]
+for pair-terminal minimizer candidates, but current sharp isotropic-constant
+knowledge does not prove it in dimension four. A trace ceiling is a possible
+stronger separator only with extra terminal/minimality structure.
+
+### Commands, compute, and verdict
+
+```text
+python3 -m py_compile problems/mahler-volume-4d/harness/*.py
+python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
+PYTHONPATH=problems/mahler-volume-4d/harness \
+python3 -B problems/mahler-volume-4d/harness/verify_bridge_counterexample.py
+PYTHONPATH=problems/mahler-volume-4d/harness \
+python3 -B problems/mahler-volume-4d/harness/bicenter_certificate.py
+```
+
+Byte-compilation passed. The final unit run passed 13 tests in 24.616
+seconds. The terminal-bridge certificate completed in 12.8 seconds and
+reproduced all 1,941 primal and 580 polar direction-flat checks. The interval
+certificate completed in 7.5 seconds, again proving Krawczyk inclusion and a
+strictly negative covariance-gap upper bound. No randomized search or
+floating-point assertion entered a proof. The refactored floating discovery
+aid completed in 2.0 seconds and only guided the covariance route.
+The full non-pyramidal conjecture remains open. The session nevertheless
+passes the continuation gate with a sharp infinite-family theorem, a new
+incidence/stress dimension formula, and a second open non-pyramidal
+realization-family exclusion. The remaining proof problem is the connected,
+integrable realization-space branch, not face-lattice enumeration.

@@ -1,4 +1,4 @@
-<title>Four-dimensional Mahler volume conjecture — terminality and second variation</title>
+<title>Four-dimensional Mahler volume conjecture — sharp reducible families and exact realization descent</title>
 <style>
   :root {
     --paper: #fbfaf7; --ink: #21211d; --muted: #6b6a62;
@@ -52,7 +52,7 @@
 </style>
 
 <h1>Four-dimensional Mahler volume conjecture</h1>
-<p class="subtitle">An exact terminal-bridge counterexample and a certified projective saddle</p>
+<p class="subtitle">Sharp joins, exact terminal-bridge counterexample, and certified realization saddles</p>
 <div class="meta">
   <span class="badge">partial results</span>
   <span><code>problems/mahler-volume-4d</code></span>
@@ -61,12 +61,13 @@
 
 <div class="abstract">
   <span class="label">Abstract</span>
-  We audit the new three-dimensional shadow-flow proof and verify its
-  minimizer-to-terminal reduction in dimension four. We then disprove the
+  We audit the new three-dimensional shadow-flow proof, then disprove the
   proposed terminal classification bridge with an exact rational 24-cell.
-  Rational interval Newton and a covariance bound certify a bi-centered
-  24-cell critical point as a projective saddle. The sharp pyramid theorem
-  survives; the general 4D conjecture remains open.
+  Exact beta factorizations settle every four-dimensional affine join and
+  strictly separate all products and free sums from equality. An exact
+  Santaló-reduced Hessian excludes an open realization neighborhood of the
+  regular 24-cell; interval covariance excludes a second nonregular branch.
+  The general 4D conjecture remains open.
 </div>
 
 <h2>1 · The terminal-pair bridge is false</h2>
@@ -112,9 +113,37 @@ for the Paffenholz chart in a radius-10<sup>−10</sup> box centered at</p>
 Nonsingularity and strictness exclude an open four-parameter critical branch
 of nonregular 24-cells from local minimality.</p>
 
-<h2>3 · Sharp result for all 4-pyramids</h2>
+<h2>3 · Sharp result for every 4D affine join</h2>
 <div class="env">
   <span class="label">Theorem 1.</span>
+  Every four-dimensional affine join <var>K</var>*<var>L</var> satisfies
+  ℘(<var>K</var>*<var>L</var>) ≥ 3125/576, with equality exactly for a
+  4-simplex.
+</div>
+<p>For dimensions <var>p</var>, <var>q</var> and
+<var>d</var>=<var>p</var>+<var>q</var>+1, beta integration at the Santaló
+height τ=(<var>q</var>+1)/(<var>d</var>+1) gives</p>
+<div class="eqn">
+  ℘(<var>K</var>*<var>L</var>) =
+  ((<var>p</var>!<var>q</var>!/<var>d</var>!)<sup>2</sup>
+  (<var>d</var>+1)<sup>d+1</sup> /
+  ((<var>p</var>+1)<sup>p+1</sup>(<var>q</var>+1)<sup>q+1</sup>))
+  ℘(<var>K</var>)℘(<var>L</var>).
+</div>
+<p>The factor exactly transports the lower-dimensional simplex constants.
+The only non-pyramidal 4D split is 1+2; equality forces a segment and a
+triangle, whose join is a simplex. Similarly,</p>
+<div class="eqn">
+  ℘(<var>K</var>×<var>L</var>) = ℘(<var>K</var>⊕<var>L</var>) =
+  (<var>p</var>!<var>q</var>!/(<var>p</var>+<var>q</var>)!)
+  ℘(<var>K</var>)℘(<var>L</var>).
+</div>
+<p>The 2+2 lower bound is 243/32 and the 1+3 lower bound is 64/9, both
+strictly above 3125/576.</p>
+
+<h2>4 · Sharp result for all 4-pyramids</h2>
+<div class="env">
+  <span class="label">Theorem 2.</span>
   Every four-dimensional pyramid <var>P</var> satisfies
   |<var>P</var>| |(<var>P</var>−s(<var>P</var>))°| ≥ 3125/576,
   with equality exactly for a 4-simplex.
@@ -138,7 +167,33 @@ vanishes at τ=1/(d+1). Integration gives
 </div>
 <p>Equality in dimension three forces the base to be a tetrahedron.</p>
 
-<h2>4 · Surviving terminal subclasses</h2>
+<h2>5 · Realization rigidity and exact Hessian</h2>
+<p>In paired coordinates x<sub>v</sub>·y<sub>F</sub>=1, the fixed-incidence
+tangent dimension is</p>
+<div class="eqn">
+  4(f<sub>0</sub>+f<sub>3</sub>)−f<sub>03</sub>+ω.
+</div>
+<p>Terminality makes facet-supported circuits span the global Gale kernel.
+Disconnected circuit support is an affine join, already settled. Otherwise
+the labeled projective stabilizer is scalar, the projective orbit has
+dimension 24, and the quotient tangent dimension is the displayed number
+minus 24.</p>
+<p>Exact second-order jets eliminate the moving Santaló point by subtracting
+the Schur term</p>
+<div class="eqn">
+  (5/6)⟨c′(<var>K</var>°),
+  cov(<var>K</var>°)<sup>−1</sup>c′(<var>K</var>°)⟩.
+</div>
+<div class="env">
+  <span class="label">Theorem 3.</span>
+  On Paffenholz’s four realization parameters at the regular 24-cell,
+  ∇<sup>2</sup> log ℘ = −(61/234)I<sub>4</sub>.
+</div>
+<p>The matrix is certified by four exact diagonal and six polarized values.
+It is negative definite, so continuity excludes an open non-pyramidal
+realization neighborhood from local minimality.</p>
+
+<h2>6 · Surviving terminal subclasses</h2>
 <p>For a facet <var>F</var>, admissibility is the family of exact equations
 λ<sup>T</sup>α|<sub>F</sub>=0 over all affine dependences λ of its vertices.
 Choosing a direction parallel to a largest facet gives, for every
@@ -147,7 +202,7 @@ pair-terminal 4-polytope,</p>
 <p>The supporting flag identity is
 f<sub>03</sub>−f<sub>02</sub>+2f<sub>2</sub>=2f<sub>3</sub>.</p>
 <div class="env">
-  <span class="label">Theorem 2.</span>
+  <span class="label">Theorem 4.</span>
   A terminal simplicial 4-polytope is a simplex. A pair-terminal simple
   4-polytope is a simplex. A pair-terminal 4-pyramid is a simplex.
 </div>
@@ -156,7 +211,7 @@ A<sub>(u,0)</sub>(pyr <var>Q</var>) ≅ A<sub>u</sub>(<var>Q</var>)⊕ℝ.
 The polar is again a pyramid over a dual 3-polytope, so the audited 3D
 dual-pair count forces a tetrahedral base.</p>
 
-<h2>5 · Source audit</h2>
+<h2>7 · Source audit</h2>
 <p>The Meyer–Reisner convexity/rigidity theorem, volume-affinity, compactness,
 and the minimizer/polar chain are dimension-independent. The printed
 Chen–Li–Xi–Xu persistence proof follows intersections of two and three facets
@@ -166,10 +221,10 @@ replacement. The analytic reduction survives, but terminal classification
 cannot be the global bridge; full second variation is the remaining
 obstacle.</p>
 
-<h2>6 · Exact verification</h2>
+<h2>8 · Exact verification</h2>
 <pre><code>$ python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ...
-Ran 10 tests in 4.201s
+Ran 13 tests
 
 OK
 
@@ -181,16 +236,18 @@ $ python3 problems/mahler-volume-4d/harness/bicenter_certificate.py
 ...
 unique-bicenter-root True
 projective-local-minimum False</code></pre>
-<p>The rational harness checks simplex polarity and product, cube/cross
-polarity, admissible-speed ranks, and the pyramid factor arithmetic. It is a
-falsification tool, not a substitute for classification.</p>
+<p>The rational harness also checks join/product/free-sum factors, a centered
+segment–square join, incidence tangent ranks, the 24 projective directions,
+and the complete four-parameter realization Hessian. It is a falsification
+tool, not a substitute for classification.</p>
 
-<h2>7 · Limits and next route</h2>
+<h2>9 · Limits and next route</h2>
 <p>Generic rigidity is too weak: the cube is rigid generically but not in
 facet-parallel directions. More decisively, exact pair-terminality does not
-force a simplex. The next proof campaign must derive the Mahler Hessian on
-the full realization-space tangent cone and seek a coordinate-free negative
-direction for terminal non-simplices.</p>
+force a simplex, and a raw singular tangent need not integrate. The next
+campaign must build a smooth realization chart in the connected
+circuit-support branch, quotient by projective motion, and seek a
+coordinate-free Gale/stress descent lemma.</p>
 
 <div class="footer">
   <p><strong>Status:</strong> partial results. The full four-dimensional

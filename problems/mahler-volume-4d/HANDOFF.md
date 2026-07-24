@@ -31,10 +31,23 @@ Current priorities (update each session):
   Paffenholz 24-cell and proves a strict negative projective covariance
   direction. This excludes an open four-parameter critical branch from local
   minimality.
+- Read `results/join-product-exclusion.md`. Mahler volume now factorizes
+  exactly for products, free sums, and joins. Every 4D affine join satisfies
+  the sharp conjecture, including the non-pyramidal \(1+2\) split; all
+  products/free sums have a strict gap.
+- Read `angles/realization-stress/README.md` and
+  `results/24cell-realization-hessian.md`. The exact Santaló-envelope Hessian
+  is implemented. It equals \(-61I_4/234\) on the full Paffenholz parameter
+  block at the regular 24-cell, excluding another open neighborhood.
+- Terminality plus disconnected facet-circuit support gives an affine join,
+  now solved. In the connected branch the projective orbit has dimension 24
+  and the quotient tangent count is
+  \(4(f_0+f_3)-f_{03}+\omega-24\).
 - Do not return to terminal face-lattice enumeration. The next theorem-shaped
-  target is the Mahler Hessian on the full infinitesimal realization space,
-  followed by a coordinate-free negative-direction lemma for terminal
-  non-simplices.
+  target is a smooth full-rank realization chart for a connected
+  pair-terminal candidate, followed by a coordinate-free Gale/stress lemma
+  forcing a negative integrable quotient direction. Raw incidence-kernel
+  vectors may fail to integrate at singular points.
 - Run the exact harness before and after changes:
   `python3 -m unittest discover -s problems/mahler-volume-4d/harness -v`,
   `verify_bridge_counterexample.py`, and `bicenter_certificate.py` as
