@@ -57,3 +57,39 @@ Do one of two things:
    tensor concentration among near-optimal fractional packings.
 
 Do not extend the additive `k`-packing hierarchy further.
+
+## Session 3 deltas
+
+- Terminal odd-clique equality was not the end of the classification.
+  Capacity-two weights plus Hall deficiency exclude every `K_{2m+1}` with
+  `m≥2`; only `K₁` and `K₃` survive.
+- The terminal capacity defect can be propagated through peeling to give a
+  rigorous subset inequality strictly stronger than the excess-only version.
+- At the formal Steiner ratios, exact fibre equality eliminates all peeling:
+  every `L_i` contains maximum ordinary and optimal 2-packings with the same
+  fixed singleton/triangle counts.
+- Tight complement dominators are anticomplete to their `L_i`. The occupied
+  and vertical cell matrices have identical margins and disjoint row
+  supports, but an exact skeleton shows those facts still do not encode
+  product domination.
+- The missing incidence data are coordinate holes. External private targets
+  force a singleton hole; self-private targets allow a larger hole set. Do
+  not silently apply the singleton claim to self-private vertices.
+- Optimal rank-one fractional packings cannot provide a universal
+  integrality-gap/concentration tradeoff: `P4` forces concentration one.
+  Deliberately suboptimal diffuse packings can still give strong class bounds.
+- Fractional clique covers of graph squares give a clean one-sided theorem
+  and centered-perfect graph classes, but triangular graphs show unbounded
+  universal loss.
+
+## Revised next move after session 3
+
+1. Prove or refute an aggregate lower bound on the number of external private
+   targets in each tight complement dominator.
+2. Couple singleton coordinate holes to the disjoint minimum exchanges in
+   `H` and the fixed `K₁/K₃` atoms in the columns.
+3. In parallel, try a nonseparable higher-rank packing ansatz or a
+   center-aware lift of the square-clique LP.
+
+Do not return to terminal atom ratios, optimal rank-one concentration, or an
+unrestricted square-clique/theta relaxation.

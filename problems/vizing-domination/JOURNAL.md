@@ -202,3 +202,150 @@ and the exact fibre-slack theorem. No constant above 0.5643 was certified.
 Further work should continue only on simultaneous row/column realizability
 or the fractional integrality/concentration tradeoff; additive packing
 reoptimization is a proved STOP.
+
+## 2026-07-24 — capacity refinement and coordinate holes
+
+### Publication and branch
+
+The previous verified branch was published as
+`origin/problem/vizing-domination/2026-07-24-fibre-tightness`. Moving remote
+`main` was deliberately not attempted after the protected action rejected a
+push that would also publish four unrelated local commits. Continued work on
+`problem/vizing-domination/2026-07-24-incidence-concentration`.
+
+### Parallel xhigh attacks
+
+Three GPT-5.6 Sol agents at xhigh effort attacked:
+
+1. simultaneous fibre equality and terminal packing structure;
+2. fractional integrality/concentration tradeoffs;
+3. an orthogonal square-graph LP formulation.
+
+A fourth Sol/xhigh referee checked the fractional and square-cover packages.
+It accepted every final theorem, caught an initially ambiguous `P4` packing
+in the split-graph example, and verified the corrected uniform-packing bound.
+The incidence agent separately caught and repaired an overstrong
+unique-hole claim: singleton holes require an external private target;
+self-private targets only give a covering inclusion.
+
+### Capacity-two terminal theorem
+
+For a terminal conflict graph `F`, introduced
+
+```text
+τ₂(F)=max Σw_x,
+w_x∈{0,1,2}, w_x+w_y≤2 for every xy∈E(F).
+```
+
+Every feasible weighting lifts to a global integer 2-packing. A
+Hall-deficiency construction proves
+
+`τ₂(F)≥α(F)+|F|-ν(F)`.
+
+This gives the exact three-defect decomposition
+
+```text
+δ_G(S)
+ = [ρ²(G)-τ₂(F)]
+ + [τ₂(F)-(α(F)+|F|-ν(F))]
+ + [α(F)+2ν(F)-|F|].
+```
+
+On `K_{2m+1}`, the middle defect is zero only for `K₁,K₃` and is `m-1`
+for `m≥2`. Thus full terminal equality consists exactly of `K₁/K₃`
+components whose supported capacity-two weighting is globally optimal.
+
+Using
+
+`η(F)=τ₂(F)-2|F|+3ν(F)`
+
+at terminal leaves yields a refined recursive parameter `p_G^△(S)` and the
+new subset inequality
+
+`3γ_G(S)≤|S|+ρ²(G)-p_G^△(S)`.
+
+Disjoint unions of isolated vertices and `C5` gadgets with target
+`{0,2,4}` realize arbitrary zero-defect mixtures, so subset-local counting
+alone remains a STOP.
+
+### Formal incidence balance
+
+For a complete peeling of `L_i`, let `ℓ_i` be its length and `r_i` the
+ordinary packing number of the terminal remainder. Proved
+
+```text
+4Σ_i[ℓ_i+(ρ(G)-r_i)]
+ ≤ γ(H)(γ(G)+4ρ(G)-3ρ²(G))
+   -v+Σ_i(p_i+d_i)+3Σ_iδ_i.
+```
+
+At the formal Steiner minimizer the parameter residual vanishes. Exact
+tightness therefore forces every `L_i` to be terminal, to contain a maximum
+ordinary packing and an optimal 2-packing, and to have fixed atom counts
+
+```text
+#K₁=3ρ-ρ²,   #K₃=ρ²-2ρ.
+```
+
+The complement dominator `X_i=P_G(D_i)` is anticomplete to `L_i`.
+Occupied-cell and vertical-cell matrices have equal row and column margins,
+so their difference decomposes into alternating cycles. Every row is a
+disjoint minimum exchange of partition centers in `H`.
+
+Coordinate-wise product domination adds the missing condition. For an
+external private target, the row has exactly one coordinate of `π_i` not
+dominated from outside the part, equal to the coordinate of its unique
+horizontal dominator. A self-private target only forces a nonempty hole set
+inside that coordinate's closed neighborhood. A checked `C4`/six-vertex
+`H` skeleton realizes all margin and exchange data but leaves `(1,p1)`
+undominated, proving that hole coverage is not optional.
+
+### Fractional and square-graph boundaries
+
+For every rank-one fractional tensor, proved the ceiling
+
+`PQ/κ≤min{|H|γ_f(G),|G|γ_f(H)}`.
+
+The unique optimal packing of `P4` makes `κ=1` against every optimal packing,
+and a near-optimal analogue rules out fixed-tolerance concentration
+tradeoffs. A connected split-graph family places all rank-one certificates
+below Steiner for sufficiently large integrality gap. Conversely, a
+deliberately diffuse packing on the hard-only `m=8,k=4` split graph gives
+the exact class-specific bound `γ(G□P4)≥8`, factor `4/5`.
+
+Independently, for `σ(G)=fcc(G²)`, proved
+
+```text
+γ(G□H)≥fcc((G□H)²)≥σ(G)σ(H),
+γ(G□H)≥max{σ(G)γ(H),γ(G)σ(H)}.
+```
+
+Centered perfect squares satisfy `σ(G)=γ(G)`; this proves Vizing when one
+factor is a forest. The connected family
+`G_m=L(K_{2m+1}), H=P4` has product-square fractional clique cover at most
+four versus domination product `2m`, so unrestricted square-clique and theta
+relaxations have unbounded universal loss.
+
+### Verification
+
+```text
+cd problems/vizing-domination/harness
+python3 -m unittest -v
+# Ran 20 tests — OK
+```
+
+New exact tests exhaust the capacity-two zero-defect classification through
+five vertices, verify the refined peeling inequality on every subset of
+named graphs, validate split-graph fractional packings, and check the
+coordinate-hole adversarial skeleton. These remain conjecture hygiene.
+
+Interactive wall time: approximately 90 minutes. External compute: none.
+
+### Gate verdict
+
+The session proves a rigorous stronger subset-domination inequality and a
+nontrivial formal equality classification. No constant above 0.5643 is
+claimed. Continue only on aggregate external-private-target counting,
+higher-rank fractional tensors, or center-aware square lifts. Optimal
+rank-one concentration and unrestricted square-clique cover are certified
+PIVOT/STOP directions.

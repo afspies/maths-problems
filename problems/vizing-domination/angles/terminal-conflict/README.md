@@ -7,6 +7,9 @@ exactly a matching-cover parameter of an auxiliary graph. This yields a
 graph-theoretic classification of equality in Lemma 2.2 and a sharper
 classification of terminal equality in Lemma 2.3.
 
+The later capacity certificate in `angles/terminal-capacity` further sharpens
+full Lemma 2.3 equality from arbitrary odd cliques to `K₁/K₃` unions.
+
 Literature priority for this formulation has not been established.
 
 ## Conflict graph

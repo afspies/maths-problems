@@ -8,6 +8,9 @@ decomposition. It gives a local-concentration parameter and a clean regular
 graph criterion, but no new universal constant without a further
 integrality/concentration tradeoff.
 
+The later analysis in `angles/fractional-rank-one-limits` proves that no
+universal tradeoff of the proposed optimal/near-optimal rank-one form exists.
+
 ## Tensor theorem
 
 Let `p` and `q` be nonzero fractional packing functions on `G` and `H`:

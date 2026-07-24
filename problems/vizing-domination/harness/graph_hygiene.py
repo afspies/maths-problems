@@ -119,6 +119,14 @@ class Graph:
 
         return recurse((1 << self.n) - 1)
 
+    def edge_capacity_two_number(self) -> int:
+        """Maximize integral vertex weight with w(u)+w(v) <= 2 on each edge."""
+        return max(
+            sum(weights)
+            for weights in product(range(3), repeat=self.n)
+            if all(weights[u] + weights[v] <= 2 for u, v in self.edges)
+        )
+
     def connected_components(self) -> tuple[frozenset[int], ...]:
         unseen = set(range(self.n))
         answer: list[frozenset[int]] = []
@@ -224,6 +232,35 @@ class Graph:
 
         return recurse(initial)
 
+    def conflict_refined_peeling_parameter(self, target: Iterable[int]) -> int:
+        """Return peeling excess plus the terminal conflict-graph defect."""
+        initial = frozenset(target)
+        if not initial <= frozenset(range(self.n)):
+            raise ValueError("target contains an invalid vertex")
+        memo: dict[frozenset[int], int] = {}
+
+        def recurse(current: frozenset[int]) -> int:
+            if current in memo:
+                return memo[current]
+            choices = []
+            for v in range(self.n):
+                hit = current & self.closed_neighborhood(v)
+                if len(hit) >= 3:
+                    choices.append(len(hit) - 3 + recurse(current - hit))
+            if choices:
+                answer = max(choices)
+            else:
+                conflict = self.closed_neighborhood_conflict_graph(current)
+                answer = (
+                    conflict.edge_capacity_two_number()
+                    - 2 * len(current)
+                    + 3 * conflict.matching_number()
+                )
+            memo[current] = answer
+            return answer
+
+        return recurse(initial)
+
     def _validate_weights(self, weights: Sequence[int]) -> None:
         if len(weights) != self.n or any(not isinstance(w, int) or w < 0 for w in weights):
             raise ValueError("weights must be nonnegative integers, one per vertex")
@@ -241,6 +278,33 @@ def cycle(n: int) -> Graph:
 
 def complete(n: int) -> Graph:
     return Graph.from_edges(n, combinations(range(n), 2))
+
+
+def uniform_set_cover_split_graph(
+    ground_size: int,
+    subset_size: int,
+    private_pairs: int = 0,
+) -> Graph:
+    """Return the complete-uniform set-cover split graph used in an angle test.
+
+    Vertices are ordered as ground-set clique vertices, private clique
+    vertices, uniform-subset independent vertices, then private leaves.
+    """
+    if not 1 <= subset_size <= ground_size:
+        raise ValueError("require 1 <= subset_size <= ground_size")
+    if private_pairs < 0:
+        raise ValueError("private_pairs must be nonnegative")
+    subsets = list(combinations(range(ground_size), subset_size))
+    clique_size = ground_size + private_pairs
+    subset_offset = clique_size
+    private_leaf_offset = subset_offset + len(subsets)
+    edges = set(combinations(range(clique_size), 2))
+    for j, subset in enumerate(subsets):
+        element = subset_offset + j
+        edges.update((coordinate, element) for coordinate in subset)
+    for j in range(private_pairs):
+        edges.add((ground_size + j, private_leaf_offset + j))
+    return Graph.from_edges(private_leaf_offset + private_pairs, edges)
 
 
 def fractional_tensor_lower_bound(

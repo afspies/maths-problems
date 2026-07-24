@@ -86,10 +86,11 @@
   <span class="label">Abstract</span>
   We reconstruct the exact optimization behind Steiner’s 0.5643 bound, locate
   the algebraic failure in the withdrawn 0.5809 claim, and prove a strict
-  instance-sensitive strengthening of Steiner’s key subset lemma. We classify
-  terminal equality by odd-clique conflict graphs, decompose every unit of
-  product-proof slack, and isolate a new fractional tensor bridge. No improved
-  universal constant is claimed.
+  instance-sensitive strengthening of Steiner’s key subset lemma. We sharpen
+  terminal equality to singleton and triangle conflict atoms, decompose every
+  unit of product-proof slack, classify formal fibre incidence, and prove
+  orthogonal fractional-tensor and square-clique-cover bounds with exact
+  universal obstructions. No improved universal constant is claimed.
 </div>
 
 <h2>1 · Setup</h2>
@@ -206,7 +207,23 @@ graph <var>F</var> when one vertex of <var>G</var> can dominate both. Then</p>
 </div>
 <p>The inequality α(<var>F</var>)+2ν(<var>F</var>)≥|<var>F</var>| is tight
 exactly when every component is a complete graph of odd order. Thus every
-tight terminal remainder has an odd-clique conflict decomposition.</p>
+tight terminal remainder first has an odd-clique conflict decomposition.</p>
+<div class="env theorem">
+  <span class="label">Capacity-two refinement.</span>
+  Let τ<sub>2</sub>(<var>F</var>) maximize Σ<var>w</var><sub><var>x</var></sub>
+  over weights in {0,1,2} satisfying
+  <var>w</var><sub><var>x</var></sub>+
+  <var>w</var><sub><var>y</var></sub>≤2 on every edge. Then
+  ρ<sup>{2}</sup>(<var>G</var>)≥τ<sub>2</sub>(<var>F</var>)≥
+  α(<var>F</var>)+|<var>F</var>|−ν(<var>F</var>). Full terminal equality
+  holds only for disjoint unions of K<sub>1</sub> and K<sub>3</sub>.
+</div>
+<p>The second inequality follows from Hall deficiency: weight an appropriate
+subset of a maximum independent set twice, its neighborhood zero, and all
+remaining vertices once. Using the terminal defect
+τ<sub>2</sub>(<var>F</var>)−2|<var>F</var>|+3ν(<var>F</var>) at the leaves
+of the peeling recursion gives a strictly stronger parameter
+<var>p</var><sup>△</sup><sub><var>G</var></sub>(<var>S</var>).</p>
 <div class="env theorem">
   <span class="label">Exact fibre-slack identity.</span>
   With <var>k</var>=γ(<var>H</var>), <var>R</var>=ρ<sup>{2}</sup>(<var>G</var>),
@@ -246,17 +263,78 @@ hierarchy as a route past 0.5643.</p>
 <var>s</var>+1). The concentrated optimal packing of <var>P</var><sub>4</sub>
 shows that totals alone cannot control κ.</p>
 
-<h2>8 · Exact verification and next gate</h2>
+<h2>8 · Formal fibre incidence</h2>
+<p>Write Γ=γ(<var>G</var>), <var>r</var>=ρ(<var>G</var>), and
+<var>R</var>=ρ<sup>{2}</sup>(<var>G</var>). For a complete peeling of each
+<var>L</var><sub><var>i</var></sub>, let ℓ<sub><var>i</var></sub> be its
+number of steps and <var>r</var><sub><var>i</var></sub> the ordinary packing
+number of its terminal remainder. The exact defects imply</p>
+<div class="eqn">
+  <span class="body">4Σ<sub><var>i</var></sub>
+  [ℓ<sub><var>i</var></sub>+(<var>r</var>−<var>r</var><sub><var>i</var></sub>)]
+  ≤ γ(<var>H</var>)(Γ+4<var>r</var>−3<var>R</var>) − <var>v</var> +
+  Σ(<var>p</var><sub><var>i</var></sub>+<var>d</var><sub><var>i</var></sub>) +
+  3Σδ<sub><var>i</var></sub>.</span><span class="no">(8)</span>
+</div>
+<p>At the formal Steiner obstruction, 3<var>R</var>=Γ+4<var>r</var> and all
+other defects vanish. Every fibre set is therefore already terminal, contains
+a maximum ordinary packing, and has exactly 3<var>r</var>−<var>R</var>
+singleton atoms and <var>R</var>−2<var>r</var> triangle atoms. Its minimum
+complement dominator is anticomplete to the fibre set.</p>
+<p>The occupied-cell and vertical-cell matrices then have the same row and
+column margins, so their difference decomposes into alternating cycles. Each
+row is a disjoint minimum exchange of partition centers in <var>H</var>.
+These cardinality conditions are not sufficient: an external private target
+must have a unique coordinate hole in its cell, while a self-private target
+only forces a nonempty hole set covered by its inside-cell point. A checked
+C<sub>4</sub>-based skeleton satisfies all margin and exchange conditions but
+misses a product vertex, isolating this coordinate-hole condition.</p>
+
+<h2>9 · Two orthogonal LP boundaries</h2>
+<h3>Rank-one fractional tensors</h3>
+<p>Every certificate in (7) obeys the exact ceiling</p>
+<div class="eqn">
+  <span class="body"><var>PQ</var>/κ ≤ min{
+  |<var>H</var>|γ<sub>f</sub>(<var>G</var>),
+  |<var>G</var>|γ<sub>f</sub>(<var>H</var>)}.</span>
+  <span class="no">(9)</span>
+</div>
+<p>Against P<sub>4</sub>, optimal and fixed-tolerance near-optimal packings
+have κ arbitrarily close to one, independently of the integrality gap. A
+connected split-graph family puts every rank-one certificate below Steiner.
+Deliberately diffuse suboptimal packings can still help on classes: the
+hard-only <var>m</var>=8,<var>k</var>=4 split graph paired with the uniform
+one-third packing on P<sub>4</sub> gives γ(<var>G</var>□P<sub>4</sub>)≥8,
+a normalized factor 4/5.</p>
+
+<h3>Square-clique covers</h3>
+<p>Let σ(<var>G</var>) be the fractional vertex clique-cover number of
+<var>G</var><sup>2</sup>. Strong-product multiplicativity and a weighted
+slice count give</p>
+<div class="eqn">
+  <span class="body">γ(<var>G</var>□<var>H</var>) ≥
+  max{σ(<var>G</var>)γ(<var>H</var>),
+  γ(<var>G</var>)σ(<var>H</var>)}.</span><span class="no">(10)</span>
+</div>
+<p>If <var>G</var><sup>2</sup> is perfect and each of its cliques lies in a
+closed neighborhood of <var>G</var>, then σ(<var>G</var>)=γ(<var>G</var>)
+and Vizing holds against every <var>H</var>. Forests satisfy both conditions.
+Universally the relaxation has unbounded loss:
+for <var>G</var><sub><var>m</var></sub>=<var>L</var>(K<sub>2<var>m</var>+1</sub>)
+and H=P<sub>4</sub>, its product-square clique cover is at most four while
+γ(<var>G</var><sub><var>m</var></sub>)γ(P<sub>4</sub>)=2<var>m</var>.</p>
+
+<h2>10 · Exact verification and next gate</h2>
 <pre><code>$ cd problems/vizing-domination/harness
 $ python3 -m unittest -v
-Ran 16 tests
+Ran 20 tests
 OK</code></pre>
 <p>The checks use integers, rational numbers, and exact elements of
 ℚ(√73). They validate definitions and finite witnesses, not the universal
-conjecture. The two-session gate is met by the odd-clique classification and
-fibre-slack theorem. Further work should attack simultaneous row/column
-incidence or prove an integrality/concentration tradeoff for the fractional
-tensor bridge.</p>
+conjecture. The gate is met by the capacity-two subset inequality and formal
+fibre-incidence classification. Further work should count external private
+targets in the coordinate-hole system, or develop a genuinely higher-rank
+fractional tensor or center-aware square lift.</p>
 
 <div class="footer">
   <p><strong>Status:</strong> partial-results. Vizing’s domination conjecture

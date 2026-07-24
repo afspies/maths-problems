@@ -3,10 +3,11 @@ title = "Vizing’s domination conjecture"
 question = "Do all finite simple graphs satisfy γ(G □ H) ≥ γ(G)γ(H)?"
 # proposed | scaffolded | active | partial-results | solved | excluded | retired
 status = "partial-results"
-best_result = "Exact fibre-slack identity; terminal odd-clique equality classification; full packing-hierarchy obstruction; fractional tensor bridge (constant still 0.5643)"
+best_result = "K1/K3 terminal-capacity inequality; formal fibre-incidence/coordinate-hole classification; square-clique and rank-one tensor bounds (constant still 0.5643)"
 doi = ""
 sessions = [
     "2026-07-23 scaffolded from template",
     "2026-07-23 proof-first: reconstructed Steiner; audited withdrawn 0.5809; proved peeling-defect and corrected k=3 inequalities",
     "2026-07-24 session 2: terminal odd-clique theorem, exact fibre slack, all-level hierarchy obstruction, fractional tensor bound",
+    "2026-07-24 session 3: K1/K3 capacity refinement, formal incidence balance, rank-one and square-clique LP boundaries",
 ]

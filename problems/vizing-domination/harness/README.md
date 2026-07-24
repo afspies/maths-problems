@@ -21,4 +21,7 @@ The named-graph fixtures include `P2 □ P2 = C4`, whose domination number is 2,
 and exact checks of Lemma 2.3, the peeling-defect strengthening, and the
 corrected `k=3` subset inequality on every subset of several small graphs.
 They also exhaust the matching-cover equality classification through five
-vertices and verify the all-level packing/domination equality gadget.
+vertices, verify its capacity-two `K₁/K₃` refinement, check the all-level
+packing/domination equality gadget, validate exact split-graph fractional
+packings, and exercise the coordinate-hole adversarial skeleton. The suite
+currently contains 20 tests.

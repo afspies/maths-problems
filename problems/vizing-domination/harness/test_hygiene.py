@@ -8,6 +8,7 @@ from graph_hygiene import (
     cycle,
     fractional_tensor_lower_bound,
     path,
+    uniform_set_cover_split_graph,
 )
 from optimization import (
     Surd73,
@@ -81,6 +82,48 @@ class GraphHygieneTests(unittest.TestCase):
                 )
                 equality = graph.independence_number() + 2 * graph.matching_number() == n
                 self.assertEqual(equality, graph.is_disjoint_union_of_odd_cliques())
+
+    def test_terminal_capacity_two_refinement(self) -> None:
+        # The terminal structural defect vanishes exactly on unions of K1 and K3.
+        for n in range(6):
+            pairs = list(combinations(range(n), 2))
+            for edge_mask in range(1 << len(pairs)):
+                graph = Graph.from_edges(
+                    n,
+                    [edge for i, edge in enumerate(pairs) if edge_mask & (1 << i)],
+                )
+                alpha = graph.independence_number()
+                matching = graph.matching_number()
+                tau_two = graph.edge_capacity_two_number()
+                self.assertGreaterEqual(tau_two, alpha + n - matching)
+                defect = tau_two - 2 * n + 3 * matching
+                self.assertGreaterEqual(defect, 0)
+                tight_components = graph.is_disjoint_union_of_odd_cliques() and all(
+                    len(component) in {1, 3}
+                    for component in graph.connected_components()
+                )
+                self.assertEqual(defect == 0, tight_components)
+
+        graph = cycle(5)
+        subset = [0, 2, 4]
+        conflict = graph.closed_neighborhood_conflict_graph(subset)
+        self.assertEqual(conflict, complete(3))
+        self.assertEqual(graph.domination_number(subset), 2)
+        self.assertEqual(graph.k_packing_number(2), 3)
+        self.assertEqual(graph.conflict_refined_peeling_parameter(subset), 0)
+
+    def test_conflict_refined_subset_inequality(self) -> None:
+        graphs = [path(5), cycle(4), cycle(5), complete(5)]
+        for graph in graphs:
+            rho_two = graph.k_packing_number(2)
+            for mask in range(1 << graph.n):
+                subset = [v for v in range(graph.n) if mask & (1 << v)]
+                parameter = graph.conflict_refined_peeling_parameter(subset)
+                self.assertGreaterEqual(parameter, graph.excess_peeling_parameter(subset))
+                self.assertLessEqual(
+                    3 * graph.domination_number(subset),
+                    len(subset) + rho_two - parameter,
+                )
 
     def test_strengthened_peeling_inequality(self) -> None:
         graphs = [path(5), cycle(4), cycle(5), complete(5)]
@@ -192,6 +235,75 @@ class GraphHygieneTests(unittest.TestCase):
             fractional_tensor_lower_bound(graph, graph, concentrated, concentrated),
             Fraction(4),
         )
+
+    def test_fractional_rank_one_split_examples(self) -> None:
+        hard = uniform_set_cover_split_graph(4, 2)
+        self.assertEqual(hard.domination_number(), 3)
+        hard_weights = [Fraction(0)] * 4 + [Fraction(1, 3)] * 6
+        self.assertTrue(hard.is_fractional_packing_function(hard_weights))
+        self.assertEqual(sum(hard_weights), 2)
+        diffuse_p4 = [Fraction(1, 3)] * 4
+        self.assertEqual(
+            fractional_tensor_lower_bound(hard, path(4), hard_weights, diffuse_p4),
+            8,
+        )
+
+        augmented = uniform_set_cover_split_graph(4, 2, private_pairs=2)
+        self.assertEqual(augmented.domination_number(), 5)
+        augmented_weights = (
+            [Fraction(0)] * 6
+            + [Fraction(1, 3)] * 6
+            + [Fraction(1)] * 2
+        )
+        self.assertTrue(augmented.is_fractional_packing_function(augmented_weights))
+        self.assertEqual(sum(augmented_weights), 4)
+
+    def test_incidence_skeleton_requires_coordinate_holes(self) -> None:
+        left = cycle(4)
+        right = Graph.from_edges(
+            6,
+            [
+                (0, 1),
+                (0, 2),
+                (0, 4),
+                (1, 4),
+                (2, 4),
+                (3, 4),
+                (3, 5),
+                (1, 3),
+                (1, 5),
+            ],
+        )
+        self.assertEqual(right.domination_number(), 2)
+        part_one = {0, 1, 2}
+        part_two = {3, 4, 5}
+        self.assertTrue(right.dominates([4], part_one))
+        self.assertTrue(right.dominates([1], part_two))
+
+        # D={(2,u1),(0,u2)} in row-major product indexing.
+        chosen = {2 * right.n + 1, 4}
+        product_graph = left.cartesian_product(right)
+        self.assertFalse(product_graph.dominates(chosen))
+        self.assertFalse(product_graph.dominates(chosen, [1 * right.n + 2]))
+
+        vertical_sets = []
+        for part in (part_one, part_two):
+            outside = set(range(right.n)) - part
+            vertical_sets.append(
+                {
+                    g
+                    for g in range(left.n)
+                    if all(
+                        any(
+                            g * right.n + source in chosen
+                            and source in right.closed_neighborhood(h)
+                            for source in outside
+                        )
+                        for h in part
+                    )
+                }
+            )
+        self.assertEqual(vertical_sets, [{0}, {2}])
 
 
 if __name__ == "__main__":

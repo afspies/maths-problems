@@ -53,11 +53,18 @@ its precise failure is audited in
   does not alone improve 0.5643; see `angles/k3-analogue/README.md`.
 - In the two-sparse terminal regime, the closed-neighborhood conflict graph
   converts subset domination exactly to matching cover. Lemma 2.2 is tight
-  exactly for disjoint unions of odd cliques.
+  exactly for disjoint unions of odd cliques. A further capacity-two
+  certificate sharpens equality in Lemma 2.3 to unions of `K₁` and `K₃`.
 - Every unit of slack in Steiner's oriented product bound splits exactly into
   vertical, projection, partition-additivity, and subset-domination defects.
+- At formal Steiner equality, every fibre set is already terminal, supports
+  maximum ordinary and optimal 2-packings, has fixed `K₁/K₃` counts, and
+  participates in balanced disjoint row/column exchanges.
 - The full additive integer packing/domination hierarchy retains the same
   formal 0.5643 obstruction at every level.
+- Rank-one fractional tensors and unrestricted square-clique LPs both have
+  certified universal obstructions; their surviving value is in graph-class
+  bounds and in suggesting higher-rank or center-aware lifts.
 
 ## Angle-of-attack menu (be exploratory — draw from different fields)
 
@@ -68,7 +75,10 @@ its precise failure is audited in
 - **LP/integer duality:** compare integer `k`-packing defects with fractional
   domination and identify rounding structure that product fibres enforce.
 - **Fractional tensoring:** optimize the exact local-concentration denominator
-  for two fractional packings and relate it to the two integrality gaps.
+  using genuinely nonseparable/higher-rank packings; optimal rank-one
+  concentration tradeoffs are now ruled out.
+- **Square-graph lifts:** retain which square cliques have a common center,
+  since the unrestricted fractional clique cover has unbounded loss.
 - **Extremal constructions:** build graphs/subsets realizing equality in every
   step to decide whether the 0.5643 framework is structurally sharp.
 - **Proof-logged constraints:** use SAT/ILP only to falsify proposed finite
@@ -77,10 +87,12 @@ its precise failure is audited in
 
 ## First steps
 
-1. Use the exact fibre-slack identity to test incompatibility of row-wise
-   minimum `H`-sets with column-wise injective minimum projections and
-   odd-clique terminal remainders.
-2. Seek a tradeoff between `γ/γ_f` and the minimum tensor concentration `κ`
-   among near-optimal fractional packings.
-3. Do not pursue the additive `k`-packing hierarchy further: it is now proved
+1. Count external private targets in the tight column projections. External
+   targets force singleton coordinate holes, whereas self-private targets
+   only give a weaker covering condition.
+2. Couple those holes to the disjoint minimum exchanges in each `H`-row and
+   the fixed `K₁/K₃` packing atoms in every column.
+3. In parallel, try a higher-rank fractional tensor or a center-aware
+   square-clique lift.
+4. Do not pursue the additive `k`-packing hierarchy further: it is now proved
    to preserve the exact obstruction at every level.

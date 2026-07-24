@@ -66,7 +66,7 @@ The mechanisms are non-vacuous:
 - an edgeless graph with `S=V(G)` is terminal-tight;
 - `C4` with `S=V(C4)` is tight and reduces through a three-hit step to a
   terminal singleton;
-- in `C5`, taking three consecutive vertices for `S` gives a two-sparse
+- in a cyclic labeling of `C5`, taking `S={0,2,4}` gives a two-sparse
   terminal example with `|S|=3`, `R=3`, `r=1`, and `γ_G(S)=2`.
 
 ## Strengthened peeling inequality

@@ -14,8 +14,11 @@ excess-peeling parameter. A second session classifies terminal equality by
 odd-clique conflict graphs, decomposes every unit of slack in Steiner's
 product proof, and proves that the entire additive integer packing/domination
 hierarchy retains the same exact 0.5643 obstruction. No improved universal
-constant is claimed; the surviving target is simultaneous row/column
-realizability of all equality conditions.
+constant is claimed. A third session sharpens terminal equality to
+singleton/triangle atoms, proves a terminal-aware subset inequality and a
+balanced fibre-incidence theorem, and establishes exact square-clique and
+fractional-tensor no-go results. The surviving target is the coordinate-hole
+system in tight fibres or a genuinely higher-rank LP bridge.
 
 ## Definitions
 
@@ -126,7 +129,8 @@ component of `F` is a complete graph of odd order. Hence terminal equality
 in Steiner's subset lemma requires an odd-clique conflict decomposition plus
 zero ambient packing slack. The matching slack is the sum of positive
 integer component defects, so slack at most two permits at most two
-non-odd-clique components.
+non-odd-clique components. The capacity refinement below further excludes
+odd cliques of order at least five from full terminal equality.
 
 ## Exact fibre-slack identity
 
@@ -189,6 +193,109 @@ connectedness does not prevent concentration and totals alone cannot control
 `κ`. A universal improvement needs a tradeoff between fractional
 integrality gaps and local concentration.
 
+## Capacity-two terminal refinement
+
+For a graph `F`, let `τ₂(F)` maximize `Σw_x` over
+`w_x∈{0,1,2}` subject to `w_x+w_y≤2` on every edge. Any such weighting of a
+two-sparse conflict graph lifts to a global 2-packing of `G`. A
+Hall-deficiency argument gives
+
+`ρ²(G)≥τ₂(F)≥α(F)+|F|-ν(F)`.                                 (11)
+
+Consequently terminal slack has the exact three-part decomposition
+
+```text
+|S|+ρ²(G)-3γ_G(S)
+ = [ρ²(G)-τ₂(F)]
+ + [τ₂(F)-(α(F)+|F|-ν(F))]
+ + [α(F)+2ν(F)-|F|].                                        (12)
+```
+
+On `K_{2m+1}`, the middle defect is zero for `K₁,K₃` and `m-1` for
+`m≥2`. Thus terminal equality holds exactly when `F` is a union of `K₁`
+and `K₃` and the supported weighting—two on singleton components, one on
+triangle vertices—is globally optimal.
+
+Writing `η(F)=τ₂(F)-2|F|+3ν(F)`, use `η` at terminal leaves of the peeling
+recursion and add `q-3` at dense steps. The resulting parameter
+`p_G^△(S)` satisfies
+
+`3γ_G(S)≤|S|+ρ²(G)-p_G^△(S)`,                                (13)
+
+and dominates the earlier parameter `p_G(S)`. Arbitrary mixtures of the two
+terminal atoms are realized by isolated vertices and `C₅` gadgets, so a
+universal strict term must still come from product geometry.
+
+## Formal fibre-incidence classification
+
+Put `Γ=γ(G)`, `r=ρ(G)`, and `R=ρ²(G)`. For a complete peeling of `L_i`,
+let `ℓ_i` be its number of steps and `r_i` the ordinary packing number of
+its terminal remainder. The exact fibre identities imply the stability bound
+
+```text
+4Σ_i[ℓ_i+(r-r_i)]
+ ≤ γ(H)(Γ+4r-3R)-v+Σ_i(p_i+d_i)+3Σ_iδ_i.                    (14)
+```
+
+At the formal Steiner minimizer, `3R=Γ+4r`, and all other defects vanish.
+Hence every `L_i` is already terminal, has `r_i=r`, and contains fixed
+numbers
+
+`3r-R` of `K₁` atoms and `R-2r` of `K₃` atoms.                (15)
+
+Moreover its minimum complement dominator `X_i=P_G(D_i)` is anticomplete to
+`L_i`. The occupied-cell and vertical-cell matrices have identical row and
+column margins, so their symmetric difference decomposes into alternating
+cycles. Each tight row is a disjoint, size-preserving exchange of partition
+centers in `H`.
+
+The remaining coordinate constraint is sharper than these margins. An
+external private target of a point `(g,h)∈D_i` must have exactly one
+coordinate in `π_i` not dominated from outside that part—namely `h`.
+Self-private targets only force a nonempty hole set dominated by `h`. An
+explicit `C₄`-based skeleton realizes all cardinality and exchange
+conditions but leaves a product vertex undominated, proving that this
+coordinate-hole condition is essential.
+
+## Limits of rank-one fractional tensors
+
+Every rank-one certificate in (10) obeys
+
+`PQ/κ≤min{|V(H)|γ_f(G),|V(G)|γ_f(H)}`.                       (16)
+
+For `H=P₄`, this caps its normalized factor by
+`2γ_f(G)/γ(G)`. A connected split-graph family has
+`γ=m-k+3` and `γ_f=m/k+2`; the instance `m=24,k=12` places every
+rank-one tensor below Steiner's constant. Optimal and fixed-tolerance
+near-optimal packings cannot repair this: the unique optimal packing
+`(1,0,0,1)` of `P₄` forces `κ=1` against every optimal packing.
+
+Suboptimal diffusion can still help on classes. For the hard-only split
+graph with `m=8,k=4`, a uniform optimal packing paired with
+`(1/3,1/3,1/3,1/3)` on `P₄` gives the exact lower bound
+`γ(G□P₄)≥8`, a normalized factor `4/5`.
+
+## Square-clique-cover bridge
+
+Let `σ(G)=fcc(G²)`, the fractional vertex clique-cover number of the graph
+square. Then
+
+```text
+γ(G□H)≥fcc((G□H)²)≥σ(G)σ(H),
+γ(G□H)≥max{σ(G)γ(H),γ(G)σ(H)}.                               (17)
+```
+
+The first line uses `(G□H)²⊆G²⊠H²` and multiplicativity of fractional
+clique cover under strong product. The stronger one-sided line follows by
+weighting the `G`-neighborhood slices of any product dominator by a dual
+optimum for `fcc(G²)`.
+
+If `G²` is perfect and every clique of `G²` lies in a closed neighborhood
+of `G`, then `σ(G)=γ(G)` and Vizing holds for `G` against every `H`.
+Forests satisfy both hypotheses. Universally, however, this route has
+unbounded loss: for `G_m=L(K_{2m+1})` and `H=P₄`,
+`fcc((G_m□P₄)²)≤4` while `γ(G_m)γ(P₄)=2m`.
+
 ## Withdrawn 0.5809 claim
 
 With `A=γ(G)`, `B=γ(H)`, `x=A-ρ(G)`, `y=B-ρ(H)`, the valid
@@ -209,14 +316,15 @@ From `problems/vizing-domination/harness` run:
 python3 -m unittest -v
 ```
 
-Sixteen exact tests check named graph products, domination and `k`-function
+Twenty exact tests check named graph products, domination and `k`-function
 definitions, Steiner's subset inequality, equation (3), the exact
 `Q(√73)` threshold identities, the withdrawn algebra witness, and the
 five-vertex `k=3` counterexample together with corrected inequality (5).
-They also exhaustively verify the matching-cover classification through five
-vertices, check the all-level hierarchy gadget, and verify the fractional
-tensor bound on regular and concentrated examples. These are hygiene and
-adversarial checks, not a finite proof of the universal conjecture.
+They also exhaustively verify the matching-cover and capacity-two
+classifications through five vertices, check the all-level hierarchy gadget,
+validate the split-graph fractional examples, and exercise the coordinate-hole
+adversarial skeleton. These are hygiene and adversarial checks, not a finite
+proof of the universal conjecture.
 
 ## Relation to prior work and next gate
 
@@ -224,8 +332,8 @@ The dependency reconstruction is in
 `literature/steiner-reconstruction.md`. The exact relaxed minimax underlying
 0.5643 attains equality, so reoptimization without a new combinatorial
 inequality is a dead end. The two-session gate is met by the terminal
-odd-clique classification and exact fibre-slack theorem. The additive
-packing hierarchy is now closed as a route to a better constant. Future work
-should attack the simultaneous row/column incidence conditions in (8), or
-develop the fractional tensor bridge (10) through a provable
-integrality/concentration tradeoff.
+capacity refinement and exact fibre-incidence theorem. Additive packing,
+optimal rank-one concentration, and unrestricted square-clique cover are now
+closed as universal routes. Future work should count external private
+targets in the coordinate-hole system, or develop a genuinely higher-rank
+fractional tensor or center-aware square lift.
