@@ -445,6 +445,89 @@ unrestricted alternatives to a GKS-specific theorem excluding boundary
 creation, a genuinely global two-ended envelope invariant, or a
 configuration degree with a nonlocal boundary correction.
 
+## Sharper boundary calculations and a conormal forcing module
+
+The hoped-for generic GKS repair is now ruled out at essentially full
+strength.  There is a smooth exact-graph telescope in which every stage is
+an invertible compactly supported GKS image of one simple object, the
+Hamiltonian amplitudes are summable, and the transition maps are canonical
+positive epigraph maps.  A fixed finite-stage microlocal restriction is
+always zero, while the homotopy colimit is the original object and has a
+rank-one restriction.  Positivity orders the maps but does not make
+microlocal specialization cocontinuous.  Any surviving theorem must use the
+conjugated quarter-rotation and compute its four-sheet cap map.
+
+The envelope and configuration routes also admit exact global calculations.
+For argument lifts \(A,B\) of the exterior envelope strands about an interior
+point,
+\[
+ \frac{B-A}{2\pi}\longrightarrow n_\pm\in\mathbb Z,
+ \qquad n_--n_+=1.
+\]
+Thus total outer winding is an end-order reversal.  Two disjoint proper arcs
+on a cylinder can realize exactly this reversal, so ordinary linking,
+Maslov, and ruled-ribbon intersection do not contradict it.  Separately, the
+cyclic four-point configuration quotient is nonorientable.  Its
+degree-zero intersection group with orientation coefficients is
+\(\mathbb Z/2\).  The resolved collision boundary carries an integer, but
+the inclusion map is reduction modulo two; the explicit wild motif has
+equivariant square-test determinant \(-8\) and realizes one boundary unit.
+
+A July 2026 unrefereed manuscript claims a conormal-Floer proof of Tao's
+four-curve alternating-area Conjecture 5.6.  It is false as circulated
+because it defines
+\(\mathcal A=-\int y\,dx\) and then uses the opposite sign in every
+normalization.  Replacing the definition by Tao's convention
+\(\mathcal A=+\int y\,dx\) repairs the proof.  After that mandatory repair,
+two independent audits found no deeper gap in the square--conormal shear,
+exact essential-circle lemma, product cutoff, conormal PSS argument, or
+embedded corner rounding.  This is evidence for an apparently sound
+auxiliary theorem, not reviewed literature.
+
+The corrected module still does not prove Square Peg.  Four horizontal
+essential circles at heights
+\[
+ (h_1,h_2,h_3,h_4)=(0,\varepsilon,3\varepsilon,2\varepsilon)
+\]
+have zero alternating action and the exact joint squares
+\[
+ (x,0),\ (x+2\varepsilon,\varepsilon),\
+ (x+\varepsilon,3\varepsilon),\ (x-\varepsilon,2\varepsilon).
+\]
+Under the natural parameter decoding to a fixed planar circle, all four
+vertices totally collide as \(\varepsilon\to0\).  Moreover the complete
+rank-two conormal Floer group can be realized by two intersections in an
+arbitrarily small neighborhood of the zero conormal: take the graph of
+\(\eta\,d\cos(2\pi q_1/L)\).  For the horizontal family both exact
+primitives vanish, so the whole clean class has normalized action zero even
+though its Tao-cylinder (universal-cover) square side is
+\(\sqrt5\,\varepsilon\); sending
+\(\varepsilon\) to zero or infinity leaves that action unchanged.  Rank and
+ordinary action therefore cannot force a nonlocal square.  The viable
+upgrade is a class relative to the complement of the diagonal, or a
+decoder-calibrated spectral gap tied to a globally linked essentialization;
+neither is currently proved.
+
+There is nevertheless a precise rank-two splicing reduction.  Choose four
+retained compact arcs \(\alpha_i\subset C\) with empty common intersection,
+complete them by artificial winding tails, balance alternating action only
+inside the tail chambers, and make the product transverse. Place all
+retained pieces in one lifted disk \(\widetilde D\) with
+\(\operatorname{diam}_x\widetilde D+
+\operatorname{diam}_y\widetilde D<L\), so a retained cylinder square cannot
+wrap. If exactly one ordered joint square has any artificial vertex, then
+\(\dim HF=2\) forces a second square with all four vertices on the retained
+arcs.  Compactness gives a square on \(C\), and
+\(\bigcap_i\alpha_i=\varnothing\) rules out total collision.  An explicit
+two-zero graph model supplies exactly two transverse artificial generators
+before splicing; after a generic choice of offsets, one can open four small
+windows around one generator while keeping the other fixed. What is not
+proved is the decisive **odd artificial splice
+lemma**: the four connectors and the action-correction ear must create no
+additional mixed square.  In cylinder coordinates this is a finite
+fifteen-pattern system of interval congruences, offering a concrete next
+proof or exact-exclusion problem.
+
 ## Relation to prior work and novelty boundary
 
 Asano--Ike already cover every rectifiable and every locally monotone Jordan

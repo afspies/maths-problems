@@ -280,7 +280,54 @@ conjecture; the live targets require a GKS-specific boundary theorem, a
 global two-ended envelope invariant, or a configuration degree with a
 nonlocal boundary correction.</p>
 
-<h2>10 · Exact hygiene checks</h2>
+<h2>10 · Sharper boundary calculations and a conormal module</h2>
+<p><span class="label">Positive GKS is insufficient.</span> A smooth
+exact-graph telescope has invertible compactly supported GKS stages,
+summable Hamiltonian amplitudes, and canonical positive epigraph maps.
+Every finite restriction at one reduced covector vanishes, but the homotopy
+colimit is the original object and has a rank-one restriction. Any surviving
+theorem must use the conjugated quarter-rotation and its four-sheet cap map,
+not positivity alone.</p>
+<p><span class="label">The global boundary invariants are exact but
+permissive.</span> The two exterior envelope strands have end integers
+<var>n</var><sub>−</sub>, <var>n</var><sub>+</sub> with
+<var>n</var><sub>−</sub>−<var>n</var><sub>+</sub>=1. This is an allowed
+end-order reversal of two disjoint proper cylinder arcs. The cyclic
+configuration quotient is nonorientable: its global degree group is
+Z/2, while the resolved collision boundary has an integer whose inclusion
+is reduction mod 2. The wild motif realizes one boundary unit with exact
+equivariant determinant −8.</p>
+<p><span class="label">Conormal forcing.</span> A July 2026 unrefereed
+manuscript claiming Tao’s four-curve alternating-area conjecture has a
+mandatory sign error: it defines A=−∫y dx and then uses the opposite
+normalization. With Tao’s convention A=+∫y dx, two independent audits found
+no deeper gap in the shear, exact-circle, cutoff, conormal-PSS, or smoothing
+steps. This is an apparently sound auxiliary claim after repair, not
+established literature.</p>
+<p>It does not solve Square Peg. Horizontal essential circles at heights
+(0,ε,3ε,2ε) have zero alternating action and exact joint squares
+(x,0), (x+2ε,ε), (x+ε,3ε), (x−ε,2ε), which totally collide under natural
+decoding as ε→0. The full rank-two conormal Floer group can likewise be
+realized in an arbitrarily small neighborhood of the zero conormal. For this
+family the normalized action is zero while the Tao-cylinder
+(universal-cover) side is √5ε, so the same action supports both collision and
+escape to infinity. The missing upgrade is a nonlocal relative class or a
+decoder-calibrated spectral gap.</p>
+<p><span class="label">Sharp surviving splice.</span> Retain four compact
+arcs of the planar curve with empty common intersection and complete them by
+artificial winding tails. Put the retained pieces in one lifted disk with
+horizontal diameter plus vertical diameter smaller than the cylinder period,
+so retained cylinder squares cannot wrap. If the transverse balanced
+quadruple has exactly one ordered square with any artificial vertex, rank
+HF=2 forces a second square entirely on the retained arcs; compactness and
+the empty intersection exclude total collision. A two-zero graph model gives
+an exact baseline for this construction; generic offsets separate the two
+four-point base sets. The unproved step is an odd artificial splice lemma:
+four connector corridors and the action-correction ear must create no mixed
+square. This reduces to fifteen explicit incidence-pattern congruence
+systems, not genericity.</p>
+
+<h2>11 · Exact hygiene checks</h2>
 <pre>$ python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
 Ran 5 tests
 OK</pre>
@@ -288,7 +335,7 @@ OK</pre>
 primitives under subdivision, and candidate squares. It does not certify the
 analytic universal theorem.</p>
 
-<h2>11 · Scope</h2>
+<h2>12 · Scope</h2>
 <table>
   <thead><tr><th>Class</th><th>Prior status</th><th>Here</th></tr></thead>
   <tbody>

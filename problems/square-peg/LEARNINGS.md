@@ -2,17 +2,19 @@
 
 ## What the next session should do first
 
-- Compute the actual GKS continuation maps in the normalized null-spiral
-  telescope. Formal fixed-input cocontinuity is false: a translated open
-  front creates a new microlocal boundary class in the homotopy colimit.
-- Any persistent diagonal-locality theorem must identify a
-  **GKS-specific uniform gap or positivity property** which excludes that
-  translated-front model. Bounded constructibility, small Hofer norm, square
-  duality, and multiplicativity have all been audited.
-- On the finite-dimensional side, search for a genuinely global two-ended
-  envelope invariant or a nonlocal correction to square degree. Cross-time
-  avoidance permits alternating winding, and the unique total-collision
-  orbit can absorb odd local degree.
+- Compute the **four-sheet cap continuation map** for an explicit normalized
+  null-spiral truncation. Generic positive GKS continuation is now refuted
+  even for invertible compactly supported exact-graph stages with summable
+  amplitudes.
+- For the corrected Tao 5.6 conormal module, seek a class relative to the
+  complement of a diagonal neighborhood. A viable theorem must prove that
+  artificial/mixed essentialization intersections are acyclic or pro-zero in
+  a fixed spectral window. Rank two and absolute action are both exhausted
+  by the balanced horizontal-level countermodel.
+- On the finite-dimensional side, attack end-order rigidity in the full
+  admissible-square space, or add a second filtration to a one-dimensional
+  all-scales carrier. Ordinary linking and the resolved collision integer
+  reduce to already-known parity.
 
 ## Results
 
@@ -127,6 +129,31 @@
   a locally square-free \(1/4\)-Lipschitz Jordan germ. The exact square
   screen and prime-end side persist, so local odd square degree is not
   \(C^0\)-closed.
+- Generic positive-GKS no-ephemeral rigidity is false at maximum natural
+  strength. Smooth exact graphs with shrinking spatial support, constant
+  nonzero covector at the tested point, canonical positive epigraph maps,
+  invertible compactly supported GKS origins, and summable amplitudes have
+  zero finite restrictions but a rank-one homotopy-colimit restriction.
+- Hugelmeyer's total outer winding is exactly an end-order defect
+  \(n_- - n_+=1\) for the two exterior strands. Two disjoint proper cylinder
+  arcs can realize this reversal, so the integer is not itself a
+  contradiction.
+- The cyclic square-test quotient has global intersection group
+  \(H_0(-;\mathcal O)=\mathbb Z/2\). Its resolved collision boundary carries
+  \(\mathbb Z\), but inclusion is reduction modulo two; an exact determinant
+  \(-8\) motif realizes a unit boundary charge.
+- The July 2026 unrefereed conormal proof of Tao 5.6 has one mandatory global
+  sign error. Replacing \(\mathcal A=-\int y\,dx\) by Tao's
+  \(\mathcal A=+\int y\,dx\) makes the square--conormal shear, exact-circle
+  lemma, compact cutoff, conormal PSS, and polygonal limit coherent. Two
+  independent audits found no deeper gap, but this remains an unreviewed
+  claim rather than established literature.
+- The corrected Tao module has a sharp local no-go. Horizontal essential
+  circles at heights \((0,s,3s,2s)\) have zero alternating action and a clean
+  circle of joint squares. After exactness normalization the clean
+  intersection is \(O_{\Delta_v}\), so its two Morse generators exhaust
+  \(H_*(S^1)\). They collapse for \(s\to0\) and escape physically for
+  \(s\to\infty\) while normalized action remains zero.
 
 ## Dead ends and cautions
 
@@ -183,6 +210,19 @@
   \(Rj_*\); both obstruct a generic cocontinuity theorem.
 - Do not identify Asano--Ike's \(v\) with the clean diagonal fundamental
   class or use Oh's fundamental-class spectral bound for it.
+- Do not infer a nonlocal square from the rank-two conormal group. The entire
+  group can be supported on an arbitrarily small Morse perturbation of the
+  zero conormal.
+- Do not use artificial detour height as an action filtration. Exactness
+  normalization subtracts each factor's mean action and can keep the
+  artificial winding collar at bounded momentum while sending the retained
+  planar piece away.
+- Do not expect GKS positivity, invertibility, or summable Hamiltonian
+  amplitudes to commute fixed-input microlocal Hom with a telescope. The
+  smooth shrinking-support graph example has all three properties.
+- Do not promote the July 2026 Tao 5.6 manuscript as correct as circulated
+  or as reviewed. Its displayed action sign invalidates its normalization;
+  the repository uses only the explicitly repaired argument.
 - Cross-time relation avoidance is already implied by exterior/interior
   separation and does not give a sign for envelope winding.
 - The finite-\(p\) theorem is likely a short, nearly formal synthesis rather

@@ -284,3 +284,57 @@ total-collision orbit of the cyclic gap simplex while retaining an exact
 square screen and fixed prime-end side.  See
 `../angles/wild-configuration-degree/README.md`.  This is a local
 configuration no-go, not a global parity computation.
+
+### July 2026 unrestricted boundary refinements
+
+The generic GKS-continuation repair is false even for smooth exact graphs.
+The telescope in `../angles/gks-positive-telescope/README.md` consists of
+invertible compactly supported GKS images of one simple object, has summable
+Hamiltonian amplitudes, and uses canonical positive epigraph maps.  Every
+finite microlocal restriction at one fixed reduced covector vanishes, while
+the homotopy colimit is the original object and has a rank-one restriction.
+Thus positivity, invertibility, and summable interleaving size do not imply
+no-ephemeral rigidity.  Any surviving microlocal theorem must use the
+conjugated quarter-rotation and its four-sheet cap maps.
+
+Hugelmeyer's envelope does carry a canonical integer.  If \(A,B\) are
+argument lifts of the two exterior strands about an interior point, their
+relative lift tends to integers \(n_-\) and \(n_+\) at the two collapsed
+ends, and total outer winding gives
+\[
+ n_- - n_+=1.
+\]
+This is an end-order reversal in the ordered configuration cylinder.  Two
+disjoint proper cylinder arcs can realize that reversal, so ordinary
+linking, Maslov, or ruled-ribbon intersection theory does not contradict it.
+The exact missing statement is an end-order rigidity theorem for compatible
+boundary-crossing carriers in the full admissible-square space; local
+polygonal notches realize either end order.
+
+Resolving total collision likewise supplies no integral refinement of the
+usual parity.  The cyclic configuration quotient is nonorientable and its
+degree-zero intersection group with orientation coefficients is
+\(\mathbb Z/2\).  The resolved collision boundary carries an integer, but
+its inclusion reduces that integer modulo two.  The explicit wild motif has
+equivariant square-test determinant \(-8\) and realizes one boundary unit;
+two disjoint motifs change the resolved integer by two without changing the
+global class.  See `../angles/global-collision-charge/README.md`.
+
+An unrefereed six-page manuscript circulated on 2026-07-15 claiming a
+conormal-Floer proof of Tao's Conjecture 5.6.  The public version is false as
+written: it defines \(\mathcal A=-\int y\,dx\) but subsequently uses the
+opposite sign in the Liouville-period normalization.  Replacing that
+definition by Tao's convention \(\mathcal A=+\int y\,dx\) repairs the
+calculation.  After that repair, the square--conormal shear, exact-circle
+Hamiltonian lemma, compact-support cutoff, conormal PSS step, and embedded
+polygonal rounding passed two independent audits.  The safe status is
+therefore “apparently sound after a mandatory sign repair, but unreviewed,”
+not established literature.  The detailed claim audit is
+`TAO56_CLAIM_AUDIT.md`.
+
+Even the corrected four-curve result does not prove unrestricted Square Peg.
+Tao's closed square locus includes the degenerate diagonal, and its
+zero-section/conormal Floer class is precisely \(H_*(S^1;\mathbb F_2)\).
+An unrestricted bridge must essentialize four pieces of a planar Jordan
+curve with balanced alternating action while preventing both Floer classes
+from collapsing to the diagonal or escaping through the artificial pieces.

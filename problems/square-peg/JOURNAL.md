@@ -962,3 +962,201 @@ git diff --check
 The rational harness passed 5/5 tests in 0.001 seconds.  Python compilation,
 both HTML parses, TOML parsing, board regeneration (19 problems), and
 `git diff --check` completed without error.
+
+## 2026-07-24 — unrestricted boundary invariants and conormal forcing
+
+### Wide-net parallel attacks
+
+Ran four independent proof-first tracks, including GPT-5.6 Sol at xhigh:
+
+1. strengthen the missing microlocal telescope theorem using positive GKS
+   continuation;
+2. extract a two-ended linking invariant from Hugelmeyer's square envelope;
+3. resolve total collision and compute the strongest integral equivariant
+   square degree; and
+4. audit a newly circulated conormal proof of Tao's Conjecture 5.6, then try
+   to turn it into an unrestricted planar bridge.
+
+The unrestricted Square Peg conjecture remains open. The session produced
+three exact no-go theorems, an independently audited auxiliary proof after a
+mandatory sign repair, and a sharply conditional rank-two splice reduction.
+
+### Smooth positive GKS telescope
+
+The generic no-ephemeral theorem is false even after adding the strongest
+natural GKS hypotheses. Choose a smooth nonnegative compactly supported
+\(g\) with \(g'(0)=1\), put
+\[
+ f_n(x)=2^{-n}g(2^nx),\qquad
+ a_n=\|f_{n+1}-f_n\|_\infty,\qquad
+ b_n=\sum_{j\geq n}a_j,
+\]
+and \(\widetilde f_n=f_n-b_n\). Then
+\(\widetilde f_n\uparrow0\), so the canonical positive epigraph maps have
+\[
+ \operatorname{hocolim}\mathbb k_{\{t\geq\widetilde f_n(x)\}}
+ =\mathbb k_{\{t\geq0\}}.
+\]
+Every finite front has reduced covector \(-1\) at \(x=0\), while the limit
+has reduced covector \(0\). Hence every finite fixed-locus microlocal Hom
+restriction is zero and the limit restriction has rank one.
+
+Each stage is an invertible compactly supported GKS image generated near the
+zero section by \(H_n=f_n\chi(p)\geq0\), with summable Hofer amplitudes.
+Thus positivity, invertibility, and summability do not imply cocontinuity.
+The only live sheaf theorem is specific to the conjugated quarter-rotation
+and requires an explicit calculation of its four-sheet cap continuation
+map. Artifact: `angles/gks-positive-telescope/README.md`.
+
+### Exact envelope and collision boundary calculations
+
+For the two exterior envelope strands \(a,b\) and an interior point \(p\),
+continuous argument lifts \(A,B\) satisfy
+\[
+ (B-A)/(2\pi)\longrightarrow n_\pm\in\mathbb Z,
+ \qquad n_- - n_+=1.
+\]
+Thus total outer winding one is exactly an end-order reversal in
+\(\operatorname{Conf}_2(S^1)\). The two disjoint proper cylinder arcs
+\[
+ (0,t),\qquad ((1+e^t)^{-1},t)
+\]
+realize the same reversal without collision. Ordinary linking, Maslov,
+ruled-ribbon intersection, and the normalized cross-ratio therefore do not
+close the envelope argument. The missing theorem is end-order rigidity for
+compatible boundary-crossing carriers in the full admissible-square space.
+Artifact: `angles/envelope-global-linking/README.md`.
+
+For the cyclic equivariant square test, cyclic relabelling reverses the
+orientation of the four-parameter domain but acts by \(-I_4\) on the target,
+whose determinant is \(+1\). Therefore
+\[
+ H_0(Q;\mathcal O)\cong\mathbb Z/2.
+\]
+The resolved total-collision boundary is one circle with trivial restricted
+orientation system and hence carries \(\mathbb Z\), but its inclusion is
+\(n\mapsto n\bmod2\). The explicit wild motif has exact equivariant
+Jacobian determinant \(-8\) and realizes one boundary unit. Pairs change the
+resolved integer by two while preserving the global parity, killing
+ordinary integral, mod-four, collision-location, finite-screen, and
+unfiltered-persistence repairs. Artifact:
+`angles/global-collision-charge/README.md`.
+
+### Audit of the July 2026 Tao 5.6 claim
+
+A six-page unrefereed manuscript circulated publicly on 2026-07-15 under the
+title *A Conormal Proof of Tao's Alternating-Area Conjecture for Jointly
+Inscribed Squares*. It is false as written. It defines
+\[
+ {\cal A}(\sigma)=-\int_\sigma y\,dx
+\]
+but its Liouville period, vertical normalization, affine-diagonal
+translation, and polygonal correction all use the opposite convention.
+For example, its displayed choice \(c_i=-A_i/L\) leaves period
+\(-2\epsilon_iA_i\), not zero.
+
+The one-character repair
+\[
+ {\cal A}(\sigma)=+\int_\sigma y\,dx
+\]
+matches Tao and makes all subsequent formulas consistent. After that repair,
+the matrix identity
+\[
+ Kp=(b-a,b,0,-a),\qquad \sum p_i=0,
+\]
+the global exact shear \(\Psi(q,p)=(q-Kp,p)\), the exact essential-circle
+Hamiltonian lemma, the product compact-support cutoff, proper conjugation,
+the zero-section/conormal PSS theorem, and the embedded polygonal rounding
+all passed the audit. GPT-5.6 Sol at xhigh independently returned
+**MERGE after the same mandatory sign repair** and found no deeper fatal
+gap. This is recorded conservatively as an apparently sound repaired
+argument, not established or reviewed literature. Primary comparisons were
+Tao's published 2017 paper, Djuretić arXiv:1411.0852v2,
+Abbondandolo--Portaluri--Schwarz arXiv:0810.1977, and Hugelmeyer's periodic
+theorem arXiv:2407.20412. Artifact:
+`literature/TAO56_CLAIM_AUDIT.md`.
+
+### Why the conormal theorem still does not give Square Peg
+
+Horizontal essential circles at heights
+\[
+ (h_1,h_2,h_3,h_4)=(0,s,3s,2s)
+\]
+have zero alternating action and the clean family of ordered squares
+\[
+ (x,0),\ (x+2s,s),\ (x+s,3s),\ (x-s,2s).
+\]
+Exactness normalization makes the product the zero section against
+\(N^*\Delta_v\), so the clean family already carries the complete
+\(HF\cong H_*(S^1)\). A small Morse perturbation gives exactly its two
+generators. Both exact primitives vanish: normalized Floer action is zero
+for every \(s\), while Tao-cylinder (universal-cover) side length is
+\(\sqrt5\,s\). Hence both
+generators may collide as \(s\to0\) or escape as \(s\to\infty\) with the
+same action.
+
+This exact family kills rank two, ordinary action, balanced four-copy
+perturbations, affine square-preserving decoders, and finite cyclic covers
+as unrestricted bridges. An independent Sol xhigh verdict was **KILL**.
+Artifact: `angles/tao-conormal-bridge/README.md`.
+
+A sharper conditional splice reduction survives. Retain four compact arcs
+\(\alpha_i\subset C\) with empty common intersection, splice them to four
+essential cylinder circles, balance action only in artificial chambers, and
+make the product transverse. Put the retained pieces in one lifted disk
+whose horizontal plus vertical diameter is smaller than the cylinder
+period, excluding wrapped retained squares. If exactly one ordered joint
+square uses any artificial piece, rank \(HF=2\) forces a second
+all-retained square. Its compact limit is a Euclidean square on \(C\), and
+the empty common intersection excludes total collision.
+
+The swallowed-zero graph model gives exactly two transverse artificial
+generators before splicing: keep three horizontal graphs and perturb the
+fourth by \(\varepsilon g(q)\), where \(g\) has zero mean and two simple
+zeros. After choosing the offsets generically, four small windows can be
+placed around one zero's base positions while the other remains uniformly
+isolated. The unresolved **odd artificial splice lemma** must
+construct translation-separated connector corridors and an action-correction
+ear with no additional mixed square. In the elementary cylinder square
+congruences this is a finite exclusion problem over the fifteen nonempty
+tail/core incidence patterns. No genericity claim substitutes for that
+certificate. Artifact: `angles/conormal-tail-splicing/README.md`.
+
+The final GPT-5.6 Sol xhigh audit returned **HOLD** on the first draft because
+the quotient-injective retained disk did not by itself exclude a wrapped
+cylinder square. Adding the explicit horizontal-plus-vertical diameter
+bound above repairs the proof: each cylinder congruence is a multiple of
+\(L\) with absolute value strictly below \(L\), hence an equality. The audit
+also required Hausdorff convergence of the lifted retained pieces, generic
+offsets separating the two zeros' base sets, and the
+“Tao-cylinder/universal-cover side” wording. After these repairs its verdict
+was **MERGE for the conditional reduction and no-go statements**, with the
+odd artificial splice lemma still unproved.
+
+### Exact checks, compute, and claim boundary
+
+The harness was run before the attacks and remained conjecture hygiene only.
+All substantive work and exact arithmetic ran locally in the repository
+worktree; no private compute infrastructure was used. The source audit used
+public official papers plus the public images of the unrefereed manuscript.
+No author was contacted and no external priority claim was made.
+
+Commands included:
+
+```text
+python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
+python3 -m py_compile problems/square-peg/harness/geometry.py problems/square-peg/harness/test_geometry.py
+python3 -c 'from fractions import Fraction; ...'
+# Kp = (b-a,b,0,-a); sum p = 0
+# equivariant determinant = -8
+# corrected normalized periods = (0,0,0,0)
+xmllint --html --noout problems/square-peg/writeup/report.html problems/square-peg/writeup/artifact-template.html
+python3 -c 'import tomllib; tomllib.load(open("problems/square-peg/STATUS.toml","rb")); print("STATUS.toml OK")'
+python3 tools/board.py
+git diff --check
+```
+
+The unrestricted theorem was not proved. The live ambitious targets are now
+either the finite odd-artificial-splice exclusion, a conormal class relative
+to a fixed diagonal neighborhood, the square-specific four-sheet GKS cap
+map, or end-order rigidity in the full admissible-square space.

@@ -8,23 +8,88 @@ Read, in order:
 1. `/AGENTS.md` and `AGENTS.local.md` if present.
 2. `PROBLEM.md`.
 3. `LEARNINGS.md`.
-4. `angles/p-variation/README.md`.
-5. `angles/critical-p2/README.md`.
-6. `angles/critical-p2/antonelli-young-bridge.md`.
-7. `results/critical-spiral-comb.md`.
-8. `angles/unrestricted-zero-trace/README.md`.
-9. `results/null-spiral-no-primitive.md`.
-10. `literature/UNRESTRICTED_AUDIT.md`.
-11. `angles/conformal-l2/README.md`.
-12. `angles/configuration-degeneration/README.md`.
-13. `results/shrinking-square-action-injection.md`.
-14. `angles/diagonal-microlocal/README.md`.
-15. `results/null-spiral-conformal-concentration.md`.
-16. `results/null-spiral-microlocal-eye.md`.
-17. `angles/local-floer-engulfing/README.md`.
-18. `results/envelope-cross-time-no-go.md`.
-19. `angles/wild-configuration-degree/README.md`.
-20. the latest `JOURNAL.md` section.
+4. `literature/TAO56_CLAIM_AUDIT.md`.
+5. `angles/tao-conormal-bridge/README.md`.
+6. `angles/gks-positive-telescope/README.md`.
+7. `angles/envelope-global-linking/README.md`.
+8. `angles/global-collision-charge/README.md`.
+9. `angles/conormal-tail-splicing/README.md`.
+10. `angles/p-variation/README.md`.
+11. `angles/critical-p2/README.md`.
+12. `angles/critical-p2/antonelli-young-bridge.md`.
+13. `results/critical-spiral-comb.md`.
+14. `angles/unrestricted-zero-trace/README.md`.
+15. `results/null-spiral-no-primitive.md`.
+16. `literature/UNRESTRICTED_AUDIT.md`.
+17. `angles/conformal-l2/README.md`.
+18. `angles/configuration-degeneration/README.md`.
+19. `results/shrinking-square-action-injection.md`.
+20. `angles/diagonal-microlocal/README.md`.
+21. `results/null-spiral-conformal-concentration.md`.
+22. `results/null-spiral-microlocal-eye.md`.
+23. `angles/local-floer-engulfing/README.md`.
+24. `results/envelope-cross-time-no-go.md`.
+25. `angles/wild-configuration-degree/README.md`.
+26. the latest `JOURNAL.md` section.
+
+The newest wide-net session audited a July 2026 unrefereed proof of Tao's
+four-curve alternating-area Conjecture 5.6. The public manuscript is false as
+written because it defines
+\(\mathcal A=-\int y\,dx\) but uses the opposite sign in the Liouville
+normalization. Replacing the definition by Tao's
+\(\mathcal A=+\int y\,dx\) repairs every downstream sign. The
+square--conormal shear, exact essential-circle lemma, product cutoff,
+conormal PSS theorem, and embedded polygonal limit then passed two
+independent audits, including GPT-5.6 Sol at xhigh. Treat this only as an
+apparently sound repaired argument, not as established literature.
+
+The corrected result is a forcing module, not an unrestricted proof. Four
+horizontal essential circles at heights
+\((0,s,3s,2s)\) have zero alternating action and a clean circle of exact
+joint squares. After exactness normalization this is precisely the zero
+conormal over an affine diagonal, and its two Morse generators exhaust
+\(H_*(S^1)\). As \(s\to0\) both generators totally collide; as
+\(s\to\infty\) they escape physically while normalized action stays zero.
+Thus rank two, absolute action, finite covers, balanced four-copy
+perturbations, and naive detour essentialization do not select a planar
+square. The surviving conormal target is a relative class outside a fixed
+diagonal neighborhood, or a theorem making all artificial/mixed
+intersections acyclic or pro-zero in a fixed spectral window.
+
+The hoped-for generic GKS repair is also dead. The smooth exact-graph
+telescope in `angles/gks-positive-telescope/README.md` uses invertible
+compactly supported GKS stages, summable Hamiltonian amplitudes, and
+canonical positive epigraph maps, yet has zero finite microlocal restrictions
+and a rank-one restriction in the homotopy colimit. Only a theorem special
+to the conjugated quarter-rotation and its four-sheet cap maps remains
+plausible.
+
+Two global topological refinements were computed exactly. Hugelmeyer's total
+outer winding is the two-ended order defect \(n_- - n_+=1\); disjoint proper
+cylinder arcs can realize it, so an end-order rigidity theorem in the full
+admissible-square space is still missing. The resolved total-collision
+boundary carries an integer, but the nonorientable cyclic configuration
+quotient sees only its reduction modulo two. An explicit determinant
+\(-8\) motif realizes one boundary unit, so ordinary integral, mod-four,
+prime-end-location, and unfiltered-persistence repairs fail.
+
+One sharply conditional conormal route survives. Select four retained
+compact arcs \(\alpha_i\subset C\) with empty common intersection, splice
+each to an essential cylinder circle, balance action only in artificial
+chambers, and make the product transverse. The retained pieces must lie in a
+lifted disk whose horizontal plus vertical diameter is smaller than the
+cylinder period; this prevents a retained cylinder square from wrapping.
+If exactly one ordered square uses any artificial piece, rank \(HF=2\)
+forces a second all-retained square; the empty common intersection prevents
+its limit from collapsing.
+The two-zero graph construction in
+`angles/conormal-tail-splicing/README.md` gives exactly two transverse
+artificial generators and, after a generic offset choice, opens four splice
+windows around one while keeping the other. The missing odd artificial
+splice lemma must exclude every
+connector, tail, and correction-ear square for all fifteen nonempty
+artificial-incidence patterns. This is a finite interval-congruence target,
+but it is unproved and must not be replaced by genericity.
 
 The finite-\(p<2\) proof has now received an independent primary-source audit
 and been packaged as `writeup/p-variation-note.md`. The audit verdict is

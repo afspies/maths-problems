@@ -3,7 +3,7 @@ title = "Square Peg conjecture"
 question = "Does every Jordan curve in the plane contain the four vertices of a nondegenerate square?"
 # proposed | scaffolded | active | partial-results | solved | excluded | retired
 status = "partial-results"
-best_result = "The exact frontier is GKS-specific boundary creation: fixed-input microlocal Hom fails on translated telescopes, cross-time envelopes allow alternating winding, and odd local square degree escapes through total collision"
+best_result = "A repaired unreviewed Tao-5.6 conormal argument passes internal audit, but an exact balanced family traps its full rank and action on artificial squares; positive GKS and integral boundary refinements also fail, leaving a finite odd-splice exclusion"
 doi = ""
 sessions = [
     "2026-07-24 scaffolded from template",
@@ -14,4 +14,5 @@ sessions = [
     "2026-07-24 diagonal microlocal: proved universal conformal L2 compactness, sharp zero-capacity concentration, and the vanishing-width eye model; isolated the derived-extension frontier",
     "2026-07-24 eye correction and envelope invariant: removed the false collapsed-action !/* obstruction, isolated the exact-action Milnor defect, refuted the zero-Hofer germ shortcut, and proved square-ribbon area conservation",
     "2026-07-24 unrestricted synthesis: refuted fixed-input microlocal continuity and ordinary local-Floer repair; built exact cross-time winding and wild local-degree countermodels",
+    "2026-07-24 unrestricted boundary: refuted generic positive-GKS rigidity, computed envelope end order and collision orientation charge, audited the repaired Tao-5.6 conormal proof, and isolated the odd artificial splice lemma",
 ]
