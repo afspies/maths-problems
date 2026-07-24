@@ -40,8 +40,14 @@ The second-session extensions add:
 - the fixed-stack Hausdorff cover cost at exact integer codimensions;
 - an exact trilinear rank-three parabolic pencil and its normal-wedge
   degeneration identity.
+- the rank-two-separated parabolic stack's double-harmonic ledger;
+- an exact ruled parabolic coefficient path with full direction and sweep
+  determinants;
+- the parent-ancestry transverse error `K D delta/alpha`;
+- a rotating rank-one tangent whose second coefficient direction appears
+  only at cubic order.
 
-The suite currently contains 33 exact tests. The geometric coarea,
+The suite currently contains 39 exact tests. The geometric coarea,
 Crofton--Bézout, reach, and Remez lemmas are proved in the result notes; the
 harness certifies their algebraic models and exponent bookkeeping, not those
 continuous theorems themselves.

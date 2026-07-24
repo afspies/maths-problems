@@ -35,8 +35,9 @@ quadratic stacks have dense shaded union at least λ²/log(1/δ). A fixed
 all-scale continuum stack satisfies a scale-sensitive incidence inequality,
 giving Hausdorff dimension four for that structured subclass. Exact
 countermodels show why small union does not itself extract such carriers,
-and a normal-form theorem isolates the remaining degenerate quadratic
-branch. No new general or sticky dimension bound is claimed.
+and a quadratic-sublevel theorem now handles linearly rank-two-separated
+parabolic coefficient paths. No new general or sticky dimension bound is
+claimed.
 </div>
 
 <h2>Main theorem</h2>
@@ -156,18 +157,52 @@ exception is the indefinite rank-three paraboloid.</p>
 factor ρ; inside the slab the directions enter a weakly 2-plany alternative.
 This is an exact stress model, not yet a scale-loss-free rigidity theorem.</p>
 
+<h2>Rank-two-separated parabolic stacks</h2>
+<div class="env"><span class="label">Quadratic-sublevel stack theorem.</span>
+For graph quadrics P<sub>s</sub>(y,z)=z−y<sup>T</sup>A<sub>s</sub>y−ℓ(y),
+assume
+σ<sub>2</sub>(A<sub>s</sub>−A<sub>t</sub>)≥c|s−t|.
+Then at M≈δ<sup>−1</sup>,
+<br><br>
+|⋃U<sub>i</sub>| ≥ cλ²/log²(1/δ).
+<br><br>
+The fixed continuum family satisfies
+|N<sub>Cr</sub>(V)|≥cA(V)²/log²(1/r), and hence has Hausdorff dimension four.
+</div>
+<p>This applies even when carrier normals coincide on a locus. The exact
+path A<sub>s</sub>=diag((1+s)²,−1,(1+s)²) has ruled-sweep and direction-chart
+determinants of absolute value 4.</p>
+<p>Exact complete cliques of pair differences cℓ² lie in one common-square
+pencil. The rotating moment path
+A(s)=∫<sub>0</sub><sup>s</sup>(1,t,0)(1,t,0)<sup>T</sup>dt has rank-one
+derivative but only cubic second-singular-value separation. It is the next
+two-scale obstruction.</p>
+
+<h2>Parent ancestry crosses the catalog baseline</h2>
+<p>For a degree-D parent wall and one line, the quantitatively transverse
+sublevel length is at most CDr/α. If descendant incidences are unioned or
+uniquely assigned under only K parent polynomials, their total transverse
+error is CKDr/α—independent of descendant count.</p>
+<p>An additive Hausdorff criterion allows
+A(V)≤Σ<sub>ν≤J(r)</sub>A<sub>ν</sub>(V)+e(r). Summable e(r) and
+Σr<sup>4−s</sup>J(r)²L<sub>0</sub>(r)→0 imply Hausdorff dimension four,
+provided the A<sub>ν</sub> are genuine fixed or cell-averaged continuum
+chart functionals satisfying SSI. Organizing the nontransverse-or-singular
+remainder into those charts is still open.</p>
+
 <h2>Verification and gate</h2>
 <pre><code>python3 exponent_ledger.py benchmark_ledger.json
 python3 -m unittest -v
-# 33 exact tests pass</code></pre>
+# 39 exact tests pass</code></pre>
 <p>Independent GPT-5.6 Sol xhigh reviews checked reach, coarea, common
 factors, the explicit pencils, exponent signs, circularity, the ρ scale loss,
-measurable-cover sampling, and Hausdorff-versus-Minkowski wording. After
-repairs the final verdicts were <strong>APPROVE</strong>.</p>
+measurable-cover sampling, parent-assignment semantics, every logarithmic
+factor, and Hausdorff-versus-Minkowski wording. After repairs the final
+verdicts were <strong>APPROVE</strong>.</p>
 <p><strong>Bridge B gate: GO. Full-conjecture gate: OPEN.</strong> The exact
-missing result is uniform shaded extraction with subpolynomial chart entropy,
-positive assigned overlap above the Mδ baseline, and persistence for every
-measurable cover group.</p>
+missing result is subpolynomial parent ancestry through the full partition
+tree plus organization of the nontransverse-or-singular incidence into
+admissible continuum charts.</p>
 
 <div class="footer">Canonical source: <code>writeup/report.md</code>.
 Sources: <code>literature/refs.bib</code>. No DOI release was made.</div>

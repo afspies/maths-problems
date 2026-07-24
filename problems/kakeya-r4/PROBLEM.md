@@ -67,6 +67,14 @@ See `literature/audit-2026-07-24.md`.
   2-plany. Affine/reducible hyperplanes are a separate output; the genuine
   smooth quadratic degenerate exception is the indefinite rank-three
   parabolic class.
+- Indefinite parabolic coefficient paths with
+  `sigma_2(A_s-A_t)≳|s-t|` obey a squared-log union theorem and a fixed-family
+  Hausdorff SSI theorem. Exact complete rank-one-dangerous cliques reduce to
+  common-square pencils.
+- Retaining polynomial partition ancestry replaces the transverse
+  `Mdelta` catalog baseline by `K D delta/alpha`, where `K` is the number of
+  parent wall labels seen by a line. The remaining nontransverse-or-singular
+  mass still needs a chart-organization theorem.
 
 ## Angle-of-attack menu (be exploratory — draw from different fields)
 
@@ -79,6 +87,8 @@ See `literature/audit-2026-07-24.md`.
   one-dimensional carrier entropy and exploit harmonic overlap summability.
 - `angles/extraction-dichotomy/`: extract assigned/high-overlap carriers or a
   classified low-Jacobian alternative from a high-multiplicity level.
+- `angles/parabolic-coefficient-charts/`: classify rank-two-separated,
+  common-square, and rotating rank-one parabolic coefficient families.
 - Future projection/slicing angle: only after an exact exponent implication
   is written; no standalone qualitative projection heuristic counts.
 - Future algebraic classification angle: bounded-degree ruled 3-folds with
@@ -88,12 +98,14 @@ See `literature/audit-2026-07-24.md`.
 
 1. Extend the exact ledger if a corrected paper version or new recurrence is
    used.
-2. Prove an extraction theorem that outputs assigned overlap
-   `lambda≫delta` on roughly `delta^-1` degree-two carriers, or an excess
-   over the `Mdelta` crossing baseline, then organizes the low-Jacobian
-   alternative into transverse stacks, 2-plany pieces, conical spines, or
-   rank-three parabolic charts.
-3. In parallel, seek a stability theorem for the trilinear estimate whose
+2. Preserve subpolynomial parent-wall ancestry through the partition tree.
+   The proved line-sublevel lemma makes transverse descendants a summable
+   additive error; organize the nontransverse-or-singular remainder into
+   fixed continuum charts.
+3. Prove quantitative stability for dense approximate rank-one-difference
+   graphs and rotating rank-one parabolic paths. The exact complete-clique
+   case is already a common-square pencil.
+4. In parallel, seek a stability theorem for the trilinear estimate whose
    model-selection entropy is only `delta^o(1)`.
-4. Submit every theorem-shaped claim to an adversarial soundness review before
+5. Submit every theorem-shaped claim to an adversarial soundness review before
    changing the dimension status.

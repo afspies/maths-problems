@@ -342,3 +342,148 @@ git diff --check
 All 33 exact tests pass. No numerical tube search or substantial compute was
 used. Work and independent reviews ran in the local Codex worktree at
 negligible laptop scale; no private infrastructure details are recorded.
+
+## 2026-07-24 — parabolic coefficient charts and parent ancestry
+
+### Session target
+
+Continued on branch
+`problem/kakeya-r4/2026-07-24-shaded-parabolic-charts`. The target was the
+first unresolved part of the full-conjecture bridge: handle arbitrary
+indefinite rank-three parabolic carriers more sharply, and cross the
+`Mdelta` transverse catalog baseline without assuming assigned long overlap.
+
+### Rank-two-separated parabolic stacks
+
+Proved a new quadratic-sublevel union theorem. For graph quadrics
+
+`P_s(y,z)=z-y^T A_s y-ell(y)`
+
+with common affine term and
+
+`sigma_2(A_s-A_t)≥c|s-t|`,
+
+the three-dimensional coefficient-difference sublevel has volume
+
+`O((delta/kappa)(1+log(1/delta)))`.
+
+After the `z`-fiber and quasi-uniform parameter summation, the carrier
+overlap denominator pays two logarithms:
+
+`|union_i U_i|
+ ≥c lambda² Mdelta/
+   (1+Mdelta(1+log(1/delta))H_(M-1))`.
+
+At `M≈delta^-1` this is `lambda²/log²(1/delta)`. The continuum kernel gives
+
+`|N_(Cr)(V)|≥c A(V)²/log²(1/r)`,
+
+so a fixed all-scale family has Hausdorff dimension four. This extends the
+earlier stack theorem because carrier normals may coincide on a
+one-dimensional locus.
+
+The exact nonvacuity path
+
+`A_s=diag((1+s)²,-1,(1+s)²)`
+
+has rank-two coefficient separation. Its ruled sweep and direction chart
+both have exact seed determinant of absolute value `4`.
+
+### Rank-one rigidity and its first rotating obstruction
+
+Proved an exact complete-clique theorem. If every pair difference among
+quadratic graph functions is constant or a zero-critical-value affine square
+`c ell²`, then either all forms differ only by constants or the entire family
+is one common-square pencil
+
+`f_i=f_*+a_i ell²`.
+
+The complete-clique and exact-critical-value hypotheses are essential.
+Connected dangerous graphs do not suffice.
+
+The rotating rank-one moment path
+
+`A(s)=integral_0^s(1,t,0)(1,t,0)^Tdt`
+
+has rank-one derivative everywhere but rank-two finite differences with
+principal determinant `h^4/12`. Its second singular value is only order
+`h³`. This exact stress model shows why infinitesimal rank-one classification
+does not reduce directly to either the common-square pencil or the
+linearly-separated theorem.
+
+### Parent ancestry and additive Hausdorff errors
+
+Proved the degree-`D` line-sublevel lemma
+
+`|{t:|P(ell(t))|≤Cr, |(P circ ell)'(t)|≥alpha}|
+ ≤C D r/alpha`.
+
+If descendant grains retain measurable union/unique assignments under at
+most `K` distinct parent polynomials per line, all transverse descendant
+incidence is therefore at most
+
+`C K D r/alpha`,
+
+with no descendant-count factor. Parallel unrelated slabs have `K=M` and
+recover the old `Mr` baseline; many grains cut from one wall have `K=1`.
+The remainder is nontransverse-or-singular, and becomes geometric tangency
+only under a lower gradient bound.
+
+Also proved an additive-error Hausdorff criterion. If every cover group has
+
+`A(V)≤sum_(nu≤J(r)) A_nu(V)+e(r)`,
+
+where the `A_nu` are genuine fixed/cell-averaged continuum chart
+functionals satisfying SSI, then full dimension follows from
+
+`sum e(r)->0`
+
+and
+
+`sum r^(4-s)J(r)²L_0(r)->0`.
+
+This makes `K D r/alpha=r^(1-o(1))` a harmless transverse error. It does not
+organize the remaining mass into charts; proving that is still the missing
+theorem. Lusin selection supplies additive retention but no quantitative
+modulus, admissible chart, or subpolynomial entropy.
+
+### Independent reviews and repairs
+
+Three independent GPT-5.6 Sol agents at `xhigh` effort audited the sublevel
+estimate, every harmonic factor, continuum normalization, Hausdorff cover
+summation, determinant certificates, parent-assignment semantics,
+singular-gradient alternative, coefficient-chart thresholds, and
+circularity.
+
+Repairs required:
+
+- fail loudly unless the exact rational double-harmonic ledger is used at
+  critical spacing `Mdelta=1`;
+- verify the two determinant values, not only rank;
+- use buffered `2eta/eta` coefficient thresholds and charge both chart count
+  and the `eta`-dependent analytic loss;
+- union or uniquely assign descendant incidences under each parent;
+- call the unaccounted output nontransverse-or-singular without a lower
+  gradient bound;
+- require genuine continuum chart incidence functionals in the additive
+  criterion;
+- state that Lusin gives retention but not SSI geometry.
+
+After repair, the final verdicts were **APPROVE**. The full conjecture and
+general/sticky benchmarks remain unchanged.
+
+### Verification and compute
+
+Commands:
+
+```bash
+cd problems/kakeya-r4/harness
+python3 exponent_ledger.py benchmark_ledger.json
+python3 -m unittest -v
+python3 -m py_compile *.py
+git diff --check
+```
+
+All 39 exact tests pass. No numerical tube search or substantial compute was
+used. Work and reviews ran in the local repository worktree at negligible
+laptop scale; no private infrastructure details are recorded.

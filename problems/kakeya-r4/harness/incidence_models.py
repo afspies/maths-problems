@@ -35,6 +35,30 @@ def rank(vectors: list[Vector]) -> int:
     return r
 
 
+def determinant(vectors: list[Vector]) -> F:
+    """Exact determinant of four four-dimensional row vectors."""
+    if len(vectors) != 4:
+        raise ValueError("determinant requires exactly four vectors")
+    matrix = [list(row) for row in vectors]
+    value = F(1)
+    for col in range(4):
+        pivot = next((i for i in range(col, 4) if matrix[i][col]), None)
+        if pivot is None:
+            return F(0)
+        if pivot != col:
+            matrix[col], matrix[pivot] = matrix[pivot], matrix[col]
+            value = -value
+        pivot_value = matrix[col][col]
+        value *= pivot_value
+        for j in range(col, 4):
+            matrix[col][j] /= pivot_value
+        for i in range(col + 1, 4):
+            factor = matrix[i][col]
+            for j in range(col, 4):
+                matrix[i][j] -= factor * matrix[col][j]
+    return value
+
+
 def wedge_squared(a: Vector, b: Vector, c: Vector) -> F:
     """Squared norm of a∧b∧c, as the sum of squared 3x3 minors."""
     total = F(0)
@@ -214,3 +238,90 @@ def rank_three_parabolic_line_directions(s: F) -> list[Vector]:
 def rank_three_parabolic_line_point(direction: Vector, t: F) -> Vector:
     """Point at parameter t on a line through the origin."""
     return tuple(t * coordinate for coordinate in direction)  # type: ignore[return-value]
+
+
+def rank_two_separated_parabolic_value(x: Vector, s: F) -> F:
+    """P_s=z-(1+s)^2(y1^2+y3^2)+y2^2."""
+    y_1, y_2, y_3, z = x
+    a = (1 + s) ** 2
+    return z - a * (y_1 * y_1 + y_3 * y_3) + y_2 * y_2
+
+
+def rank_two_separated_null_direction(s: F, q: F) -> tuple[F, F, F]:
+    """Rational null direction for diag((1+s)^2,-1,(1+s)^2)."""
+    return (
+        1 - q * q,
+        (1 + s) * (1 + q * q),
+        2 * q,
+    )
+
+
+def rank_two_separated_parabolic_line(
+    s: F, q: F, r: F, t: F
+) -> Vector:
+    """Exact ruled line based at (r,0,0) on the parabolic graph."""
+    u_1, u_2, u_3 = rank_two_separated_null_direction(s, q)
+    y_1 = r + t * u_1
+    y_2 = t * u_2
+    y_3 = t * u_3
+    a = (1 + s) ** 2
+    z = a * (y_1 * y_1 + y_3 * y_3) - y_2 * y_2
+    return (y_1, y_2, y_3, z)
+
+
+def rank_two_separated_line_direction(s: F, q: F, r: F) -> Vector:
+    """Four-dimensional direction of the exact ruled line."""
+    u_1, u_2, u_3 = rank_two_separated_null_direction(s, q)
+    return (
+        u_1,
+        u_2,
+        u_3,
+        2 * r * (1 + s) ** 2 * u_1,
+    )
+
+
+def rank_two_separated_direction_chart_seed() -> list[Vector]:
+    """Direction and (s,q,r)-derivatives at s=q=r=0.
+
+    For the line through (r,0,0), its four-dimensional direction is
+    (u, 2*r*(1+s)^2*u1).  The returned four vectors have determinant 4.
+    """
+    return [
+        vec((1, 1, 0, 0)),
+        vec((0, 1, 0, 0)),
+        vec((0, 0, 2, 0)),
+        vec((0, 0, 0, 2)),
+    ]
+
+
+def rank_two_separated_sweep_seed_derivatives() -> list[Vector]:
+    """(s,q,r,t)-derivatives of the ruled sweep at (0,0,0,1)."""
+    return [
+        vec((0, 1, 0, 0)),
+        vec((0, 0, 2, 0)),
+        vec((1, 0, 0, 2)),
+        vec((1, 1, 0, 0)),
+    ]
+
+
+def rank_two_separated_coefficient_difference(s: F, t: F) -> list[Vector]:
+    """Rows of A_s-A_t embedded in four coordinates.
+
+    A_s=diag((1+s)^2,-1,(1+s)^2), so the difference has exact rank two
+    whenever s != t.
+    """
+    d = (1 + s) ** 2 - (1 + t) ** 2
+    return [
+        (d, F(0), F(0), F(0)),
+        (F(0), F(0), F(0), F(0)),
+        (F(0), F(0), d, F(0)),
+    ]
+
+
+def rotating_rank_one_moment_matrix(s: F) -> list[Vector]:
+    """Integral from 0 to s of (1,t,0)(1,t,0)^T, embedded in R4 rows."""
+    return [
+        (s, s * s / 2, F(0), F(0)),
+        (s * s / 2, s**3 / 3, F(0), F(0)),
+        (F(0), F(0), F(0), F(0)),
+    ]

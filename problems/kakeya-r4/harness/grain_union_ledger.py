@@ -292,3 +292,67 @@ def hausdorff_cover_cost_lower_bound(
         for radius, loss in zip(radii, losses, strict=True)
     )
     return total_line_incidence * total_line_incidence / scale_sum
+
+
+def rank_two_parabolic_stack_union_lower_bound(
+    *,
+    carriers: int,
+    delta: Fraction,
+    shading_density: Fraction,
+) -> Fraction:
+    """Exact ledger for a rank-two-separated parabolic stack.
+
+    A quadratic sublevel estimate costs one harmonic factor and summing over
+    carrier separation costs a second.  At the critical spacing
+    M*delta = 1, the normalized second-moment conclusion is
+
+        |union U_i| >= lambda^2 (M*delta) / (1 + H_M^2).
+
+    The analytic theorem absorbs absolute geometric constants.
+    """
+    if carriers < 1:
+        raise ValueError("carriers must be positive")
+    if not 0 < delta <= 1:
+        raise ValueError("delta must lie in (0,1]")
+    if not 0 < shading_density <= 1:
+        raise ValueError("shading density must lie in (0,1]")
+    if carriers * delta != 1:
+        raise ValueError("ledger certifies the critical spacing M*delta = 1")
+    harmonic = harmonic_number(carriers)
+    return (
+        shading_density
+        * shading_density
+        * carriers
+        * delta
+        / (1 + harmonic * harmonic)
+    )
+
+
+def transverse_parent_ancestry_error(
+    *,
+    parent_labels_per_line: int,
+    polynomial_degree: int,
+    scale: Fraction,
+    derivative_threshold: Fraction,
+) -> Fraction:
+    """Longitudinal error from transverse crossings of parent wall sublevels.
+
+    A degree-D restriction to a line spends O(D*r/alpha) parameter length in
+    {|P|<=r, |dP/dt|>=alpha}.  If a line meets descendants from at most K
+    distinct parent polynomials, descendant multiplicity does not change the
+    union-length bound:
+
+        error <= K*D*r/alpha.
+
+    Absolute geometric constants are omitted from this exact ledger.
+    """
+    if parent_labels_per_line < 1 or polynomial_degree < 1:
+        raise ValueError("parent count and degree must be positive")
+    if not 0 < scale <= 1 or derivative_threshold <= 0:
+        raise ValueError("scale and derivative threshold must be positive")
+    return (
+        parent_labels_per_line
+        * polynomial_degree
+        * scale
+        / derivative_threshold
+    )

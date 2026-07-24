@@ -6,17 +6,19 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 
 ## What the next session should do first
 
-- Prove a **shaded, cover-by-cover extraction theorem**. From the incidence
-  mass `A(V)` of an arbitrary measurable cover group, retain
-  `b(delta)=delta^o(1)` inside one of `delta^-o(1)` fixed continuum carrier
-  charts. A whole-union or independently scale-chosen grain decomposition is
-  insufficient.
-- The extracted output must cross the ordinary `Mdelta` incidence baseline:
-  assigned tube-to-grain overlap `lambda>>delta`, quantified excess
-  `q-Mdelta`, or a rule excluding transverse slab-grid crossings.
-- Classify the resulting low-Jacobian carrier energy into bounded-entropy
-  pencils, 2-plany pieces, conical-spine bushes, and coefficient-charted
-  indefinite rank-three parabolic families while retaining shaded mass.
+- Preserve polynomial **parent ancestry** through the partition tree.
+  Descendants of only `K` degree-`D` parents contribute transverse
+  longitudinal error `O(K D delta/alpha)`, independent of descendant count.
+  Prove `K D/alpha=delta^-o(1)` or identify the exact tree obstruction.
+- Organize the resulting nontransverse-or-singular cover incidence into
+  `delta^-o(1)` genuine fixed/cell-averaged continuum charts satisfying SSI.
+  The additive error may be summable; the chart theorem remains missing.
+- In the parabolic branch, prove quantitative stability for dense graphs of
+  approximate rank-one square differences. Exact complete cliques are common
+  square pencils; linearly rank-two-separated paths are already handled.
+- Attack the rotating rank-one tangent model across two separated scales.
+  Its second coefficient singular value appears only cubically, so a
+  one-scale application loses a power.
 
 ## Dead ends (and why)
 
@@ -40,6 +42,9 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 - “All low-rank quadrics are 2-plany” is false if affine and reducible
   hyperplanes are included. Those are separate outputs with a
   three-dimensional tangent direction space.
+- Lusin regularity gives additive aggregate incidence retention, but no
+  quantitative modulus, admissible carrier charts, or subpolynomial chart
+  entropy. Treating continuity as SSI is circular.
 
 ## Surprises / structure discovered
 
@@ -75,3 +80,18 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 - The canonical rank-three parabolic pencil has a precise
   transverse-versus-plany split, but the transverse estimate loses a factor
   `rho`. That loss must be optimized, not suppressed.
+- Pointwise normal transversality is stronger than necessary. For parabolic
+  graph coefficients with `sigma_2(A_s-A_t)≳|s-t|`, a direct quadratic
+  sublevel estimate gives a squared-log union and SSI theorem even though
+  normals coincide on a locus.
+- Exact complete cliques of zero-critical-value rank-one square differences
+  lie in one common-square pencil. This does not classify a merely dense
+  dangerous graph.
+- The rotating moment path
+  `A(s)=integral_0^s(1,t,0)(1,t,0)^Tdt` has rank-one derivative but second
+  finite-difference singular value of order `|s-t|^3`. It is the first exact
+  stress model for two-scale rank-one rotation.
+- Partition ancestry is the first rigorous way found to cross the
+  `Mdelta` catalog baseline: descendant multiplicity disappears only for
+  unioned or uniquely assigned incidences under a bounded number of parent
+  polynomials.

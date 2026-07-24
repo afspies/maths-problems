@@ -9,6 +9,9 @@
 - `extraction-dichotomy/`: exact accounting for what small union and a
   catalog imply, including the baseline-crossing countermodel and the
   corrected assigned/high-overlap target.
+- `parabolic-coefficient-charts/`: handle the indefinite rank-three
+  parabolic branch through coefficient-difference rank, parent ancestry, and
+  rank-one-tangent rigidity.
 
 These are distinct bridges. A ruled grain appearing in the inverse
 trilinear problem does not by itself prove the general-to-sticky reduction.

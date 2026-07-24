@@ -15,6 +15,9 @@ a fixed all-scale family of ruled quadratic obstructions. A stack of
 index separation has dense shaded union at least
 `lambda²/log(1/delta)`. If the scale-wise stacks sample one fixed continuum
 line family, a weighted incidence argument gives Hausdorff dimension four.
+For indefinite parabolic graph carriers, the pointwise-normal hypothesis can
+be weakened: two linearly separated coefficient singular directions give a
+squared-log union and Hausdorff SSI theorem.
 
 The campaign also proves that small union alone extracts only a
 high-multiplicity incidence level, not a quadratic carrier, and gives an
@@ -27,7 +30,7 @@ full-conjecture claim, is made.
 
 The campaign also proves exact one-carrier capacity, catalog-evasion,
 distributed-catalog extraction, and sticky carrier-entropy lemmas. All
-exponent arithmetic and algebraic models are checked by a 27-test exact
+exponent arithmetic and algebraic models are checked by a 39-test exact
 rational harness.
 
 ## Main result
@@ -235,6 +238,78 @@ Away from `|x_3|<=rho`, the stack theorem therefore loses the genuine factor
 alternative. This is a rigorous transverse-versus-plany stress model, but
 optimizing the `rho` loss across scales remains open.
 
+## Rank-two-separated parabolic stacks
+
+Let
+
+`P_s(y,z)=z-y^T A_s y-ell(y)`
+
+with a common affine term and
+
+`sigma_2(A_s-A_t)≥c|s-t|`.
+
+A direct three-dimensional quadratic-sublevel estimate gives
+
+`|U_i intersect U_j|
+ ≤Cdelta min(
+      1,
+      delta M(1+log(1/delta))/|i-j|
+    )`.
+
+Consequently,
+
+`|union_i U_i|
+ ≥c lambda² Mdelta/
+   (1+Mdelta(1+log(1/delta))H_(M-1))`.
+
+At critical carrier entropy this is `lambda²/log²(1/delta)`. The fixed
+continuum version satisfies
+
+`|N_(Cr)(V)|≥c A(V)²/log²(1/r)`,
+
+and therefore has Hausdorff dimension four. Unlike the earlier theorem,
+carrier normals may coincide on a locus.
+
+The exact path
+
+`A_s=diag((1+s)²,-1,(1+s)²)`
+
+has ruled sweep and direction-chart determinants of absolute value `4`.
+
+Exact complete cliques of zero-critical-value rank-one square differences
+are rigid: every member lies in one common-square pencil
+`f_i=f_*+a_i ell²`. Dense non-cliques and approximate critical values are
+not covered. The rotating moment path
+
+`A(s)=integral_0^s(1,t,0)(1,t,0)^Tdt`
+
+has rank-one derivative but second finite-difference singular value only of
+order `|s-t|³`, giving the next exact two-scale stress model.
+
+## Parent ancestry and additive cover errors
+
+For a degree-`D` parent wall and a line `ell`,
+
+`|{t:|P(ell(t))|≤Cr, |(P circ ell)'(t)|≥alpha}|
+ ≤C D r/alpha`.
+
+If descendants are unioned or uniquely assigned under only `K` parent
+polynomials per line, their transverse incidence is therefore
+`O(K D r/alpha)`, independent of descendant count. The remainder is
+nontransverse-or-singular; a lower gradient bound is needed to call it
+tangent.
+
+An additive-error cover theorem now allows
+
+`A(V)≤sum_(nu≤J(r))A_nu(V)+e(r)`.
+
+If the `A_nu` are genuine continuum chart functionals satisfying SSI,
+`sum e(r)->0`, and
+`sum r^(4-s)J(r)²L_0(r)->0`, then the swept set has Hausdorff dimension four.
+Thus subpolynomial parent ancestry makes transverse crossings harmless. The
+organization of the remaining incidence into admissible charts is still
+open.
+
 ## Exact verification
 
 From `problems/kakeya-r4/harness/`:
@@ -245,11 +320,12 @@ python3 -m unittest -v
 ```
 
 The ledger returns volume exponent `3/4`, dimension `13/4`, and bottleneck
-`trilinear`. All 33 tests pass. They verify exact recurrence arithmetic,
+`trilinear`. All 39 tests pass. They verify exact recurrence arithmetic,
 harmonic second moments, catalog exponents, sticky persistence inequalities,
 high-multiplicity and carrier-energy ledgers, the split-quadric sweep,
-rank-three parabolic line conditions, normal-wedge identities, and the
-transverse pencil's rank-four seed.
+rank-three parabolic line conditions, normal-wedge identities,
+parent-ancestry errors, two parabolic coefficient paths, and exact
+direction/sweep determinants.
 Continuous coarea, reach, Remez, and algebraic-degree arguments are written
 as proofs rather than delegated to numerical tests.
 
@@ -260,14 +336,18 @@ rank-two coarea, the explicit pencil, weighted normalization,
 Hausdorff-versus-Minkowski wording, the transverse `rho` loss, the
 hyperplane exception, and measurable-cover sampling. The repaired statements
 then received `APPROVE` verdicts for exponent signs, circularity, scale loss,
-and endpoint consequences.
+and endpoint consequences. A further review round approved the parabolic
+sublevel theorem, complete-clique rigidity, parent-assignment semantics, and
+additive Hausdorff summation after explicit repairs.
 
 The two-session gate remains **GO on Bridge B**: the union theorem handles an
 infinite family of ruled obstructions, and the fixed-family criterion gives
 full Hausdorff dimension for a structured all-scale subclass. The
 full-conjecture gate itself is **OPEN**. The decisive missing theorem is
-uniform shaded extraction with subpolynomial chart entropy, assigned
-positive overlap above the `Mdelta` baseline, and persistence for arbitrary
-cover groups.
+preservation of subpolynomial parent ancestry through the full partition
+tree, followed by organization of the nontransverse-or-singular incidence
+into subpolynomially many fixed continuum charts. Dense approximate
+rank-one graphs and rotating rank-one tangents are the sharp parabolic
+subproblem.
 
 No DOI is assigned because the general conjecture remains open.

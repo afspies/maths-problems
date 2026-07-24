@@ -19,7 +19,7 @@ Work in problems/kakeya-r4/ of the maths-problems repo. Read, in order:
 4. problems/kakeya-r4/JOURNAL.md — recent sessions' detail, if needed.
 
 Current priorities (update each session):
-- The exact harness is built and currently has 33 passing tests. Run it before
+- The exact harness is built and currently has 39 passing tests. Run it before
   changing any exponent claim.
 - Treat `13/4` as the sticky benchmark and the corrected Katz–Zahl `>3.059`
   number as the general Hausdorff benchmark. Do not relabel the `3.0543`
@@ -34,6 +34,11 @@ Current priorities (update each session):
 - Any carrier output must cross the ordinary `Mdelta` overlap baseline by
   assigned overlap `lambda>>delta`, excess `q-Mdelta`, or a geometric
   exclusion of transverse slab-grid crossings.
+- Preserve parent wall labels. `results/parent-ancestry-tangency-excess.md`
+  proves that descendants under only `K` degree-`D` parents contribute
+  transverse additive error `O(K D delta/alpha)`, independent of descendant
+  count, provided incidences are unioned or uniquely assigned. The remaining
+  output is nontransverse-or-singular unless gradients are bounded below.
 - Use `results/distributed-quadratic-catalog.md` to turn diffuse catalog
   capture into an explicit polynomial, overlap level, and balanced subfamily.
   Use `results/transverse-quadric-stack-union.md` for the transverse branch.
@@ -54,6 +59,17 @@ Current priorities (update each session):
   most two and central rank three by 2-planiness, separates hyperplanes and
   conical spines, and isolates indefinite rank-three parabolics. Its exact
   pencil pays a real `rho` loss in the transverse branch.
+- `results/rank-two-separated-parabolic-stacks.md` gives a squared-log union
+  and fixed-family Hausdorff theorem when
+  `sigma_2(A_s-A_t)≳|s-t|`. It also proves exact common-square rigidity for a
+  complete clique of rank-one-dangerous differences.
+- The live parabolic obstruction is a dense approximate rank-one graph or a
+  rotating rank-one tangent. The exact moment path has second singular value
+  only cubic in parameter separation; do not apply the rank-two theorem to it
+  at the original spacing.
+- Lusin selection can make discarded cover incidence a summable additive
+  error, but supplies no SSI chart, quantitative modulus, or subpolynomial
+  chart count.
 - Keep Bridge A separate. Before revisiting it, define a common two-scale
   refinement and a bounded-entropy model selector. Proposition 3.12 alone
   supplies neither. Any proposed gain must be relative to the full
@@ -64,4 +80,6 @@ Current priorities (update each session):
 - The second-session gate is GO on Bridge B. No new general or sticky
   dimension bound was proved. The third session sharpens the full-conjecture
   bottleneck to uniform shaded extraction with subpolynomial chart entropy;
-  do not claim that this extraction theorem is known.
+  the fourth session handles the generic rank-two parabolic path and removes
+  descendant transverse baselines under bounded ancestry. Do not claim that
+  the remaining chart-organization theorem is known.

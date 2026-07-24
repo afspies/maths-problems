@@ -3,11 +3,12 @@ title = "Four-dimensional Kakeya conjecture"
 question = "Must every Kakeya set in R^4 have Hausdorff and Minkowski dimension 4?"
 # proposed | scaffolded | active | partial-results | solved | excluded | retired
 status = "partial-results"
-best_result = "Fixed-stack incidence theorem gives full Hausdorff dimension for a structured all-scale ruled-quadric subclass; exact extraction no-go and degenerate-quadric classification isolate the missing general bridge, with no new general or sticky bound"
+best_result = "Full Hausdorff dimension for fixed all-scale transverse and rank-two-separated parabolic stacks; parent-ancestry tangency lemma removes descendant Mdelta baseline, with no new general or sticky bound"
 doi = ""
 sessions = [
     "2026-07-24 scaffolded from template",
     "2026-07-24 exact 13/4 audit, ruled-quadric stress test, STOP/PIVOT after xhigh review",
     "2026-07-24 harmonic ruled-quadric stack theorem and carrier-entropy lemmas, Bridge B gate GO",
     "2026-07-24 full-conjecture extraction audit, fixed-stack Hausdorff theorem, and degenerate quadratic classification",
+    "2026-07-24 rank-two-separated parabolic stack theorem and parent-ancestry tangency excess",
 ]

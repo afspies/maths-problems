@@ -26,9 +26,18 @@
   transverse-versus-plany rank-three parabolic pencil.
 - `fixed-stack-hausdorff.md`: a weighted covering theorem upgrading a fixed
   all-scale transverse stack from Minkowski to Hausdorff dimension four.
+- `rank-two-separated-parabolic-stacks.md`: a squared-log union and SSI
+  theorem for indefinite parabolic coefficient paths with two linearly
+  separated singular directions, plus complete-clique common-square
+  rigidity and a rotating rank-one stress model.
+- `parent-ancestry-tangency-excess.md`: a degree-`D` line-sublevel lemma
+  replacing the `Mdelta` baseline by `K D delta/alpha` when descendant grains
+  retain only `K` parent wall labels, together with an additive-error
+  Hausdorff criterion.
 
 The first two results do not improve the Kakeya dimension bound. The
 fixed-stack covering theorem now gives Hausdorff dimension four for a new
-structured all-scale transverse-stack subclass. It does not extract that
-structure from a general Kakeya set, so no general or sticky benchmark
-changes.
+structured all-scale transverse-stack subclass. The parabolic theorem
+extends this to a family whose normals may coincide on a locus. Neither
+result extracts its organized coefficient path from a general Kakeya set,
+so no general or sticky benchmark changes.

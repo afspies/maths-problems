@@ -11,6 +11,8 @@ from grain_union_ledger import (
     inverse_tangency_mass_lower_bound,
     normalized_union_lower_bound,
     normalized_weighted_union_lower_bound,
+    rank_two_parabolic_stack_union_lower_bound,
+    transverse_parent_ancestry_error,
     quadratic_catalog_evasion_exponent,
     quadric_thinning_can_be_sticky_and_extremal,
     quadric_direction_capacity_exponents,
@@ -172,6 +174,32 @@ class GrainUnionLedgerTests(unittest.TestCase):
             )
 
         self.assertGreater(bound(20), bound(10))
+
+    def test_rank_two_parabolic_stack_pays_only_two_harmonic_factors(self) -> None:
+        lower = rank_two_parabolic_stack_union_lower_bound(
+            carriers=8,
+            delta=F(1, 8),
+            shading_density=F(1, 2),
+        )
+        self.assertEqual(lower, F(1, 4) / (1 + harmonic_number(8) ** 2))
+        self.assertGreater(lower, 0)
+        with self.assertRaisesRegex(ValueError, "critical spacing"):
+            rank_two_parabolic_stack_union_lower_bound(
+                carriers=8,
+                delta=F(1, 16),
+                shading_density=F(1, 2),
+            )
+
+    def test_parent_ancestry_prevents_descendant_baseline_multiplication(self) -> None:
+        self.assertEqual(
+            transverse_parent_ancestry_error(
+                parent_labels_per_line=2,
+                polynomial_degree=3,
+                scale=F(1, 1024),
+                derivative_threshold=F(1, 8),
+            ),
+            F(3, 64),
+        )
 
 
 if __name__ == "__main__":
