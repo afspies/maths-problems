@@ -18,17 +18,27 @@ generally when a parametrized Jordan curve admits smooth Jordan approximants
 whose Liouville primitives converge locally uniformly.
 
 This campaign proves that the criterion holds under either of two
-parameter-level conditions:
+parameter-level conditions below the critical exponent, and one genuinely
+critical condition:
 
 1. finite \(p\)-variation for some \(p<2\); or
 2. coordinate moduli satisfying the critical Dini--Young integral
-   \(\int_0^1\omega_x(r)\omega_y(r)r^{-2}\,dr<\infty\).
+   \(\int_0^1\omega_x(r)\omega_y(r)r^{-2}\,dr<\infty\); or
+3. \(1/2\)-Hölder regularity together with Antonelli--Young's finite dyadic
+   quadratic-diameter sum \(\sigma(c)<\infty\).
 
 The first class contains explicit nonrectifiable, non-locally-monotone double
 spirals (`results/spiral-family.md`).  The proof is a short synthesis of
 Asano--Ike, Boedihardjo--Geng's embedded polygonal interpolation, a controlled
 corner rounding, and Young integration.  It is a partial result; the
 unrestricted conjecture remains open.
+
+The third class reaches finite \(2\)-variation beyond every
+finite-\(p<2\) class.  The explicit critical spiral comb in
+`results/critical-spiral-comb.md` has infinite \(p\)-variation for every
+\(p<2\), infinite length, and is not locally monotone, but still inscribes
+every prescribed rectangle.  The proof is in
+`angles/critical-p2/antonelli-young-bridge.md`.
 
 At the critical exponent, `angles/critical-p2/osgood-area-anomaly.md` proves
 that finite \(2\)-variation plus parameter-aligned embedded \(C^0\)
@@ -66,26 +76,33 @@ to the existential Asano--Ike criterion.
   determine Lévy area; a second-level lift or a Dini improvement is needed.
 - Positive-area Jordan traces admit inner and outer conformal level
   approximations with incompatible limiting periods. For a zero-area trace,
-  total periods are stable, but local subarc primitives remain unresolved.
+  total periods are stable.
+- Antonelli--Young's all-partitions signed-area theorem turns
+  \(1/2\)-Hölder regularity plus \(\sigma(c)<\infty\) into a
+  partition-independent local primitive. Combined with embedded Jordan
+  polygons, this resolves a strict critical subclass.
 
 ## Angle-of-attack menu
 
 - **Young/rough integration:** completed finite-\(p<2\) and Dini--Young
   criteria in `angles/p-variation/` and `angles/critical-p2/`.
 - **Geometric rough paths at \(p=2\):** the positive-area period anomaly is
-  complete; seek a local lift theorem or counterexample for zero-area traces.
+  complete, and the Antonelli--Young \(\sigma\)-class is complete; seek a
+  weaker local lift theorem or a counterexample outside that class.
 - **Sheaf criterion:** weaken the no-translate microsupport condition without
   requiring a single-valued continuous primitive.
 - **Planar topology:** find quantitative tubular/one-sided conditions that
   force primitive compactness for embedded approximants.
 - **Counterexample pressure test:** localize an embedded anomaly to a
-  zero-area trace, or prove a beta-number/tubular compactness condition.
+  zero-area trace outside the \(\sigma\)-class, or prove a weaker
+  tubular/rough-lift compactness condition.
 
 ## First steps for the next session
 
 1. Ask Asano--Ike and Boedihardjo--Geng for a priority/soundness check of the
    synthesis before claiming novelty.
-2. Compare Antonelli--Young's beta-number signed-area criterion with the
-   parameter-aligned embedded approximation required by Asano--Ike.
-3. Attack the zero-area local-lift question; do not spend time on numerical
-   square searches.
+2. Obtain an independent expert check of the critical uniform-prefix bridge
+   and spiral-comb witness.
+3. Seek a geometric weakening of \(\sigma(c)<\infty\), or attack the
+   zero-area local-lift question outside this class. Do not spend time on
+   numerical square searches.

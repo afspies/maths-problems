@@ -140,8 +140,18 @@ solves the Square Peg conjecture.
 ### Antonelli--Young, arXiv:2605.15987
 
 Antonelli--Young define signed area for critical \(1/2\)-Hölder curves
-through polygonal approximations and prove geometric convergence criteria
-using beta-number control. Their work confirms that the \(p=2\) area problem
-requires geometry beyond a bare Hölder or variation bound. It is the first
-published input to test for any positive theorem on the remaining zero-area,
-local-primitive frontier.
+through convergence over all fine polygonal partitions. Their planar
+Theorem 1.2 assumes the dyadic quadratic-diameter sum
+\[
+\sum_{i,j}\operatorname {diam}\{\gamma(j2^{-i}),
+\gamma((2j+1)2^{-i-1}),\gamma((j+1)2^{-i})\}^2<\infty.
+\]
+Under this hypothesis the signed area exists, the trace is
+\(\mathcal H^2\)-null, and the area is the integral of winding number.
+The paper's beta numbers enter its ambient Heisenberg-map/fibre argument;
+they are not the stated hypothesis of the directly used planar theorem.
+
+The all-partitions quantifier gives uniform prefix-area convergence by
+extending two prefix partitions with the same tail.  Together with
+Boedihardjo--Geng embedded polygons and Asano--Ike, this yields the critical
+peg theorem in `angles/critical-p2/antonelli-young-bridge.md`.

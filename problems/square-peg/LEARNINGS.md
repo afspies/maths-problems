@@ -2,12 +2,10 @@
 
 ## What the next session should do first
 
-- Obtain human/expert priority and soundness feedback on the packaged
-  finite-\(p<2\) synthesis, especially from the authors of Asano--Ike and
-  Boedihardjo--Geng.
-- Compare Antonelli--Young's beta-number criterion with the zero-area local
-  primitive needed by Asano--Ike. Seek either parameter-aligned embedded
-  realizability or a zero-area local anomaly.
+- Obtain human/expert priority and soundness feedback on both the packaged
+  finite-\(p<2\) synthesis and the critical Antonelli--Young bridge.
+- Seek a geometric weakening of the finite dyadic quadratic-diameter sum, or
+  a zero-area local anomaly outside that class.
 
 ## Results
 
@@ -31,7 +29,17 @@
   occurs within finite \(2\)-variation.
 - For a zero-area Jordan trace, winding-number stability forces convergence
   of total enclosed areas under uniform oriented Jordan approximation. This
-  does not yet control local subarc primitives.
+  does not by itself control local subarc primitives.
+- Antonelli--Young's all-partitions signed-area convergence has a hidden
+  uniform-local consequence: extend two prefix partitions by the same tail.
+  The common tail cancels, giving a Cauchy estimate uniform in the endpoint.
+- Therefore every \(1/2\)-Hölder Jordan parametrization with finite dyadic
+  quadratic-diameter sum \(\sigma(c)\) satisfies Asano--Ike and gets every
+  prescribed rectangle.
+- A disjoint many-turn spiral comb can have
+  \(\sigma(c)<\infty\) but infinite \(p\)-variation for every \(p<2\):
+  choose radius \(a_n=2^{-n-20}\), turn count
+  \(N_n\asymp4^n/n^2\), and time \(w_n=N_na_n^2\).
 - The two-arm spiral \(r=\theta^{-1/d}\), \(1<d<2\), is Jordan,
   nonrectifiable, finite \(p\)-variation for every \(p>d\), and not locally
   monotone.  It proves the new class is strictly outside Asano--Ike's two
@@ -51,3 +59,9 @@
   than deep novelty.  Targeted search found no explicit statement, but that
   does not establish priority. The independent audit recommends “apparently
   unstated consequence,” not “new rough-integration theorem.”
+- Do not call Antonelli--Young Theorem 1.2 a planar beta-number criterion.
+  Its directly usable planar hypothesis is the dyadic diameter-square sum;
+  beta numbers occur in the ambient Heisenberg-map/fibre argument.
+- Convergence of dyadic polygon areas alone is not enough at \(1/2\)-Hölder
+  regularity. The essential Antonelli--Young input is convergence over all
+  fine partitions.

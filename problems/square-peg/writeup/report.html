@@ -55,9 +55,10 @@
   We combine Asano–Ike’s 2026 smooth-approximation criterion with
   Boedihardjo–Geng’s embedded polygon interpolation and Young integration.
   Every Jordan parametrization of finite <var>p</var>-variation,
-  <var>p</var>&lt;2, inscribes every prescribed rectangle. A Dini–Young
-  condition reaches the critical scale. An explicit double spiral proves that
-  the class includes curves that are neither rectifiable nor locally monotone.
+	  <var>p</var>&lt;2, inscribes every prescribed rectangle. Dini–Young and
+	  Antonelli–Young quadratic-diameter conditions reach the critical scale.
+	  An explicit critical spiral comb has infinite <var>p</var>-variation for
+	  every <var>p</var>&lt;2, yet still gets every rectangle.
   At <var>p</var>=2, a positive-area ½-Hölder Jordan curve gives incompatible
   inner and outer embedded primitive limits.
 </div>
@@ -69,10 +70,16 @@
   <var>c</var>(S<sup>1</sup>) inscribes a θ-rectangle for every
   θ∈(0,π), including a square.
 </div>
-<div class="env"><span class="label">Critical extension.</span>
-  The conclusion also holds if the periodic coordinate moduli satisfy
-  ∫<sub>0</sub><sup>1</sup>ω<sub>x</sub>(r)ω<sub>y</sub>(r)r<sup>−2</sup>dr&lt;∞.
-</div>
+	<div class="env"><span class="label">Critical extension.</span>
+	  The conclusion also holds if the periodic coordinate moduli satisfy
+	  ∫<sub>0</sub><sup>1</sup>ω<sub>x</sub>(r)ω<sub>y</sub>(r)r<sup>−2</sup>dr&lt;∞.
+	</div>
+	<div class="env"><span class="label">Exact critical extension.</span>
+	  The conclusion also holds when <var>c</var> is ½-Hölder and
+	  Σ<sub>i,j</sub> diam{<var>c</var>(j2<sup>−i</sup>),
+	  <var>c</var>((2j+1)2<sup>−i−1</sup>),
+	  <var>c</var>((j+1)2<sup>−i</sup>)}<sup>2</sup>&lt;∞.
+	</div>
 
 <h2>2 · Why the approximation is genuinely embedded</h2>
 <p>Choose <var>p</var>&lt;<var>q</var>&lt;2.
@@ -87,8 +94,14 @@ of the original rough curve is assumed to remain embedded.</p>
   F<sub>n</sub>(t)=∫<sub>0</sub><sup>t</sup>y<sub>n</sub>dx<sub>n</sub>
   &nbsp;→&nbsp;∫<sub>0</sub><sup>t</sup>y dx.
 </div>
-<p>The period increments converge too, so the primitives converge locally
-uniformly on ℝ. This is precisely Asano–Ike Theorem 1.1.</p>
+	<p>The period increments converge too, so the primitives converge locally
+	uniformly on ℝ. This is precisely Asano–Ike Theorem 1.1.</p>
+	<p>At the exact critical scale, Antonelli–Young prove convergence of signed
+	area over all fine partitions. Two prefix partitions of [0,t] can be
+	extended by the same fine tail on [t,1]; that tail cancels. Their total-area
+	Cauchy estimate is therefore uniform in t and supplies the complete local
+	primitive. The same embedded polygons and diagonal C<sup>1</sup> rounding
+	then apply.</p>
 
 <h2>3 · A strict nonrectifiable witness</h2>
 <p>For 1&lt;<var>d</var>&lt;2, join two rotated spirals</p>
@@ -96,10 +109,21 @@ uniformly on ℝ. This is precisely Asano–Ike Theorem 1.1.</p>
   γ<sub>0</sub>(θ)=θ<sup>−1/d</sup>e<sup>iθ</sup>, &nbsp;
   γ<sub>1</sub>(θ)=e<sup>iδ</sup>γ<sub>0</sub>(θ), &nbsp; θ≥1,
 </div>
-<p>by an outer circular arc. Monotone radius proves embeddedness. Its length
-diverges like Σn<sup>−1/d</sup>, but its <var>p</var>-variation is finite for
-every <var>p</var>&gt;<var>d</var>. Every projection oscillates infinitely
-often at the common origin, so it is not locally monotone.</p>
+	<p>by an outer circular arc. Monotone radius proves embeddedness. Its length
+	diverges like Σn<sup>−1/d</sup>, but its <var>p</var>-variation is finite for
+	every <var>p</var>&gt;<var>d</var>. Every projection oscillates infinitely
+	often at the common origin, so it is not locally monotone.</p>
+	<p>A stronger critical witness uses disjoint many-turn annular detours with</p>
+	<div class="eqn">
+	  a<sub>n</sub>=2<sup>−n−20</sup>, &nbsp;
+	  N<sub>n</sub>=⌈4<sup>n</sup>/n<sup>2</sup>⌉, &nbsp;
+	  w<sub>n</sub>=N<sub>n</sub>a<sub>n</sub><sup>2</sup>.
+	</div>
+	<p>The summable times w<sub>n</sub> give a ½-Hölder clock. A supported-bump
+	estimate gives finite Antonelli–Young energy, while
+	ΣN<sub>n</sub>a<sub>n</sub><sup>p</sup>=∞ for every
+	<var>p</var>&lt;2. Disjoint disks prove the curve is Jordan; accumulating
+	full turns make it non-locally-monotone.</p>
 
 <h2>4 · The critical p=2 obstruction</h2>
 <p>For any Jordan trace C=∂Ω, inner conformal level curves converge with
@@ -115,8 +139,9 @@ destroys primitive convergence.</p>
 </div>
 <p>This refutes stability for a supplied approximation sequence, not the
 existential Asano–Ike criterion, and is not a counterexample to Square Peg.
-For zero-area traces the total periods are stable; local subarc area lifts
-remain the frontier.</p>
+	For zero-area traces the total periods are stable. The quadratic-diameter
+	theorem now controls one strict critical local-lift class; curves outside
+	that class remain the frontier.</p>
 
 <h2>5 · Exact hygiene checks</h2>
 <pre>$ python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
@@ -132,15 +157,16 @@ analytic universal theorem.</p>
   <tbody>
     <tr><td>Rectifiable</td><td>Asano–Ike: every rectangle</td><td>not new</td></tr>
     <tr><td>Locally monotone</td><td>Asano–Ike: every rectangle</td><td>not new</td></tr>
-    <tr><td>Finite p-variation, p&lt;2</td><td>no explicit peg theorem found</td><td>synthesis proved</td></tr>
-    <tr><td>Finite 2-variation</td><td>area lift not automatic</td><td>embedded anomaly proved</td></tr>
+	    <tr><td>Finite p-variation, p&lt;2</td><td>no explicit peg theorem found</td><td>synthesis proved</td></tr>
+	    <tr><td>½-Hölder + finite quadratic-diameter energy</td><td>signed area: Antonelli–Young</td><td>every rectangle</td></tr>
+	    <tr><td>General finite 2-variation</td><td>area lift not automatic</td><td>strict class + embedded anomaly</td></tr>
     <tr><td>General Jordan</td><td>open</td><td>still open</td></tr>
   </tbody>
 </table>
 <p>The contribution is a concise combination of published ingredients, not a
-new rough-integration theory. The independent priority audit classifies the
-finite-p result as an apparently unstated immediate synthesis. Expert
-confirmation remains appropriate.</p>
+	new rough-integration theory. The independent priority audits classify both
+	positive results as apparently unstated syntheses. Expert confirmation
+	remains appropriate.</p>
 
 <div class="footer">
   Canonical source: <code>writeup/report.md</code>. Detailed proofs:

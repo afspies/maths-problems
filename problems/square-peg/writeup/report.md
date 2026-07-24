@@ -14,6 +14,10 @@ Dini condition
 \[
 \int_0^1\omega_x(r)\omega_y(r)r^{-2}\,dr<\infty.
 \]
+At the exact \(1/2\)-Hölder threshold, Antonelli--Young's finite dyadic
+quadratic-diameter sum also suffices.  An explicit critical spiral comb
+satisfies this condition while having infinite \(p\)-variation for every
+\(p<2\).
 An explicit double-spiral family is nonrectifiable and not locally monotone,
 yet has finite \(p\)-variation for some \(p<2\).  Thus the result gives
 rectangular pegs for a class not contained in the two named Asano--Ike
@@ -35,10 +39,19 @@ moduli satisfy
 \int_0^1\frac{\omega_x(r)\omega_y(r)}{r^2}\,dr<\infty.
 \]
 
+**Critical quadratic-diameter extension.** The same conclusion holds if
+\(c\) is \(1/2\)-Hölder and
+\[
+\sigma(c)=\sum_{i\geq0}\sum_{j<2^i}
+\operatorname {diam}\{c(j2^{-i}),c((2j+1)2^{-i-1}),
+c((j+1)2^{-i})\}^2<\infty.
+\]
+
 The complete argument, including the fixed-parameter embedded \(C^1\) rounding
 lemma and explicit Young--Loeve estimate, is in
 `../angles/p-variation/README.md`.  The Dini refinement and \(p=2\) boundary
-are in `../angles/critical-p2/README.md`.
+are in `../angles/critical-p2/README.md`; the quadratic-diameter proof is in
+`../angles/critical-p2/antonelli-young-bridge.md`.
 
 ## Proof architecture
 
@@ -69,6 +82,14 @@ C\int_0^\delta\omega_x(r)\omega_y(r)r^{-2}\,dr.
 This supplies primitive convergence directly; the same embedded polygons and
 corner rounding then apply.
 
+For the exact critical extension, Antonelli--Young prove convergence of
+polygonal signed areas over all fine partitions under \(\sigma(c)<\infty\).
+That all-partitions quantifier upgrades total area to a uniform local
+primitive: extend any two fine partitions of \([0,t]\) by the same fine
+partition of \([t,1]\), and the common tail cancels. Boedihardjo--Geng then
+supplies embedded Jordan polygons among the controlled partitions; diagonal
+\(C^1\) rounding preserves their primitives.
+
 ## Strict witness beyond rectifiability and local monotonicity
 
 For \(1<d<2\), take two disjoint rotated spirals
@@ -83,6 +104,24 @@ radius proves embeddedness.  Its length dominates
 \(p>d\).  Every linear projection oscillates infinitely often at the common
 origin, so the curve is not locally monotone.  Details are in
 `../results/spiral-family.md`.
+
+The sharper critical witness replaces disjoint tiny axis diameters by
+many-turn simple annular detours. At scale \(n\), take
+\[
+a_n=2^{-n-20},\qquad
+N_n=\left\lceil4^n/n^2\right\rceil,\qquad
+w_n=N_na_n^2.
+\]
+The supports have summable lengths \(w_n\asymp n^{-2}\), and constant-speed
+traversal gives a uniform \(1/2\)-Hölder bound. A supported-bump estimate
+gives
+\[
+\sigma(f_n)\lesssim w_n+a_n^2\log(e/a_n^2),
+\]
+so \(\sigma(c)<\infty\). But \(\sum_nN_na_n^p=\infty\) for every \(p<2\).
+Disjoint detour disks prove embeddedness, and the full turns accumulating at
+the basepoint defeat every linear projection. Details are in
+`../results/critical-spiral-comb.md`.
 
 ## Verification
 
@@ -127,23 +166,23 @@ counterexample to the Square Peg conjecture.
 
 For zero-area Jordan traces, winding-number stability forces the total
 periods of all uniformly convergent oriented Jordan approximants to converge.
-Local subarc primitives can still carry a second-level anomaly. The remaining
-frontier is therefore uniqueness or realizability of the local area lift for
-zero-area finite-\(2\)-variation Jordan curves. Antonelli--Young's May 2026
-beta-number criterion for signed area of \(1/2\)-Hölder curves is the most
-relevant published input.
+The Antonelli--Young theorem now also controls the full local primitive when
+the curve is \(1/2\)-Hölder and \(\sigma(c)<\infty\). The remaining frontier
+is uniqueness or realizability of the local area lift outside this
+quadratic-diameter class.
 
 ## Relation to prior work and novelty boundary
 
 Asano--Ike already cover every rectifiable and every locally monotone Jordan
 curve; this report does not rediscover those results.  Boedihardjo--Geng
 already prove the hard embedded polygonal approximation and finite-\(p\)
-Green theorem.  The contribution here is a concise synthesis with
-Asano--Ike's newly available sheaf criterion, plus an explicit strict witness
-and a Dini-critical formulation. An independent source-by-source audit found
-no explicit prior peg theorem in these terms, but classified the result as an
-apparently unstated immediate corollary/synthesis rather than a new
-rough-integration theorem. Expert confirmation should precede a formal
+Green theorem. Antonelli--Young already prove the critical signed-area
+criterion. The contribution here is the synthesis of these inputs with
+Asano--Ike's sheaf criterion, the uniform-prefix observation, and explicit
+strict witnesses. Independent source-by-source searches found no explicit
+prior peg theorem in either the finite-\(p<2\) or critical
+quadratic-diameter terms, but both should be described as apparently
+unstated corollaries/syntheses. Expert confirmation should precede a formal
 priority claim.
 
 ## Cite as

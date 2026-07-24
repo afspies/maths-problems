@@ -238,3 +238,110 @@ git diff --check
 The board regenerated with 18 problems. The exact harness passed 5/5 tests
 in 0.001 seconds. Python compilation, both HTML parses, TOML parsing, and
 `git diff --check` completed without error.
+
+## 2026-07-24 — critical Antonelli--Young local lift
+
+### The breakthrough
+
+Reconstructed Antonelli--Young, arXiv:2605.15987v1, Theorem 1.2 and Appendix
+B directly from the primary PDF. Their planar hypothesis is not a beta-number
+condition: for a \(1/2\)-Hölder path it is the finite dyadic
+quadratic-diameter sum
+\[
+\sigma(c)=\sum_{i\geq0}\sum_{j<2^i}
+\operatorname {diam}\{c(j2^{-i}),c((2j+1)2^{-i-1}),
+c((j+1)2^{-i})\}^2.
+\]
+Their conclusion is convergence of polygonal signed areas over **all** fine
+partitions, not just the dyadic sequence.
+
+Proved in `angles/critical-p2/antonelli-young-bridge.md`:
+
+> Every \(1/2\)-Hölder Jordan parametrization with
+> \(\sigma(c)<\infty\) satisfies Asano--Ike Theorem 1.1 and hence inscribes
+> every prescribed rectangle.
+
+The key uniform-prefix lemma extends any two fine partitions of \([0,t]\)
+by the same fine partition of \([t,1]\). The common tail cancels, so
+Antonelli--Young's full-partition Cauchy modulus is uniform in \(t\).
+Continuous polygonal prefix functions give continuity of the limiting
+primitive. Boedihardjo--Geng then supplies arbitrarily fine
+parameter-aligned Jordan polygons, and the existing diagonal regular-\(C^1\)
+rounding makes their primitive error tend to zero. This proves exactly the
+local-uniform primitive convergence Asano--Ike require.
+
+### Strict critical witness
+
+Constructed `results/critical-spiral-comb.md`. At scale \(n\), a simple
+annular detour has radius
+\(a_n=2^{-n-20}\), turn count
+\(N_n=\lceil4^n/n^2\rceil\), and parameter time
+\(w_n=N_na_n^2\). The detours replace diameters in pairwise disjoint disks
+accumulating at one point of an otherwise polygonal Jordan curve.
+
+The global background parametrization is explicitly Lipschitz. Constant-speed
+detours give supported bumps with
+\[
+\|f_n\|_\infty\lesssim a_n,\qquad
+\operatorname {Lip}(f_n)\lesssim a_n^{-1}.
+\]
+This proves a uniform \(1/2\)-Hölder bound, including cross-support cases.
+At each dyadic scale,
+\[
+\sigma(f_n)\lesssim
+w_n+a_n^2\log(e/a_n^2),
+\]
+so \(\sigma(c)<\infty\). Conversely, half-turn chords give
+\(\sum_nN_na_n^p=\infty\) for every \(p<2\). Thus the curve has finite
+\(2\)-variation but infinite \(p\)-variation for all \(p<2\), infinite
+length, and is not locally monotone.
+
+### Novelty and source boundary
+
+Targeted searches through 2026-07-24 found no explicit use of
+Antonelli--Young's theorem in the square/rectangular-peg literature. The
+paper is only two months old and indexing is incomplete. The result is
+therefore described conservatively as an “apparently unstated critical
+corollary/synthesis,” not an independent critical-integration theorem.
+Details are in `literature/CRITICAL_PRIORITY_AUDIT.md`.
+
+Corrected the previous live documentation: beta numbers in
+Antonelli--Young belong to their ambient Heisenberg-map/fibre analysis. The
+directly used planar theorem has the dyadic diameter-square hypothesis.
+The earlier journal entry is left unchanged under the append-only rule; this
+paragraph records the correction.
+
+### Required GPT-5.6 Sol xhigh review
+
+Consulted GPT-5.6 Sol at xhigh at theorem selection and twice on the complete
+proof.
+
+1. Selection verdict: **PIVOT/GO** to the Antonelli--Young
+   quadratic-diameter class; **HOLD** the speculative zero-area anomaly.
+2. First written-proof verdict: **HOLD** for three local repairs: construct
+   the limiting primitive as a uniform limit of continuous prefix functions;
+   correct a false sentence about spiral/diameter intersections; and write
+   the global Lipschitz background parametrization with explicit slope
+   bounds.
+3. After those repairs, final verdict: **MERGE both files.** No logical
+   blockers remained in the uniform-prefix, embedded-rounding, Jordan,
+   Hölder, \(\sigma\), variation, or local-monotonicity arguments.
+
+### Compute and verification
+
+All work ran locally in the repository worktree; no private compute
+infrastructure was used. The rational harness remains conjecture hygiene and
+does not count as evidence for the analytic theorem. Commands run:
+
+```text
+python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
+python3 -m py_compile problems/square-peg/harness/geometry.py problems/square-peg/harness/test_geometry.py
+xmllint --html --noout problems/square-peg/writeup/report.html problems/square-peg/writeup/artifact-template.html
+python3 -c 'import tomllib; tomllib.load(open("problems/square-peg/STATUS.toml","rb")); print("STATUS.toml OK")'
+python3 tools/board.py
+git diff --check
+```
+
+The exact harness passed 5/5 tests in 0.001 seconds. Python compilation, both
+HTML parses, TOML parsing, and `git diff --check` emitted no errors. The board
+regenerated with 18 problems.

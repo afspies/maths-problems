@@ -1,8 +1,15 @@
 # The critical \(p=2\) frontier
 
-**Status:** sharp analytic obstruction isolated; a Dini--Young positive
-subclass is available.  No claim is made for all finite \(2\)-variation Jordan
-curves.
+**Status:** sharp analytic obstruction isolated; Dini--Young and
+Antonelli--Young quadratic-diameter positive subclasses are proved.  No claim
+is made for all finite \(2\)-variation Jordan curves.
+
+The strongest positive result is now
+`antonelli-young-bridge.md`: every \(1/2\)-Hölder Jordan parametrization with
+finite dyadic quadratic-diameter sum \(\sigma(c)\) satisfies Asano--Ike and
+therefore inscribes every prescribed rectangle.  The explicit construction
+in `../../results/critical-spiral-comb.md` lies in this class but has infinite
+\(p\)-variation for every \(p<2\).
 
 The companion note `osgood-area-anomaly.md` proves a sharp embedded
 counterexample to bare \(C^0\) primitive stability: a positive-area,
@@ -11,11 +18,12 @@ Jordan approximations whose Liouville periods differ in the limit by exactly
 the planar area of the trace. Thus the obstruction persists for finite
 \(2\)-variation paths and does not rely on nonembedded repeated loops.
 
-Antonelli--Young (arXiv:2605.15987, May 2026) independently develop a
-geometric approximation criterion for signed area of \(1/2\)-Hölder planar
-curves. Their beta-number framework is the most relevant published input for
-the remaining **zero-area, local-primitive** frontier; the positive-area
-inner/outer period anomaly below is logically separate.
+Antonelli--Young (arXiv:2605.15987, May 2026) prove an all-partitions signed
+area criterion for \(1/2\)-Hölder planar curves under a dyadic
+diameter-square sum.  Their beta numbers occur in the ambient
+Heisenberg-map/fibre analysis; the planar theorem used here is the explicit
+quadratic-diameter criterion.  The positive-area inner/outer period anomaly
+below is logically separate.
 
 ## Why the proof stops at \(2\)
 
@@ -162,3 +170,7 @@ or curves with a quantitative one-sided/tubular geometry that forbids area
 anomalies.  A decisive negative result would require two embedded
 approximation sequences of the same parametrized Jordan curve with
 incompatible primitive limits.
+
+The Antonelli--Young bridge now settles the first substantial zero-area
+critical class.  The frontier is to weaken its absolute dyadic
+quadratic-diameter summability or to construct a local anomaly outside it.
