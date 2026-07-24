@@ -5,9 +5,10 @@ towards Vizing's conjecture: finite graph checks cannot prove the universal
 inequality.
 
 `graph_hygiene.py` provides exact brute-force domination numbers, subset
-domination, Cartesian products, two-packings, and integer `k`-packing and
-`k`-dominating functions. `optimization.py` evaluates Steiner's normalized six
-lower bounds using `fractions.Fraction` and records both sides of the invalid
+domination, Cartesian products, two-packings, integer `k`-packing and
+`k`-dominating functions, near-cover profiles, and the small-instance typed
+fibre relaxation. `optimization.py` evaluates Steiner's normalized six lower
+bounds using `fractions.Fraction` and records both sides of the invalid
 algebraic replacement in arXiv:2607.01109v1.
 
 Run:
@@ -30,4 +31,7 @@ defect on `C₅`, and a diffuse split-graph tensor. Additional fixtures cover
 exact anchored/capped surd identities, the common-crown concentration
 witness, the `C₄` combined-lift benchmark, and the `K₂□P₃` length-two escape
 cycle. The typed-fibre fixture separates cardinality feasibility from actual
-product domination. The suite currently contains 30 tests.
+product domination. New exhaustive fixtures verify the two-axis near-cover
+profile inequality, its exact isolation slack, the correlated fractional
+charging identity, and the corrected `s+t-st` cap obstruction. The suite
+currently contains 35 tests.

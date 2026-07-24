@@ -178,6 +178,15 @@ class GraphHygieneTests(unittest.TestCase):
             b,
             c5_share.scale(Fraction(3, 4)) + (one - c5_share) * diagonal_ratio,
         )
+        triangle_provider_bound = b * (b.scale(2) - a)
+        self.assertEqual(
+            triangle_provider_bound,
+            Surd73(Fraction(10, 9), Fraction(-1, 9)),
+        )
+        self.assertEqual(
+            c - triangle_provider_bound,
+            Surd73(Fraction(-65, 72), Fraction(11, 72)),
+        )
         anchored_limit = Surd73(Fraction(1273, 576), Fraction(-115, 576))
         anchored_gap = c - anchored_limit
         self.assertEqual(
@@ -227,6 +236,12 @@ class GraphHygieneTests(unittest.TestCase):
             Surd73(Fraction(151, 132), Fraction(-13, 132)),
         )
         self.assertGreater(151 * 151 - 13 * 13 * 73, 0)
+        exact_cap_gap = c - cap_limit.scale(2)
+        self.assertEqual(
+            exact_cap_gap,
+            Surd73(Fraction(183, 88), Fraction(-21, 88)),
+        )
+        self.assertEqual(183 * 183 - 21 * 21 * 73, 1296)
 
         profile_slope_drop = Surd73(Fraction(-811, 264), Fraction(97, 264))
         self.assertGreater(97 * 97 * 73 - 811 * 811, 0)
@@ -522,6 +537,7 @@ class GraphHygieneTests(unittest.TestCase):
 
         self.assertEqual(factor.domination_number(), 2)
         self.assertEqual(product_graph.domination_number(), 5)
+        self.assertEqual(factor.typed_fibre_number(factor), 4)
         self.assertFalse(product_graph.dominates(chosen))
 
         row_sets = {
@@ -538,6 +554,230 @@ class GraphHygieneTests(unittest.TestCase):
                 len(row_sets[g]),
                 factor.domination_number(missed_type),
             )
+
+    def test_typed_fibre_number_on_small_named_pairs(self) -> None:
+        for left, right, expected in (
+            (path(2), path(3), 2),
+            (path(3), path(3), 3),
+            (path(4), path(4), 4),
+            (path(4), cycle(4), 4),
+            (cycle(4), cycle(4), 4),
+        ):
+            self.assertEqual(left.typed_fibre_number(right), expected)
+            self.assertGreaterEqual(
+                expected,
+                left.domination_number() * right.domination_number(),
+            )
+
+    def test_typed_partial_cover_profile_inequality(self) -> None:
+        for left, right in (
+            (path(3), path(3)),
+            (Graph.from_edges(3, [(0, 1)]), Graph.from_edges(3, [(0, 1)])),
+        ):
+            left_profile = left.near_cover_profile()
+            right_profile = right.near_cover_profile()
+            for mask in range(1 << (left.n * right.n)):
+                chosen = {
+                    cell
+                    for cell in range(left.n * right.n)
+                    if mask & (1 << cell)
+                }
+                if not left.is_typed_fibre_feasible(right, chosen):
+                    continue
+                row_sizes = [
+                    sum(g * right.n <= cell < (g + 1) * right.n for cell in chosen)
+                    for g in range(left.n)
+                ]
+                column_sizes = [
+                    sum(cell % right.n == h for cell in chosen)
+                    for h in range(right.n)
+                ]
+                self.assertLessEqual(
+                    sum(right_profile[size] for size in row_sizes)
+                    + sum(left_profile[size] for size in column_sizes),
+                    left.n * right.n,
+                )
+
+    def test_typed_profile_exact_isolation_slack(self) -> None:
+        for factor, chosen_pairs, expected_slack in (
+            (cycle(4), {(g, g) for g in range(4)}, 8),
+            (cycle(5), {(g, 2 * g % 5) for g in range(5)}, 5),
+        ):
+            profile = factor.near_cover_profile()
+            row_sets = [
+                {h for x, h in chosen_pairs if x == g}
+                for g in range(factor.n)
+            ]
+            column_sets = [
+                {g for g, y in chosen_pairs if y == h}
+                for h in range(factor.n)
+            ]
+            row_remainders = []
+            for g, row in enumerate(row_sets):
+                imported = set().union(
+                    *(row_sets[x] for x in factor.open_neighborhood(g))
+                )
+                row_remainders.append(len(imported) - profile[len(row)])
+
+            column_excess = []
+            column_isolates = []
+            for column in column_sets:
+                closed = set().union(
+                    *(factor.closed_neighborhood(g) for g in column)
+                )
+                open_union = set().union(
+                    *(factor.open_neighborhood(g) for g in column)
+                )
+                column_excess.append(
+                    factor.n - profile[len(column)] - len(closed)
+                )
+                column_isolates.append(len(column - open_union))
+
+            scalar_slack = (
+                factor.n * factor.n
+                - sum(profile[len(row)] for row in row_sets)
+                - sum(profile[len(column)] for column in column_sets)
+            )
+            self.assertEqual(scalar_slack, expected_slack)
+            self.assertEqual(
+                scalar_slack,
+                sum(row_remainders)
+                + sum(column_excess)
+                + sum(column_isolates),
+            )
+
+    def test_typed_fractional_charging_identity(self) -> None:
+        for factor, chosen_pairs, expected_gap in (
+            (cycle(4), {(g, g) for g in range(4)}, Fraction(4, 9)),
+            (cycle(5), {(g, 2 * g % 5) for g in range(5)}, Fraction(0)),
+        ):
+            weight = Fraction(1, 3)
+            total = factor.n * weight
+            rows = [
+                {h for x, h in chosen_pairs if x == g}
+                for g in range(factor.n)
+            ]
+            columns = [
+                {g for g, y in chosen_pairs if y == h}
+                for h in range(factor.n)
+            ]
+
+            energy_h = Fraction(0)
+            for g, row in enumerate(rows):
+                imported = set().union(
+                    *(rows[x] for x in factor.open_neighborhood(g))
+                )
+                target = set(range(factor.n)) - imported
+                energy_h += weight * (
+                    factor.domination_number(target) - weight * len(target)
+                )
+
+            energy_g = Fraction(0)
+            for h, column in enumerate(columns):
+                imported = set().union(
+                    *(columns[y] for y in factor.open_neighborhood(h))
+                )
+                target = set(range(factor.n)) - imported
+                energy_g += weight * (
+                    factor.domination_number(target) - weight * len(target)
+                )
+
+            kernel = sum(
+                weight + weight - weight * weight
+                for _ in chosen_pairs
+            )
+            gap = kernel - total * total
+            complement = sum(
+                (1 - weight) * (1 - weight)
+                for _ in chosen_pairs
+            )
+            self.assertEqual(gap, expected_gap)
+            self.assertGreaterEqual(gap, max(energy_h, energy_g))
+            self.assertEqual(
+                len(chosen_pairs),
+                total * total + complement + gap,
+            )
+
+    def test_isolation_to_escape_charging_is_sharp(self) -> None:
+        def oriented_terms(
+            left: Graph,
+            right: Graph,
+            chosen_pairs: set[tuple[int, int]],
+        ) -> tuple[int, int, int]:
+            rows = [
+                {h for x, h in chosen_pairs if x == g}
+                for g in range(left.n)
+            ]
+            columns = [
+                {g for g, y in chosen_pairs if y == h}
+                for h in range(right.n)
+            ]
+            isolated = sum(
+                not (left.open_neighborhood(g) & columns[h])
+                for g, h in chosen_pairs
+            )
+            collisions = sum(
+                max(len(left.open_neighborhood(x) & columns[h]) - 1, 0)
+                for x in range(left.n)
+                for h in range(right.n)
+            )
+            cross_redundancy = 0
+            for x in range(left.n):
+                imported = set().union(
+                    *(rows[g] for g in left.open_neighborhood(x))
+                )
+                vertically_covered = set().union(
+                    *(right.closed_neighborhood(h) for h in rows[x])
+                )
+                cross_redundancy += len(imported & vertically_covered)
+            return isolated, collisions, cross_redundancy
+
+        for left, right, chosen_pairs in (
+            (
+                cycle(5),
+                cycle(5),
+                {(g, 2 * g % 5) for g in range(5)},
+            ),
+            (
+                path(2),
+                path(3),
+                {(0, 0), (1, 2)},
+            ),
+        ):
+            i_g, omega_g, x_h = oriented_terms(left, right, chosen_pairs)
+            i_h, omega_h, x_g = oriented_terms(
+                right,
+                left,
+                {(h, g) for g, h in chosen_pairs},
+            )
+            product_graph = left.cartesian_product(right)
+            chosen = {g * right.n + h for g, h in chosen_pairs}
+            two_sided_private = 0
+            for g, h in chosen_pairs:
+                source = g * right.n + h
+                horizontal = any(
+                    product_graph.closed_neighborhood(x * right.n + h) & chosen
+                    == {source}
+                    for x in left.open_neighborhood(g)
+                )
+                vertical = any(
+                    product_graph.closed_neighborhood(g * right.n + y) & chosen
+                    == {source}
+                    for y in right.open_neighborhood(h)
+                )
+                two_sided_private += horizontal and vertical
+
+            lower_bound = (
+                i_g
+                + i_h
+                - len(chosen_pairs)
+                - 2 * omega_g
+                - 2 * omega_h
+                - x_g
+                - x_h
+            )
+            self.assertEqual(two_sided_private, len(chosen_pairs))
+            self.assertEqual(lower_bound, two_sided_private)
 
     def test_bidirectional_blocker_certifies_small_p4_pairs(self) -> None:
         right = path(4)

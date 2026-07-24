@@ -2,14 +2,15 @@
 
 ## Status
 
-**Exact labelled inequality and a new successor relaxation; universal value
-open.** This is the minimal information that the zero-factor combined LP
+**Exact labelled relaxation with three new product-specific bridges;
+universal value open.** This is the minimal information that the zero-factor combined LP
 discarded: a coordinate imported from a neighboring row covers only that
 coordinate, while a coordinate owned in the row covers its entire closed
 neighborhood.
 
-No improvement beyond the `c/2` baseline below is claimed. Any campaign on
-this parameter must first test the asymmetric translate-cover Cayley graphs.
+No improved universal constant is claimed. The mandatory asymmetric and
+comparable-scale robust Cayley tests are now passed by the partial-cover
+profile theorem in `../typed-partial-cover/`.
 
 ## Exact row condition
 
@@ -114,6 +115,38 @@ and its column analogue are exact intermediate defect parameters:
 Any escape-label strengthening should track the repair owners of the missed
 sets, because private-corner dynamics only exists once those sets vanish.
 
+## Subsequent exact bridges
+
+Three later theorems make the labels quantitatively useful.
+
+1. The near-cover profiles
+
+   `u_K(t)=min_{|C|≤t}|V(K)\N_K[C]|`
+
+   satisfy, for every typed set,
+
+   `Σ_g u_H(|A_g|)+Σ_hu_G(|B_h|)≤|G||H|`.
+
+   The proof has an exact defect identity whose final terms count isolated
+   induced fibres. Robust random Cayley graphs force this profile bound far
+   above `γ(G)γ(H)` at all growing pairs of scales.
+2. For fractional packings `q,p`, the exact correlated inequality is
+
+   ```text
+   |A|≥PQ+Σ_A(1-q_g)(1-p_h)+max{E_H,E_G},
+   E_H=Σ_gq_g[γ_H(H\V_g)-p(H\V_g)],
+   ```
+
+   with a symmetric definition of `E_G`. For half-integral 2-packings every
+   nonzero repair gap costs at least one half.
+3. For an actual product dominator, isolated fibres are charged to
+   external-private escape obligations, repeated same-label imports, or
+   cross-coordinate redundancy. This produces a quantitative lower bound
+   on the number of points carrying the labelled mixed-distance escape rule.
+
+See `../typed-partial-cover/`, `../typed-fractional-charging/`, and
+`../isolation-escape-charging/`.
+
 ## Strictness
 
 The relaxation is genuinely weaker than product domination. Let
@@ -151,13 +184,16 @@ is a perfect dominating set, and the two points form a directed escape
 
 `Θ(G,H)≥γ(G)γ(H)`                                            (10)
 
-would imply Vizing's conjecture and is not claimed. First determine `Θ`
-exactly or bound it on:
+would imply Vizing's conjecture and is not claimed. The Cayley benchmark is
+now cleared. The remaining hard tests are:
 
-1. the asymmetric-scale translate-cover Cayley pair that kills `Ξ`;
-2. the connected formal-ratio safe-port family; and
-3. `K₂□P₃` and `C₅□C₅`, which realize the shortest and odd escape cycles.
+1. the connected formal-ratio safe-port family;
+2. `K₂□P₃` and `C₅□C₅`, which realize the shortest and odd escape cycles;
+3. typed systems in which the profile slack is concentrated entirely in
+   isolated fibres.
 
-The immediate theorem-shaped target is to improve the repair factor two in
-(8) using both row and column missed-set corrections. Finite instances may
-falsify proposed strengthenings but are not evidence for the conjecture.
+The immediate theorem-shaped target is no longer a better repair factor.
+It is to combine the quantized fractional repair energies with the fixed
+`K₁/K₃` terminal atoms, or to prove a closure/path-length theorem for the
+dense set of labelled escape obligations. Finite instances may falsify
+proposed strengthenings but are not evidence for the conjecture.

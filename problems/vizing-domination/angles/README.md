@@ -53,11 +53,22 @@
 - `typed-fibre-relaxation/` — **new labelled GO candidate:** retains the
   actual correlated row-coordinate sets and their subset-domination burden,
   the minimal distinction lost by all averaged blocker/fractional lifts.
+- `typed-partial-cover/` — **proved two-axis profile theorem:** an exact
+  near-cover defect identity retains fibre locations, and robust random
+  Cayley graphs force the typed value above the Vizing scale at every pair
+  of growing scales.
+- `typed-fractional-charging/` — **proved correlated bridge:** exact
+  fractional charging adds quantized row/column repair energies to the
+  rank-one product term; equality forces packing-saturated exact-one
+  repairs.
+- `isolation-escape-charging/` — **proved product bridge:** fibre isolation
+  is charged exactly to private-corner escape obligations, same-label
+  collisions, or cross-coordinate redundancy.
 - `anchored-domination/` — **exact duality and STOP results:** the optimized
   saturation-defect slice is an anchored fractional-domination parameter and
   stays below Steiner on formal-ratio mixtures; even independently capped
   rank-one diffuseness fails jointly with both anchored arms.
 
-Next work must use the full alternating fibre labels or another constraint
-not implied by factor dominator distributions and product fractional
-domination.
+Next work should couple the half-integral repair energy to the `K₁/K₃`
+terminal atoms, or prove that labelled escape paths close before their
+owners can dissipate into collision and cross-redundancy defects.

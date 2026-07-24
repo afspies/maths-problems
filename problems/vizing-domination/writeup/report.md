@@ -27,7 +27,11 @@ the blocker's saturation-defect algebra, proves exact anchored and capped
 profile counterfamilies even after connectedization, extracts labelled
 mixed-distance escape cycles from two-sided privacy, and shows that a
 stronger combined product-packing/blocker LP has zero universal factor on
-connected vertex-transitive Cayley graph pairs.
+connected vertex-transitive Cayley graph pairs. A sixth session proves exact
+typed partial-cover and fractional repair-energy inequalities, shows that
+the typed relaxation clears the robust Cayley obstruction at every pair of
+scales, and quantitatively charges isolated fibres to labelled corner-escape
+obligations, collisions, or cross-coordinate redundancy.
 
 ## Definitions
 
@@ -562,8 +566,137 @@ The second follows by repairing each genuinely missed row subset at cost at
 most `|A_g|`. The relaxation is strict: for
 `G=H=K₂⊔K₁`, four swapped-component labels satisfy both cardinality systems
 but do not dominate the product, whose domination number is five. Improving
-the factor-two repair using both row and column missed-set costs is the
-current theorem-shaped target.
+the factor-two repair alone is no longer the target; the label correlations
+support stronger exact inequalities.
+
+## Partial-cover profile and Cayley calibration
+
+Define
+
+`u_K(t)=min_{|C|≤t}|V(K)\N_K[C]|`.
+
+For every typed-feasible incidence set, with row masses `a_g` and column
+masses `b_h`,
+
+`Σ_g u_H(a_g)+Σ_hu_G(b_h)≤|G||H|`.                          (32)
+
+The proof is a two-axis count:
+
+```text
+u_H(a_g)≤|V_g|,
+Σ_g|V_g|=Σ_h|N_G^open(B_h)|
+         ≤Σ_h(|G|-u_G(b_h)).
+```
+
+Moreover, this is an exact defect identity. Its three terms are import
+profile excess, partial-cover suboptimality of the actual column fibres,
+and isolated vertices in the induced column fibres.
+
+For `d`-regular `G`,
+
+`Θ(G,H)≥|G|(t+1)u_H(t)/[u_H(t)+d(t+1)]`.                    (33)
+
+A robust adaptation of the random-translate proof in
+Bollobás--Janson--Riordan Remark 4.3
+[@bollobasJansonRiordan2011, Remark 4.3] constructs connected Cayley graphs on
+`F₂^m` with closed-neighborhood size `k`, domination number asymptotic to
+`(n/k)log k`, and
+
+```text
+u(t)>L,
+t=(n/k)(log k-10 log log k)+O(1),
+L=(log k)^6+O(1).
+```
+
+Equation (33) beats `γ(G)γ(H)` for every pair of growing graphs in this
+robust family, by a diverging factor, and gives at least the Vizing scale
+when the other factor is fixed. Thus the actual labels in `Θ` decisively
+defeat the asymmetric Cayley construction that drives `Ξ` to zero. This
+robust near-cover statement is a new adaptation, not a theorem stated
+verbatim in the cited paper.
+
+## Correlated fractional charging
+
+Let `q,p` be fractional packings on `G,H`, with totals `Q,P`, and put
+
+```text
+C_g=H\V_g,       D_h=G\U_h,
+Z=Σ_{(g,h)∈A}(1-q_g)(1-p_h),
+E_H=Σ_gq_g[γ_H(C_g)-p(C_g)],
+E_G=Σ_hp_h[γ_G(D_h)-q(D_h)].
+```
+
+Then every typed-feasible set of mass `M` satisfies
+
+`M≥PQ+Z+max{E_H,E_G}`.                                      (34)
+
+The exact row identity behind (34) is
+
+```text
+Σ_A(q_g+p_h-q_gp_h)-PQ
+ =Σ_gq_g[|A_g|-p(C_g)+o_g]
+  +Σ_xp(A_x)[1-q(N_G[x])],
+```
+
+where `o_g` is the nonnegative weighted overlap among imported neighbouring
+fibres. The symmetric identity gives `E_G`.
+
+For a minimum dominator `T` of a target `C`,
+
+```text
+γ_K(C)-p(C)
+ =Σ_{t∈T}[1-p(C∩N[t])]
+  +Σ_{v∈C}p_v(|T∩N[v]|-1).                                 (35)
+```
+
+Thus zero repair energy means every repair owner is packing-saturated and
+every positive-packing target is covered exactly once. For half of an
+integral 2-packing, every failure costs at least one half.
+
+The cap-only consequence has the corrected denominator
+
+`M≥PQ/(s+t-st)`.                                             (36)
+
+It is exactly the known rank-one product packing and remains a STOP. The
+formal-ratio counterfamily keeps it at most
+
+`(-247+37√73)/132≈0.523698<c`.
+
+## Isolation-to-escape charging
+
+For an actual product dominator, let `I_G` count selected points isolated
+inside their fixed-label `G`-fibres. Define
+
+```text
+r_{x,h}=|N_G(x)∩B_h|,
+Ω_G=Σ_{x,h}(r_{x,h}-1)_+,
+X_H=Σ_x|V_x∩N_H[A_x]|.
+```
+
+If `Bad_G⊆I_G` consists of points with no horizontal external-private
+neighbor, then
+
+`|Bad_G|≤2Ω_G+X_H`.                                         (37)
+
+Choose one horizontal neighbor target for each bad point. If it has two or
+more same-label owners, charge the collision; otherwise its additional
+dominator must lie in the arrival row and charges `X_H`.
+
+Applying (37) in both orientations, the number `T` of fibre-isolated points
+with external private neighbors in both directions satisfies
+
+```text
+|T|≥[
+ I_G+I_H-|D|
+ -2Ω_G-2Ω_H-X_H-X_G
+]_+.                                                        (38)
+```
+
+Every point counted by (38) carries the labelled mixed `(1,2)` or `(2,1)`
+private-corner escape obligation. Equation (38) is exact on the
+`C₅□C₅` 5-cycle and the `K₂□P₃` 2-cycle. The remaining obstruction is
+closure: escape owners can leave `T`, and bounded indegree does not bound
+the length of the resulting in-trees.
 
 ## Withdrawn 0.5809 claim
 
@@ -585,7 +718,7 @@ From `problems/vizing-domination/harness` run:
 python3 -m unittest -v
 ```
 
-Thirty exact tests check named graph products, domination and `k`-function
+Thirty-five exact tests check named graph products, domination and `k`-function
 definitions, Steiner's subset inequality, equation (3), the exact
 `Q(√73)` threshold identities, the withdrawn algebra witness, and the
 five-vertex `k=3` counterexample together with corrected inequality (5).
@@ -594,8 +727,10 @@ classifications through five vertices, check the all-level hierarchy gadget,
 validate the split-graph fractional examples, and exercise the coordinate-hole
 adversarial skeleton. They also check the atomic external-private example,
 the necessity of additivity, the `C₅□C₅` corner cycle, and small `P₄`
-blocker targets. These are hygiene and adversarial checks, not a finite proof
-of the universal conjecture.
+blocker targets. New exhaustive fixtures verify (32), its exact isolation
+slack, (34), the small typed relaxation values, and the exact surd gap after
+the corrected cap denominator. These are hygiene and adversarial checks, not
+a finite proof of the universal conjecture.
 
 ## Relation to prior work and next gate
 
@@ -610,6 +745,8 @@ theorems further meet the gate, but their first aggregate consequence
 depends on factor order. Pure higher-rank fractional packing and the
 standalone blocker lift are also closed. The factor-marginal
 blocker/diffuseness hybrid and the stronger combined lift are now closed as
-well. Future work must quantify the actual labelled escape-cycle dynamics
-inside the typed fibre relaxation and improve its factor-two missed-set
-repair.
+well. The typed profile and fractional energies now clear the mandatory
+Cayley obstruction, and (38) turns isolation into a density of labelled
+escape obligations. Future work must couple the half-integral repair energy
+to the `K₁/K₃` terminal atoms or prove that escape paths close before their
+owners dissipate into collision and cross-coordinate redundancy.

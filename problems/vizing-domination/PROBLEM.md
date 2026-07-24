@@ -103,8 +103,24 @@ its precise failure is audited in
 - The surviving typed fibre relaxation keeps the actual row label sets
   `A_g` and their imports `V_g=⋃_{x∈N(g)}A_x`. Product domination implies
   `|A_g|≥γ_H(V(H)\V_g)` in every row, with a symmetric column condition.
-  Its universal value is open and must first survive the translate-cover
-  Cayley benchmark.
+  Its universal value is open.
+- The near-cover profile `u_K(t)=min_{|C|≤t}|V(K)\N[C]|` satisfies the
+  exact two-axis inequality
+  `Σ_g u_H(|A_g|)+Σ_hu_G(|B_h|)≤|G||H|`, with a defect identity whose
+  final term counts isolated induced fibres. A robust adaptation of the
+  random translate-cover construction proves that this bound clears every
+  two-scale pair in the Cayley family that kills `Ξ`, by a diverging factor
+  when both factors grow.
+- Fractional factor packings satisfy the exact correlated typed inequality
+  `|A|≥PQ+Σ_A(1-q_g)(1-p_h)+max{E_H,E_G}`, where the energies measure
+  subset-domination minus packing mass in the actual remaining row and
+  column targets. For half-integral 2-packings, every nonzero repair gap
+  costs at least one half.
+- For an actual product dominator, every fibre-isolated point without an
+  external private neighbor charges to a repeated same-label import or
+  cross-coordinate redundancy. Consequently a quantitative set of points
+  carries the labelled mixed-distance escape obligation; the remaining gap
+  is to close or bound the length of those escape paths.
 - The formal-ratio three-arm counterfamily can also be connected through
   safe zero-weight ports while preserving `γ,ρ,ρ²` and only decreasing its
   anchored/capped values. Connectedness alone does not repair the marginal
@@ -133,12 +149,12 @@ its precise failure is audited in
 
 ## First steps
 
-1. Quantify the mixed escape-cycle lemma: force many disjoint cycles or
-   charge failures of two-sided privacy to the exact Steiner defect budget.
-2. Calibrate the typed fibre-set relaxation on the asymmetric Cayley pair,
-   then add successive red-diagonal/blue-cross-zero escape transitions.
-3. Seek a constraint tied to one actual product dominator; averaged factor
-   dominator distributions plus fractional product domination have zero
-   universal strength.
+1. Combine the half-integral row/column repair energies with the fixed
+   `K₁/K₃` terminal atoms at formal Steiner equality.
+2. Prove that a positive fraction of labelled escape owners remain in the
+   escape set, or that every departure charges collision,
+   cross-coordinate redundancy, or an exact Steiner defect.
+3. Use the near-cover and fractional defect identities only with actual
+   fibre labels; their scalar relaxations remain insufficient on `C₄□C₄`.
 4. Do not pursue additive `k`-packing, saturation-defect, capped-rank-one, or
    ordinary-packing residual slices further: each now has an exact STOP.

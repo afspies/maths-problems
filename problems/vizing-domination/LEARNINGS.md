@@ -206,3 +206,63 @@ fractional packing.
 Do not return to the canonical or optimized saturation defect, shared or
 independent capped rank-one tensors, row-weight density alone, the
 ordinary-packing residual slice of `Λ`, the full `Λ`, or the combined `Ξ`.
+
+## Session 6 deltas
+
+- The typed relaxation has an exact two-axis near-cover theorem. With
+  `u_K(t)=min_{|C|≤t}|V(K)\N[C]|`,
+
+  `Σ_g u_H(|A_g|)+Σ_hu_G(|B_h|)≤|G||H|`.
+
+  Its exact slack consists of import-profile excess, partial-cover
+  suboptimality, and isolated induced fibres.
+- For a `d`-regular first factor,
+
+  `Θ(G,H)≥|G|(t+1)u_H(t)/[u_H(t)+d(t+1)]`.
+
+  A robust adaptation of the Bollobás--Janson--Riordan random-translate
+  argument constructs connected `F₂^m` Cayley graphs for which this lower
+  bound beats `γ(G)γ(H)` for every pair of growing scales. The asymmetric
+  Cayley obstruction to `Ξ` is therefore decisively absent from `Θ`.
+- Do not claim that the global resilience
+  `min_t u(t)/(γ-t)` is large on those Cayley graphs. The proof controls the
+  profile up to `(1-o(1))γ`, but a singleton private set could collapse the
+  final `o(γ)` window and make the global parameter one.
+- Typed fibres obey the exact fractional inequality
+
+  `|A|≥PQ+Σ_A(1-q_g)(1-p_h)+max{E_H,E_G}`.
+
+  The repair energies are subset-domination minus packing mass on the actual
+  remaining targets. For half-integral 2-packings they are quantized in
+  units of one half, and equality forces packing-saturated exact-one repairs.
+- The cap-only consequence uses the corrected denominator `s+t-st`, not the
+  earlier weaker `s+t`. The formal-ratio counterfamily still kills it:
+  `s+t-st≥(s+t)/2` leaves the exact upper value at most
+  `(-247+37√73)/132≈0.523698<c`. Thus the energy terms, not the corrected
+  scalar tensor, are the live content.
+- Fibre isolation now has a rigorous product-specific charge. A
+  directionally isolated point without an external private neighbor charges
+  to a same-label collision or a cross-coordinate redundancy. In both
+  orientations this yields a quantitative set of labelled private-corner
+  escape obligations, exact on the `C₅□C₅` 5-cycle and `K₂□P₃` 2-cycle.
+- The first `K₁/K₃` coupling is exact but too weak. Triangle parity gives
+  `Z+E_H≥τ_HQ/2`, yet at the formal ratios the resulting normalized bound is
+  only `b(2b-a)=(10-√73)/9≈0.16178`. Row and column charges cannot be
+  added. The missing lemma must prevent provider reuse across the many
+  fibre-indexed triangle systems or exclude the large zero-packing-support
+  mass in the formal ledger.
+- Escape density is not yet cycle density. Owners can leave the good escape
+  set, and bounded indegree does not control arbitrarily long in-trees.
+
+## Revised next move after session 6
+
+1. Combine half-integral repair-energy equality with the fixed `K₁/K₃`
+   terminal atoms and balanced row exchanges at formal Steiner equality.
+2. Prove an escape closure/path-length lemma: an owner leaving the
+   two-sided-private set must charge new collision, cross-redundancy, or one
+   of the exact Steiner defects.
+3. Keep the full near-cover profile, rather than replacing it by the fragile
+   global resilience minimum.
+
+Do not spend another session on the scalar profile inequality, cap
+denominator, or bare escape counts. Their exact limitations are now known.

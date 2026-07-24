@@ -44,6 +44,9 @@ class Graph:
                 answer.add(a)
         return frozenset(answer)
 
+    def open_neighborhood(self, v: int) -> frozenset[int]:
+        return self.closed_neighborhood(v) - {v}
+
     def dominates(self, chosen: Iterable[int], target: Iterable[int] | None = None) -> bool:
         chosen_set = frozenset(chosen)
         if not chosen_set <= frozenset(range(self.n)):
@@ -72,6 +75,116 @@ class Graph:
             for g in range(self.n):
                 edges.add((vertex(g, h1), vertex(g, h2)))
         return Graph.from_edges(self.n * other.n, edges)
+
+    def near_cover_profile(self) -> tuple[int, ...]:
+        """Return ``u(t)=min_{|C|<=t}|V\\N[C]|`` for ``0<=t<=n``."""
+
+        vertices = frozenset(range(self.n))
+        answer = []
+        for size in range(self.n + 1):
+            answer.append(
+                min(
+                    len(
+                        vertices
+                        - frozenset().union(
+                            *(self.closed_neighborhood(v) for v in chosen)
+                        )
+                    )
+                    for chosen in combinations(range(self.n), size)
+                )
+            )
+        return tuple(answer)
+
+    def is_typed_fibre_feasible(
+        self,
+        other: "Graph",
+        chosen: Iterable[int],
+    ) -> bool:
+        """Check the row and column cardinality conditions defining ``Theta``."""
+
+        chosen_set = frozenset(chosen)
+        if not chosen_set <= frozenset(range(self.n * other.n)):
+            raise ValueError("chosen set contains an invalid product vertex")
+        rows = [set() for _ in range(self.n)]
+        columns = [set() for _ in range(other.n)]
+        for cell in chosen_set:
+            g, h = divmod(cell, other.n)
+            rows[g].add(h)
+            columns[h].add(g)
+
+        for g in range(self.n):
+            imported = set().union(
+                *(rows[x] for x in self.open_neighborhood(g))
+            )
+            if len(rows[g]) < other.domination_number(
+                set(range(other.n)) - imported
+            ):
+                return False
+
+        for h in range(other.n):
+            imported = set().union(
+                *(columns[y] for y in other.open_neighborhood(h))
+            )
+            if len(columns[h]) < self.domination_number(
+                set(range(self.n)) - imported
+            ):
+                return False
+        return True
+
+    def typed_fibre_number(self, other: "Graph") -> int:
+        """Return the exact small-instance typed fibre relaxation ``Theta``.
+
+        This is exponential in ``self.n * other.n`` and is intended only for
+        conjecture hygiene and adversarial falsification.
+        """
+
+        left_all = frozenset(range(self.n))
+        right_all = frozenset(range(other.n))
+        left_gamma = {
+            target_mask: self.domination_number(
+                v for v in range(self.n) if target_mask & (1 << v)
+            )
+            for target_mask in range(1 << self.n)
+        }
+        right_gamma = {
+            target_mask: other.domination_number(
+                h for h in range(other.n) if target_mask & (1 << h)
+            )
+            for target_mask in range(1 << other.n)
+        }
+
+        def feasible(chosen: tuple[int, ...]) -> bool:
+            rows = [set() for _ in range(self.n)]
+            columns = [set() for _ in range(other.n)]
+            for cell in chosen:
+                g, h = divmod(cell, other.n)
+                rows[g].add(h)
+                columns[h].add(g)
+
+            for g in range(self.n):
+                imported = set().union(
+                    *(rows[x] for x in self.open_neighborhood(g))
+                )
+                missed_type = right_all - imported
+                target_mask = sum(1 << h for h in missed_type)
+                if len(rows[g]) < right_gamma[target_mask]:
+                    return False
+
+            for h in range(other.n):
+                imported = set().union(
+                    *(columns[y] for y in other.open_neighborhood(h))
+                )
+                missed_type = left_all - imported
+                target_mask = sum(1 << g for g in missed_type)
+                if len(columns[h]) < left_gamma[target_mask]:
+                    return False
+            return True
+
+        cells = range(self.n * other.n)
+        for size in range(self.n * other.n + 1):
+            if any(feasible(chosen) for chosen in combinations(cells, size)):
+                return size
+        raise AssertionError("the full product vertex set is typed-feasible")
 
     def is_two_packing(self, chosen: Iterable[int]) -> bool:
         chosen_tuple = tuple(chosen)

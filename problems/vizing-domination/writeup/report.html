@@ -96,8 +96,12 @@
   P<sub>4</sub>. Finally, we correct the lift’s deficit algebra, construct
   connected formal-ratio counterfamilies to all marginal repairs, extract
   labelled distance-three escape cycles, and prove that a stronger combined
-  lift has zero universal factor on connected Cayley graph pairs. No improved
-  universal constant is claimed.
+  lift has zero universal factor on connected Cayley graph pairs. We then
+  prove exact typed partial-cover and fractional repair-energy inequalities,
+  show that the typed relaxation clears the robust Cayley obstruction at
+  every pair of scales, and charge fibre isolation quantitatively to labelled
+  escape obligations, collisions, or cross-coordinate redundancy. No
+  improved universal constant is claimed.
 </div>
 
 <h2>1 · Setup</h2>
@@ -480,22 +484,98 @@ repaired at total cost at most the original label count, giving</p>
 <p>The relaxation is strict on
 (K<sub>2</sub>⊔K<sub>1</sub>)□(K<sub>2</sub>⊔K<sub>1</sub>):
 four swapped-component labels pass both cardinality systems, while the
-product domination number is five. The live target is to improve the
-factor-two repair using both row and column missed-set costs.</p>
+product domination number is five. The live information is not a better
+repair factor but the correlated labels retained by the following exact
+inequalities.</p>
 
-<h2>15 · Exact verification and next gate</h2>
+<h2>15 · Partial-cover profile and Cayley calibration</h2>
+<p>Define <var>u</var><sub>K</sub>(<var>t</var>) as the least number of
+vertices left uncovered by at most <var>t</var> closed neighborhoods. Every
+typed incidence set, with row masses <var>a</var><sub>g</sub> and column
+masses <var>b</var><sub>h</sub>, satisfies</p>
+<div class="eqn">
+  <span class="body">Σ<sub>g</sub>u<sub>H</sub>(a<sub>g</sub>)
+  +Σ<sub>h</sub>u<sub>G</sub>(b<sub>h</sub>)≤|G||H|.</span>
+  <span class="no">(18)</span>
+</div>
+<p>The proof has an exact defect identity: its three terms are import-profile
+excess, partial-cover suboptimality, and isolated induced fibres. For a
+<var>d</var>-regular first factor,</p>
+<div class="eqn">
+  <span class="body">Θ(G,H)≥|G|(t+1)u<sub>H</sub>(t) /
+  [u<sub>H</sub>(t)+d(t+1)].</span>
+  <span class="no">(19)</span>
+</div>
+<p>A robust adaptation of the Newman/Bollobás–Janson–Riordan random-translate
+argument constructs connected Cayley graphs on F<sub>2</sub><sup>m</sup>
+with t=(n/k)(log k−10 log log k)+O(1),
+u(t)&gt;(log k)<sup>6</sup>, and γ∼(n/k)log k. Equation (19)
+beats γ(G)γ(H) for every pair of growing graphs in this family, at arbitrary
+relative scales. Thus the labels in Θ decisively defeat the Cayley
+construction that sends Ξ to zero. This robust profile statement is a new
+adaptation, not a theorem stated verbatim in the cited paper.</p>
+
+<h2>16 · Correlated fractional repair energy</h2>
+<p>For factor fractional packings <var>q,p</var>, totals
+<var>Q,P</var>, and actual remaining row and column targets
+<var>C</var><sub>g</sub>,<var>D</var><sub>h</sub>, define</p>
+<div class="eqn">
+  <span class="body">Z=Σ<sub>(g,h)∈A</sub>(1−q<sub>g</sub>)(1−p<sub>h</sub>),
+  &nbsp; E<sub>H</sub>=Σ<sub>g</sub>q<sub>g</sub>
+  [γ<sub>H</sub>(C<sub>g</sub>)−p(C<sub>g</sub>)],</span>
+  <span class="no">(20)</span>
+</div>
+<p>and E<sub>G</sub> symmetrically. Exact double counting gives</p>
+<div class="eqn">
+  <span class="body">|A|≥PQ+Z+max{E<sub>H</sub>,E<sub>G</sub>}.</span>
+  <span class="no">(21)</span>
+</div>
+<p>Each repair gap splits into unsaturated repair owners and positive-packing
+targets covered more than once. For half of an integral 2-packing every
+nonzero gap costs at least one half. The cap-only corollary has denominator
+s+t−st, but the formal-ratio counterfamily still bounds it by
+(−247+37√73)/132≈0.523698&lt;c. The energy terms are the live content.</p>
+<p>On a terminal K<sub>1</sub>/K<sub>3</sub> equality set, triangle parity
+gives Z+E<sub>H</sub>≥τQ/2. This is rigorous but yields only
+(10−√73)/9≈0.16178 at the formal ratios. Provider reuse across different
+fibre-indexed triangle systems is the remaining obstruction.</p>
+
+<h2>17 · Isolation-to-escape density</h2>
+<p>Let I<sub>G</sub> count selected points isolated in their fixed-label
+G-fibres. Let Ω<sub>G</sub> count repeated same-label horizontal imports and
+X<sub>H</sub> count imported labels redundantly covered inside their arrival
+row. Points lacking a horizontal external-private neighbor satisfy</p>
+<div class="eqn">
+  <span class="body">|Bad<sub>G</sub>|≤2Ω<sub>G</sub>+X<sub>H</sub>.</span>
+  <span class="no">(22)</span>
+</div>
+<p>Applying this in both orientations, the number T of fibre-isolated points
+with external private neighbors in both directions obeys</p>
+<div class="eqn">
+  <span class="body">|T|≥[I<sub>G</sub>+I<sub>H</sub>−|D|
+  −2Ω<sub>G</sub>−2Ω<sub>H</sub>−X<sub>G</sub>−X<sub>H</sub>]<sub>+</sub>.</span>
+  <span class="no">(23)</span>
+</div>
+<p>Every such point carries a labelled mixed (1,2) or (2,1) corner escape
+obligation. The bound is exact on the C<sub>5</sub>□C<sub>5</sub> 5-cycle
+and K<sub>2</sub>□P<sub>3</sub> 2-cycle. Escape density is not yet cycle
+density: owners can leave T, and bounded indegree permits long in-trees.</p>
+
+<h2>18 · Exact verification and next gate</h2>
 <pre><code>$ cd problems/vizing-domination/harness
 $ python3 -m unittest -v
-Ran 30 tests
+Ran 35 tests
 OK</code></pre>
 <p>The checks use integers, rational numbers, and exact elements of
 ℚ(√73). They validate definitions and finite witnesses, not the universal
 conjecture. The gate is met by the capacity-two subset inequality and formal
 fibre-incidence classification, and strengthened by the external-private and
 row hole-packing theorems. Every averaged blocker/fractional hybrid attempted
-here is now closed. Further work must use the typed correlated fibre sets,
-their missed-set repair costs, and the successive cell labels along escape
-paths.</p>
+here is now closed. The typed profile clears the mandatory Cayley benchmark,
+and isolation now forces a quantitative density of labelled escape
+obligations. Further work must prove provider non-reuse across terminal
+systems or close the labelled escape paths before their owners dissipate
+into collision and cross-coordinate redundancy.</p>
 
 <div class="footer">
   <p><strong>Status:</strong> partial-results. Vizing’s domination conjecture

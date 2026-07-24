@@ -1,166 +1,216 @@
 # Handoff — Vizing’s domination conjecture
 
-Read these session-five notes first:
+Read these session-six notes first:
 
-- `angles/anchored-domination/README.md`
-- `angles/bidirectional-blocker/README.md`
-- `angles/combined-blocker-packing/README.md`
-- `angles/cross-row-hole-packing/README.md`
+- `angles/typed-fibre-relaxation/README.md`
+- `angles/typed-partial-cover/README.md`
+- `angles/typed-fractional-charging/README.md`
+- `angles/isolation-escape-charging/README.md`
 - `angles/corner-dynamics/README.md`
-- `angles/external-private-holes/README.md`
+- `angles/incidence-balance/README.md`
 
-## Critical correction
+The best universal constant remains
 
-For a fractional packing `q` on `H`, write `Q=Σq` and
+`c=(5+√73)/24≈0.5643`.
 
-`Δ_H(q)=min_{T dominates H}Σ_{t∈T}[1-q(N[t])]`.
+The withdrawn `0.5809` claim is not a theorem and was not used.
+
+## Decisive session-six theorems
+
+### 1. Two-axis near-cover profile
+
+For
+
+`u_K(t)=min_{|C|≤t}|V(K)\N_K[C]|`,
+
+every row-typed incidence set `A`, with row masses `a_g` and column masses
+`b_h`, satisfies
+
+`Σ_g u_H(a_g)+Σ_hu_G(b_h)≤|G||H|`.                          (1)
+
+The exact defect identity is
+
+```text
+|G||H|-Σ_gu_H(a_g)-Σ_hu_G(b_h)
+=Σ_g(|V_g|-u_H(a_g))
+ +Σ_h[|G|-u_G(b_h)-|N_G[B_h]|]
+ +Σ_h|B_h\N_G^open(B_h)|.
+```
+
+The final term is induced-fibre isolation. On the `C₅□C₅` perfect code,
+all five units of slack are isolation.
+
+For `d`-regular `G`,
+
+`Θ(G,H)≥|G|(t+1)u_H(t)/[u_H(t)+d(t+1)]`.                    (2)
+
+There is also a fractional-packing-weighted version in the angle note.
+
+### 2. Robust Cayley benchmark cleared
+
+A new robust adaptation of the Newman/Bollobás--Janson--Riordan random-set
+argument gives connected Cayley graphs on `F₂^m`, with
+
+```text
+n=2^m,
+k=floor(n/m²),
+q=n/k,
+ℓ=log k,
+t*=floor(q(ℓ-10 log ℓ)),
+L=floor(ℓ⁶),
+u(t*)>L,
+t*<γ≤q(ℓ+1).
+```
+
+Equation (2) proves
+
+`Θ(G,H)/(γ(G)γ(H))→∞`
+
+for every pair of growing graphs from this robust family, regardless of
+relative scale. If one factor is fixed, the liminf is at least
+`|G|/γ(G)≥1`.
+
+Thus the asymmetric Cayley construction that drives `Ξ` to zero is a hard
+PASS for `Θ`, not an obstruction.
+
+Do not claim that the global minimum
+
+`min_{t<γ}u(t)/(γ-t)`
+
+is large. The construction leaves an `o(γ)` final window where a singleton
+private set could make it one.
+
+### 3. Correlated fractional repair energy
+
+For factor fractional packings `q,p`, totals `Q,P`, define
+
+```text
+C_g=H\V_g,       D_h=G\U_h,
+Z=Σ_{(g,h)∈A}(1-q_g)(1-p_h),
+E_H=Σ_gq_g[γ_H(C_g)-p(C_g)],
+E_G=Σ_hp_h[γ_G(D_h)-q(D_h)].
+```
 
 Then exactly
 
+`|A|≥PQ+Z+max{E_H,E_G}`.                                    (3)
+
+For a minimum dominator `T` of a target `C`,
+
 ```text
-Δ_H(q)=γ(H)-Q-Ω_H(q),
-Ω_H(q)=max_T[
-  Σ_xq_x(|T∩N[x]|-1)-(|T|-γ(H))
-]≥0.
+γ(C)-p(C)
+=Σ_{t∈T}[1-p(C∩N[t])]
+ +Σ_{v∈C}p_v(|T∩N[v]|-1).
 ```
 
-Hence `Δ_H(q)≤γ(H)-Q`. The canonical half-2-packing at the formal ratios
-can meet Steiner only when this inequality is equality; it can never improve
-the constant. Do not reuse the session-four “deficit above threshold”
-language.
+Hence zero energy means packing-saturated repair owners and exact-one
+coverage of every positive-packing target. For half of an integral
+2-packing, every failure costs at least `1/2`.
 
-## What is now proved
+The maximum in (3) is sharp; `E_H+E_G` is false. The cap-only consequence
+has denominator `s+t-st`, but the formal-ratio counterfamily still bounds it
+by
 
-1. The optimized valid slice
+`(-247+37√73)/132≈0.523698<c`.
 
-   `F_a(H)=max_q[Q+aΔ_H(q)]`
+### 4. Terminal triangle provider charge
 
-   has an optimistic anchored fractional-domination dual. On the augmented
-   uniform split graph,
+For a terminal `K₁/K₃` equality set with `τ` triangle atoms and its
+canonical half-2-packing,
 
-   `F_a(S_{2k,z})=z+max{2,a(k+1)}`,
+`Z+E_H≥τQ/2`.                                                (4)
 
-   and `F_a(C₅)=5/3`, `F_a(L(K₇))=21/11`.
-2. Formal-ratio `C₅,S₂₆,₂,S₂₈,₂` mixtures have
+Odd remaining-target intersection with a triangle charges `E_H`; even
+intersection forces an odd imported provider and charges `Z`.
 
-   `F_a/γ→(1273-115√73)/576≈0.504235<c`.
+This is rigorous but far too weak. At the formal ratios (4) plus (3) gives
+only
 
-   Thus optimizing the saturation-defect slice is a STOP.
-3. The capped packing profile
+`b(2b-a)=(10-√73)/9≈0.16178`,
 
-   `Φ_H(t)=max{Σp:p fractional packing, p_v≤t}`
+leaving `(11√73-65)/72≈0.40255` to Steiner. Row and column charges
+cannot be added. **STOP** for local atom parity alone.
 
-   gives
+The missing provider theorem must use the fact that the terminal triangle
+systems vary with the fibre index. A single selected label should not be
+allowed to pay for arbitrarily many independent odd-import demands without
+creating collision, separation, or private-target slack.
 
-   `γ_f(G□H)≥Φ_G(s)Φ_H(t)/(s+t)`.
+### 5. Isolation-to-escape density
 
-   For `S_{2k,z}`, with `M=binom(2k-1,k-1)`, the profile is exactly
+For a product dominator, let `I_G` count selected points isolated in their
+fixed-label `G`-fibres. Put
 
-   ```text
-   (2M+2k+2z)t,
-   1+(M+z)t,
-   2+zt
-   ```
+```text
+r_{x,h}=|N_G(x)∩B_h|,
+Ω_G=Σ_{x,h}(r_{x,h}-1)_+,
+X_H=Σ_x|V_x∩N_H[A_x]|.
+```
 
-   on the three consecutive intervals cut by
-   `1/(M+2k+z)` and `1/M`.
-4. There are finite additive pairs approaching `(a,b)` in both factors for
-   which both `F_a` arms and the independently optimized capped tensor remain
-   below `c`. The first factor is a bounded
-   `C₅/S₂₆,₂/S₂₈,₂` mixture; the second is an
-   `L(K₇)/S_{2k,z_k}` mixture. The limiting cap arm is at most
+If `Bad_G⊆I_G` lacks horizontal external-private neighbors, then
 
-   `(-247+37√73)/264≈0.261849`.
+`|Bad_G|≤2Ω_G+X_H`.                                         (5)
 
-   The exact split profile makes the finite all-caps argument uniform.
-5. A natural two-sided ordinary-packing slice of the full blocker is also a
-   STOP. If `U=N[P]` contains a minimum dominator, then
+When both factors have no isolates, the number `T` of fibre-isolated points
+with external private neighbors in both directions satisfies
 
-   `κ_G(s;U)=min_T(|T\U|+s|T∩U|)=sγ(G)`.
+```text
+|T|≥[
+ I_G+I_H-|D|
+ -2Ω_G-2Ω_H-X_H-X_G
+]_+.                                                        (6)
+```
 
-   This holds on all cycle/split components in the counterfamily, reducing
-   the slice to the ordinary packing ratio `a`.
-6. Row hole two-packings tensor with any fractional factor packing:
+Every point of `T` carries the labelled `(1,2)` or `(2,1)` private-corner
+escape obligation. Equation (6) is exact on the `C₅□C₅` 5-cycle and
+`K₂□P₃` 2-cycle.
 
-   `Σ_y p_y|P_y|≤γ_f(G□H)≤|D|`.
-
-   The common-crown construction makes all external target rows lie in one
-   closed neighborhood, so factor-weighted density alone can lose an
-   arbitrary factor. Under full formal balance, a common neighborhood
-   `Y⊆N[w]` satisfies
-
-   `M(Y)≤2γ(H)ρ(H)+sd`,
-
-   where `s` is the number of singleton terminal cells and `d=|L_i|`.
-   This coefficient is presently vacuous at comparable formal scales.
-7. If every `d∈D` has external private neighbors in both directions, its
-   corner is owned by another point of `D`. Choosing one owner per corner
-   creates a directed cycle. Every arc is an edge move in one factor and a
-   distance-two move in the other. Full two-oriented formal equality forces
-   this hypothesis; the `C₅□C₅` perfect code realizes the directed cycle
-   sharply. At exact equality, an owner `(x,z)` has type-`(1,2)` indegree at
-   most
-
-   `min{|J_x|,ρ_H(N₂(z)),deg_H(z)}≤ρ(H)`,
-
-   and symmetrically. Every arc also forces a red-diagonal/blue-cross-zero
-   pattern in the cell matrices.
+Escape density is not yet cycle density. Owners can leave `T`, and bounded
+indegree permits arbitrarily long in-trees.
 
 ## Best next attacks
 
-### A. Do not continue the combined dual
+### A. Provider non-reuse across fibre indices
 
-The shared-capacity lift `Ξ` combines a genuine fractional product packing
-with the full bidirectional blocker. Its exact dual minimizes the mass of a
-product fractional dominator `d` that simultaneously routes, for every
-factor vertex, the incidence marginals of a probability distribution over
-integral dominators of the other factor.
+At formal equality, every Steiner fibre has fixed singleton/triangle atom
+counts, but the supported optimal 2-packing changes with the fibre index.
+Use the balanced red/blue cell matrices, column separation, and
+private-target injection to show that one selected coordinate cannot provide
+the odd-import alternative in (4) for too many indexed triangles.
 
-It has zero universal factor. Bollobás--Janson--Riordan translate covers in
-elementary abelian 2-groups give connected vertex-transitive Cayley graphs
-with unbounded neighborhood-covering multiplicity. Taking the two factor
-scales very different makes every exact transitive `Ξ` term tend to zero.
-This is a hard STOP, not an open bridge.
+A useful theorem must recover a product-scale term. Another local parity
+count is a STOP.
 
-### B. Quantitative escape cycles
+### B. Escape closure or path length
 
-Use the exact Steiner defect budget to show either:
+Iterate the labelled red-diagonal/blue-cross-zero transition from every
+point counted by (6). Prove one of:
 
-- a positive density of points has two-sided external privacy and belongs to
-  controlled escape cycles; or
-- failures charge positive terminal-capacity, additivity, or row slack.
+1. a positive fraction of owners remain inside `T`;
+2. every escape path returns to `T` after bounded length; or
+3. each departure charges a fresh `Ω`, `X`, terminal, projection, or
+   partition-additivity defect.
 
-Mere cycle existence is insufficient. Any useful count must use the fixed
-`K₁/K₃` atoms or the alternating occupied/vertical row exchanges.
+The third option aligns best with the exact Steiner slack identity.
 
-The typed fibre-set relaxation is the cleanest current container. For actual
-row label sets `A_g` and open-neighborhood imports
-`V_g=⋃_{x∈N(g)}A_x`, product domination implies
+### C. Profile-isolation coupling
 
-`|A_g|≥γ_H(V(H)\V_g)`
-
-in every row, plus the symmetric column inequalities. This keeps the exact
-labels discarded by `Ξ`. Its universal value is uncalibrated: test it first
-on the asymmetric translate-cover Cayley pair.
-
-### C. Successor-relaxation benchmark
-
-Any new relaxation must be tested against the asymmetric translate-cover
-Cayley pair. It must use actual labelled fibre incidences of one product
-dominator, because product fractional domination plus owner-indexed averaged
-factor dominators has already lost every positive constant.
+Equation (1) alone permits a fictitious mass three on `C₄□C₄`, while
+exact typed enumeration gives four. The missing information is precisely
+the location of isolated fibres. Seek a Hall/matching statement coupling
+row and column isolation before passing to scalar masses.
 
 ## Hard stops
 
 - No numerical reoptimization of Steiner's six existing inequalities.
-- No additive integer packing levels.
-- No canonical or optimized saturation-defect campaign.
-- No shared-cap or independent-cap rank-one dichotomy.
-- No row-hole weighting that ignores owner labels.
-- No ordinary-packing residual slice of `Λ`.
-- No full `Λ` or combined `Ξ` campaign; both have zero universal factor.
-- No bare corner contradiction; `C₅□C₅` cycles it exactly.
-- Finite tests are hygiene and falsification, never evidence for the
-  universal conjecture.
+- No additive `k`-packing hierarchy.
+- No saturation-defect or anchored-deficit campaign.
+- No cap correction by itself; `s+t-st` is already accounted for.
+- No full `Λ`, combined `Ξ`, or averaged factor-dominator lift.
+- No global-resilience claim for the random Cayley family.
+- No local `K₁/K₃` parity-only argument.
+- No bare escape count, cycle existence, or bounded-indegree argument.
+- Finite tests remain hygiene and falsification only.
 
-Any proposed proof requires a fresh independent GPT-5.6 Sol xhigh review.
+Any proposed provider-reuse or escape-closure proof requires a fresh
+independent GPT-5.6 Sol xhigh audit.

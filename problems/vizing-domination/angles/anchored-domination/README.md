@@ -184,9 +184,13 @@ Its exact dual is
 }.                                                          (13)
 ```
 
-Packings with caps `s,t` on `G,H` give the rank-one product certificate
+Packings with caps `s,t` on `G,H` give the exact cap-only rank-one
+certificate
 
-`γ_f(G□H)≥Φ_G(s)Φ_H(t)/(s+t)`.                               (14)
+`γ_f(G□H)≥Φ_G(s)Φ_H(t)/(s+t-st)`.                            (14)
+
+Indeed the product-neighborhood load is at most
+`s+t-st`. The earlier `s+t` denominator is a valid but weaker envelope.
 
 The split profile is also exact. Put
 
@@ -322,7 +326,8 @@ therefore gives the limiting second profile
 
 `h(t)=7λ_H min{t,1/11}+(1-λ_H)θ_Ht`.                         (20)
 
-For every fixed `s`, `h(t)/(s+t)` is maximized at `t=1/11`.
+For every fixed `s`, the weaker quotient `h(t)/(s+t)` is maximized at
+`t=1/11`.
 Below that point (20) is a linear ray. Above it, write `h(t)=A+Bt`;
 then
 
@@ -341,6 +346,24 @@ The exact gap is
 
 `(151-13√73)/132>0`.
 
+This also controls the exact denominator in (14), since
+
+`s+t-st≥(s+t)/2`.
+
+Therefore
+
+```text
+sup_{s,t} g(s)h(t)/(s+t-st)
+ ≤(-247+37√73)/132
+ ≈0.523698<c.                                               (22)
+```
+
+The exact remaining gap is
+
+`(183-21√73)/88>0`,
+
+and `183²-21²·73=1296`.
+
 This limiting construction has finite witnesses, uniformly over all caps.
 For a large split component of domination number `d`, write its normalized
 profile as
@@ -351,7 +374,10 @@ The first factor is a mixture of fixed finite components, so
 `g(s)≤Ks` for a fixed constant `K`. The contribution of the split error to
 the normalized tensor is therefore at most
 
-`g(s)e(t)/(s+t)≤2K/d`,
+```text
+g(s)e(t)/(s+t)≤2K/d,
+g(s)e(t)/(s+t-st)≤4K/d,
+```
 
 even when both caps tend to zero. Choose the large split parameter first,
 then approximate the irrational component shares by rational

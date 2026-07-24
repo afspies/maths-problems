@@ -791,3 +791,228 @@ formal-ratio counterfamily, and two rigorous zero-factor obstructions for
 natural blocker/fractional lifts. **GO** only for the typed correlated fibre
 sets and successive labelled escape transitions. All factor-marginal,
 averaged-dominator, full-blocker, and combined-lift routes are STOPs.
+
+## 2026-07-24 — typed profiles, fractional repair energy, and escape density
+
+### Scope and independent reviews
+
+Continued on branch
+`problem/vizing-domination/2026-07-24-typed-two-axis`. Three GPT-5.6 Sol
+agents at xhigh effort independently attacked:
+
+1. two-axis charging and fractional packing on actual fibre labels;
+2. the robust asymmetric and symmetric Cayley benchmarks; and
+3. partial-cover defects and isolation-to-escape dynamics.
+
+Every theorem below received an independent Sol audit. The robust Cayley
+statement is explicitly a new adaptation of the Newman/Bollobás--Janson--
+Riordan random-set argument, not a theorem stated verbatim in that paper.
+
+### Exact partial-cover profile theorem
+
+Defined
+
+`u_K(t)=min_{|C|≤t}|V(K)\N_K[C]|`.
+
+For every row-typed incidence set `A`, with row masses `a_g` and column
+masses `b_h`, proved
+
+`Σ_g u_H(a_g)+Σ_hu_G(b_h)≤|G||H|`.
+
+The proof is the exact chain
+
+```text
+u_H(a_g)≤|V_g|,
+Σ_g|V_g|=Σ_h|N_G^open(B_h)|
+≤Σ_h(|G|-u_G(b_h)).
+```
+
+It has the defect identity
+
+```text
+|G||H|-Σ_gu_H(a_g)-Σ_hu_G(b_h)
+=Σ_g(|V_g|-u_H(a_g))
+ +Σ_h[|G|-u_G(b_h)-|N_G[B_h]|]
+ +Σ_h|B_h\N_G^open(B_h)|.
+```
+
+Thus the exact final obstruction is fibre isolation, not an untracked scalar
+loss. `C₅□C₅` realizes all five units of slack as isolated fibres.
+
+For `d`-regular `G`, the profile gives
+
+`Θ(G,H)≥|G|(t+1)u_H(t)/[u_H(t)+d(t+1)]`.
+
+A weighted fractional-packing version was also proved.
+
+### Robust Cayley calibration
+
+Let `Q_m=F₂^m`, `n=2^m`, `k=floor(n/m²)`, `q=n/k`, and
+`ℓ=log k`. A robust adaptation of Newman's hitting lemma, as recorded in
+Bollobás--Janson--Riordan Remark 4.3, gives an affinely spanning `k`-set
+containing zero whose Cayley graph has
+
+```text
+t*=floor(q(ℓ-10 log ℓ)),
+L=floor(ℓ⁶),
+u(t*)>L.
+```
+
+For fixed center set `T` and exceptional set `E`, the failure probability is
+at most
+
+`exp(-(n-L)(1-k/n)^t/t)`.
+
+The negative exponent is asymptotic to `ℓ⁹`, while the two union-bound
+entropy terms are `O(ℓ⁴)` and `O(ℓ⁷)`. Deleting to exactly `k` while
+retaining an affine basis, then translating to contain zero, preserves the
+profile and gives a connected undirected Cayley graph.
+
+The greedy cover bound gives
+
+`t*<γ≤q(ℓ+1)` and `t*/γ→1`.
+
+The partial-cover theorem then proves
+
+`Θ(G,H)/(γ(G)γ(H))→∞`
+
+for every pair of growing members of this robust family, with arbitrary
+relative scales. With one factor fixed the liminf is at least
+`|G|/γ(G)≥1`. Thus the same family that drives `Ξ` to zero is decisively
+harmless for `Θ`.
+
+The global resilience `min_{t<γ}u(t)/(γ-t)` was not claimed large. The
+argument leaves an `o(γ)` final window where a singleton private set could
+collapse the minimum to one.
+
+### Correlated fractional repair energy
+
+For factor fractional packings `q,p`, totals `Q,P`, remaining target sets
+`C_g=H\V_g`, `D_h=G\U_h`, defined
+
+```text
+Z=Σ_{(g,h)∈A}(1-q_g)(1-p_h),
+E_H=Σ_gq_g[γ_H(C_g)-p(C_g)],
+E_G=Σ_hp_h[γ_G(D_h)-q(D_h)].
+```
+
+Proved the exact inequality
+
+`|A|≥PQ+Z+max{E_H,E_G}`.
+
+The row slack identity is
+
+```text
+Σ_A(q_g+p_h-q_gp_h)-PQ
+=Σ_gq_g[|A_g|-p(C_g)+o_g]
+ +Σ_xp(A_x)[1-q(N_G[x])],
+```
+
+where `o_g` is imported weighted overlap. The symmetric identity gives
+`E_G`. The maximum is sharp on `K₂□K₂` and `P₃□P₃`; the two energies
+cannot be added.
+
+For a minimum dominator `T` of `C`,
+
+```text
+γ(C)-p(C)
+=Σ_{t∈T}[1-p(C∩N[t])]
+ +Σ_{v∈C}p_v(|T∩N[v]|-1).
+```
+
+Hence zero energy is exactly packing saturation plus exact-one coverage. For
+half of an integral 2-packing, every nonzero gap costs at least one half.
+
+The cap-only denominator is `s+t-st`, correcting the earlier weaker
+`s+t` envelope. Since `s+t-st≥(s+t)/2`, the existing formal-ratio
+counterfamily still bounds the exact cap certificate by
+
+`(-247+37√73)/132≈0.523698<c`.
+
+### Terminal triangle provider lemma and STOP
+
+For a terminal `K₁/K₃` equality set in `H`, use the canonical packing
+with weight one on singleton targets and one half on triangle targets. If
+there are `τ` triangle atoms, then
+
+`Z+E_H≥τQ/2`.
+
+An odd intersection of a remaining target set with a triangle costs one
+half in `E_H`. An even intersection forces an odd nonempty imported set;
+fractional packing capacity charges its provider to `Z`.
+
+At the formal ratios this gives only
+
+```text
+b²+b(b-a)
+=b(2b-a)
+=(10-√73)/9
+≈0.16178,
+```
+
+leaving the exact gap `(11√73-65)/72` to Steiner. Row and column charges
+cannot be added. This is a rigorous STOP for local atom parity alone. The
+missing theorem must prevent provider reuse across the fibre-indexed
+triangle systems or exclude the large zero-packing-support mass.
+
+### Isolation-to-escape density
+
+For a product dominator, let `I_G` be the selected points isolated in their
+fixed-label `G`-fibres, put
+
+```text
+r_{x,h}=|N_G(x)∩B_h|,
+Ω_G=Σ_{x,h}(r_{x,h}-1)_+,
+X_H=Σ_x|V_x∩N_H[A_x]|.
+```
+
+If `Bad_G⊆I_G` has no horizontal external-private neighbor, proved
+
+`|Bad_G|≤2Ω_G+X_H`.
+
+A chosen horizontal target either has multiple same-label owners, charged
+with multiplicity at most `2(r-1)`, or its other dominator lies in the
+arrival row and charges `X_H`.
+
+Symmetrically, when both factors have no isolates, the number `T` of
+fibre-isolated points with external private neighbors in both directions
+satisfies
+
+```text
+|T|≥[
+ I_G+I_H-|D|
+ -2Ω_G-2Ω_H-X_H-X_G
+]_+.
+```
+
+Every point of `T` carries a labelled `(1,2)` or `(2,1)` corner escape
+obligation. The bound is exact on the `C₅□C₅` 5-cycle and the
+`K₂□P₃` 2-cycle. Escape owners may still leave `T`, so a closure or
+path-length lemma is required.
+
+### Verification and compute
+
+```text
+cd problems/vizing-domination/harness
+python3 -m unittest -v
+# Ran 35 tests — OK
+```
+
+The new exact hygiene code computes `Θ` and near-cover profiles on small
+graphs. Exhaustive fixtures verify the two-axis profile inequality, its
+isolation defect identity, the correlated fractional charging identity,
+the sharp isolation-to-escape count, small typed values, and the corrected
+cap and triangle-provider surd gaps. These are falsification and algebra
+checks, not evidence for the universal conjecture.
+
+Interactive wall time: approximately two hours. External compute: none.
+
+### Gate verdict
+
+No constant above `0.5643` was certified. The session nevertheless proves
+three new product-specific inequalities, a quantitative equality
+classification, and a robust graph-family theorem that clears the mandatory
+Cayley obstruction at all scales. **GO** only for a provider non-reuse lemma
+across terminal systems or an escape closure/path-length theorem. Scalar
+near-cover optimization, cap correction alone, global resilience alone, and
+local triangle parity are STOPs.
