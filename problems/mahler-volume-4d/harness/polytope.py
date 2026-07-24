@@ -378,6 +378,79 @@ class RationalPolytope:
 
         return triangulate(tuple(range(len(self.vertices))))
 
+    def facet_cone_weights(self):
+        """Return normalized volumes of the cones from zero to each facet.
+
+        The origin lies strictly inside the polytope, so the facet cones
+        partition it.  Recursive pulling works for arbitrary rational
+        three-dimensional facets, not only those with triangular ridges.
+        """
+        cache = {}
+
+        def face_facets(face):
+            face_set = frozenset(face)
+            face_dimension = affine_rank(
+                [self.vertices[index] for index in face]
+            )
+            facets = set()
+            for incident, _, _ in self.facets:
+                intersection = face_set.intersection(incident)
+                if not intersection or intersection == face_set:
+                    continue
+                ordered = tuple(sorted(intersection))
+                if (
+                    affine_rank(
+                        [self.vertices[index] for index in ordered]
+                    )
+                    == face_dimension - 1
+                ):
+                    facets.add(ordered)
+            return tuple(sorted(facets))
+
+        def triangulate(face):
+            face = tuple(sorted(face))
+            if face in cache:
+                return cache[face]
+            dimension = affine_rank(
+                [self.vertices[index] for index in face]
+            )
+            if len(face) == dimension + 1:
+                cache[face] = (face,)
+                return cache[face]
+            apex = face[0]
+            simplices = []
+            for subfacet in face_facets(face):
+                if apex in subfacet:
+                    continue
+                for simplex in triangulate(subfacet):
+                    simplices.append(tuple(sorted((apex, *simplex))))
+            cache[face] = tuple(sorted(set(simplices)))
+            return cache[face]
+
+        origin = (Fraction(),) * self.dimension
+        raw = tuple(
+            sum(
+                (
+                    simplex_volume(
+                        [
+                            origin,
+                            *[
+                                self.vertices[index]
+                                for index in simplex
+                            ],
+                        ]
+                    )
+                    for simplex in triangulate(incident)
+                ),
+                Fraction(),
+            )
+            for incident, _, _ in self.facets
+        )
+        total = sum(raw, Fraction())
+        if not total:
+            raise ValueError("facet cones have zero total volume")
+        return tuple(value / total for value in raw)
+
     def volume_and_centroid(self):
         """Compute volume and centroid exactly from a pulling triangulation."""
         volume, centroid, _ = self.volume_centroid_covariance()
@@ -644,6 +717,54 @@ def join_segment_square_4():
         for first, second in product((-1, 1), repeat=2)
     ]
     return RationalPolytope([*segment, *square])
+
+
+def simplex_product_2_2():
+    """Centered Boolean realization of Delta_2 x Delta_2."""
+    triangle = ((0, 0), (0, 1), (1, 0))
+    vertices = tuple(
+        (*left, *right)
+        for left in triangle
+        for right in triangle
+    )
+    center = tuple(
+        Fraction(sum(vertex[coordinate] for vertex in vertices), len(vertices))
+        for coordinate in range(4)
+    )
+    return RationalPolytope(
+        [
+            tuple(
+                Fraction(value) - center[coordinate]
+                for coordinate, value in enumerate(vertex)
+            )
+            for vertex in vertices
+        ]
+    )
+
+
+def boolean_4_polytope(indices):
+    """Center the selected vertices of the Boolean four-cube."""
+    cube = tuple(product((0, 1), repeat=4))
+    indices = tuple(indices)
+    if (
+        len(set(indices)) != len(indices)
+        or any(index < 0 or index >= len(cube) for index in indices)
+    ):
+        raise ValueError("Boolean vertex indices must be distinct and in [0, 16)")
+    vertices = tuple(cube[index] for index in indices)
+    center = tuple(
+        Fraction(sum(vertex[coordinate] for vertex in vertices), len(vertices))
+        for coordinate in range(4)
+    )
+    return RationalPolytope(
+        [
+            tuple(
+                Fraction(value) - center[coordinate]
+                for coordinate, value in enumerate(vertex)
+            )
+            for vertex in vertices
+        ]
+    )
 
 
 def cell_24():

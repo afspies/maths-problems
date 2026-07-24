@@ -759,6 +759,190 @@ def quadratic_slack_flex_data(polytope):
     }
 
 
+def speed_affinity_data(polytope, speeds):
+    """Return the exact facets on which a vertex speed is nonaffine."""
+    speeds = tuple(map(Q, speeds))
+    if len(speeds) != len(polytope.vertices):
+        raise ValueError("one speed is required per vertex")
+
+    def is_affine(indices):
+        evaluation_rows = [
+            [Fraction(1) for _ in indices],
+            *[
+                [
+                    polytope.vertices[index][coordinate]
+                    for index in indices
+                ]
+                for coordinate in range(polytope.dimension)
+            ],
+        ]
+        return rank([*evaluation_rows, [speeds[index] for index in indices]]) == (
+            rank(evaluation_rows)
+        )
+
+    violated = tuple(
+        facet_index
+        for facet_index, (incident, _, _) in enumerate(polytope.facets)
+        if not is_affine(incident)
+    )
+    return {
+        "is_globally_affine": is_affine(tuple(range(len(polytope.vertices)))),
+        "violated_facets": violated,
+        "violated_normal_rank": rank(
+            [polytope.facets[index][1] for index in violated]
+        ),
+    }
+
+
+def cone_volume_green_data(polytope):
+    """Intrinsic double-nonaffine energy of the squared slack matrix.
+
+    Vertex weights are the normalized cone volumes of the corresponding
+    dual facets.  The returned Green energy is the squared weighted norm of
+    the double affine-regression residual of ``S o S``.
+    """
+    polar, _, _, _ = paired_geometry(polytope)
+    primal_facet_weights = polytope.facet_cone_weights()
+    polar_facet_weights = polar.facet_cone_weights()
+
+    primal_vertex_weights = []
+    for vertex in polytope.vertices:
+        matches = [
+            facet_index
+            for facet_index, (_, normal, offset) in enumerate(polar.facets)
+            if tuple(value / offset for value in normal) == vertex
+        ]
+        if len(matches) != 1:
+            raise ValueError("could not match a primal vertex to its dual facet")
+        primal_vertex_weights.append(polar_facet_weights[matches[0]])
+
+    primal_relations = tuple(
+        nullspace(
+            [
+                [Fraction(1) for _ in polytope.vertices],
+                *[
+                    [vertex[coordinate] for vertex in polytope.vertices]
+                    for coordinate in range(polytope.dimension)
+                ],
+            ]
+        )
+    )
+    polar_relations = tuple(
+        nullspace(
+            [
+                [Fraction(1) for _ in polar.vertices],
+                *[
+                    [vertex[coordinate] for vertex in polar.vertices]
+                    for coordinate in range(polytope.dimension)
+                ],
+            ]
+        )
+    )
+    if not primal_relations or not polar_relations:
+        return {
+            "green_energy": Fraction(),
+            "boundary_deficit": Fraction(),
+            "deficit_to_energy_ratio": None,
+        }
+
+    def transpose(matrix):
+        return tuple(zip(*matrix))
+
+    def multiply(left, right):
+        return tuple(
+            tuple(
+                sum(
+                    (
+                        left[row][inner] * right[inner][column]
+                        for inner in range(len(right))
+                    ),
+                    Fraction(),
+                )
+                for column in range(len(right[0]))
+            )
+            for row in range(len(left))
+        )
+
+    slack_squared = tuple(
+        tuple((1 - dot(vertex, dual)) ** 2 for dual in polar.vertices)
+        for vertex in polytope.vertices
+    )
+    coupling = multiply(
+        multiply(primal_relations, slack_squared),
+        transpose(polar_relations),
+    )
+    primal_gram = tuple(
+        tuple(
+            sum(
+                (
+                    primal_relations[left][vertex]
+                    * primal_relations[right][vertex]
+                    / primal_vertex_weights[vertex]
+                    for vertex in range(len(polytope.vertices))
+                ),
+                Fraction(),
+            )
+            for right in range(len(primal_relations))
+        )
+        for left in range(len(primal_relations))
+    )
+    polar_gram = tuple(
+        tuple(
+            sum(
+                (
+                    polar_relations[left][facet]
+                    * polar_relations[right][facet]
+                    / primal_facet_weights[facet]
+                    for facet in range(len(polar.vertices))
+                ),
+                Fraction(),
+            )
+            for right in range(len(polar_relations))
+        )
+        for left in range(len(polar_relations))
+    )
+    energy_matrix = multiply(
+        multiply(
+            multiply(inverse(primal_gram), coupling),
+            inverse(polar_gram),
+        ),
+        transpose(coupling),
+    )
+    green_energy = sum(
+        (energy_matrix[index][index] for index in range(len(energy_matrix))),
+        Fraction(),
+    )
+
+    _, primal_centroid, primal_covariance = (
+        polytope.volume_centroid_covariance()
+    )
+    _, polar_centroid, polar_covariance = polar.volume_centroid_covariance()
+    if any(primal_centroid) or any(polar_centroid):
+        boundary_deficit = None
+        ratio = None
+    else:
+        covariance_trace = sum(
+            (
+                primal_covariance[row][column]
+                * polar_covariance[column][row]
+                for row in range(polytope.dimension)
+                for column in range(polytope.dimension)
+            ),
+            Fraction(),
+        )
+        boundary_deficit = Fraction(1, 4) - Fraction(9, 4) * covariance_trace
+        ratio = (
+            boundary_deficit / green_energy
+            if green_energy
+            else None
+        )
+    return {
+        "green_energy": green_energy,
+        "boundary_deficit": boundary_deficit,
+        "deficit_to_energy_ratio": ratio,
+    }
+
+
 def circuit_cofactor_response(
         polytope,
         primal_indices,

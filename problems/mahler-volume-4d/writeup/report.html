@@ -76,7 +76,11 @@
   quadratic identity and a fixed-geometry one-sided flip ansatz. Every
   terminal non-simplex has quadratic Hilbert excess at least three, and
   the displayed uniform barycentric cofactor residues cancel
-  componentwise. The general 4D conjecture remains open.
+  componentwise. Finally, the terminal two-level bodies are classified as
+  Δ<sub>4</sub> and Δ<sub>2</sub>×Δ<sub>2</sub>; only the simplex is
+  pair-terminal. An intrinsic cone-volume Green energy isolates the
+  remaining mixed quadratic interaction. The general 4D conjecture
+  remains open.
 </div>
 
 <h2>1 · The terminal-pair bridge is false</h2>
@@ -407,6 +411,36 @@ moment pieces contribute C, −C, −C, C. The displayed uniform
 Cauchy–Binet/Plücker residues therefore cancel. The remaining route
 requires global Veronese gluing or geometry-dependent nonlocal Hodge/Green
 weights before this cancellation.</p>
+<div class="env">
+  <span class="label">Theorem 7.</span>
+  Every terminal two-level 4-polytope is affinely equivalent to
+  Δ<sub>4</sub> or Δ<sub>2</sub>×Δ<sub>2</sub>. Consequently every
+  pair-terminal two-level 4-polytope is a simplex.
+</div>
+<p>At a simple vertex, Boolean slack coordinates identify the polytope
+with the stable-set polytope of a graph <var>G</var> on four vertices.
+For every nonedge <var>ij</var>, the speed x<sub>i</sub>x<sub>j</sub>
+and robust terminality force private neighbors in both directions. Hence
+<var>G</var> is K<sub>4</sub> or 2K<sub>2</sub>. The complete published
+list has nineteen 4D two-level types, eleven with a simple vertex. An
+independent exact Boolean audit recovers all nineteen, and explicit
+squarefree-quadratic speeds exclude the remaining eight. The product
+Δ<sub>2</sub>×Δ<sub>2</sub> is terminal but its simplicial nonsimplex
+polar is not.</p>
+<p>The intrinsic cone-volume Green energy is</p>
+<div class="eqn">
+  G<sub>cv</sub> =
+  tr(K<sup>−1</sup> C L<sup>−1</sup> C<sup>T</sup>),
+  &nbsp; C=D(S∘S)E<sup>T</sup>.
+</div>
+<p>Here K and L are the affine-dependency Gram matrices for normalized
+dual/primal cone-volume weights. This is basis-, relabeling-, and
+GL(4)-invariant, nonnegative, and zero exactly when mixed quadratic
+coupling vanishes. For the regular 24-cell,
+G<sub>cv</sub>=1/4 and D<sub>∂</sub>=31/800. Numerical bi-centered
+Paffenholz tests rule out the proposed fixed coefficients 31/200, 1/8,
+and 1/10 at discovery precision; no interval-certified counterexample is
+claimed.</p>
 
 <h2>9 · Source audit</h2>
 <p>The Meyer–Reisner convexity/rigidity theorem, volume-affinity, compactness,
@@ -421,7 +455,7 @@ obstacle.</p>
 <h2>10 · Exact verification</h2>
 <pre><code>$ python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ...
-Ran 24 tests
+Ran 27 tests
 
 OK
 
@@ -440,8 +474,10 @@ projective-local-minimum False</code></pre>
 segment–square join, incidence tangent ranks, the 24 projective directions,
 the complete four-parameter realization Hessian, the signed smooth-family
 covariances, the q-regular spanning germ, the full KKT Hessian blocks, and
-the global slack/facet-boundary identities. It is a falsification tool, not
-a substitute for classification.</p>
+the global slack/facet-boundary identities. The suite now also checks
+Δ<sub>2</sub>×Δ<sub>2</sub>, all eight exact nonsimple-vertex two-level
+speed certificates, and the regular-24-cell Green energy. It is a
+falsification tool, not a substitute for classification.</p>
 
 <h2>11 · Limits and next route</h2>
 <p>Generic rigidity is too weak: the cube is rigid generically but not in
@@ -455,9 +491,11 @@ connected circuit-support branch. Incidence repartition alone is
 tautological, while the universal unweighted contraction, raw regression
 residual, and uniform oriented Plücker residues fail exactly;
 geometry-dependent or nonlocal cofactor weights remain open. The rank-sum
-shortcut cannot cover f<sub>0</sub>+f<sub>3</sub>≤20. The route is GO for
-global low-Hilbert/Veronese gluing or a terminality-dependent nonlocal
-Hodge/Green operator acting before the C−C−C+C cancellation. Any candidate
+shortcut cannot cover f<sub>0</sub>+f<sub>3</sub>≤20. The two-level
+boundary is now closed. The route is GO for global low-Hilbert/Veronese
+gluing in the necessarily non-two-level branch or a
+terminality-dependent signed/anisotropic Hodge operator acting before the
+C−C−C+C cancellation. Any candidate
 passing the projective covariance test must then face the stress-corrected
 Schur complement.</p>
 

@@ -1287,3 +1287,144 @@ session.
 The final exact rerun passed `Ran 24 tests in 64.401s — OK`; both standalone
 certificates and Python compilation also passed. After the corrections, the
 same xhigh reviewer returned **GO — no remaining exact issue**.
+
+## 2026-07-24 — complete two-level boundary and cone-volume Green diagnostic
+
+### Boolean saturation falsified, then replaced
+
+The proposed next lemma
+\[
+P\text{ terminal, connected, two-level, non-simplex}
+\Longrightarrow \rho(P)=6
+\]
+is false. The exact counterexample is
+\(\Delta_2\times\Delta_2\): it is terminal, has connected rectangle-circuit
+support, and has \(\rho=4\). Its polar is simplicial and nonsimplex, hence
+nonterminal, and its Mahler product is the already-separated
+\(243/32>3125/576\).
+
+The matrix proof generalizes: for \(p,q\ge2\), a speed on
+\(\Delta_p\times\Delta_q\) is a \((p+1)\times(q+1)\) matrix. Global affine
+speeds are exactly row-plus-column matrices. Every nonadditive matrix
+violates enough delete-row and delete-column facets to span the two
+complementary normal factors. Thus
+\[
+\Delta_p\times\Delta_q\text{ is terminal},\qquad
+\rho(\Delta_p\times\Delta_q)=pq.
+\]
+
+### Structural simple-vertex theorem
+
+If a terminal two-level 4-polytope has a simple vertex, its incident-facet
+slacks give Boolean coordinates containing \(0,e_1,\ldots,e_4\). Every
+remaining facet is a clique inequality, so the polytope is the stable-set
+polytope of a graph \(G\) on four vertices.
+
+For a nonedge \(ij\), the globally nonaffine speed \(x_ix_j\) and the
+robust-support criterion force both
+\[
+N(i)\setminus N(j)\ne\varnothing,\qquad
+N(j)\setminus N(i)\ne\varnothing.
+\]
+A direct four-vertex graph argument gives only \(G=K_4\) or \(G=2K_2\).
+Hence the only terminal simple-vertex two-level types are
+\(\Delta_4\) and \(\Delta_2\times\Delta_2\).
+
+### Exact completion of all two-level types
+
+Bohn--Faenza--Fiorini--Fisikopoulos--Macchia--Pashkovich prove that affine
+and combinatorial equivalence agree for two-level polytopes and that there
+are exactly nineteen affine types in dimension four, eleven with a simple
+vertex. An independent exact Boolean audit reproduced the boundary:
+
+```text
+nonempty Boolean subsets                 65535
+cube-symmetry orbits                       401
+full-dimensional representatives           347
+two-level presentations                     100
+distinct strong incidence signatures         19
+simple-vertex types                           11
+no-simple-vertex types                         8
+```
+
+For each of the remaining eight types, the harness records a Boolean
+representative, a squarefree quadratic speed \(x_ix_j\), and a nonzero
+rational direction perpendicular to every violated facet normal. The
+violated-normal ranks are \(1,0,1,2,3,0,0,1\), respectively; every speed
+is exactly globally nonaffine and admissible in its displayed direction.
+Therefore
+\[
+\boxed{P\text{ terminal and two-level}
+\Longrightarrow P\simeq\Delta_4\text{ or }\Delta_2\times\Delta_2.}
+\]
+Since the latter polar is nonterminal, every pair-terminal two-level
+4-polytope is a simplex. This closes the full two-level minimizer branch.
+
+### Cone-volume Green energy
+
+For normalized dual/primal cone-volume laws \(\mu,\nu\), complete
+affine-dependency bases \(D,E\), and
+\[
+K=D\operatorname{diag}(\mu)^{-1}D^\mathsf T,\quad
+L=E\operatorname{diag}(\nu)^{-1}E^\mathsf T,\quad
+C=D(S\circ S)E^\mathsf T,
+\]
+define
+\[
+\mathcal G_{\rm cv}
+=\operatorname{tr}(K^{-1}CL^{-1}C^\mathsf T).
+\]
+Exact algebra identifies this with the product-weighted squared norm of
+the doubly affine-regressed \(S\circ S\), or the Hilbert--Schmidt overlap
+of primal and polar residual-quadratic covariance operators. It is
+basis-, relabeling-, and \(GL(4)\)-invariant, nonnegative, and zero exactly
+when the mixed quadratic coupling vanishes.
+
+The harness gives
+\[
+\mathcal G_{\rm cv}(\text{regular 24-cell})=\frac14,\qquad
+D_\partial=\frac{31}{800},\qquad
+\frac{D_\partial}{\mathcal G_{\rm cv}}=\frac{31}{200},
+\]
+and \(\mathcal G_{\rm cv}=0\) on the segment--square join and centered
+\(\Delta(2,5)\). High-precision bi-centered Paffenholz tests numerically
+violate the candidate constants \(31/200,1/8,1/10\), with a smallest
+recorded ratio about \(0.096765\). These are discovery-level witnesses,
+not interval certificates. The scalar energy is therefore retained only
+as a diagnostic; the proof route needs signed/anisotropic or
+configuration-dependent terminal data.
+
+### Independent xhigh audits
+
+GPT-5.6 Sol at xhigh effort returned **GO** on the simple-vertex theorem and
+on the classification-backed completion, conditional on the exact
+representative matching and speed certificates supplied by the harness.
+It independently checked the graph witnesses and the terminality proof for
+\(\Delta_2\times\Delta_2\).
+
+A separate xhigh audit returned **GO** on every Green identity, verified
+the weighted-projection expansion and a nonorthogonal rational
+\(GL(4)\)-transform, and reproduced the numerical Paffenholz ratio. Its
+route verdict was **STOP** for a universal positive scalar comparison and
+conditional **GO** only as a secondary mixed-coupling diagnostic.
+
+### Commands and compute
+
+```text
+python3 -m unittest discover \
+  -s problems/mahler-volume-4d/harness -v
+```
+
+The final full exact suite passed `Ran 27 tests in 61.527s — OK`. Focused
+two-level and Green tests had already passed independently. The Boolean
+orbit sweep used exact rational affine ranks and incidence signatures; it
+was a certificate-discovery and completeness cross-check, not a substitute
+for the published nineteen-type theorem. No face-lattice enumeration was
+used in the proof of the simple-vertex subclass.
+
+The full four-dimensional conjecture remains open. The surviving connected
+pair-terminal branch is necessarily non-two-level. Its two concrete proof
+surfaces are global simultaneous Veronese gluing for
+\(zz^\mathsf T-\operatorname{diag}(z)\), especially when
+\(f_0+f_3\le20\), and a terminality-dependent signed/anisotropic transport
+operator that retains information lost by the scalar Green energy.

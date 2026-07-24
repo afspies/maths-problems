@@ -102,6 +102,27 @@ simplex-energy residues cancel as \((C,-C,-C,C)\).
 Vandermonde models showing that robust normal-flat erasure and local
 facet-tensor inertia alone permit every quadratic rank \(3,4,5\).
 
+The two-level boundary checks include the terminal product
+\(\Delta_2\times\Delta_2\), its quadratic rank four, and the failure of
+terminality on its simplicial polar. Eight Boolean representatives with no
+simple vertex carry explicit squarefree-quadratic speeds; the verifier
+checks that each speed is globally nonaffine, its violated facet normals
+have rank at most three, and the stated perpendicular direction has
+admissible dimension greater than five. Together with the published
+nineteen-type completeness theorem, these are the exact certificates used
+in `results/two-level-green-boundary.md`.
+
+`facet_cone_weights` recursively triangulates arbitrary rational facets.
+`cone_volume_green_data` uses those intrinsic weights to compute
+\[
+\mathcal G_{\rm cv}
+=\operatorname{tr}(K^{-1}CL^{-1}C^\mathsf T),
+\]
+the squared double-nonaffine projection of \(S\circ S\). It verifies
+\(\mathcal G_{\rm cv}=1/4\) and deficit-to-energy ratio \(31/200\) at the
+regular 24-cell, and zero energy on the segment--square join and
+\(\Delta(2,5)\). No universal comparison constant is claimed.
+
 At the regular 24-cell the paired verifier checks the exact constrained
 blocks
 \[
