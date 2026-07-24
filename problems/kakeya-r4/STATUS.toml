@@ -1,0 +1,11 @@
+slug = "kakeya-r4"
+title = "Four-dimensional Kakeya conjecture"
+question = "Must every Kakeya set in R^4 have Hausdorff and Minkowski dimension 4?"
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "partial-results"
+best_result = "Exact repair ledger for the 13/4 induction; degree-2 split-quadric obstruction and QW2 detection lemma; no new dimension bound"
+doi = ""
+sessions = [
+    "2026-07-24 scaffolded from template",
+    "2026-07-24 exact 13/4 audit, ruled-quadric stress test, STOP/PIVOT after xhigh review",
+]

@@ -1,0 +1,20 @@
+{
+  "ambient_dimension": 4,
+  "scope": "Rai Choudhuri 2026 sticky R4 branch exponents, audited 2026-07-24",
+  "branches": [
+    {
+      "name": "trilinear",
+      "volume_exponent": "3/4",
+      "dimension_bound": "13/4"
+    },
+    {
+      "name": "weakly_plany",
+      "volume_exponent": "2/3",
+      "dimension_bound": "10/3"
+    }
+  ],
+  "claimed_global": {
+    "volume_exponent": "3/4",
+    "dimension_bound": "13/4"
+  }
+}

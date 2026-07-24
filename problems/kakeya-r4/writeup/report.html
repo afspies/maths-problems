@@ -1,0 +1,83 @@
+<title>Four-dimensional Kakeya — sticky grains campaign</title>
+<style>
+  :root { --paper:#fbfaf7; --ink:#21211d; --muted:#66645d; --rule:#d9d5ca;
+    --blue:#1e4f8f; --box:#f1efe8; --open:#ececef; }
+  body { max-width:46rem; margin:auto; padding:3rem 1.25rem 4rem;
+    background:var(--paper); color:var(--ink); font:1.04rem/1.55 Georgia,serif; }
+  h1,h2 { line-height:1.2; font-weight:600; } h1{font-size:1.75rem;margin-bottom:.3rem}
+  h2{font-size:1.22rem;margin-top:2.2rem;border-bottom:1px solid var(--rule)}
+  code,pre { font-family:ui-monospace,Menlo,monospace; font-size:.86em }
+  code { background:#eef0f2; padding:.1em .3em } pre { background:#eef0f2;
+    border-left:3px solid #226b3b; padding:.8rem; overflow:auto }
+  .subtitle,.meta,.footer { color:var(--muted) } .meta{border-bottom:1px solid var(--rule);
+    padding-bottom:1rem}.badge{background:var(--open);padding:.25rem .5rem;
+    border-radius:999px;font:700 .72rem ui-monospace,monospace;text-transform:uppercase}
+  .abstract,.env { margin:1.2rem 0;padding:1rem 1.1rem;background:var(--box);
+    border-left:3px solid var(--blue) }.label{font-weight:700}.footer{margin-top:3rem;
+    padding-top:1rem;border-top:1px solid var(--rule);font-size:.88rem}
+  table{border-collapse:collapse;width:100%}th,td{padding:.4rem;border-bottom:1px solid var(--rule);
+    text-align:left;vertical-align:top}
+</style>
+
+<h1>Four-dimensional Kakeya: sticky grains campaign</h1>
+<p class="subtitle">Exact audit of the 13/4 sticky bound and the ruled-quadric obstruction</p>
+<p class="meta"><span class="badge">partial-results · open</span> · 24 July 2026 ·
+<code>problems/kakeya-r4</code></p>
+
+<div class="abstract"><span class="label">Abstract.</span>
+The current general Hausdorff benchmark in R⁴ is above 3.059, the distinct
+maximal-function benchmark is 3.0543, and the sticky Hausdorff benchmark is
+13/4. This campaign reconstructed the sticky induction, found repairable
+bookkeeping defects, and built an exact ruled-quadric stress test. No new
+Kakeya dimension bound is claimed.</div>
+
+<h2>Verified bookkeeping</h2>
+<div class="env"><span class="label">Proposition 1.</span>
+If <var>N</var> is minimal with 4/<var>N</var>&lt;ε<sub>0</sub>, then
+ε<sub>0</sub>/(4+ε<sub>0</sub>)≤1/<var>N</var>&lt;ε<sub>0</sub>/4.
+The published comparisons using ε<sub>0</sub>/4 on the other side do not
+follow. The lower bound ε<sub>0</sub>/5, a smaller ε<sub>1</sub>, and a
+shrunk η-hierarchy repair the exponent budget.</div>
+<p>For ε<sub>0</sub>=1/10, exact arithmetic gives <var>N</var>=41.
+The printed multiplicity exponent also needs the sign
+−σ<sub>4</sub>+2η. Two elementary admissibility fixes are recorded: impose
+η<sub>0</sub>≤1/<var>N</var> for the intermediate-scale interval, and weaken
+the available exponent-one two-ends condition to an exponent strictly below
+one before applying the planebrush theorem.</p>
+
+<h2>Ruled-quadric stress test</h2>
+<div class="env"><span class="label">Proposition 2.</span>
+The quadric <var>x</var><sub>1</sub>²+<var>x</var><sub>2</sub>²−
+<var>x</var><sub>3</sub>²−<var>x</var><sub>4</sub>²=1 contains three
+concurrent rational lines with normalized squared trilinear wedge 1/50.
+Thus a ruled quadratic carrier need not be 2-plany even locally.</div>
+<p>The linear identification with SL<sub>2</sub>(R) verifies the ruling
+exactly. The Convex-Wolff obstruction is the thinned line net followed by
+δ<sup>−1/2</sup> moved copies; the raw full net itself fails Convex Wolff.
+A degree-two polynomial test detects each thinned copy by
+δ<sup>−1/2</sup>.</p>
+
+<h2>Exact verification</h2>
+<pre><code>python3 exponent_ledger.py benchmark_ledger.json
+python3 -m unittest -v</code></pre>
+<table>
+  <tr><th>Bridge</th><th>Verified output</th><th>Missing theorem</th></tr>
+  <tr><td>Sticky multiscale</td><td>Exact implication for 0&lt;c&lt;1/12</td>
+      <td>bounded-entropy inverse theorem and common two-scale refinement</td></tr>
+  <tr><td>Semialgebraic</td><td>Degree-two obstruction detected</td>
+      <td>carrier extraction and inner/outer union estimate</td></tr>
+</table>
+
+<h2>Conditional bridge and gate verdict</h2>
+<p>A uniform multiscale gain |U|≥δ<sup>3/4−c+o(1)</sup>, with
+0&lt;c&lt;1/12, would leave plany gain
+ρ<sup>−(1/12−c)</sup> and imply dim<sub>H</sub>K≥13/4+c. This theorem is
+not proved. Independent GPT-5.6 Sol xhigh review rejected inferring it from
+the scalar near-equality conditions or from independently selected balanced
+scales.</p>
+<p><strong>STOP/PIVOT:</strong> the two-session milestone gate is not met.
+Continue only as a degree-two carrier-extraction project or after proving a
+quantified inverse theorem with all entropy and scale losses charged.</p>
+
+<div class="footer">Canonical source: <code>writeup/report.md</code>.
+See <code>literature/refs.bib</code> for sources. No DOI release was made.</div>

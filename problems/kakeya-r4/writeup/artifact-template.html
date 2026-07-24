@@ -1,0 +1,266 @@
+<!--
+  Artifact styling template for problem writeups.
+
+  Usage: copy the <style> block and the structural skeleton below into the
+  report page, replace the placeholder content with the real writeup
+  (canonical source: report.md), and publish as a Claude Artifact.
+
+  Hard constraints (Artifacts enforce a strict CSP — external requests fail):
+  - Everything inline: no CDN scripts, no external stylesheets, no web fonts,
+    no MathJax/KaTeX. Write mathematics with Unicode (∀ ∃ ∈ ⊆ ⊗ Σ λ …) plus
+    <sup>/<sub>/<var>; use the .eqn block for numbered display equations.
+  - Diagrams: <pre class="mermaid"> renders natively in Artifacts.
+  - No <!DOCTYPE>/<html>/<head>/<body> tags — the publisher wraps the file.
+  - Status badges must match STATUS.toml. Never overstate epistemic status.
+-->
+<title>Four-dimensional Kakeya conjecture — results</title>
+<style>
+  :root {
+    --paper: #fbfaf7;
+    --ink: #21211d;
+    --muted: #6b6a62;
+    --accent: #1e4f8f;
+    --rule: #ddd9cf;
+    --env-bg: #f3f1ea;
+    --mono-bg: #eef0f2;
+    --ok: #226b3b;
+    --ok-bg: #e4f0e7;
+    --neg: #7a4a12;
+    --neg-bg: #f5ecdc;
+    --open: #5b5b66;
+    --open-bg: #ececef;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #191a1c;
+      --ink: #e6e4dd;
+      --muted: #9b998f;
+      --accent: #7aa7dd;
+      --rule: #3a3b3e;
+      --env-bg: #212226;
+      --mono-bg: #232529;
+      --ok: #7fc796;
+      --ok-bg: #1d2b21;
+      --neg: #d9a866;
+      --neg-bg: #2b2419;
+      --open: #a9a9b4;
+      --open-bg: #26262b;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #fbfaf7; --ink: #21211d; --muted: #6b6a62; --accent: #1e4f8f;
+    --rule: #ddd9cf; --env-bg: #f3f1ea; --mono-bg: #eef0f2;
+    --ok: #226b3b; --ok-bg: #e4f0e7; --neg: #7a4a12; --neg-bg: #f5ecdc;
+    --open: #5b5b66; --open-bg: #ececef;
+  }
+  :root[data-theme="dark"] {
+    --paper: #191a1c; --ink: #e6e4dd; --muted: #9b998f; --accent: #7aa7dd;
+    --rule: #3a3b3e; --env-bg: #212226; --mono-bg: #232529;
+    --ok: #7fc796; --ok-bg: #1d2b21; --neg: #d9a866; --neg-bg: #2b2419;
+    --open: #a9a9b4; --open-bg: #26262b;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Charter, "Bitstream Charter", "Iowan Old Style", Georgia,
+      "Times New Roman", serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    margin: 0 auto;
+    padding: 3rem 1.25rem 4rem;
+    max-width: 46rem;
+  }
+  h1, h2, h3 { line-height: 1.25; font-weight: 600; }
+  h1 { font-size: 1.7rem; margin: 0 0 0.35rem; }
+  h2 { font-size: 1.25rem; margin: 2.2rem 0 0.7rem; }
+  h3 { font-size: 1.05rem; margin: 1.6rem 0 0.5rem; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  var, .mathit { font-style: italic; }
+
+  .subtitle { color: var(--muted); margin: 0 0 0.9rem; }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem;
+    align-items: center; color: var(--muted); font-size: 0.85rem;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--rule);
+  }
+  .badge {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.15rem 0.5rem; border-radius: 3px;
+  }
+  .badge-verified { color: var(--ok); background: var(--ok-bg); }
+  .badge-negative { color: var(--neg); background: var(--neg-bg); }
+  .badge-open     { color: var(--open); background: var(--open-bg); }
+
+  .abstract {
+    margin: 1.4rem 0 0; padding: 0 1.4rem;
+    font-size: 0.97rem;
+  }
+  .abstract .label {
+    display: block; text-align: center; font-variant: small-caps;
+    letter-spacing: 0.08em; margin-bottom: 0.3rem;
+  }
+
+  /* Theorem-style environments. Theorem/lemma/etc. bodies italic (AMS
+     convention); definitions and remarks upright. */
+  .env {
+    margin: 1.2rem 0; padding: 0.75rem 1rem;
+    background: var(--env-bg); border-left: 3px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+  }
+  .env > .label { font-weight: 700; font-style: normal; }
+  .env.theorem, .env.lemma, .env.proposition, .env.corollary,
+  .env.conjecture { font-style: italic; }
+  .env.definition, .env.remark { font-style: normal; }
+
+  .proof { margin: 1rem 0; }
+  .proof > .label { font-style: italic; }
+  .proof::after { content: "∎"; float: right; color: var(--muted); }
+
+  .eqn {
+    display: flex; align-items: center; gap: 1rem;
+    margin: 1rem 0; overflow-x: auto;
+  }
+  .eqn .body { flex: 1; text-align: center; }
+  .eqn .no { color: var(--muted); }
+
+  code, pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.85em;
+  }
+  code { background: var(--mono-bg); padding: 0.1em 0.35em; border-radius: 3px; }
+  pre {
+    background: var(--mono-bg); border: 1px solid var(--rule);
+    border-radius: 5px; padding: 0.8rem 1rem; overflow-x: auto;
+    line-height: 1.45;
+  }
+  pre > code { background: none; padding: 0; }
+  pre.cert { border-left: 3px solid var(--ok); }
+  .filelabel {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.75rem; color: var(--muted); margin-bottom: -0.5rem;
+  }
+
+  .tablewrap { overflow-x: auto; margin: 1.2rem 0; }
+  table { border-collapse: collapse; font-size: 0.92rem; min-width: 60%; }
+  th, td { padding: 0.4rem 0.9rem; text-align: left; }
+  thead th { border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
+  tbody tr:last-child td { border-bottom: 2px solid var(--ink); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  figure { margin: 1.4rem 0; text-align: center; }
+  figure img, figure svg { max-width: 100%; height: auto; }
+  figcaption { font-size: 0.88rem; color: var(--muted); margin-top: 0.4rem; }
+
+  .footer {
+    margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule);
+    font-size: 0.85rem; color: var(--muted);
+  }
+</style>
+
+<h1>Four-dimensional Kakeya: sticky grains campaign</h1>
+<p class="subtitle">Exact audit of the 13/4 sticky bound and the ruled-quadric obstruction</p>
+<div class="meta">
+  <span class="badge badge-neg">partial-results · open</span>
+  <span><code>problems/kakeya-r4</code></span>
+  <span>2026-07-24</span>
+</div>
+
+<div class="abstract">
+  <span class="label">Abstract</span>
+  The current general Hausdorff benchmark in R⁴ is above 3.059, the current
+  maximal-function benchmark is the distinct 3.0543 result, and the sticky
+  Hausdorff benchmark is 13/4. We reconstructed the sticky induction, found
+  and repaired a constants defect in its printed bookkeeping, and built an
+  exact ruled-quadric stress test. No new Kakeya dimension bound is claimed.
+</div>
+
+<h2>1 · Verified bookkeeping</h2>
+<div class="env proposition">
+  <span class="label">Proposition 1.</span>
+  If <var>N</var> is minimal with 4/<var>N</var> &lt; ε<sub>0</sub>, then
+  ε<sub>0</sub>/(4+ε<sub>0</sub>) ≤ 1/<var>N</var> &lt;
+  ε<sub>0</sub>/4. The two published Section 6 comparisons using
+  ε<sub>0</sub>/4 on the opposite side do not follow from the stated choices.
+  Replacing it by the safe lower bound ε<sub>0</sub>/5 and shrinking the
+  auxiliary losses repairs the induction budget.
+</div>
+<div class="proof">
+  <span class="label">Exact check.</span>
+  For ε<sub>0</sub>=1/10, minimality gives <var>N</var>=41, so
+  2/<var>N</var>&lt;ε<sub>0</sub>. The complete rational calculation and
+  repaired witness are in <code>results/rai-section-6-parameter-check.md</code>.
+</div>
+<div class="eqn">
+  <span class="body">ε<sub>0</sub>/(4+ε<sub>0</sub>) ≤ 1/<var>N</var> &lt; ε<sub>0</sub>/4</span>
+  <span class="no">(1)</span>
+</div>
+
+<h2>2 · Ruled-quadric stress test</h2>
+<div class="env proposition">
+  <span class="label">Proposition 2.</span>
+  The quadric <var>x</var><sub>1</sub>²+<var>x</var><sub>2</sub>²−
+  <var>x</var><sub>3</sub>²−<var>x</var><sub>4</sub>²=1 contains three
+  concurrent rational lines whose normalized squared trilinear wedge is
+  1/50. Thus a ruled quadratic carrier need not be 2-plany even locally.
+</div>
+<p>The linear identification with SL<sub>2</sub>(R) makes the ruling exact.
+The true Convex-Wolff obstruction is the randomly thinned net followed by
+δ<sup>−1/2</sup> moved copies; the raw full net itself fails Convex Wolff.
+A degree-2 polynomial Wolff test detects each thinned copy by
+δ<sup>−1/2</sup>.</p>
+
+<h2>3 · Exact verification</h2>
+<p class="filelabel">Run from problems/kakeya-r4/harness/</p>
+<pre class="cert"><code>$ python3 exponent_ledger.py benchmark_ledger.json
+{"ambient_dimension":"4","bottleneck_branches":"trilinear",
+ "global_dimension_bound":"13/4","global_volume_exponent":"3/4"}
+$ python3 -m unittest -v
+OK</code></pre>
+<div class="tablewrap">
+  <table>
+    <thead><tr><th>Bridge</th><th>Verified output</th><th>Research status</th></tr></thead>
+    <tbody>
+      <tr><td>Sticky multiscale</td><td>Exact implication for any 0&lt;c&lt;1/12</td><td>inverse theorem missing</td></tr>
+      <tr><td>Semialgebraic</td><td>Degree-2 obstruction detected</td><td>carrier extraction missing</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>4 · Conditional exponent bridge</h2>
+<div class="env conjecture">
+  <span class="label">Target.</span>
+  A multiscale trilinear gain
+  |U| ≥ δ<sup>3/4−<var>c</var>+o(1)</sup>, for some
+  0&lt;<var>c</var>&lt;1/12, would leave the weakly plany gain
+  ρ<sup>−(1/12−<var>c</var>)</sup> positive and imply
+  dim<sub>H</sub> K ≥ 13/4+<var>c</var>.
+</div>
+<p>This target is not proved. The current one-scale trilinear estimate has no
+factor capable of producing δ<sup>−<var>c</var></sup>, and Proposition 3.12
+contains no near-equality classification or cross-scale algebraic coherence.
+The soundness review also rejected combining independently selected balanced
+refinements without a common-mass lemma or ignoring model-selection losses.</p>
+
+<h2>5 · Gate verdict</h2>
+<p>Continue Bridge B only as a degree-two carrier-extraction research target.
+Do not claim a new sticky exponent, a full-dimensional subclass, an inverse
+theorem, or a semialgebraic union theorem. The two-session milestone gate has
+not yet been met.</p>
+
+<h2>6 · Relation to prior work</h2>
+<p>Rai Choudhuri combines the Guth–Zahl trilinear estimate, the Katz–Zahl
+planebrush estimate, and Wang–Zahl multiscale balance. The R³ full-to-sticky
+reduction uses three-dimensional convex-factor geometry and a full R³ sticky
+endpoint. Guth and Zahl identify ruled low-degree hypersurfaces as the
+obstruction to a literal R⁴ convex-union theorem. Full citations are in
+<code>literature/refs.bib</code>.</p>
+
+<div class="footer">
+  <p><strong>Cite as:</strong> see <code>writeup/CITATION.cff</code>.
+  No DOI release was made.</p>
+  <p>Repository: <code>problems/kakeya-r4</code> · canonical source:
+  <code>writeup/report.md</code>.</p>
+</div>

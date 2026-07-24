@@ -14,6 +14,7 @@ do not edit by hand.**
 
 | Problem | Status | Question | Best result so far | DOI |
 |---|---|---|---|---|
+| [Four-dimensional Kakeya conjecture](problems/kakeya-r4/PROBLEM.md) | 🟡 partial results | Must every Kakeya set in R^4 have Hausdorff and Minkowski dimension 4? | Exact repair ledger for the 13/4 induction; degree-2 split-quadric obstruction and QW2 detection lemma; no new dimension bound | — |
 | [Four-dimensional Mahler volume conjecture](problems/mahler-volume-4d/PROBLEM.md) | 🟡 partial results | For every convex body K⊂R^4, prove \|K\| \|(K-s(K))°\| ≥ 3125/576, with equality only for simplices. | Sharp inequality for every 4D affine join; connected case equals strict entropic superharmonicity, with a robust-support terminal lemma and exact degree-two Bochner target. | — |
 | [The missing Moore graph (degree 57)](problems/moore-graph-57/PROBLEM.md) | 🟡 partial results | Does a 57-regular graph on 3250 vertices with girth 5 (srg(3250,57,0,1)) exist? | NEW THEOREM: derangement ansatz forces H perfect; no order-56 group works (closes Smith-Montemanni 2026 open case) - writeup drafted+refereed | — |
 | [Square Peg conjecture](problems/square-peg/PROBLEM.md) | 🟡 partial results | Does every Jordan curve in the plane contain the four vertices of a nondegenerate square? | Every finite-p-variation (p<2) curve and every 1/2-Holder curve with finite Antonelli-Young quadratic-diameter energy gets every rectangle; the critical class has a witness in no finite-p<2 class | — |
