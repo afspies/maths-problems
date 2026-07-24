@@ -93,7 +93,11 @@
   universal obstructions. We further prove that tight atomic columns have
   external private targets, that their row holes are two-packings, and that
   a bidirectional weighted-domination lift certifies every product with
-  P<sub>4</sub>. No improved universal constant is claimed.
+  P<sub>4</sub>. Finally, we correct the lift’s deficit algebra, construct
+  connected formal-ratio counterfamilies to all marginal repairs, extract
+  labelled distance-three escape cycles, and prove that a stronger combined
+  lift has zero universal factor on connected Cayley graph pairs. No improved
+  universal constant is claimed.
 </div>
 
 <h2>1 · Setup</h2>
@@ -403,30 +407,95 @@ two-packing in <var>G</var> and a fractional packing <var>q</var> on
   ρ(<var>G</var>)Δ<sub><var>H</var></sub>(<var>q</var>).</span>
   <span class="no">(15)</span>
 </div>
-<p>For the canonical half-2-packing at the formal Steiner ratios, this reaches
-the constant exactly when Δ=(1−<var>b</var>)γ(<var>H</var>). C<sub>5</sub>
-and augmented split-graph mixtures approach the formal ratios with zero
-canonical deficit, so ratios alone cannot prove the threshold. Those split
-graphs have diffuse alternative packings: if <var>η</var><sub><var>p</var></sub>,
-<var>η</var><sub><var>q</var></sub> are the maximum coordinates of packings
-of totals <var>P,Q</var>, then
-γ<sub>f</sub>(<var>G</var>□<var>H</var>)≥
-<var>PQ</var>/(<var>η</var><sub><var>p</var></sub>+
-<var>η</var><sub><var>q</var></sub>). This leaves a concrete
-defect–diffuseness dichotomy.</p>
+<p>Double counting gives the exact correction
+Δ<sub><var>H</var></sub>(<var>q</var>)=
+γ(<var>H</var>)−<var>Q</var>−Ω<sub><var>H</var></sub>(<var>q</var>)≤
+γ(<var>H</var>)−<var>Q</var>. The canonical half-2-packing can therefore
+only meet Steiner at its absolute ceiling; it can never improve it.
+Optimizing the valid slice still fails: exact C<sub>5</sub>/split mixtures
+approaching the formal ratios keep its normalized value at
+(1273−115√73)/576≈0.504235.</p>
+<p>The independently capped fractional-packing repair also fails. The
+augmented split graph has an exact three-piece capped profile and a uniform
+normalized hard-spike error at most 2/γ. An asymmetric
+C<sub>5</sub>/L(K<sub>7</sub>) additive family keeps both anchored arms and
+every pair of caps below Steiner. Safe zero-weight ports connect the family
+while preserving γ, ρ and ρ<sup>{2}</sup>, so connectedness does not repair
+the no-go.</p>
 
-<h2>12 · Exact verification and next gate</h2>
+<h2>12 · Labelled private-corner dynamics</h2>
+<p>Row hole two-packings tensor with every factor packing, but a common-crown
+construction concentrates all private incidences in one closed neighborhood.
+Two-sided external privacy does force a genuinely labelled object. Each
+dominating point has a horizontal and vertical private neighbor; the
+opposite corner is owned by another point of the dominating set. Choosing
+one owner per corner creates a directed cycle whose every step changes one
+coordinate by an edge and the other by distance exactly two.</p>
+<p>At formal equality, escape indegrees are bounded by the row-hole packing
+numbers and every arc has a red-diagonal/blue-cross-zero cell-label pattern.
+The perfect code in C<sub>5</sub>□C<sub>5</sub> realizes a directed 5-cycle,
+so cycle existence and bounded indegree alone do not give a density gain.</p>
+
+<h2>13 · Combined packing/blocker lift and exact STOP</h2>
+<p>Let a genuine fractional product packing <var>W</var> share each local
+capacity unit with both blocker arrays. Maximizing
+Σ<var>W</var>+Στ<sub>H</sub>(<var>a</var>)+Στ<sub>G</sub>(<var>b</var>)
+under the shared constraint defines Ξ(<var>G,H</var>), and the same
+dominating-set count proves γ(<var>G</var>□<var>H</var>)≥Ξ(<var>G,H</var>).
+Its exact dual is a fractional product dominator that simultaneously routes
+owner-indexed probability marginals of integral factor dominators.</p>
+<p>For vertex-transitive factors with closed-neighborhood sizes
+<var>R</var><sub>G</sub>,<var>R</var><sub>H</sub>, put
+κ<sub>G</sub>=γ(<var>G</var>)<var>R</var><sub>G</sub>/|<var>G</var>| and
+similarly for <var>H</var>. Exact averaging gives the normalized value</p>
+<div class="eqn">
+  <span class="body">max{1/κ<sub>G</sub>, 1/κ<sub>H</sub>,
+  R<sub>G</sub>R<sub>H</sub>/
+  [κ<sub>G</sub>κ<sub>H</sub>(R<sub>G</sub>+R<sub>H</sub>−1)]}.</span>
+  <span class="no">(16)</span>
+</div>
+<p>Bollobás–Janson–Riordan translate coverings yield affinely spanning sets
+in elementary abelian 2-groups with κ→∞. Their Cayley graphs are connected
+and vertex-transitive. Taking the two neighborhood scales sufficiently
+different sends all three terms above to zero. Hence Ξ, and therefore the
+full blocker alone, has no positive universal normalized factor.</p>
+
+<h2>14 · Typed fibre-set successor</h2>
+<p>For actual row label sets
+<var>A</var><sub><var>g</var></sub>, let
+<var>V</var><sub><var>g</var></sub> be the union of labels imported from
+open neighboring rows. Product domination is exactly
+H∖<var>V</var><sub><var>g</var></sub>⊆
+N<sub>H</sub>[<var>A</var><sub><var>g</var></sub>]. Keeping only the
+necessary cardinality inequality in every row and column defines a strict
+typed relaxation Θ.</p>
+<p>The row masses form an integer γ(<var>H</var>)-dominating function on
+<var>G</var>. More directly, every genuinely missed row subset can be
+repaired at total cost at most the original label count, giving</p>
+<div class="eqn">
+  <span class="body">Θ≥γ(<var>G</var>□<var>H</var>)/2
+  ≥(<var>c</var>/2)γ(<var>G</var>)γ(<var>H</var>).</span>
+  <span class="no">(17)</span>
+</div>
+<p>The relaxation is strict on
+(K<sub>2</sub>⊔K<sub>1</sub>)□(K<sub>2</sub>⊔K<sub>1</sub>):
+four swapped-component labels pass both cardinality systems, while the
+product domination number is five. The live target is to improve the
+factor-two repair using both row and column missed-set costs.</p>
+
+<h2>15 · Exact verification and next gate</h2>
 <pre><code>$ cd problems/vizing-domination/harness
 $ python3 -m unittest -v
-Ran 25 tests
+Ran 30 tests
 OK</code></pre>
 <p>The checks use integers, rational numbers, and exact elements of
 ℚ(√73). They validate definitions and finite witnesses, not the universal
 conjecture. The gate is met by the capacity-two subset inequality and formal
 fibre-incidence classification, and strengthened by the external-private and
-row hole-packing theorems. Further work should couple hole packings without
-factor order, control self-private sets in near-tight columns, or prove a
-second-order blocker/Steiner dichotomy.</p>
+row hole-packing theorems. Every averaged blocker/fractional hybrid attempted
+here is now closed. Further work must use the typed correlated fibre sets,
+their missed-set repair costs, and the successive cell labels along escape
+paths.</p>
 
 <div class="footer">
   <p><strong>Status:</strong> partial-results. Vizing’s domination conjecture

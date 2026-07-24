@@ -178,6 +178,74 @@ class GraphHygieneTests(unittest.TestCase):
             b,
             c5_share.scale(Fraction(3, 4)) + (one - c5_share) * diagonal_ratio,
         )
+        anchored_limit = Surd73(Fraction(1273, 576), Fraction(-115, 576))
+        anchored_gap = c - anchored_limit
+        self.assertEqual(
+            anchored_gap,
+            Surd73(Fraction(-1153, 576), Fraction(139, 576)),
+        )
+        self.assertEqual(139 * 139 * 73 - 1153 * 1153, 81024)
+
+    def test_independent_cap_counterfamily_identities(self) -> None:
+        c, a, b = steiner_exact_constants()
+        one = Surd73(Fraction(1))
+
+        c5_share = Surd73(Fraction(-7, 6), Fraction(1, 6))
+        split_ratio = Surd73(Fraction(41, 64), Fraction(-3, 64))
+        self.assertEqual(
+            a,
+            c5_share.scale(Fraction(1, 2)) + (one - c5_share) * split_ratio,
+        )
+        self.assertEqual(
+            b,
+            c5_share.scale(Fraction(3, 4)) + (one - c5_share) * split_ratio,
+        )
+
+        line_share = Surd73(Fraction(-7, 4), Fraction(1, 4))
+        large_split_ratio = Surd73(Fraction(19, 36), Fraction(-1, 36))
+        self.assertEqual(
+            a,
+            line_share.scale(Fraction(1, 3))
+            + (one - line_share) * large_split_ratio,
+        )
+        self.assertEqual(
+            b,
+            line_share.scale(Fraction(1, 2))
+            + (one - line_share) * large_split_ratio,
+        )
+
+        right_anchored = Surd73(Fraction(2443, 1056), Fraction(-217, 1056))
+        self.assertEqual(
+            c - right_anchored,
+            Surd73(Fraction(-741, 352), Fraction(87, 352)),
+        )
+        self.assertEqual(87 * 87 * 73 - 741 * 741, 3456)
+
+        cap_limit = Surd73(Fraction(-247, 264), Fraction(37, 264))
+        self.assertEqual(
+            c - cap_limit,
+            Surd73(Fraction(151, 132), Fraction(-13, 132)),
+        )
+        self.assertGreater(151 * 151 - 13 * 13 * 73, 0)
+
+        profile_slope_drop = Surd73(Fraction(-811, 264), Fraction(97, 264))
+        self.assertGreater(97 * 97 * 73 - 811 * 811, 0)
+
+    def test_combined_lift_transitive_benchmarks(self) -> None:
+        # The exact transitive formula is the maximum of the product
+        # fractional term and the two directional blocker terms.
+        c4_fractional = Fraction(4 * 4, 2 + 2 + 1)
+        c4_blocker = Fraction(4 * 2, 2 + 1)
+        self.assertEqual(max(c4_fractional, c4_blocker), Fraction(16, 5))
+        self.assertLess(Fraction(16, 5), 2 * 2)
+
+        c, _, _ = steiner_exact_constants()
+        normalized_c4 = Surd73(Fraction(4, 5))
+        self.assertEqual(
+            normalized_c4 - c,
+            Surd73(Fraction(71, 120), Fraction(-1, 24)),
+        )
+        self.assertGreater(71 * 71 - 5 * 5 * 73, 0)
 
     def test_k3_counterexample(self) -> None:
         graph = Graph.from_edges(
@@ -400,6 +468,76 @@ class GraphHygieneTests(unittest.TestCase):
                 next_point[0] * factor.n + next_point[1],
                 product_graph.closed_neighborhood(corner[0] * factor.n + corner[1]),
             )
+            self.assertNotIn(
+                next_point[0] * factor.n + next_point[1],
+                product_graph.closed_neighborhood(
+                    horizontal_private[0] * factor.n + horizontal_private[1]
+                ),
+            )
+            self.assertNotIn(
+                next_point[1],
+                factor.closed_neighborhood(point[1]),
+            )
+            self.assertIn(
+                vertical_private[1],
+                factor.closed_neighborhood(point[1])
+                & factor.closed_neighborhood(next_point[1]),
+            )
+
+    def test_private_corner_escape_cycle_can_have_length_two(self) -> None:
+        left = path(2)
+        right = path(3)
+        product_graph = left.cartesian_product(right)
+        chosen_pairs = ((0, 0), (1, 2))
+        chosen = {g * right.n + h for g, h in chosen_pairs}
+        self.assertTrue(product_graph.dominates(chosen))
+
+        for point, horizontal, vertical, corner, owner in (
+            ((0, 0), (1, 0), (0, 1), (1, 1), (1, 2)),
+            ((1, 2), (0, 2), (1, 1), (0, 1), (0, 0)),
+        ):
+            source = point[0] * right.n + point[1]
+            horizontal_vertex = horizontal[0] * right.n + horizontal[1]
+            vertical_vertex = vertical[0] * right.n + vertical[1]
+            corner_vertex = corner[0] * right.n + corner[1]
+            owner_vertex = owner[0] * right.n + owner[1]
+            self.assertEqual(
+                product_graph.closed_neighborhood(horizontal_vertex) & chosen,
+                {source},
+            )
+            self.assertEqual(
+                product_graph.closed_neighborhood(vertical_vertex) & chosen,
+                {source},
+            )
+            self.assertIn(
+                owner_vertex,
+                product_graph.closed_neighborhood(corner_vertex),
+            )
+
+    def test_typed_fibre_cardinality_is_strictly_weaker(self) -> None:
+        factor = Graph.from_edges(3, [(0, 1)])
+        chosen_pairs = {(0, 2), (1, 2), (2, 0), (2, 1)}
+        product_graph = factor.cartesian_product(factor)
+        chosen = {g * factor.n + h for g, h in chosen_pairs}
+
+        self.assertEqual(factor.domination_number(), 2)
+        self.assertEqual(product_graph.domination_number(), 5)
+        self.assertFalse(product_graph.dominates(chosen))
+
+        row_sets = {
+            g: {h for x, h in chosen_pairs if x == g}
+            for g in range(factor.n)
+        }
+        for g in range(factor.n):
+            open_neighbors = set(factor.closed_neighborhood(g)) - {g}
+            imported = set().union(
+                *(row_sets[x] for x in open_neighbors),
+            )
+            missed_type = set(range(factor.n)) - imported
+            self.assertGreaterEqual(
+                len(row_sets[g]),
+                factor.domination_number(missed_type),
+            )
 
     def test_bidirectional_blocker_certifies_small_p4_pairs(self) -> None:
         right = path(4)
@@ -434,6 +572,41 @@ class GraphHygieneTests(unittest.TestCase):
             if graph.dominates(chosen)
         )
         self.assertEqual(best_defect, 0)
+
+    def test_common_crown_kills_private_row_density(self) -> None:
+        base = cycle(4)
+        crown = Graph.from_edges(
+            7,
+            list(base.edges)
+            + [
+                (4, 0),
+                (0, 5),
+                (4, 5),
+                (2, 6),
+                (4, 6),
+            ],
+        )
+        owners = {0, 2}
+        targets = {5, 6}
+        self.assertEqual(crown.domination_number(), 2)
+        self.assertTrue(crown.dominates(owners))
+        self.assertEqual(crown.closed_neighborhood(4) & targets, targets)
+        self.assertEqual(crown.closed_neighborhood(5) & owners, {0})
+        self.assertEqual(crown.closed_neighborhood(6) & owners, {2})
+
+        right = Graph.from_edges(2, [])
+        product_graph = crown.cartesian_product(right)
+        chosen = {g * right.n + h for g in owners for h in range(right.n)}
+        self.assertEqual(product_graph.domination_number(), 4)
+        self.assertTrue(product_graph.dominates(chosen))
+        for owner, target in ((0, 5), (2, 6)):
+            for h in range(right.n):
+                private = target * right.n + h
+                source = owner * right.n + h
+                self.assertEqual(
+                    product_graph.closed_neighborhood(private) & chosen,
+                    {source},
+                )
 
 
 if __name__ == "__main__":

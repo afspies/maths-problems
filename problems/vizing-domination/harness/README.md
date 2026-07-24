@@ -26,5 +26,8 @@ packing/domination equality gadget, validate exact split-graph fractional
 packings, and exercise the coordinate-hole adversarial skeleton. New fixtures
 check the external-private atomic theorem and its additivity obstruction, the
 `C₅□C₅` cycling-corner obstruction, `P₄` blocker targets, zero saturation
-defect on `C₅`, and a diffuse split-graph tensor. The suite currently contains
-25 tests.
+defect on `C₅`, and a diffuse split-graph tensor. Additional fixtures cover
+exact anchored/capped surd identities, the common-crown concentration
+witness, the `C₄` combined-lift benchmark, and the `K₂□P₃` length-two escape
+cycle. The typed-fibre fixture separates cardinality feasibility from actual
+product domination. The suite currently contains 30 tests.

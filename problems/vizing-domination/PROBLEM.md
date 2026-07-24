@@ -64,6 +64,16 @@ its precise failure is audited in
   Their external private targets force singleton holes, and all holes landing
   in one row form a two-packing in the other factor; row slack `e` weakens
   this to the exact bound `|J|≤ρ+2e`.
+- Row hole two-packings tensor with any factor packing, but a common-crown
+  construction shows that private incidences can concentrate where every
+  such weighting has negligible mass. Full formal balance adds the exact
+  common-neighborhood bound `M(Y)≤2γ(H)ρ(H)+sd`, which is still vacuous at
+  the formal ratios when the factor domination numbers are comparable.
+- Two-sided external privacy forces a directed cycle inside the product:
+  every step changes one coordinate by an edge and the other by distance
+  exactly two. Escape indegrees are bounded by the row-hole packing numbers
+  and retain a red-diagonal/blue-cross-zero cell-label pattern. The
+  `C₅□C₅` perfect code realizes the cycle sharply.
 - The full additive integer packing/domination hierarchy retains the same
   formal 0.5643 obstruction at every level.
 - Rank-one fractional tensors and unrestricted square-clique LPs both have
@@ -73,6 +83,32 @@ its precise failure is audited in
   for every `G□P₄`, but vertex-transitive line graphs force that standalone
   relaxation back toward `1/2`. Pure higher-rank fractional packing is also
   blocked by the split-graph `□P₄` family.
+- The blocker's saturation-defect slice satisfies the exact overlap identity
+  `Δ=γ-Q-Ω≤γ-Q`; the canonical half-2-packing can therefore only meet, never
+  beat, Steiner at the formal point. Its fully optimized anchored value has
+  an exact dual, but formal-ratio split/cycle mixtures keep it below `c`.
+- Even combining both optimized anchored arms with independently capped
+  rank-one packings fails on an exact asymmetric additive counterfamily
+  approaching `(a,b)` in both factors. A natural two-sided ordinary-packing
+  residual slice of the full blocker also collapses to `a`. These are STOPs
+  for factor-marginal hybrids, not for the unsliced blocker or labelled
+  product geometry.
+- A shared-capacity lift `Ξ` combines a true fractional packing on the
+  product with the full bidirectional blocker. Its exact dual is a product
+  fractional dominator that simultaneously routes owner-indexed averaged
+  integral dominators of both factors. Asymmetric-scale connected
+  vertex-transitive Cayley graphs built from inefficient translate covers
+  drive `Ξ/(γ(G)γ(H))` to zero. Thus even this combined owner-indexed LP is a
+  universal STOP.
+- The surviving typed fibre relaxation keeps the actual row label sets
+  `A_g` and their imports `V_g=⋃_{x∈N(g)}A_x`. Product domination implies
+  `|A_g|≥γ_H(V(H)\V_g)` in every row, with a symmetric column condition.
+  Its universal value is open and must first survive the translate-cover
+  Cayley benchmark.
+- The formal-ratio three-arm counterfamily can also be connected through
+  safe zero-weight ports while preserving `γ,ρ,ρ²` and only decreasing its
+  anchored/capped values. Connectedness alone does not repair the marginal
+  no-go.
 
 ## Angle-of-attack menu (be exploratory — draw from different fields)
 
@@ -82,9 +118,11 @@ its precise failure is audited in
   additional obstruction parameter; the parameter-free `k=3` guess is dead.
 - **LP/integer duality:** compare integer `k`-packing defects with fractional
   domination and identify rounding structure that product fibres enforce.
-- **Hybrid blocker/Steiner certificates:** couple weighted integral
-  domination blockers to the exact fibre defects; both pure fractional
-  higher rank and the standalone blocker have certified obstructions.
+- **Typed fibre sets and escape dynamics:** retain the actual correlated row
+  label sets, private-target maps, and cell-owner transitions. Even
+  owner-indexed averaged factor dominators lose all positive constant.
+- **Escape-cycle stability:** couple the mixed edge/distance-two cycle to the
+  fixed `K₁/K₃` terminal atoms and exact row exchanges.
 - **Square-graph lifts:** retain which square cliques have a common center,
   since the unrestricted fractional clique cover has unbounded loss.
 - **Extremal constructions:** build graphs/subsets realizing equality in every
@@ -95,11 +133,12 @@ its precise failure is audited in
 
 ## First steps
 
-1. Seek an order-free coupling among the two-packings of singleton holes in
-   different rows. Bare row summation only gives an order lower bound.
-2. Bound the cardinality of self-private vertices in a near-tight column
-   from their two-packing number and the ambient capacity defect.
-3. In parallel, couple the bidirectional blocker lift to Steiner's defect
-   identity or to the fractional product bound.
-4. Do not pursue the additive `k`-packing hierarchy further: it is now proved
-   to preserve the exact obstruction at every level.
+1. Quantify the mixed escape-cycle lemma: force many disjoint cycles or
+   charge failures of two-sided privacy to the exact Steiner defect budget.
+2. Calibrate the typed fibre-set relaxation on the asymmetric Cayley pair,
+   then add successive red-diagonal/blue-cross-zero escape transitions.
+3. Seek a constraint tied to one actual product dominator; averaged factor
+   dominator distributions plus fractional product domination have zero
+   universal strength.
+4. Do not pursue additive `k`-packing, saturation-defect, capped-rank-one, or
+   ordinary-packing residual slices further: each now has an exact STOP.

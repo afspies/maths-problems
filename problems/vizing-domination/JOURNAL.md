@@ -535,3 +535,259 @@ row subset-domination inequality, and a new nonseparable product lift. It
 does not certify a constant above `0.5643`. **GO** only for order-free
 cross-row hole coupling, self-private stability using the full atomic
 geometry, or the explicit blocker defect–fractional diffuseness dichotomy.
+
+## 2026-07-24 — anchored correction, escape dynamics, and zero-factor lifts
+
+### Scope and independent reviews
+
+Continued on branch
+`problem/vizing-domination/2026-07-24-defect-diffuseness`. Three independent
+GPT-5.6 Sol agents at xhigh effort attacked:
+
+1. the optimized saturation-defect/capped-profile hybrid;
+2. cross-row private-hole incidence and the full blocker; and
+3. orthogonal product LPs and adversarial graph families.
+
+Every proposed theorem below received an independent Sol audit. One initial
+shared-cap counterfamily was explicitly rejected after independent caps at
+`s=1/126,t=1/15` gave
+
+`(-14641+1753√73)/564≈0.596877>c`.
+
+It was replaced by the uniform all-caps counterfamily below. A separate
+agent briefly used the wrong normalization for `ρ²`; that proposal was
+withdrawn before entering the notes.
+
+### Decisive correction to the blocker deficit
+
+The session-four threshold interpretation was incomplete. For a fractional
+packing `q`, total `Q`, and a dominating set `T`, define
+
+`E_T(q)=Σ_xq_x(|T∩N[x]|-1)≥0`.
+
+Double counting gives
+
+`Σ_{t∈T}q(N[t])=Q+E_T(q)`.
+
+Therefore exactly
+
+```text
+Δ_H(q)=γ(H)-Q-Ω_H(q),
+Ω_H(q)=max_T[E_T(q)-(|T|-γ(H))]≥0.
+```
+
+In particular `Δ_H(q)≤γ(H)-Q`. The canonical half-2-packing at the formal
+point can meet Steiner only at this absolute ceiling and can never beat it.
+All prior forward-looking “deficit above the threshold” text was corrected.
+
+### Optimized anchored value
+
+Defined
+
+`F_a(H)=max_q[Q+aΔ_H(q)]`.
+
+An optimistic minimum-dominator version has the exact anchored fractional
+domination dual
+
+```text
+min 1ᵀd
+subject to Ad≥1 and d≥az
+for some z in the convex hull of minimum dominators.
+```
+
+For the augmented uniform split graph `S_{2k,z}`,
+
+```text
+γ=k+z+1,  ρ=z+2,  ρ²=2z+4,
+F_a=z+max{2,a(k+1)}.
+```
+
+Also `F_a(C₅)=5/3` and `F_a(L(K₇))=21/11`. Disjoint-union mixtures of
+`C₅,S₂₆,₂,S₂₈,₂` approach the formal packing ratios and have
+
+`F_a/γ→(1273-115√73)/576≈0.504235<c`.
+
+The exact gap is `(139√73-1153)/576`, with square difference `81024`.
+
+### Exact capped profiles and the independent-cap STOP
+
+For
+
+`Φ_H(t)=max{Σp:p fractional packing, p_v≤t}`,
+
+proved the exact split profile. With
+`M=binom(2k-1,k-1)` and `n=2M+2k+2z`,
+
+```text
+Φ_{S_{2k,z}}(t)=
+  nt                         up to 1/(M+2k+z),
+  1+(M+z)t                  up to 1/M,
+  2+zt                       thereafter.
+```
+
+Thus its normalized profile is `(z/γ)t+e(t)` with the uniform bound
+`0≤e(t)≤2/γ`.
+
+The first counterfactor uses domination-mass share
+`(√73-7)/6` of `C₅`, with the rest a fixed `S₂₆,₂/S₂₈,₂` mixture. The
+second uses share `(√73-7)/4` of `L(K₇)` and a large
+`S_{2k,z_k}` component. Both factors approach `(a,b)`. Their anchored
+values are respectively approximately `0.504235` and `0.557719`, while the
+independently capped tensor is uniformly at most
+
+`(-247+37√73)/264≈0.261849<c`.
+
+The exact split error and a bounded slope `g(s)≤Ks` make the finite
+all-caps estimate uniform even as `s,t→0`.
+
+A safe-port lemma connects all components by a tree while preserving
+`γ,ρ,ρ²`. Edge addition only decreases `F_a` and `Φ`, so the full
+three-arm counterfamily remains a STOP on connected factors.
+
+### Cross-row packings and exact obstructions
+
+If every row `y` carries a hole two-packing `P_y` in `H` and `p` is any
+fractional packing on `G`, then
+
+`W(y,a)=p_y1[a∈P_y]`
+
+is a fractional packing on the product. Hence
+
+`Σ_yp_y|P_y|≤γ_f(G□H)≤|D|`.
+
+The common-crown construction keeps `γ` unchanged while putting every
+external private target in one closed neighborhood, so this weighted mass
+can lose an arbitrary factor. Under full formal balance, if
+`Y⊆N_G[w]`, then
+
+`M(Y)≤2γ(H)ρ(H)+sd`,
+
+where `s` is the number of singleton terminal cells and `d=|L_i|`. The
+coefficient is still vacuous at comparable formal scales.
+
+### Private-corner escape dynamics
+
+If a product point `d=(g,h)` has external private neighbors
+`(x,h)` and `(g,y)` in both directions, every dominator of the corner
+`(x,y)` is an exact `(1,2)` or `(2,1)` knight move from `d`. Choosing one
+corner owner per point gives a loopless functional digraph and hence a
+directed escape cycle.
+
+At exact equality, a destination `(x,z)` has type-`(1,2)` indegree at most
+
+`min{|J_x|,ρ_H(N₂(z)),deg_H(z)}≤ρ(H)`,
+
+and symmetrically. Every arc also forces the labelled pattern
+
+`i∈S_g∩J_x, j∈S_x, i∉I_x, j∉I_g`.
+
+The `C₅□C₅` perfect code realizes a directed 5-cycle, and
+`K₂□P₃` with `{(0,0),(1,2)}` realizes a directed 2-cycle. Existence,
+bounded indegree, and cycle length alone are therefore insufficient.
+
+### Combined lift and zero-factor Cayley obstruction
+
+Defined a shared-capacity lift `Ξ` by adding a genuine product fractional
+packing `W` to the two blocker arrays:
+
+```text
+W(N[(u,v)])
++Σ_{g∈N_G[u]}a_{g,v}
++Σ_{h∈N_H[v]}b_{u,h}≤1.
+```
+
+The product-dominator count proves `γ(G□H)≥Ξ(G,H)`. Its exact dual minimizes
+the mass of a product fractional dominator that simultaneously routes, for
+every factor vertex, probability marginals of integral dominators of the
+opposite factor.
+
+For vertex-transitive factors, with closed-neighborhood sizes `R_i` and
+covering multiplicities `κ_i=γ_iR_i/n_i`, exact averaging gives
+
+```text
+Ξ/(γ_Gγ_H)=max{
+  1/κ_G,
+  1/κ_H,
+  R_GR_H/[κ_Gκ_H(R_G+R_H-1)]
+}.
+```
+
+Bollobás--Janson--Riordan, arXiv:0910.3815v2, Theorem 4.1 and Remark 4.2,
+show that for `n=k^{1+o(1)}`, `n/k→∞`, almost every `k`-subset of any group
+of order `n` has translate-cover multiplicity `Ω(log k)`. Specialize to
+`(ℤ₂)^m`, choose `k≈2^m/log(2^m)`, and intersect with the asymptotically
+certain affine-spanning event. After translation to include zero, the sets
+give connected undirected Cayley graphs whose closed neighborhoods are the
+translates and whose `κ` is unbounded.
+
+Choose the second Cayley scale so that `log R_H≥R_G`. Then every displayed
+term tends to zero. Thus
+
+`inf Ξ(G,H)/(γ(G)γ(H))=0`
+
+even for connected vertex-transitive factors. The same family sends the full
+blocker `Λ` to zero. Two independent Sol reviewers accepted the
+specialization; the literal `⌊k log k⌋` clause of Theorem 4.1 was not used,
+only its proof and Remark 4.2 covering power-of-two group orders.
+
+### Typed successor
+
+For actual row label sets `A_g={h:(g,h)∈D}` and open-neighborhood imports
+`V_g=⋃_{x∈N_G(g)}A_x`, product domination is exactly
+
+`V(H)\V_g⊆N_H[A_g]`.
+
+Hence every product dominator satisfies
+
+`|A_g|≥γ_H(V(H)\V_g)`
+
+in every row and the symmetric column inequalities. Minimizing over set
+systems satisfying only these cardinality conditions defines a strict
+labelled relaxation `Θ≤γ(G□H)`. Its universal value is uncalibrated; the
+asymmetric Cayley pair is the first mandatory test.
+
+An independent audit proved
+
+```text
+Θ≥max{γ^{γ(H)}(G),γ^{γ(G)}(H)},
+Θ≥γ(G□H)/2≥(c/2)γ(G)γ(H).
+```
+
+For the second line, add in every row a minimum dominator of the genuinely
+missed set
+
+`M_g=(V(H)\V_g)\N_H[A_g]`.
+
+Typed feasibility bounds the total repair cost by `Σ_g|A_g|`. For
+`G=H=K₂⊔K₁`, four swapped-component labels satisfy both typed cardinality
+systems but fail to dominate the product, whose domination number is five.
+Thus the relaxation is strict. The next target is to improve the factor-two
+repair using both row and column missed-set corrections.
+
+### Verification and compute
+
+```text
+cd problems/vizing-domination/harness
+python3 -m unittest -v
+# Ran 30 tests — OK
+```
+
+New exact tests cover the anchored and independent-cap surd identities, the
+common-crown product witness, the `C₄` combined-lift benchmark, and the
+length-two private-corner escape cycle. The typed-fibre fixture separates
+cardinality feasibility from actual domination. These are hygiene and
+adversarial checks, not evidence for the conjecture.
+
+Interactive wall time: approximately three hours. External compute: the Sol
+reviewers reported one small-graph numerical falsification scan for `Ξ`;
+it was used only to find `C₄□C₄` and is not treated as a theorem or campaign
+progress.
+
+### Gate verdict
+
+No constant above `0.5643` was certified. The session nevertheless adds a
+nontrivial labelled equality classification, an exact connected
+formal-ratio counterfamily, and two rigorous zero-factor obstructions for
+natural blocker/fractional lifts. **GO** only for the typed correlated fibre
+sets and successive labelled escape transitions. All factor-marginal,
+averaged-dominator, full-blocker, and combined-lift routes are STOPs.

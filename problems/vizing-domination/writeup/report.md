@@ -22,7 +22,12 @@ system in tight fibres or a genuinely higher-rank LP bridge. A fourth
 session proves that every tight atomic column target is external-private,
 turns the resulting row holes into exact two-packings, and introduces a
 nonseparable weighted-domination blocker lift. Exact obstructions show why
-neither result yet raises the universal constant.
+neither result yet raises the universal constant. A fifth session corrects
+the blocker's saturation-defect algebra, proves exact anchored and capped
+profile counterfamilies even after connectedization, extracts labelled
+mixed-distance escape cycles from two-sided privacy, and shows that a
+stronger combined product-packing/blocker LP has zero universal factor on
+connected vertex-transitive Cayley graph pairs.
 
 ## Definitions
 
@@ -380,18 +385,185 @@ An explicit feasible blocker solution gives
 
 `Λ(G,H)≥Qγ(G)+ρ(G)Δ_H(q)`.                                   (21)
 
-At the formal Steiner ratios, taking `q` to be half an optimal integer
-2-packing reaches `c` exactly when
-`Δ_H(q)=(1-b)γ(H)`. This deficit is not forced by the ratios:
-`C₅` and augmented split graphs have canonical `Δ=0`, and disjoint-union
-mixtures approach the formal irrational point. Those split graphs also have
-very diffuse alternative packings. In general, if `η_p,η_q` are maximum
-coordinates of fractional packings of totals `P,Q`, then
+For a dominating set `T`, put
 
-`γ_f(G□H)≥PQ/(η_p+η_q)`.                                    (22)
+`E_T(q)=Σ_xq_x(|T∩N[x]|-1)≥0`.
 
-The remaining orthogonal target is therefore an explicit
-defect–diffuseness dichotomy, not a pure blocker or pure fractional theorem.
+Double counting gives the exact correction
+
+```text
+Δ_H(q)=γ(H)-Q-Ω_H(q),
+Ω_H(q)=max_T[E_T(q)-(|T|-γ(H))]≥0.                            (22)
+```
+
+Thus `Δ_H(q)≤γ(H)-Q`. At the formal ratios, the canonical half-2-packing can
+only meet Steiner at this absolute ceiling; it can never beat it.
+
+Optimizing over all fractional packings gives the anchored parameter
+
+`F_a(H)=max_q[Q+aΔ_H(q)]`.
+
+For the augmented split graph `S_{2k,z}`,
+
+`F_a(S_{2k,z})=z+max{2,a(k+1)}`,
+
+while `F_a(C₅)=5/3`. Formal-ratio `C₅,S₂₆,₂,S₂₈,₂` mixtures have
+
+`F_a/γ→(1273-115√73)/576≈0.504235<c`.                        (23)
+
+The natural diffuseness repair also fails. Define the capped profile
+
+`Φ_H(t)=max{Σp:p fractional packing, p_v≤t}`.
+
+Then
+
+`γ_f(G□H)≥Φ_G(s)Φ_H(t)/(s+t)`.                               (24)
+
+The profile of `S_{2k,z}` is exactly piecewise linear, with breakpoints
+`1/(binom(2k-1,k-1)+2k+z)` and `1/binom(2k-1,k-1)`, and its normalized form
+is
+
+`(z/γ)t+e(t),  0≤e(t)≤2/γ`
+
+uniformly over all caps. An asymmetric additive pair approaching both
+formal packing ratios keeps both anchored values and every independently
+capped tensor below `c`; the cap arm is at most
+
+`(-247+37√73)/264≈0.261849`.                                 (25)
+
+Hence the entire factor-marginal defect–diffuseness hybrid is a STOP.
+
+## Cross-row holes and escape cycles
+
+If `P_y` is the singleton-hole two-packing in product row `y` and `p` is
+any fractional packing on `G`, then
+
+`Σ_yp_y|P_y|≤γ_f(G□H)≤|D|`.                                  (26)
+
+A common-crown construction concentrates all external private targets in
+one closed neighborhood, making this weighted mass arbitrarily small
+relative to the number of private incidences. Full formal balance adds the
+exact common-neighborhood bound
+
+`M(Y)≤2γ(H)ρ(H)+sd`,
+
+where `s` is the number of singleton terminal cells and `d=|L_i|`; its
+coefficient is still vacuous at comparable formal scales.
+
+Two-sided external privacy nevertheless forces a genuinely product-labelled
+object. The horizontal and vertical private neighbors of each `d∈D` define
+a corner owned by another point of `D`. Choosing one owner per corner gives
+a directed cycle in `D`; every arc changes one coordinate by an edge and
+the other by distance exactly two. At exact equality, its indegrees are
+bounded by the row-hole packing numbers and every arc has a
+red-diagonal/blue-cross-zero cell-label pattern. The `C₅□C₅` perfect code
+realizes a directed 5-cycle, so existence and bounded indegree alone do not
+give a density defect.
+
+## Combined product-packing/blocker lift
+
+Let `K=G□H`. Make a product fractional packing `W` share the blocker
+capacity by replacing its constraint with
+
+```text
+W(N_K[(u,v)])
++Σ_{g∈N_G[u]}a_{g,v}
++Σ_{h∈N_H[v]}b_{u,h}≤1.
+```
+
+Maximizing
+
+`Σ_xW_x+Σ_gτ_H(a_g)+Σ_hτ_G(b^h)`
+
+defines `Ξ(G,H)`. The same product-dominator count proves
+
+`γ(G□H)≥Ξ(G,H)`.                                             (27)
+
+Its exact dual minimizes `Σd_{u,v}` subject to:
+
+1. `d` fractionally dominates `G□H`; and
+2. for every vertex of either factor, the corresponding neighborhood slice
+   of `d` covers the incidence marginals of a probability distribution over
+   integral dominators of the opposite factor.
+
+Thus one cheap dual object must satisfy the product-fractional and both
+owner-indexed integral-routing requirements simultaneously.
+
+For vertex-transitive factors of degrees `r,s`, averaging gives exactly
+
+```text
+Ξ=max{
+ |G||H|/(r+s+1),
+ |G|γ(H)/(r+1),
+ |H|γ(G)/(s+1)
+}.                                                          (28)
+```
+
+The Vizing-level claim `Ξ≥γ(G)γ(H)` is false:
+`Ξ(C₄,C₄)=16/5<4`. More decisively, `Ξ` has no positive universal factor.
+For a vertex-transitive graph, put
+
+`κ_G=γ(G)|N_G[g]|/|V(G)|`.
+
+Equation (28), normalized, is
+
+```text
+max{
+  1/κ_G,
+  1/κ_H,
+  |N_G||N_H|/[κ_Gκ_H(|N_G|+|N_H|-1)]
+}.                                                          (29)
+```
+
+Bollobás--Janson--Riordan's translate-cover theorem gives affinely spanning
+sets in elementary abelian 2-groups with `κ→∞`
+[@bollobasJansonRiordan2011, Theorem 4.1 and Remark 4.2]. The associated
+Cayley graphs are connected and have the translates as closed
+neighborhoods. Choosing the second closed-neighborhood scale so large that
+its logarithm dominates the first scale sends all three terms in (29) to
+zero. Therefore
+
+`inf Ξ(G,H)/(γ(G)γ(H))=0`
+
+even over connected vertex-transitive graphs.
+
+For comparison, the exact formal-ratio additive counterfamily from (25)
+has a componentwise blocker lower bound
+
+`(14479-997√73)/9504≈0.627170>c`,
+
+but safe zero-weight ports connect that family while preserving its packing
+ratios and marginal no-gos. Connectedness alone repairs neither route.
+
+## Typed fibre-set successor
+
+For the actual row labels `A_g={h:(g,h)∈D}`, let
+
+`V_g=⋃_{x∈N_G(g)}A_x`
+
+use the open neighborhood. Product domination is exactly
+
+`V(H)\V_g⊆N_H[A_g]`.
+
+The necessary cardinality condition
+
+`|A_g|≥γ_H(V(H)\V_g)`                                       (30)
+
+and its column analogue define a strict labelled relaxation `Θ`. It retains
+the correlated coordinate sets discarded by every averaged lift. Two exact
+baselines are
+
+```text
+Θ≥max{γ^{γ(H)}(G),γ^{γ(G)}(H)},
+Θ≥γ(G□H)/2≥(c/2)γ(G)γ(H).                                  (31)
+```
+
+The second follows by repairing each genuinely missed row subset at cost at
+most `|A_g|`. The relaxation is strict: for
+`G=H=K₂⊔K₁`, four swapped-component labels satisfy both cardinality systems
+but do not dominate the product, whose domination number is five. Improving
+the factor-two repair using both row and column missed-set costs is the
+current theorem-shaped target.
 
 ## Withdrawn 0.5809 claim
 
@@ -413,7 +585,7 @@ From `problems/vizing-domination/harness` run:
 python3 -m unittest -v
 ```
 
-Twenty-five exact tests check named graph products, domination and `k`-function
+Thirty exact tests check named graph products, domination and `k`-function
 definitions, Steiner's subset inequality, equation (3), the exact
 `Q(√73)` threshold identities, the withdrawn algebra witness, and the
 five-vertex `k=3` counterexample together with corrected inequality (5).
@@ -436,6 +608,8 @@ optimal rank-one concentration, and unrestricted square-clique cover are now
 closed as universal routes. The exact external-private and row hole-packing
 theorems further meet the gate, but their first aggregate consequence
 depends on factor order. Pure higher-rank fractional packing and the
-standalone blocker lift are also closed. Future work should seek an
-order-free coupling of hole packings, a near-tight cardinal bound for
-self-private sets, or a second-order blocker/Steiner hybrid.
+standalone blocker lift are also closed. The factor-marginal
+blocker/diffuseness hybrid and the stronger combined lift are now closed as
+well. Future work must quantify the actual labelled escape-cycle dynamics
+inside the typed fibre relaxation and improve its factor-two missed-set
+repair.

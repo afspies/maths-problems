@@ -24,6 +24,13 @@
   columns have no self-private projection vertices; singleton holes landing
   in one row satisfy a quantitative subset-domination inequality and become
   a two-packing at zero row slack.
+- `cross-row-hole-packing/` — **proved tensor and obstruction:** row hole
+  packings tensor with factor packings, but a common-crown construction makes
+  the captured mass vanish; full balance adds only a presently weak
+  singleton-cell correction.
+- `corner-dynamics/` — **proved product-specific bridge:** two-sided external
+  privacy forces a directed cycle of mixed edge/distance-two moves; the
+  `C₅□C₅` perfect code realizes the cycle sharply.
 - `packing-hierarchy/` — **proved obstruction:** the full additive hierarchy
   of integer `k`-packing subset/product bounds is derived and shown to retain
   Steiner's exact 0.5643 minimax obstruction.
@@ -39,7 +46,18 @@
 - `bidirectional-blocker/` — **proved nonseparable lift and obstruction:**
   weighted integral domination blockers certify every `G□P₄` exactly, while
   vertex-transitive line graphs drive the standalone lift back to `1/2`.
+- `combined-blocker-packing/` — **proved exact lift and zero-factor STOP:**
+  the shared-capacity LP simultaneously fractionally dominates the product
+  and routes owner-indexed averaged factor dominators, but asymmetric-scale
+  connected Cayley graphs drive its normalized value to zero.
+- `typed-fibre-relaxation/` — **new labelled GO candidate:** retains the
+  actual correlated row-coordinate sets and their subset-domination burden,
+  the minimal distinction lost by all averaged blocker/fractional lifts.
+- `anchored-domination/` — **exact duality and STOP results:** the optimized
+  saturation-defect slice is an anchored fractional-domination parameter and
+  stays below Steiner on formal-ratio mixtures; even independently capped
+  rank-one diffuseness fails jointly with both anchored arms.
 
-Next work should couple the row hole packings across different rows without
-using factor order, or build a second-order hybrid of the blocker lift with
-Steiner/fractional certificates.
+Next work must use the full alternating fibre labels or another constraint
+not implied by factor dominator distributions and product fractional
+domination.

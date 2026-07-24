@@ -117,36 +117,61 @@ on `H`. Then `Q=bγ(H)` and `ρ(G)=aγ(G)`, so (7), normalized, is
 
 `b+a Δ_H(q)/γ(H)`.
 
-Since `c=b+a(1-b)`, this reaches Steiner exactly at
+For every dominating set `T`, put
 
-`Δ_H(q)=(1-b)γ(H)`                                            (8)
+`E_T(q)=Σ_x q_x(|T∩N_H[x]|-1)≥0`.
 
-and improves it above that threshold.
+Double counting gives
 
-The packing ratios alone do not force (8) for this canonical `q`. On `C₅`,
-half-weight on `{0,2,4}` has `Δ=0`. For even `m`, the augmented uniform
-split graph `S_m` with `k=m/2` satisfies
+`Σ_{t∈T}q(N[t])=Q+E_T(q)`.
+
+Consequently
 
 ```text
-γ(S_m)=m/2+3,   ρ(S_m)=4,   ρ²(S_m)=8,
-x₁=x₂=8/(m+6).
+Δ_H(q)=γ(H)-Q-Ω_H(q),
+Ω_H(q)=max_T [E_T(q)-(|T|-γ(H))]≥0.                          (8)
 ```
 
-Weight one on two complementary hard vertices and the two private leaves.
-This is an optimal fractional packing of total four, and a minimum dominator
-can be chosen entirely from vertices with saturated closed neighborhoods,
-so again `Δ=0`.
+In particular `Δ_H(q)≤γ(H)-Q`. Therefore the canonical packing reaches
+Steiner only at the absolute ceiling
+
+`Δ_H(q)=(1-b)γ(H)`,
+
+and can never improve it. More generally, writing
+`x=Q/γ(H)` and `ω=Ω_H(q)/γ(H)`, the normalized complement value is
+
+`a+(1-a)x-aω`.                                               (9)
+
+Improvement over Steiner would require both `x>b` and the exact
+surplus-overlap inequality
+
+`(1-a)(x-b)>aω`.                                             (10)
+
+Even optimizing over every fractional packing does not force this from the
+formal packing ratios. On `C₅`, the optimized complement value is `5/3`.
+For the augmented uniform split graph `S_{2k}`,
+
+```text
+γ(S_{2k})=k+3,   ρ(S_{2k})=4,   ρ²(S_{2k})=8.
+```
+
+If `a(k+1)≥2`, an exact orbit calculation gives
+
+`max_q [Q+aΔ(q)]=a(k+1)+2`.                                  (11)
 
 Disjoint-union mixtures of `C₅,S₂₆,S₂₈` approach the irrational formal
-point while retaining zero canonical deficit. The necessary `C₅`
-domination-mass fraction is
+point in both packing ratios. Additivity and (11) give the limiting optimized
+normalized value
 
-`(√73-7)/6≈0.257334`,
+`(1273-115√73)/576≈0.504235<c`.                              (12)
 
-and the remaining diagonal ratio is approximately `0.240125`, between
-`1/4` and `4/17`. This refutes a ratio-only lower bound on the canonical
-deficit. It is not an upper obstruction to optimizing (7) over all `q`, nor
-to the full blocker lift.
+The exact positive gap is
+
+`(139√73-1153)/576`,
+
+with `139²·73-1153²=81024`. Thus the entire saturation-defect complement
+slice is a **STOP** from Steiner's packing ratios, not merely its canonical
+choice of `q`. This does not upper-bound the full blocker lift `Λ`.
 
 There is a complementary diffuseness estimate. For fractional packings
 `p,q` of totals `P,Q` and maximum coordinates `η_p,η_q`, the rank-one
@@ -156,12 +181,50 @@ denominator satisfies
 
 and hence
 
-`γ_f(G□H)≥PQ/(η_p+η_q)`.                                    (9)
+`γ_f(G□H)≥PQ/(η_p+η_q)`.                                    (13)
 
-The zero-deficit split examples have extremely diffuse hard-only packings.
-Thus the current sharp target is a defect–diffuseness dichotomy: either an
-optimized `q` makes (7) beat Steiner, or diffuse packings in both factors
-make (9) do so. This dichotomy remains unproved.
+The split components defeating (7) have extremely diffuse hard-only
+packings, so they do not refute a combined theorem. However, even the
+unrestricted claim “low complement value in both factors forces a useful
+common concentration cap” is false on the connected pairs
+`S₂₆,S_{2ℓ}` as `ℓ→∞`; their complement values stay below Steiner while
+every shared-cap rank-one profile is negligible after normalization.
+Even independent caps do not repair this at the formal ratios. The exact
+asymmetric construction in `../anchored-domination/README.md` has both
+packing ratios tending to `(a,b)`, both optimized complement values below
+`c`, and
+
+`sup_{s,t} Φ_G(s)Φ_H(t)/((s+t)γ(G)γ(H))<c`.
+
+Thus the entire three-arm marginal hybrid is a STOP.
+
+There is a tempting genuinely two-sided slice of `Λ`. Choose maximum
+ordinary two-packings `P,Q`, put `U=N_G[P],V=N_H[Q]`, and activate the
+`a`-rows indexed by `P` and the `b`-columns indexed by `Q`. For
+
+`κ_G(s;U)=min_{T dominates G} (|T\U|+s|T∩U|)`,
+
+the resulting feasible objective contains
+
+`ρ(G)κ_H(t;V)+ρ(H)κ_G(1-t;U)`.                               (14)
+
+This coupled slice is also exactly blocked by the formal-ratio split
+mixtures. If `U` contains a minimum dominator, then
+
+`κ_G(s;U)=sγ(G)`.
+
+The lower bound is immediate because every vertex weight is at least `s`;
+the minimum dominator inside `U` gives equality. For `C₅`, one maximum
+two-packing neighborhood contains a minimum dominator. For every
+`S_{2k,z}`, take the two complementary hard vertices and all private leaves
+as `P`; their closed-neighborhood union contains the standard minimum
+dominator of `k+1` coordinate vertices and all `z` private clique vertices.
+The property is preserved by disjoint union. Hence (14), normalized on the
+formal-ratio mixtures, is identically
+
+`ta+(1-t)a=a<c`.
+
+This closes a natural coupled residual allocation, not the full `Λ`.
 
 ## Vertex-transitive obstruction
 
@@ -170,7 +233,7 @@ lossless: the feasible region is invariant and `τ` is concave as a minimum
 of linear functions. The averaged arrays are constant, and exact
 optimization gives
 
-`Λ(G,H)=max{|V(G)|γ(H)/(r+1), |V(H)|γ(G)/(s+1)}`.            (10)
+`Λ(G,H)=max{|V(G)|γ(H)/(r+1), |V(H)|γ(G)/(s+1)}`.            (15)
 
 Take `G=H=L(K_{2m+1})`. Then
 
@@ -180,15 +243,32 @@ Take `G=H=L(K_{2m+1})`. Then
 
 so
 
-`Λ(G,G)/γ(G)²=(2m+1)/(4m-1)→1/2`.                           (11)
+`Λ(G,G)/γ(G)²=(2m+1)/(4m-1)→1/2`.                           (16)
 
 Already at `m=7`, this is `5/9`, below Steiner's constant. Therefore the
 standalone blocker lift cannot improve the universal factor.
 
+In fact the normalized value can tend to zero even on connected
+vertex-transitive graphs. If `X` is vertex-transitive, put
+
+`κ_X=γ(X)|N_X[x]|/|V(X)|`.
+
+Formula (15) says that the two normalized blocker arms are `1/κ_G` and
+`1/κ_H`. Bollobás, Janson, and Riordan's translate-cover theorem supplies
+affinely spanning sets in elementary abelian 2-groups with
+`κ_X→∞` [@bollobasJansonRiordan2011, Theorem 4.1 and Remark 4.2].
+Their Cayley graphs are connected and have the translates as closed
+neighborhoods. Hence
+
+`inf_{G,H} Λ(G,H)/(γ(G)γ(H))=0`
+
+even over connected vertex-transitive factors.
+
 ## Verdict
 
-**PIVOT** from pure higher-rank fractional packing and from `Λ` alone.
-**GO** for the explicit defect–diffuseness dichotomy or another second-order
-hybrid that makes the blocker lift pay precisely when the fractional
-certificate is weak. Any proposed hybrid must survive both the split-graph
-`□P₄` family and `L(K_{2m+1})□L(K_{2m+1})`.
+**STOP** for the saturation-defect complement, independently capped
+rank-one repair, the coupled ordinary-packing slice (14), pure higher-rank
+fractional packing, and `Λ` alone. The full `Λ` has zero universal factor.
+**GO** only for a certificate using the actual labelled incidences of a
+product dominator. Averaged owner-indexed factor dominators are also
+insufficient; see `../combined-blocker-packing/README.md`.

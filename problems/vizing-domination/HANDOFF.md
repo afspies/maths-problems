@@ -1,95 +1,166 @@
 # Handoff — Vizing’s domination conjecture
 
-Read these session-four notes first:
+Read these session-five notes first:
 
-- `angles/external-private-holes/README.md`
+- `angles/anchored-domination/README.md`
 - `angles/bidirectional-blocker/README.md`
-- `angles/terminal-capacity/README.md`
-- `angles/incidence-balance/README.md`
+- `angles/combined-blocker-packing/README.md`
+- `angles/cross-row-hole-packing/README.md`
+- `angles/corner-dynamics/README.md`
+- `angles/external-private-holes/README.md`
+
+## Critical correction
+
+For a fractional packing `q` on `H`, write `Q=Σq` and
+
+`Δ_H(q)=min_{T dominates H}Σ_{t∈T}[1-q(N[t])]`.
+
+Then exactly
+
+```text
+Δ_H(q)=γ(H)-Q-Ω_H(q),
+Ω_H(q)=max_T[
+  Σ_xq_x(|T∩N[x]|-1)-(|T|-γ(H))
+]≥0.
+```
+
+Hence `Δ_H(q)≤γ(H)-Q`. The canonical half-2-packing at the formal ratios
+can meet Steiner only when this inequality is equality; it can never improve
+the constant. Do not reuse the session-four “deficit above threshold”
+language.
 
 ## What is now proved
 
-1. At full atomic/additive column equality, every
-   `x∈X_i=P_G(D_i)` has an external private target
-   `y∈V(G)\(L_i∪X_i)`. If `x` were self-private only, optimality of the
-   supported 2-packing would produce a saturated witness `w∈N[x]`; replacing
-   `x` by `w` and extending `w` through its `K₁/K₃` atom would dominate `G`
-   with `γ(G)-1` vertices.
-2. If the supported atomic capacity is short of the ambient optimum by
-   `Δ=ρ²(G)-τ₂(F_G(L_i))`, the self-private set `S` only satisfies
-   `ρ_G(S)≤Δ`. Do not strengthen this to `|S|≤Δ`: opposite vertices in `C₄`
-   show that self-private members need not form a two-packing.
-3. Fix a product row `y`. If `J` indexes the columns choosing `y` as an
-   external private target, `P={a_i:i∈J}` is the set of singleton holes, and
-   `e_y=|A_y|-|I_y|` is row slack, then
+1. The optimized valid slice
 
-   `|J|-γ_H(P)≤e_y` and `|J|≤ρ(H)+2e_y`.
+   `F_a(H)=max_q[Q+aΔ_H(q)]`
 
-   At zero slack, `P` is a two-packing. Summation gives
-   `M≤|V(G)|ρ(H)+2v`, and at formal equality
-   `|D|≤|V(G)|ρ(H)`. This is rigorous but order-dependent.
-4. Symmetric external private targets do not force an undominated corner.
-   The perfect dominating code `{(i,2i):i∈Z₅}` in `C₅□C₅` gives an exact
-   cycling obstruction.
-5. The nonseparable bidirectional blocker lift `Λ(G,H)` satisfies
-   `γ(G□H)≥Λ(G,H)≤γ(G)γ(H)` and
-   `Λ(G,P₄)=2γ(G)` for every `G`. For vertex-transitive `r,s`-regular
-   factors,
+   has an optimistic anchored fractional-domination dual. On the augmented
+   uniform split graph,
 
-   `Λ=max{|G|γ(H)/(r+1),|H|γ(G)/(s+1)}`.
+   `F_a(S_{2k,z})=z+max{2,a(k+1)}`,
 
-   Hence `L(K_{2m+1})□L(K_{2m+1})` drives its normalized value to `1/2`.
-   Pure higher-rank fractional packing is separately blocked by the
-   split-graph `□P₄` family.
-6. For an ordinary maximum two-packing in `G` and any fractional packing `q`
-   on `H`, with total `Q`,
+   and `F_a(C₅)=5/3`, `F_a(L(K₇))=21/11`.
+2. Formal-ratio `C₅,S₂₆,₂,S₂₈,₂` mixtures have
 
-   `Λ(G,H)≥Qγ(G)+ρ(G)Δ_H(q)`,
+   `F_a/γ→(1273-115√73)/576≈0.504235<c`.
 
-   where `Δ_H(q)` is the minimum closed-neighborhood saturation deficit over
-   a dominating set of `H`. At the formal point, the canonical half-2-packing
-   beats Steiner exactly above `Δ_H(q)=(1-b)γ(H)`. `C₅`/split mixtures show
-   this is not forced by packing ratios alone. The diffuse alternative
-   `γ_f(G□H)≥PQ/(η_p+η_q)` survives those mixtures.
+   Thus optimizing the saturation-defect slice is a STOP.
+3. The capped packing profile
+
+   `Φ_H(t)=max{Σp:p fractional packing, p_v≤t}`
+
+   gives
+
+   `γ_f(G□H)≥Φ_G(s)Φ_H(t)/(s+t)`.
+
+   For `S_{2k,z}`, with `M=binom(2k-1,k-1)`, the profile is exactly
+
+   ```text
+   (2M+2k+2z)t,
+   1+(M+z)t,
+   2+zt
+   ```
+
+   on the three consecutive intervals cut by
+   `1/(M+2k+z)` and `1/M`.
+4. There are finite additive pairs approaching `(a,b)` in both factors for
+   which both `F_a` arms and the independently optimized capped tensor remain
+   below `c`. The first factor is a bounded
+   `C₅/S₂₆,₂/S₂₈,₂` mixture; the second is an
+   `L(K₇)/S_{2k,z_k}` mixture. The limiting cap arm is at most
+
+   `(-247+37√73)/264≈0.261849`.
+
+   The exact split profile makes the finite all-caps argument uniform.
+5. A natural two-sided ordinary-packing slice of the full blocker is also a
+   STOP. If `U=N[P]` contains a minimum dominator, then
+
+   `κ_G(s;U)=min_T(|T\U|+s|T∩U|)=sγ(G)`.
+
+   This holds on all cycle/split components in the counterfamily, reducing
+   the slice to the ordinary packing ratio `a`.
+6. Row hole two-packings tensor with any fractional factor packing:
+
+   `Σ_y p_y|P_y|≤γ_f(G□H)≤|D|`.
+
+   The common-crown construction makes all external target rows lie in one
+   closed neighborhood, so factor-weighted density alone can lose an
+   arbitrary factor. Under full formal balance, a common neighborhood
+   `Y⊆N[w]` satisfies
+
+   `M(Y)≤2γ(H)ρ(H)+sd`,
+
+   where `s` is the number of singleton terminal cells and `d=|L_i|`.
+   This coefficient is presently vacuous at comparable formal scales.
+7. If every `d∈D` has external private neighbors in both directions, its
+   corner is owned by another point of `D`. Choosing one owner per corner
+   creates a directed cycle. Every arc is an edge move in one factor and a
+   distance-two move in the other. Full two-oriented formal equality forces
+   this hypothesis; the `C₅□C₅` perfect code realizes the directed cycle
+   sharply. At exact equality, an owner `(x,z)` has type-`(1,2)` indegree at
+   most
+
+   `min{|J_x|,ρ_H(N₂(z)),deg_H(z)}≤ρ(H)`,
+
+   and symmetrically. Every arc also forces a red-diagonal/blue-cross-zero
+   pattern in the cell matrices.
 
 ## Best next attacks
 
-### A. Order-free hole coupling
+### A. Do not continue the combined dual
 
-The individual row hole sets are two-packings. Find a constraint on overlaps
-between different `P_y` that uses their source columns and the fixed
-`K₁/K₃` atoms, rather than summing the trivial per-row bound and introducing
-`|V(G)|`. A useful result must charge positive density on the
-`Θ(γ(G)γ(H))` scale.
+The shared-capacity lift `Ξ` combines a genuine fractional product packing
+with the full bidirectional blocker. Its exact dual minimizes the mass of a
+product fractional dominator `d` that simultaneously routes, for every
+factor vertex, the incidence marginals of a probability distribution over
+integral dominators of the other factor.
 
-### B. Self-private stability
+It has zero universal factor. Bollobás--Janson--Riordan translate covers in
+elementary abelian 2-groups give connected vertex-transitive Cayley graphs
+with unbounded neighborhood-covering multiplicity. Taking the two factor
+scales very different makes every exact transitive `Ξ` term tend to zero.
+This is a hard STOP, not an open bridge.
 
-Under near-tight rather than exact columns, prove a lower bound for
-`ρ_G(S_self)` in terms of `|S_self|` using the full terminal packing and
-balanced-incidence hypotheses. General minimal dominating sets are too
-flexible; the extra `K₁/K₃` geometry must be used.
+### B. Quantitative escape cycles
 
-### C. Defect–diffuseness dichotomy
+Use the exact Steiner defect budget to show either:
 
-Prove that a near-formal factor either has an optimized blocker packing with
-saturation deficit above the exact threshold, or has a sufficiently diffuse
-packing for the fractional tensor bound. The dichotomy must simultaneously
-survive:
+- a positive density of points has two-sided external privacy and belongs to
+  controlled escape cycles; or
+- failures charge positive terminal-capacity, additivity, or row slack.
 
-- the connected split graph against `P₄`, which kills every pure fractional
-  certificate; and
-- `L(K_{2m+1})□L(K_{2m+1})`, which kills `Λ` alone.
+Mere cycle existence is insufficient. Any useful count must use the fixed
+`K₁/K₃` atoms or the alternating occupied/vertical row exchanges.
+
+The typed fibre-set relaxation is the cleanest current container. For actual
+row label sets `A_g` and open-neighborhood imports
+`V_g=⋃_{x∈N(g)}A_x`, product domination implies
+
+`|A_g|≥γ_H(V(H)\V_g)`
+
+in every row, plus the symmetric column inequalities. This keeps the exact
+labels discarded by `Ξ`. Its universal value is uncalibrated: test it first
+on the asymmetric translate-cover Cayley pair.
+
+### C. Successor-relaxation benchmark
+
+Any new relaxation must be tested against the asymmetric translate-cover
+Cayley pair. It must use actual labelled fibre incidences of one product
+dominator, because product fractional domination plus owner-indexed averaged
+factor dominators has already lost every positive constant.
 
 ## Hard stops
 
-- No numerical reoptimization of Steiner's existing inequalities.
-- No more additive integer packing levels.
-- No pure higher-rank fractional packing claim.
-- No standalone blocker-lift universal claim.
-- No inference that self-private members form a two-packing.
-- No symmetric rectangle-corner contradiction without defeating the
-  `C₅□C₅` perfect code.
-- Finite tests remain falsification and hygiene, never evidence for the
+- No numerical reoptimization of Steiner's six existing inequalities.
+- No additive integer packing levels.
+- No canonical or optimized saturation-defect campaign.
+- No shared-cap or independent-cap rank-one dichotomy.
+- No row-hole weighting that ignores owner labels.
+- No ordinary-packing residual slice of `Λ`.
+- No full `Λ` or combined `Ξ` campaign; both have zero universal factor.
+- No bare corner contradiction; `C₅□C₅` cycles it exactly.
+- Finite tests are hygiene and falsification, never evidence for the
   universal conjecture.
 
 Any proposed proof requires a fresh independent GPT-5.6 Sol xhigh review.

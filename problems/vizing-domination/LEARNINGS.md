@@ -124,7 +124,8 @@ unrestricted square-clique/theta relaxation.
 - `C₅` and augmented split-graph mixtures approach the formal packing ratios
   with zero canonical saturation deficit, so ratios alone cannot prove that
   threshold. The same split graphs possess very diffuse alternative
-  packings, leaving a concrete defect–diffuseness dichotomy alive.
+  packings. Session 5 later closed the resulting defect–diffuseness
+  dichotomy, even with independently optimized caps.
 
 ## Revised next move after session 4
 
@@ -139,3 +140,69 @@ unrestricted square-clique/theta relaxation.
 Do not infer cardinality from the self-private packing bound, do not use a
 bare corner-completion argument, and do not pursue pure higher-rank
 fractional packing.
+
+## Session 5 deltas
+
+- The previous saturation-defect interpretation needed a decisive
+  correction. For every fractional packing `q`,
+
+  `Δ_H(q)=γ(H)-Q-Ω_H(q)≤γ(H)-Q`,
+
+  where `Ω` is the maximum excess neighborhood overlap over dominating
+  sets. Thus the canonical half-2-packing can only meet Steiner at its
+  absolute ceiling; it can never beat it.
+- The optimized value `F_a(H)=max_q[Q+aΔ_H(q)]` is an anchored fractional
+  domination parameter. On `S_{2k,z}`,
+  `F_a=z+max{2,a(k+1)}`; on `C₅`, it is `5/3`.
+  Formal-ratio mixtures keep `F_a/γ` at
+  `(1273-115√73)/576≈0.504235<c`.
+- The capped packing profile of `S_{2k,z}` is exactly piecewise linear, with
+  normalized form `(z/γ)t+e(t)` and uniform `0≤e(t)≤2/γ`.
+  An asymmetric `C₅`/`L(K₇)` additive counterfamily approaching `(a,b)` in
+  both factors keeps both anchored arms below `c` and every independently
+  capped rank-one tensor below `c`. The finite small-cap regime is controlled
+  uniformly by the exact `2/γ` hard-spike error.
+- A natural two-sided ordinary-packing slice of the full blocker also
+  collapses. If `N[P]` contains a minimum dominator, then its weighted
+  domination profile is exactly `sγ`; this holds for the cycle/split
+  components in the formal-ratio counterfamily.
+- Row hole two-packings tensor with arbitrary factor packings, but the
+  common-crown graph concentrates all external private targets in one closed
+  neighborhood. Full balance yields
+  `M(Y)≤2γ(H)ρ(H)+sd`; at the formal ratios its coefficient is too weak to
+  force dispersion.
+- Two-sided external private neighbors do force one genuinely
+  product-labelled object: a directed escape cycle in `D`, each of whose
+  arcs changes one coordinate by an edge and the other by distance two.
+  The `C₅□C₅` perfect code realizes a sharp directed 5-cycle.
+- Sharing local capacity between a genuine fractional product packing and
+  the full bidirectional blocker gives an exact stronger lift `Ξ`. Its dual
+  simultaneously fractionally dominates the product and routes
+  owner-indexed probability marginals of integral factor dominators.
+  This still has zero universal normalized value. Inefficient translate
+  covers in elementary abelian 2-groups give connected vertex-transitive
+  Cayley graphs with unbounded neighborhood-covering multiplicity; an
+  asymmetric-scale pair drives all three exact transitive `Ξ` terms to zero.
+- Safe zero-weight ports connect the formal-ratio three-arm counterfamily
+  while preserving `γ,ρ,ρ²` and only decreasing `F_a` and `Φ`. Connectedness
+  alone does not rescue any marginal dichotomy.
+- The minimal surviving labelled relaxation keeps the actual row coordinate
+  sets `A_g`. With open-neighborhood imports
+  `V_g=⋃_{x∈N(g)}A_x`, every product dominator satisfies
+  `|A_g|≥γ_H(V(H)\V_g)` and the symmetric column inequalities. This strict
+  cardinality relaxation has not yet been calibrated on the Cayley STOP.
+
+## Revised next move after session 5
+
+1. Work only with actual labelled fibre incidences. Even the exact combined
+   dual with owner-indexed distributions has zero universal factor.
+2. Calibrate the typed fibre relaxation on the asymmetric Cayley pair, then
+   quantify escape-cycle dynamics using fixed `K₁/K₃` atoms and alternating
+   row exchanges; mere cycle existence is sharp.
+3. Use translate-cover Cayley graphs as a mandatory adversarial benchmark
+   for any successor relaxation; connectedness and vertex transitivity are
+   not substitutes for labels.
+
+Do not return to the canonical or optimized saturation defect, shared or
+independent capped rank-one tensors, row-weight density alone, the
+ordinary-packing residual slice of `Λ`, the full `Λ`, or the combined `Ξ`.

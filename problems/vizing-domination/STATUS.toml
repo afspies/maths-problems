@@ -3,7 +3,7 @@ title = "Vizing’s domination conjecture"
 question = "Do all finite simple graphs satisfy γ(G □ H) ≥ γ(G)γ(H)?"
 # proposed | scaffolded | active | partial-results | solved | excluded | retired
 status = "partial-results"
-best_result = "K1/K3 terminal-capacity inequality; external-private and row hole-packing theorems; bidirectional blocker lift (constant still 0.5643)"
+best_result = "K1/K3 terminal structure; labelled escape cycles; typed fibre relaxation with c/2 baseline; exact connected zero-factor lift obstructions (best constant still 0.5643)"
 doi = ""
 sessions = [
     "2026-07-23 scaffolded from template",
@@ -11,4 +11,5 @@ sessions = [
     "2026-07-24 session 2: terminal odd-clique theorem, exact fibre slack, all-level hierarchy obstruction, fractional tensor bound",
     "2026-07-24 session 3: K1/K3 capacity refinement, formal incidence balance, rank-one and square-clique LP boundaries",
     "2026-07-24 session 4: external-private theorem, quantitative row hole packings, bidirectional blocker lift and obstructions",
+    "2026-07-24 session 5: anchored correction, connected independent-cap counterfamily, labelled escape dynamics, typed fibre relaxation, Cayley zero-factor lift obstructions",
 ]
