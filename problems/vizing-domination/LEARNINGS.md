@@ -266,3 +266,73 @@ ordinary-packing residual slice of `Λ`, the full `Λ`, or the combined `Ξ`.
 
 Do not spend another session on the scalar profile inequality, cap
 denominator, or bare escape counts. Their exact limitations are now known.
+
+## Session 7 deltas
+
+- The typed fractional repair theorem must retain its cardinality slacks:
+
+  `|A|≥PQ+Z+max{E_H+α_H,E_G+α_G}`.
+
+  The omitted `α` term is already necessary for sharpness on a minimum
+  dominator of `P₃□P₃`.
+- The row and column repair ledgers admit an exact common accounting. The
+  four-region overlap tax is
+
+  `K=w(A\I)+w(J)`,
+
+  supported on selected nonisolated cells and double-open imports, and
+
+  `|A|=PQ+Z+E_H+E_G+α_H+α_G-K`
+
+  for a product dominator. A second identity decomposes the two residuals
+  into repeated-owner and packing-load slack. The averaged bound collapses
+  exactly to the corrected directional maximum.
+- Generic escape dynamics are completely unconstrained at zero defect.
+  Perfect-code products `K₂□subdivision(F)` realize every finite bipartite
+  escape graph without isolates. Stars destroy positive recurrent density
+  and any `ε|T|` credit; paths destroy bounded return time.
+- The formal Steiner point is not an artifact of relaxing the factor
+  invariants. Dense graphs with `γ→∞,ρ=1,ρ²=2`, mixed with isolated vertices
+  and `C₅` components, converge exactly to `(a,b)`. No continuous closed
+  relation involving only `γ,ρ,ρ²` can remove the optimizer.
+- Provider reuse is precisely Hall deficiency, but the existing
+  two-packing theorem applies to incoming hole indices `J_g`, while terminal
+  demands use outgoing indices `I_g`. An actual `C₅□H_m` dominator has exact
+  terminal triangles, optimal canonical 2-packings, and minimum row
+  exchanges while one selected point serves `m` indexed demands.
+- The fixed-demand obstruction has a sharp positive counterpart. If the
+  demand inside each outgoing cell is chosen adaptively, Hall's theorem
+  always matches the cells to distinct genuine row providers. At zero
+  vertical and column slack the resulting cell transitions are loopless
+  Eulerian cycles; under the external-private hypotheses they transfer
+  injectively to singleton holes and yield local weighted expansion cuts.
+- Adaptivity is essential. On `C₅□H_m`, the matching chooses `t_i` with
+  provider `a_i`, while the pre-prescribed `s_i` still all require `a₀`.
+  The exact remaining bridge is compatibility between the triangle-energy
+  witness and the adaptive matching, not generic provider non-reuse.
+- The provider counterfamily is paid for by linear fibre defects. This
+  leaves one narrow stability target: bound aggregate Hall deficiency by
+  the exact `v,p_i,d_i,δ_i` budget using the full labelled alternating-cycle
+  geometry.
+- The required amplification is much larger than it first appears. Even
+  independently additive row and column triangle credits are below
+  Steiner; at least eighteen copies of the basic `b(b-a)` charge are needed
+  just to cross `c`.
+
+## Revised next move after session 7
+
+1. Work on the labelled adaptive-provider cycles before aggregating. Seek
+   a triangle witness inside each source cell that is both energy-detecting
+   and adjacent to its matched distinct provider.
+2. Exploit the local weighted expansion cuts for subsets of source rows,
+   charging failure of the external-private transfer to
+   `v,p_i,d_i,δ_i`. Calculate the constant consequence before investing in
+   a long proof; a coefficient that cannot supply eighteen-fold effective
+   credit is not useful.
+3. If the full defect-weighted Hall theorem fails, extract an explicit
+   actual-product counterfamily and pivot to a higher-rank labelled dual
+   whose constraints couple indices before taking factor marginals.
+
+Do not return to generic escape closure, factor-only invariant relations,
+local `K₁/K₃` parity, per-index overlap taxes, or numerical optimization of
+Steiner's existing region.

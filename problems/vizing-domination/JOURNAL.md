@@ -1016,3 +1016,340 @@ Cayley obstruction at all scales. **GO** only for a provider non-reuse lemma
 across terminal systems or an escape closure/path-length theorem. Scalar
 near-cover optimization, cap correction alone, global resilience alone, and
 local triangle parity are STOPs.
+
+## 2026-07-24 — session 7: exact overlap ledger and closure no-go theorems
+
+### Scope and source discipline
+
+The campaign stayed inside `problems/vizing-domination/`. The current
+universal benchmark remains Steiner's
+
+`c=(5+√73)/24≈0.5643`.
+
+The withdrawn `0.5809` claim was not used. This session did not numerically
+reoptimize Steiner's six inequalities and did not treat finite graph checks
+as evidence for the conjecture.
+
+### Corrected typed fractional charging
+
+The session-six inequality had discarded two nonnegative cardinality slacks.
+For typed-feasible `A⊆V(G)×V(H)`, factor fractional packings `q,p`, and the
+session-six notation, define
+
+```text
+α_H=Σ_gq_g(|A_g|-γ_H(C_g)),
+α_G=Σ_hp_h(|B_h|-γ_G(D_h)).
+```
+
+The correct directional consequence is
+
+```text
+|A|≥PQ+Z+max{E_H+α_H,E_G+α_G}.                              (1)
+```
+
+This is strictly stronger than the earlier recorded form. On `P₃□P₃`,
+
+```text
+A={(0,1),(2,0),(2,2)},       q=p=(0,0,1),
+```
+
+one has `PQ=1`, `Z=1`, `E_H=E_G=0`, `α_H=1`, and `α_G=0`.
+Equation (1) is sharp at `|A|=3`; the earlier form gave only two.
+
+### Four-region overlap and multiplicity identities
+
+Let `C` be the cells with no horizontal open import, `D₀` those with no
+vertical open import,
+
+```text
+I=A∩C∩D₀,       W=(C∩D₀)\A,
+J=(G□H)\(C∪D₀),
+K=w(A\I)+w(J),
+```
+
+where `w=q⊗p`. Direct inclusion-exclusion gives the exact identity
+
+```text
+|A|=PQ+Z+E_H+E_G+α_H+α_G-K+w(W).                            (2)
+```
+
+For an actual product dominator `W=∅`. Thus selected nonisolation and
+double-open imports are precisely the overlap tax preventing the two
+directional repair ledgers from being added.
+
+There is a second exact decomposition. If `m(z)` counts all selected owners
+of `z`, while `t(z)` retains only self-selection and the existence of an
+owner in each coordinate direction, put
+
+```text
+R=Σ_z w(z)(m(z)-t(z)),
+Δ=Σ_{(g,h)∈A}{
+    p_h[1-q(N_G[g])]
+   +q_g[1-p(N_H[h])]
+  }.
+```
+
+Then
+
+```text
+2(|A|-PQ-Z)=E_H+E_G+α_H+α_G+R+Δ,                            (3)
+```
+
+and the two one-axis residuals are nonnegative and sum to `R+Δ`.
+Consequently the averaged consequence of (3) is no stronger than (1).
+For an actual dominator,
+
+```text
+E_H+E_G+α_H+α_G=2K+R+Δ.                                    (4)
+```
+
+The minimum antidiagonal dominator of `K₂□K₂` and a minimum dominator of
+`P₃□P₃` both have `K=min(E_H,E_G)` with zero cardinality slack. They rule
+out any universal strict scalar overlap estimate under minimum domination
+and optimal factor duals alone.
+
+Two independent GPT-5.6 Sol xhigh audits accepted (1)--(4), including the
+restored `α` terms and the sharp examples.
+
+### Generic escape closure is impossible
+
+If an actual product dominator has
+
+```text
+I_G=I_H=D,       Ω_G=Ω_H=X_G=X_H=0,
+```
+
+then it is a perfect dominating code. Its mixed escape relation is
+undirected.
+
+More strongly, every finite bipartite graph `F` without isolated vertices
+is realized as such an escape graph. If `F` has parts `S,T`, let `H` be its
+one-subdivision, take `G=K₂`, and put
+
+```text
+D={(0,s):s∈S}∪{(1,t):t∈T}.
+```
+
+Every product vertex has exactly one owner and the mixed escape graph on
+`D` is exactly `F`. Subdivided stars make the cyclic fraction
+`2/(k+1)→0` while
+
+```text
+|D|-γ(K₂)γ(H)=1,       |T|=k+1.
+```
+
+Paths give arbitrarily long zero-defect in-trees. Hence no positive cycle
+density, bounded return time, injective escape matching, or
+`ε|T|` additive credit follows from the generic escape quantities, even at
+zero defect. A GPT-5.6 Sol xhigh audit accepted the classification and
+realization theorem.
+
+### The formal factor-invariant point is actually realizable
+
+For every fixed `L`, a random graph `K∼G(n,1/2)` has, with probability
+tending to one,
+
+```text
+γ(K)>L,       ρ(K)=1,       ρ^{\{2\}}(K)=2.
+```
+
+The union-bound failure probability is at most
+
+```text
+C(n,2)(3/4)^(n-2)
++C(n,3)(7/8)^(n-3)
++Σ_{k=1}^L C(n,k)(1-2^-k)^(n-k)
+=o(1).
+```
+
+The pair and triple common-closed-neighborhood properties force
+`ρ=1,ρ²=2`; the last sum excludes dominators of size at most `L`.
+This disproves the tempting relation
+
+`γ≤2(ρ²-ρ)`
+
+by an unbounded factor.
+
+Writing
+
+```text
+a=(11-√73)/8,       b=(13-√73)/12,
+c=(5+√73)/24,
+t=(47-5√73)/24,     s=(√73-7)/6,
+```
+
+gives
+
+```text
+c+t+s=1,       t+s/2=a,       t+3s/4=b.
+```
+
+Disjoint mixtures whose domination mass is split in proportions `c,t,s`
+among the dense graphs above, isolated vertices, and `C₅` copies have
+
+```text
+ρ/γ→a,       ρ²/(2γ)→b.
+```
+
+Thus Steiner's formal optimizer lies in the closure of invariant pairs of
+actual finite graphs. Any continuous or closed homogeneous relation using
+only `γ,ρ,ρ²` cannot exclude it. This is a disconnected, nonconstructive
+calibration and says nothing about product near-extremizers. Two independent
+GPT-5.6 Sol xhigh audits accepted the probabilistic proof and exact surd
+mixture.
+
+### Provider Hall deficiency and unbounded reuse
+
+For indexed demands in a row, the provider graph `P_g` has left side the
+indices and right side the selected row labels. Reuse is exactly its Hall
+deficiency:
+
+```text
+|I|-ν(P_g)=max_{J⊆I}(|J|-|N(J)|).                           (5)
+```
+
+The incoming external-private holes indexed by `J_g` form a two-packing at
+zero row slack, but the terminal providers are indexed by the outgoing
+cells `I_g`. No proved coordinate-preserving map connects the two systems.
+
+An explicit family makes the mismatch sharp. For each `m`, construct
+`H_m` from blue cells `{c_i,s_i,t_i}`, red cells `{r_i,a_i,w_i}`, and
+
+```text
+c_i s_i, c_i t_i, r_i a_i, r_i w_i, a_i t_i,
+a_0 c_i, a_0 s_i.
+```
+
+Pairwise disjoint closed neighborhoods `N[t_i]` and `N[w_i]` prove
+`γ(H_m)=2m`. In `G=C₅`, with `T={0,2,4}` and `X={1,3}`, the set
+
+```text
+D_m=(T×{a_i:0≤i<m})∪(X×{c_i,w_i:0≤i<m})
+```
+
+dominates `C₅□H_m`. Every blue fibre is an exact terminal `K₃`, with the
+canonical unit weighting on `T` an optimal global 2-packing, and every
+provider row performs a minimum exchange. Nevertheless `(g,a_0)` is the
+unique provider for all `m` demands `s_i`, so the Hall deficiency is
+`m-1`.
+
+The per-index overlap tax is zero on the natural rank-one weights. The
+construction has linear exact Steiner defects rather than full equality:
+
+```text
+v+3Σ_i(p_i+d_i)+Σ_iδ_i=22m.
+```
+
+Thus indexed atoms alone are a STOP; only a stability theorem charging Hall
+deficiency to the complete defect budget survives.
+
+The constant arithmetic is severe. Even disjoint row and column triangle
+credits give only
+
+```text
+b²+2b(b-a)=(13-√73)/24≈0.18567<c.
+```
+
+Starting from `b²`, more than
+
+```text
+(c-b²)/(b(b-a))
+=(249+21√73)/24
+≈17.851
+```
+
+independently additive triangle charges are needed. At least eighteen
+effective copies would be required merely to cross Steiner. A GPT-5.6 Sol
+xhigh audit accepted the construction, Hall calculation, defect identity,
+and surd threshold.
+
+### Adaptive provider matching and labelled cycles
+
+The fixed-demand obstruction does not kill adaptive provider choice. For a
+row `g`, let
+
+```text
+I_g={i:g∈L_i},
+A_g=P_H(D∩({g}×H)).
+```
+
+Build a bipartite graph by joining `i∈I_g` to `a∈A_g\π_i` when
+`N_H[a]∩π_i≠∅`. The exact row-exchange fact
+
+`γ_H(⋃_{i∈I_g}π_i)=|I_g|`
+
+implies Hall's condition: if `J⊆I_g` had fewer than `|J|` neighboring
+providers, those neighbors together with the retained centers for
+`I_g\J` would dominate the union with fewer than `|I_g|` vertices.
+Therefore every row has an injection
+
+```text
+μ_g:I_g→A_g,
+μ_g(i)∉π_i,
+N_H[μ_g(i)]∩π_i≠∅.                                         (6)
+```
+
+The witness point in `π_i` is chosen after the matching. Globally, (6)
+injects all blue incidences `(g,i)`, `g∈L_i`, into `D`, leaving exactly
+
+`v=|D|-Σ_i|L_i|`
+
+selected points unmatched.
+
+If `v=0` and `|D_i|=|L_i|` in every column, each match gives a loopless
+cell transition `i→j`, where `μ_g(i)∈π_j`; the cell digraph is Eulerian
+and decomposes into directed cycles carrying actual domination labels.
+
+Under the full atomic/additive external-private hypotheses, the matched
+selected points transfer injectively to singleton hole occurrences. With
+`e_x=|A_x|-|I_x|`, every row set `U⊆V(G)` satisfies the local cut
+
+```text
+Σ_{g∈U}|I_g|
+≤ρ(H)|N_G(U)|+2Σ_{x∈N_G(U)}e_x.                             (7)
+```
+
+The same charge has a weighted form with
+`max_{g∈N_G(x)}λ_g`. The `C₅□H_m` family passes the stress test: the
+adaptive matching uses `a_i` to cover `t_i`, while the pre-prescribed
+`s_i` demands still all require `a₀`; its `4m` unmatched selected points
+are exactly `v`.
+
+The triangle-only consequence of (7) is weaker than the previously known
+all-incidence bound, so this does not improve `c`. It precisely narrows the
+remaining bridge to compatibility between the adaptive Hall witnesses and
+the pre-prescribed triangle-energy witnesses. A GPT-5.6 Sol xhigh audit
+accepted the Hall proof, cycle decomposition, private-hole transfer, local
+cut, and the limitation.
+
+### Verification and compute
+
+```text
+cd problems/vizing-domination/harness
+python3 -m unittest -v
+# Ran 38 tests — OK
+```
+
+New exact fixtures check the four-region and multiplicity identities,
+restored cardinality slack, zero-defect escape realization, the indexed
+provider obstruction, and its adaptive matching on `C₅□H_m`. The
+random-graph argument is deductive via explicit union bounds; no stochastic
+experiment is used as evidence.
+
+Interactive wall time: approximately three hours across the session.
+External compute: none.
+
+### Two-session gate verdict
+
+No constant above `0.5643` was certified. The session did prove a nontrivial
+zero-defect classification and universal realization theorem, an exact
+two-direction equality/stability ledger, a universal adaptive-provider Hall
+theorem with labelled cycle and local-cut consequences, and two rigorous
+obstruction families. The gate is met by structural results, but the generic
+escape and factor-invariant branches are now closed.
+
+**GO** only for compatibility between adaptive providers and prescribed
+triangle witnesses, a defect-weighted version of that compatibility, or an
+equally strong product-correlated invariant. **STOP/PIVOT** for numerical
+reoptimization, factor invariants, generic escape dynamics, local triangle
+parity, or fixed-demand provider atoms without the complete defect budget.

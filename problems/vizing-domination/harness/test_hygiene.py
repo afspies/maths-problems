@@ -4,6 +4,7 @@ import unittest
 
 from graph_hygiene import (
     Graph,
+    bipartite_one_subdivision,
     complete,
     cycle,
     fractional_tensor_lower_bound,
@@ -778,6 +779,476 @@ class GraphHygieneTests(unittest.TestCase):
             )
             self.assertEqual(two_sided_private, len(chosen_pairs))
             self.assertEqual(lower_bound, two_sided_private)
+
+    def test_zero_defect_escape_graph_realizes_bipartite_graphs(self) -> None:
+        left = path(2)
+        for left_size, right_size, edges in (
+            (1, 4, {(0, right) for right in range(4)}),
+            (2, 2, {(0, 0), (1, 0), (1, 1)}),
+        ):
+            right = bipartite_one_subdivision(left_size, right_size, edges)
+            chosen_pairs = {
+                *((0, vertex) for vertex in range(left_size)),
+                *(
+                    (1, left_size + vertex)
+                    for vertex in range(right_size)
+                ),
+            }
+            chosen = {
+                g * right.n + h
+                for g, h in chosen_pairs
+            }
+            product_graph = left.cartesian_product(right)
+
+            # The construction is an efficient dominating set, hence also a
+            # closed-neighborhood packing and therefore minimum.
+            self.assertEqual(
+                {
+                    len(product_graph.closed_neighborhood(vertex) & chosen)
+                    for vertex in range(product_graph.n)
+                },
+                {1},
+            )
+            self.assertEqual(
+                product_graph.domination_number(),
+                len(chosen_pairs),
+            )
+
+            # Mixed (1,2) escape adjacency recovers exactly the original
+            # bipartite graph.
+            recovered = {
+                (source, target)
+                for source in range(left_size)
+                for target in range(right_size)
+                if right.open_neighborhood(source)
+                & right.open_neighborhood(left_size + target)
+            }
+            self.assertEqual(recovered, edges)
+
+        for arms in range(1, 5):
+            subdivided_star = bipartite_one_subdivision(
+                arms,
+                1,
+                {(leaf, 0) for leaf in range(arms)},
+            )
+            self.assertEqual(subdivided_star.domination_number(), arms)
+            self.assertEqual(
+                path(2).cartesian_product(
+                    subdivided_star
+                ).domination_number(),
+                arms + 1,
+            )
+
+    def test_four_region_overlap_tax_identity(self) -> None:
+        def audit(
+            left: Graph,
+            right: Graph,
+            chosen_pairs: set[tuple[int, int]],
+            q: tuple[Fraction, ...],
+            p: tuple[Fraction, ...],
+        ) -> dict[str, Fraction | set[tuple[int, int]]]:
+            rows = [
+                {h for x, h in chosen_pairs if x == g}
+                for g in range(left.n)
+            ]
+            columns = [
+                {g for g, y in chosen_pairs if y == h}
+                for h in range(right.n)
+            ]
+            universe = {
+                (g, h)
+                for g in range(left.n)
+                for h in range(right.n)
+            }
+            no_horizontal_import = {
+                (g, h)
+                for g, h in universe
+                if not any(
+                    h in rows[x]
+                    for x in left.open_neighborhood(g)
+                )
+            }
+            no_vertical_import = {
+                (g, h)
+                for g, h in universe
+                if not any(
+                    g in columns[y]
+                    for y in right.open_neighborhood(h)
+                )
+            }
+            isolated = (
+                chosen_pairs
+                & no_horizontal_import
+                & no_vertical_import
+            )
+            missed = (
+                no_horizontal_import
+                & no_vertical_import
+            ) - chosen_pairs
+            double_import = universe - (
+                no_horizontal_import | no_vertical_import
+            )
+
+            def weight(points: set[tuple[int, int]]) -> Fraction:
+                return sum(
+                    (q[g] * p[h] for g, h in points),
+                    Fraction(0),
+                )
+
+            energy_h = Fraction(0)
+            alpha_h = Fraction(0)
+            for g in range(left.n):
+                target = {
+                    h
+                    for h in range(right.n)
+                    if (g, h) in no_horizontal_import
+                }
+                gamma = right.domination_number(target)
+                energy_h += q[g] * (
+                    gamma - sum((p[h] for h in target), Fraction(0))
+                )
+                alpha_h += q[g] * (len(rows[g]) - gamma)
+
+            energy_g = Fraction(0)
+            alpha_g = Fraction(0)
+            for h in range(right.n):
+                target = {
+                    g
+                    for g in range(left.n)
+                    if (g, h) in no_vertical_import
+                }
+                gamma = left.domination_number(target)
+                energy_g += p[h] * (
+                    gamma - sum((q[g] for g in target), Fraction(0))
+                )
+                alpha_g += p[h] * (len(columns[h]) - gamma)
+
+            complement = sum(
+                (
+                    (1 - q[g]) * (1 - p[h])
+                    for g, h in chosen_pairs
+                ),
+                Fraction(0),
+            )
+            overlap_tax = (
+                weight(chosen_pairs - isolated)
+                + weight(double_import)
+            )
+            repeated_owner_mass = Fraction(0)
+            for g, h in universe:
+                horizontal_owners = sum(
+                    h in rows[x]
+                    for x in left.open_neighborhood(g)
+                )
+                vertical_owners = sum(
+                    g in columns[y]
+                    for y in right.open_neighborhood(h)
+                )
+                repeated_owner_mass += q[g] * p[h] * (
+                    horizontal_owners
+                    - bool(horizontal_owners)
+                    + vertical_owners
+                    - bool(vertical_owners)
+                )
+            load_slack = sum(
+                (
+                    p[h]
+                    * (
+                        1
+                        - sum(
+                            (q[x] for x in left.closed_neighborhood(g)),
+                            Fraction(0),
+                        )
+                    )
+                    + q[g]
+                    * (
+                        1
+                        - sum(
+                            (p[y] for y in right.closed_neighborhood(h)),
+                            Fraction(0),
+                        )
+                    )
+                    for g, h in chosen_pairs
+                ),
+                Fraction(0),
+            )
+            packing_product = (
+                sum(q, Fraction(0)) * sum(p, Fraction(0))
+            )
+            right_hand_side = (
+                packing_product
+                + complement
+                + energy_h
+                + energy_g
+                + alpha_h
+                + alpha_g
+                - overlap_tax
+                + weight(missed)
+            )
+            self.assertEqual(right_hand_side, len(chosen_pairs))
+            self.assertEqual(
+                2 * (len(chosen_pairs) - packing_product - complement),
+                energy_h
+                + energy_g
+                + alpha_h
+                + alpha_g
+                + repeated_owner_mass
+                + load_slack,
+            )
+            return {
+                "energy_h": energy_h,
+                "energy_g": energy_g,
+                "alpha_h": alpha_h,
+                "alpha_g": alpha_g,
+                "overlap_tax": overlap_tax,
+                "repeated_owner_mass": repeated_owner_mass,
+                "load_slack": load_slack,
+                "missed": missed,
+                "double_import": double_import,
+            }
+
+        half = (Fraction(1, 2), Fraction(1, 2))
+        anti_diagonal = audit(
+            path(2),
+            path(2),
+            {(0, 1), (1, 0)},
+            half,
+            half,
+        )
+        self.assertEqual(anti_diagonal["energy_h"], Fraction(1, 2))
+        self.assertEqual(anti_diagonal["energy_g"], Fraction(1, 2))
+        self.assertEqual(anti_diagonal["overlap_tax"], Fraction(1, 2))
+
+        endpoint = (
+            Fraction(0),
+            Fraction(0),
+            Fraction(1),
+        )
+        p3_minimum = audit(
+            path(3),
+            path(3),
+            {(0, 0), (1, 2), (2, 1)},
+            endpoint,
+            endpoint,
+        )
+        self.assertEqual(
+            path(3).cartesian_product(path(3)).domination_number(),
+            3,
+        )
+        self.assertEqual(p3_minimum["energy_h"], 1)
+        self.assertEqual(p3_minimum["energy_g"], 1)
+        self.assertEqual(p3_minimum["overlap_tax"], 1)
+
+        p3_cardinality_slack = audit(
+            path(3),
+            path(3),
+            {(0, 1), (2, 0), (2, 2)},
+            endpoint,
+            endpoint,
+        )
+        self.assertEqual(p3_cardinality_slack["energy_h"], 0)
+        self.assertEqual(p3_cardinality_slack["energy_g"], 0)
+        self.assertEqual(p3_cardinality_slack["alpha_h"], 1)
+        self.assertEqual(p3_cardinality_slack["alpha_g"], 0)
+
+        endpoints = (
+            Fraction(1),
+            Fraction(0),
+            Fraction(0),
+            Fraction(1),
+        )
+        p4_witness = audit(
+            path(4),
+            path(4),
+            {(0, 1), (1, 0), (1, 3), (2, 3), (3, 1)},
+            endpoints,
+            endpoints,
+        )
+        self.assertEqual(p4_witness["energy_h"], 1)
+        self.assertEqual(p4_witness["energy_g"], 1)
+        self.assertEqual(p4_witness["overlap_tax"], 1)
+        self.assertEqual(p4_witness["missed"], set())
+
+        third = tuple(Fraction(1, 3) for _ in range(5))
+        perfect_code = audit(
+            cycle(5),
+            cycle(5),
+            {(g, 2 * g % 5) for g in range(5)},
+            third,
+            third,
+        )
+        self.assertEqual(perfect_code["overlap_tax"], 0)
+        self.assertEqual(perfect_code["missed"], set())
+
+        typed_only = audit(
+            cycle(4),
+            cycle(4),
+            {(g, g) for g in range(4)},
+            tuple(Fraction(1, 3) for _ in range(4)),
+            tuple(Fraction(1, 3) for _ in range(4)),
+        )
+        self.assertTrue(typed_only["missed"])
+
+    def test_indexed_provider_reuse_obstruction(self) -> None:
+        left = cycle(5)
+        terminal = {0, 2, 4}
+        complement = {1, 3}
+        self.assertEqual(left.domination_number(terminal), 2)
+        self.assertTrue(
+            left.is_k_packing_function((1, 0, 1, 0, 1), 2)
+        )
+        self.assertEqual(left.k_packing_number(2), 3)
+
+        for count in range(1, 4):
+            def vertex(index: int, offset: int) -> int:
+                return 6 * index + offset
+
+            blue_cells = []
+            red_cells = []
+            edges = set()
+            a_zero = vertex(0, 4)
+            for index in range(count):
+                c_i, s_i, t_i, r_i, a_i, w_i = (
+                    vertex(index, offset)
+                    for offset in range(6)
+                )
+                blue_cells.append({c_i, s_i, t_i})
+                red_cells.append({r_i, a_i, w_i})
+                edges.update(
+                    {
+                        (c_i, s_i),
+                        (c_i, t_i),
+                        (r_i, a_i),
+                        (r_i, w_i),
+                        (a_i, t_i),
+                        (a_zero, c_i),
+                        (a_zero, s_i),
+                    }
+                )
+
+            right = Graph.from_edges(6 * count, edges)
+            packing_witnesses = [
+                right.closed_neighborhood(vertex(index, offset))
+                for index in range(count)
+                for offset in (2, 5)
+            ]
+            self.assertEqual(
+                len(set().union(*packing_witnesses)),
+                sum(map(len, packing_witnesses)),
+            )
+            centers = {
+                vertex(index, offset)
+                for index in range(count)
+                for offset in (0, 3)
+            }
+            self.assertTrue(right.dominates(centers))
+            self.assertEqual(right.domination_number(), 2 * count)
+
+            exchange = {
+                vertex(index, 4)
+                for index in range(count)
+            }
+            exchange |= {
+                vertex(index, 3)
+                for index in range(count)
+            }
+            self.assertTrue(right.dominates(exchange))
+            for index in range(count):
+                demand = vertex(index, 1)
+                self.assertEqual(
+                    right.closed_neighborhood(demand)
+                    & {
+                        vertex(other, 4)
+                        for other in range(count)
+                    },
+                    {a_zero},
+                )
+
+            # Fixed demands s_i all reuse a_0, but the universal adaptive
+            # row matching chooses t_i and the distinct provider a_i.
+            adaptive_providers = {
+                index: vertex(index, 4)
+                for index in range(count)
+            }
+            self.assertEqual(
+                len(set(adaptive_providers.values())),
+                count,
+            )
+            for index, provider in adaptive_providers.items():
+                adaptive_target = vertex(index, 2)
+                self.assertIn(
+                    provider,
+                    right.closed_neighborhood(adaptive_target),
+                )
+                self.assertNotIn(provider, blue_cells[index])
+                self.assertIn(provider, red_cells[index])
+
+            row_coordinates = {
+                g: (
+                    {
+                        vertex(index, 4)
+                        for index in range(count)
+                    }
+                    if g in terminal
+                    else {
+                        vertex(index, offset)
+                        for index in range(count)
+                        for offset in (0, 5)
+                    }
+                )
+                for g in range(left.n)
+            }
+            chosen_pairs = {
+                (g, h)
+                for g, coordinates in row_coordinates.items()
+                for h in coordinates
+            }
+            product_graph = left.cartesian_product(right)
+            chosen = {
+                g * right.n + h
+                for g, h in chosen_pairs
+            }
+            self.assertTrue(product_graph.dominates(chosen))
+
+            fibre_sets = []
+            for cell in blue_cells + red_cells:
+                fibre_sets.append(
+                    {
+                        g
+                        for g in range(left.n)
+                        if right.dominates(
+                            row_coordinates[g] - cell,
+                            cell,
+                        )
+                    }
+                )
+            self.assertEqual(
+                fibre_sets,
+                [terminal] * count + [set()] * count,
+            )
+
+            vertical_slack = (
+                len(chosen_pairs)
+                - sum(map(len, fibre_sets))
+            )
+            projection_additivity_subset_slack = (
+                3 * count * (1 + 1)
+                + 3 * count * 3
+                + 3 * count
+            )
+            oriented_slack = (
+                4 * len(chosen_pairs)
+                - right.domination_number()
+                * (
+                    3 * left.domination_number()
+                    - left.k_packing_number(2)
+                )
+            )
+            self.assertEqual(vertical_slack, 4 * count)
+            self.assertEqual(
+                vertical_slack + projection_additivity_subset_slack,
+                oriented_slack,
+            )
 
     def test_bidirectional_blocker_certifies_small_p4_pairs(self) -> None:
         right = path(4)

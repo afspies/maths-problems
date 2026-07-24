@@ -420,6 +420,40 @@ def uniform_set_cover_split_graph(
     return Graph.from_edges(private_leaf_offset + private_pairs, edges)
 
 
+def bipartite_one_subdivision(
+    left_size: int,
+    right_size: int,
+    edges: Iterable[tuple[int, int]],
+) -> Graph:
+    """Return the one-subdivision of a finite bipartite graph.
+
+    The original left vertices come first, followed by the original right
+    vertices and then one new subdivision vertex for each edge.  Right
+    endpoints in ``edges`` are indexed from zero within the right part.
+    """
+
+    if left_size < 0 or right_size < 0:
+        raise ValueError("part sizes must be nonnegative")
+    edge_list = tuple(edges)
+    if len(set(edge_list)) != len(edge_list):
+        raise ValueError("bipartite edges must be distinct")
+    for left, right in edge_list:
+        if not (0 <= left < left_size and 0 <= right < right_size):
+            raise ValueError("bipartite edge endpoint is outside its part")
+
+    right_offset = left_size
+    subdivision_offset = left_size + right_size
+    subdivided_edges: set[tuple[int, int]] = set()
+    for index, (left, right) in enumerate(edge_list):
+        middle = subdivision_offset + index
+        subdivided_edges.add((left, middle))
+        subdivided_edges.add((right_offset + right, middle))
+    return Graph.from_edges(
+        left_size + right_size + len(edge_list),
+        subdivided_edges,
+    )
+
+
 def fractional_tensor_lower_bound(
     left: Graph,
     right: Graph,

@@ -33,5 +33,9 @@ witness, the `C₄` combined-lift benchmark, and the `K₂□P₃` length-two es
 cycle. The typed-fibre fixture separates cardinality feasibility from actual
 product domination. New exhaustive fixtures verify the two-axis near-cover
 profile inequality, its exact isolation slack, the correlated fractional
-charging identity, and the corrected `s+t-st` cap obstruction. The suite
-currently contains 35 tests.
+charging identity, and the corrected `s+t-st` cap obstruction. Session-seven
+fixtures verify the four-region overlap and multiplicity identities,
+cardinality-slack correction, the realization of arbitrary bipartite escape
+graphs by one-subdivision perfect codes, and the indexed-provider reuse
+obstruction together with its distinct adaptive provider matching. The
+suite currently contains 38 tests.

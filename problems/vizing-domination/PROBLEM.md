@@ -111,16 +111,40 @@ its precise failure is audited in
   random translate-cover construction proves that this bound clears every
   two-scale pair in the Cayley family that kills `Ξ`, by a diverging factor
   when both factors grow.
-- Fractional factor packings satisfy the exact correlated typed inequality
-  `|A|≥PQ+Σ_A(1-q_g)(1-p_h)+max{E_H,E_G}`, where the energies measure
-  subset-domination minus packing mass in the actual remaining row and
-  column targets. For half-integral 2-packings, every nonzero repair gap
-  costs at least one half.
+- Fractional factor packings satisfy the corrected correlated typed
+  inequality
+  `|A|≥PQ+Σ_A(1-q_g)(1-p_h)+max{E_H+α_H,E_G+α_G}`, where the energies
+  measure subset-domination minus packing mass and the `α` terms retain
+  typed cardinality slack in the actual remaining row and column targets.
+  For half-integral 2-packings, every nonzero repair gap costs at least one
+  half.
+- A four-region identity shows exactly why the two directional repair
+  ledgers cannot simply be added: selected nonisolation and double-open
+  imports form an overlap tax. A second exact identity decomposes the sum
+  of the two directional residuals into repeated-owner and packing-load
+  slack. `K₂□K₂` and `P₃□P₃` make the corrected scalar maximum sharp.
 - For an actual product dominator, every fibre-isolated point without an
   external private neighbor charges to a repeated same-label import or
-  cross-coordinate redundancy. Consequently a quantitative set of points
-  carries the labelled mixed-distance escape obligation; the remaining gap
-  is to close or bound the length of those escape paths.
+  cross-coordinate redundancy. However, the generic escape route is now a
+  hard stop: zero-defect perfect-code products realize every finite
+  bipartite escape graph without isolates, including stars and arbitrarily
+  long in-trees.
+- Dense random graphs have `ρ=1`, `ρ²=2`, and unbounded domination number.
+  Mixing them with isolated vertices and `C₅` components makes actual graph
+  invariant pairs converge exactly to Steiner's formal `(a,b)` optimizer.
+  Thus no new relation using only `γ,ρ,ρ²` can cut that point.
+- Provider reuse has an exact Hall-deficiency formulation, but indexed
+  terminal triangles, optimal atomic 2-packings, and exact row exchange do
+  not control it: an actual `C₅□H_m` dominator reuses one point across `m`
+  demands. Its fibre defects grow linearly, so the only surviving provider
+  theorem must charge Hall deficiency to the full exact defect budget.
+- If the demanded point in each outgoing cell may be chosen adaptively,
+  Hall's theorem does give distinct row providers universally. At zero
+  vertical and column slack the resulting genuine cell transitions form a
+  loopless Eulerian digraph; under the external-private hypotheses they
+  transfer injectively to singleton holes and give local expansion cuts.
+  The unresolved issue is compatibility with pre-prescribed
+  triangle-energy witnesses.
 - The formal-ratio three-arm counterfamily can also be connected through
   safe zero-weight ports while preserving `γ,ρ,ρ²` and only decreasing its
   anchored/capped values. Connectedness alone does not repair the marginal
@@ -134,11 +158,13 @@ its precise failure is audited in
   additional obstruction parameter; the parameter-free `k=3` guess is dead.
 - **LP/integer duality:** compare integer `k`-packing defects with fractional
   domination and identify rounding structure that product fibres enforce.
-- **Typed fibre sets and escape dynamics:** retain the actual correlated row
-  label sets, private-target maps, and cell-owner transitions. Even
-  owner-indexed averaged factor dominators lose all positive constant.
-- **Escape-cycle stability:** couple the mixed edge/distance-two cycle to the
-  fixed `K₁/K₃` terminal atoms and exact row exchanges.
+- **Typed fibre sets and indexed providers:** retain the actual correlated
+  row label sets, private-target maps, and the varying `K₁/K₃` terminal
+  systems. Generic escape graphs and owner-indexed averaged factor
+  dominators both lose all positive control.
+- **Overlap-tax stability:** prove a triangle/index-sensitive bound on the
+  exact double-import and selected-nonisolation tax, or force corrected
+  cardinality slack.
 - **Square-graph lifts:** retain which square cliques have a common center,
   since the unrestricted fractional clique cover has unbounded loss.
 - **Extremal constructions:** build graphs/subsets realizing equality in every
@@ -149,12 +175,12 @@ its precise failure is audited in
 
 ## First steps
 
-1. Combine the half-integral row/column repair energies with the fixed
-   `K₁/K₃` terminal atoms at formal Steiner equality.
-2. Prove that a positive fraction of labelled escape owners remain in the
-   escape set, or that every departure charges collision,
-   cross-coordinate redundancy, or an exact Steiner defect.
+1. Make the terminal-triangle repair witness compatible with the universal
+   adaptive row-provider matching, or quantify the cost of incompatibility.
+2. Exploit the local weighted expansion cuts from the adaptive
+   provider-to-private-hole transfer before aggregating over rows.
 3. Use the near-cover and fractional defect identities only with actual
    fibre labels; their scalar relaxations remain insufficient on `C₄□C₄`.
-4. Do not pursue additive `k`-packing, saturation-defect, capped-rank-one, or
+4. Do not pursue generic escape closure, factor-invariant relations,
+   additive `k`-packing, saturation-defect, capped-rank-one, or
    ordinary-packing residual slices further: each now has an exact STOP.

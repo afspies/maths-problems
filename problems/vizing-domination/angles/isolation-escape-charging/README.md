@@ -141,17 +141,23 @@ cycle.
    Its genuinely missed cells appear exactly as the final term in (3),
    preventing a false escape conclusion.
 
-## Remaining obstruction
+## Session-seven obstruction
 
-Many points in `T` need not give many cycles: an escape owner may lie
-outside `T`, and a functional digraph can have long in-trees feeding a
-single cycle. The next theorem must prove one of:
+The generic closure program is now a hard stop. The exact realization
+theorem in `../escape-realization/README.md` shows that even when
 
-1. a positive fraction of escape owners remain inside `T`;
-2. bounded labelled escape-path length before returning to `T`; or
-3. every departure from `T` charges new collision, cross-redundancy, or
-   one of the exact Steiner defects.
+```text
+T=D,
+Ω_G=Ω_H=X_G=X_H=0,
+```
 
-**GO** for a closure/path-length lemma using the red-diagonal,
-blue-cross-zero transition rule. **STOP** for counting isolation without
-subtracting `Ω` and `X`.
+the escape-candidate graph can be any finite bipartite graph without
+isolates. Subdivided-star perfect codes give an eligible fraction one but
+only two cyclic vertices, and subdivided paths give arbitrarily long
+in-trees.
+
+Thus no positive owner-retention fraction, bounded return length,
+injective-owner selection, or fresh present-defect charge per departure is
+possible. A surviving escape-shaped theorem must use additional
+formal-Steiner structure—specifically the varying indexed `K₁/K₃`
+terminal systems—not the quantities in this lemma alone.

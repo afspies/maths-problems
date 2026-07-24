@@ -58,17 +58,38 @@
   Cayley graphs force the typed value above the Vizing scale at every pair
   of growing scales.
 - `typed-fractional-charging/` — **proved correlated bridge:** exact
-  fractional charging adds quantized row/column repair energies to the
-  rank-one product term; equality forces packing-saturated exact-one
-  repairs.
+  fractional charging adds quantized row/column repair energies and typed
+  cardinality slacks to the rank-one product term; equality forces
+  packing-saturated exact-one repairs.
+- `overlap-tax/` — **proved exact two-axis ledger:** a four-region identity
+  identifies the precise overlap tax blocking addition of row and column
+  repair energies, while a multiplicity identity decomposes all remaining
+  slack; small minimum dominators make the scalar bound sharp.
 - `isolation-escape-charging/` — **proved product bridge:** fibre isolation
   is charged exactly to private-corner escape obligations, same-label
   collisions, or cross-coordinate redundancy.
+- `escape-realization/` — **complete generic STOP:** at zero defect the
+  escape graph can be any bipartite graph without isolates; perfect-code
+  subdivision products realize stars and arbitrarily long in-trees.
+- `factor-invariant-calibration/` — **proved asymptotic no-go:** actual
+  disconnected graph sequences converge to Steiner's formal `(a,b)` point,
+  so no relation using only `γ,ρ,ρ²` can exclude the optimizer.
+- `provider-nonreuse/` — **exact Hall formulation and sharp STOP:** one
+  selected coordinate can serve arbitrarily many indexed terminal
+  triangles despite optimal atomic packings and exact row exchange; only
+  the full fibre-defect package can still control the Hall deficiency.
+- `adaptive-provider-cycles/` — **proved product bridge:** every row has an
+  adaptive Hall matching from outgoing cells to distinct genuine providers;
+  at zero vertical/column slack these transitions form labelled Eulerian
+  cell cycles and compose with external-private holes to give local
+  expansion cuts. Pre-prescribed triangle demands remain uncontrolled.
 - `anchored-domination/` — **exact duality and STOP results:** the optimized
   saturation-defect slice is an anchored fractional-domination parameter and
   stays below Steiner on formal-ratio mixtures; even independently capped
   rank-one diffuseness fails jointly with both anchored arms.
 
-Next work should couple the half-integral repair energy to the `K₁/K₃`
-terminal atoms, or prove that labelled escape paths close before their
-owners can dissipate into collision and cross-redundancy defects.
+Next work must be explicitly indexed-triangle and product-correlated:
+make the prescribed triangle-energy witnesses compatible with the adaptive
+provider cycles, or exploit their local weighted expansion cuts with the
+full defect budget. Generic escape closure and factor-invariant
+reoptimization are now hard stops.

@@ -31,7 +31,13 @@ connected vertex-transitive Cayley graph pairs. A sixth session proves exact
 typed partial-cover and fractional repair-energy inequalities, shows that
 the typed relaxation clears the robust Cayley obstruction at every pair of
 scales, and quantitatively charges isolated fibres to labelled corner-escape
-obligations, collisions, or cross-coordinate redundancy.
+obligations, collisions, or cross-coordinate redundancy. A seventh session
+restores the typed cardinality slacks, proves exact overlap and multiplicity
+identities, completely classifies the freedom of zero-defect escape graphs,
+and realizes Steiner's formal factor-invariant optimizer as a limit of
+actual graphs. It also proves a universal adaptive-provider Hall matching
+whose tight transitions form labelled Eulerian cell cycles and local
+expansion cuts.
 
 ## Definitions
 
@@ -623,12 +629,14 @@ Let `q,p` be fractional packings on `G,H`, with totals `Q,P`, and put
 C_g=H\V_g,       D_h=G\U_h,
 Z=Σ_{(g,h)∈A}(1-q_g)(1-p_h),
 E_H=Σ_gq_g[γ_H(C_g)-p(C_g)],
-E_G=Σ_hp_h[γ_G(D_h)-q(D_h)].
+E_G=Σ_hp_h[γ_G(D_h)-q(D_h)],
+α_H=Σ_gq_g[|A_g|-γ_H(C_g)],
+α_G=Σ_hp_h[|B_h|-γ_G(D_h)].
 ```
 
 Then every typed-feasible set of mass `M` satisfies
 
-`M≥PQ+Z+max{E_H,E_G}`.                                      (34)
+`M≥PQ+Z+max{E_H+α_H,E_G+α_G}`.                              (34)
 
 The exact row identity behind (34) is
 
@@ -639,7 +647,9 @@ The exact row identity behind (34) is
 ```
 
 where `o_g` is the nonnegative weighted overlap among imported neighbouring
-fibres. The symmetric identity gives `E_G`.
+fibres. Splitting
+`|A_g|-p(C_g)=|A_g|-γ_H(C_g)+γ_H(C_g)-p(C_g)` retains
+`α_H+E_H`; the symmetric identity retains `α_G+E_G`.
 
 For a minimum dominator `T` of a target `C`,
 
@@ -694,9 +704,221 @@ with external private neighbors in both directions satisfies
 
 Every point counted by (38) carries the labelled mixed `(1,2)` or `(2,1)`
 private-corner escape obligation. Equation (38) is exact on the
-`C₅□C₅` 5-cycle and the `K₂□P₃` 2-cycle. The remaining obstruction is
-closure: escape owners can leave `T`, and bounded indegree does not bound
-the length of the resulting in-trees.
+`C₅□C₅` 5-cycle and the `K₂□P₃` 2-cycle.
+
+## Four-region and multiplicity identities
+
+Let `C` be the product region with no horizontal open import and `D₀` the
+region with no vertical open import. Put
+
+```text
+I=A∩C∩D₀,
+W=(C∩D₀)\A,
+J=(G□H)\(C∪D₀),
+w(g,h)=q_gp_h,
+K=w(A\I)+w(J).
+```
+
+Here `W` is exactly the missed-cell set and `J` is the double-open-import
+region. Direct inclusion--exclusion gives
+
+```text
+M
+=PQ+Z+E_H+E_G+α_H+α_G-K+w(W).                              (39)
+```
+
+Thus (39) repairs the false addition of the two repair energies by an exact
+overlap tax.
+
+There is a second exact decomposition. Let `m(z)` count all selected owners
+of `z`, let `t(z)` retain only self-selection and existence of an owner in
+each open direction, and define
+
+```text
+R=Σ_zw(z)[m(z)-t(z)],
+Δ=Σ_{(g,h)∈A}{
+ p_h[1-q(N_G[g])]
++q_g[1-p(N_H[h])]
+}.
+```
+
+Then
+
+```text
+2(M-PQ-Z)
+=E_H+E_G+α_H+α_G+R+Δ.                                     (40)
+```
+
+The two directional residuals are nonnegative and sum exactly to `R+Δ`.
+Minimum dominators in `K₂□K₂` and `P₃□P₃` make the corrected maximum in
+(34) sharp, so (39)--(40) are equality/stability diagnostics rather than a
+new scalar constant.
+
+## Complete obstruction to generic escape closure
+
+At
+
+`I_G=I_H=D` and `Ω_G=Ω_H=X_G=X_H=0`,
+
+the dominator `D` is a perfect code: every product vertex has exactly one
+owner. Its mixed escape-candidate relation is undirected.
+
+More strongly, every finite bipartite graph `F` without isolates is
+realizable as such a zero-defect escape graph. If `H` is the one-subdivision
+of `F` with bipartition `S,T`, then
+
+`D={(0,s):s∈S}∪{(1,t):t∈T}`
+
+is a minimum perfect code in `K₂□H`, and its escape graph is exactly `F`.
+Taking stars gives cyclic fraction `2/(k+1)→0`; taking paths gives
+arbitrarily long in-trees. Hence generic cycle density, bounded return,
+injective owner choice, and additive escape credit are all impossible even
+at zero present defect.
+
+## Actual calibration of Steiner's factor point
+
+For every fixed `L`, a random graph `K∼G(n,1/2)` has, with positive
+probability for large `n`,
+
+```text
+γ(K)>L,       ρ(K)=1,       ρ^{\{2\}}(K)=2.                 (41)
+```
+
+Indeed, union bounds show simultaneously that every pair and triple lies
+in a closed neighborhood, while no set of at most `L` vertices dominates.
+The first two properties force the two packing values in (41).
+
+Write
+
+```text
+d=c=(5+√73)/24,
+t=(47-5√73)/24,
+s=(√73-7)/6.
+```
+
+These positive numbers sum to one. Take a disjoint mixture with domination
+mass fractions `d,t,s` coming respectively from graphs in (41), isolated
+vertices, and copies of `C₅`. Since the three limiting normalized packing
+pairs are
+
+`(0,0)`, `(1,1)`, and `(1/2,3/4)`,
+
+the mixture satisfies
+
+```text
+ρ/γ→t+s/2=(11-√73)/8=a,
+ρ²/(2γ)→t+3s/4=(13-√73)/12=b.                              (42)
+```
+
+Thus Steiner's formal optimizer is the limit of actual finite graphs.
+No continuous universal relation involving only `γ,ρ,ρ²` can exclude it.
+
+## Indexed provider reuse obstruction
+
+For one row, let `I` index terminal demands `y_i∈π_i`, and join `i` to a
+selected row coordinate `a` when `a∈N[y_i]\π_i`. The unavoidable provider
+reuse is the exact Hall deficiency
+
+```text
+|I|-ν(P)
+=max_{J⊆I}(|J|-|N_P(J)|).                                  (43)
+```
+
+Indexed `K₃` atomicity and exact row exchange do not control (43). For every
+`m`, an explicit graph `H_m` with blue cells `{c_i,s_i,t_i}` and red cells
+`{r_i,a_i,w_i}` admits an actual dominator
+
+`D_m=(T×{a_0,...,a_{m-1}})∪(X×{c_i,w_i})⊂C₅□H_m`,
+
+where `T={0,2,4}` and `X={1,3}`. Every blue fibre is the same exact terminal
+triangle `T`, its canonical weighting is an optimal global 2-packing, and
+each provider row performs a minimum size-preserving exchange. Nevertheless
+the single point `(g,a_0)` is the unique provider for all `m` blue demands
+`s_i`.
+
+The four-region tax is zero for the natural indexed packings, so it cannot
+detect reuse across different packing choices. The obstruction is paid
+instead by the exact fibre defects:
+
+```text
+blue: (p_i,d_i,δ_i)=(1,1,0),
+red:  (p_i,d_i,δ_i)=(3,0,3),
+v=4m.                                                       (44)
+```
+
+Even ideal row-plus-column triangle additivity is quantitatively tiny:
+
+```text
+b²+2b(b-a)=(13-√73)/24≈0.18567<c.
+```
+
+Starting from `b²`, at least eighteen independent triangle charges are
+required to cross `c`, since
+
+`(c-b²)/(b(b-a))=(249+21√73)/24≈17.851`.                    (45)
+
+Thus the next lemma must couple outgoing terminal indices to incoming
+private-hole two-packings and charge Hall deficiency to the full defect
+budget with substantial amplification.
+
+## Adaptive provider matching and labelled cycles
+
+There is a universal positive theorem once the point inside each source
+cell may be chosen adaptively. For a row `g`, put
+
+```text
+I_g={i:g∈L_i},
+A_g=P_H(D∩({g}×H)).
+```
+
+Join `i∈I_g` to `a∈A_g\π_i` when
+`N_H[a]∩π_i≠∅`. The exact row-exchange identity
+
+`γ_H(⋃_{i∈I_g}π_i)=|I_g|`
+
+implies Hall's condition. Indeed, the neighbor set of `J⊆I_g`, together
+with the retained centers for `I_g\J`, dominates the whole union. Hence
+there is an injection
+
+```text
+μ_g:I_g→A_g,
+μ_g(i)∉π_i,
+N_H[μ_g(i)]∩π_i≠∅.                                        (46)
+```
+
+Globally, (46) injects the blue incidences `(g,i)`, `g∈L_i`, into `D`
+and leaves exactly
+
+`v=|D|-Σ_i|L_i|`
+
+selected points unused. If `v=0` and `|D_i|=|L_i|` for every column, the
+matches give a loopless Eulerian cell digraph, hence a decomposition into
+directed cycles carrying actual domination labels.
+
+Under the full atomic/additive external-private hypotheses, every matched
+point transfers injectively to a singleton private-hole occurrence. With
+`e_x=|A_x|-|I_x|`, this gives the local open-neighborhood cut
+
+```text
+Σ_{g∈U}|I_g|
+≤ρ(H)|N_G^open(U)|
+ +2Σ_{x∈N_G^open(U)}e_x.                                   (47)
+```
+
+The theorem is exactly compatible with the obstruction above: in
+`C₅□H_m`, it matches blue cell `B_i` to the distinct provider `a_i` using
+the adaptively chosen target `t_i`. The pre-prescribed targets `s_i` still
+all require `a₀`. Thus (46) solves adaptive cell-level provider reuse, not
+the demand-specific graph (43).
+
+The triangle-only consequence of (47) is
+
+`3k(R-2r)≤|V(G)|ρ(H)`,                                      (48)
+
+which is weaker than the existing all-incidence inequality
+`k(2R-3r)≤|V(G)|ρ(H)`. No new universal constant follows. The remaining
+bridge is compatibility between the triangle-energy witness and the
+adaptive matching, or a useful exploitation of the local weighted cuts.
 
 ## Withdrawn 0.5809 claim
 
@@ -718,7 +940,7 @@ From `problems/vizing-domination/harness` run:
 python3 -m unittest -v
 ```
 
-Thirty-five exact tests check named graph products, domination and `k`-function
+Thirty-eight exact tests check named graph products, domination and `k`-function
 definitions, Steiner's subset inequality, equation (3), the exact
 `Q(√73)` threshold identities, the withdrawn algebra witness, and the
 five-vertex `k=3` counterexample together with corrected inequality (5).
@@ -729,8 +951,11 @@ adversarial skeleton. They also check the atomic external-private example,
 the necessity of additivity, the `C₅□C₅` corner cycle, and small `P₄`
 blocker targets. New exhaustive fixtures verify (32), its exact isolation
 slack, (34), the small typed relaxation values, and the exact surd gap after
-the corrected cap denominator. These are hygiene and adversarial checks, not
-a finite proof of the universal conjecture.
+the corrected cap denominator. Session-seven fixtures verify (39)--(40),
+the recovered cardinality slack, the one-subdivision realization of
+arbitrary bipartite escape graphs, and the indexed-provider reuse
+obstruction together with its adaptive matching. These are hygiene and
+adversarial checks, not a finite proof of the universal conjecture.
 
 ## Relation to prior work and next gate
 
@@ -745,8 +970,11 @@ theorems further meet the gate, but their first aggregate consequence
 depends on factor order. Pure higher-rank fractional packing and the
 standalone blocker lift are also closed. The factor-marginal
 blocker/diffuseness hybrid and the stronger combined lift are now closed as
-well. The typed profile and fractional energies now clear the mandatory
+well. The typed profile and corrected fractional ledger clear the mandatory
 Cayley obstruction, and (38) turns isolation into a density of labelled
-escape obligations. Future work must couple the half-integral repair energy
-to the `K₁/K₃` terminal atoms or prove that escape paths close before their
-owners dissipate into collision and cross-coordinate redundancy.
+escape obligations. The universal escape-realization theorem closes generic
+path/cycle arguments, while (42) closes factor-invariant reoptimization.
+Equation (46) resolves adaptive cell-level provider reuse and adds labelled
+cycle and local-cut structure. Future work must make its adaptive witnesses
+compatible with the prescribed terminal-triangle energy witnesses, using
+the full Steiner defect budget.

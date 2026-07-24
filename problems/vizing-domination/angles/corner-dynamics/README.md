@@ -151,7 +151,11 @@ digraph can be a directed 2-cycle.
 
 ## Verdict
 
-**GO** only for a bound on labelled escape-path length or a coupling of
-successive red-diagonal/blue-cross-zero transitions. **STOP** for the claim
-that two-sided external privacy alone leaves an undominated corner, and for
-using bounded indegree alone to infer a positive cycle density.
+The generic dynamics route is a **STOP**. The exact theorem in
+`../escape-realization/README.md` realizes every finite bipartite graph
+without isolates as a zero-defect escape graph of a minimum perfect code.
+Consequently neither bounded path length nor positive cycle density follows
+even after all current collision and cross-redundancy defects vanish.
+
+Only a theorem using the additional indexed `K₁/K₃` terminal labels at the
+formal Steiner obstruction remains viable.

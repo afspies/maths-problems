@@ -100,8 +100,13 @@
   prove exact typed partial-cover and fractional repair-energy inequalities,
   show that the typed relaxation clears the robust Cayley obstruction at
   every pair of scales, and charge fibre isolation quantitatively to labelled
-  escape obligations, collisions, or cross-coordinate redundancy. No
-  improved universal constant is claimed.
+  escape obligations, collisions, or cross-coordinate redundancy. Session
+  seven restores typed cardinality slack, proves exact overlap and
+  multiplicity identities, classifies zero-defect escape freedom, and
+  realizes Steiner’s factor-invariant optimizer as an actual graph limit.
+  It also proves a universal adaptive-provider Hall matching whose tight
+  transitions form labelled Eulerian cell cycles and local expansion cuts.
+  No improved universal constant is claimed.
 </div>
 
 <h2>1 · Setup</h2>
@@ -525,9 +530,12 @@ adaptation, not a theorem stated verbatim in the cited paper.</p>
   [γ<sub>H</sub>(C<sub>g</sub>)−p(C<sub>g</sub>)],</span>
   <span class="no">(20)</span>
 </div>
-<p>and E<sub>G</sub> symmetrically. Exact double counting gives</p>
+<p>Define α<sub>H</sub>=Σ<sub>g</sub>q<sub>g</sub>
+[|A<sub>g</sub>|−γ<sub>H</sub>(C<sub>g</sub>)] and
+α<sub>G</sub> symmetrically. Exact double counting gives</p>
 <div class="eqn">
-  <span class="body">|A|≥PQ+Z+max{E<sub>H</sub>,E<sub>G</sub>}.</span>
+  <span class="body">|A|≥PQ+Z+
+  max{E<sub>H</sub>+α<sub>H</sub>,E<sub>G</sub>+α<sub>G</sub>}.</span>
   <span class="no">(21)</span>
 </div>
 <p>Each repair gap splits into unsaturated repair owners and positive-packing
@@ -558,24 +566,121 @@ with external private neighbors in both directions obeys</p>
 </div>
 <p>Every such point carries a labelled mixed (1,2) or (2,1) corner escape
 obligation. The bound is exact on the C<sub>5</sub>□C<sub>5</sub> 5-cycle
-and K<sub>2</sub>□P<sub>3</sub> 2-cycle. Escape density is not yet cycle
-density: owners can leave T, and bounded indegree permits long in-trees.</p>
+and K<sub>2</sub>□P<sub>3</sub> 2-cycle.</p>
 
-<h2>18 · Exact verification and next gate</h2>
+<h2>18 · Overlap and multiplicity ledger</h2>
+<p>Let C and D<sub>0</sub> be the no-horizontal and no-vertical open-import
+regions. Put I=A∩C∩D<sub>0</sub>,
+W=(C∩D<sub>0</sub>)\A, J=(G□H)\(C∪D<sub>0</sub>), and
+w(g,h)=q<sub>g</sub>p<sub>h</sub>. Then K=w(A\I)+w(J) is the exact
+overlap tax, and</p>
+<div class="eqn">
+  <span class="body">|A|=PQ+Z+E<sub>H</sub>+E<sub>G</sub>
+  +α<sub>H</sub>+α<sub>G</sub>−K+w(W).</span>
+  <span class="no">(24)</span>
+</div>
+<p>If m(z) counts all owners, t(z) only records existence in the self,
+horizontal, and vertical channels, R=Σw(z)[m(z)−t(z)], and Δ is the
+factor-packing load slack at selected owners, then</p>
+<div class="eqn">
+  <span class="body">2(|A|−PQ−Z)=E<sub>H</sub>+E<sub>G</sub>
+  +α<sub>H</sub>+α<sub>G</sub>+R+Δ.</span>
+  <span class="no">(25)</span>
+</div>
+<p>The two one-axis residuals are nonnegative and sum exactly to R+Δ.
+Minimum dominators of K<sub>2</sub>□K<sub>2</sub> and
+P<sub>3</sub>□P<sub>3</sub> make the corrected directional maximum sharp.</p>
+
+<h2>19 · Two complete no-go classifications</h2>
+<div class="env theorem">
+  <span class="label">Escape realization.</span>
+  Every finite bipartite graph F without isolates occurs as a zero-defect
+  escape graph. If H is its one-subdivision with parts S,T, then
+  D={(0,s):s∈S}∪{(1,t):t∈T} is a minimum perfect code in K<sub>2</sub>□H.
+</div>
+<p>Stars give cyclic fraction 2/(k+1)→0 and paths give arbitrarily long
+in-trees. Generic cycle-density, bounded-return, injective-owner, and
+additive escape-credit arguments therefore fail even when all present
+defects vanish.</p>
+<div class="env theorem">
+  <span class="label">Actual factor calibration.</span>
+  There are graphs K with γ(K)→∞, ρ(K)=1, and
+  ρ<sup>{2}</sup>(K)=2. Mixing these with isolated vertices and
+  C<sub>5</sub> components in domination-mass fractions
+  c=(5+√73)/24, (47−5√73)/24, and (√73−7)/6 makes
+  ρ/γ→(11−√73)/8 and ρ<sup>{2}</sup>/(2γ)→(13−√73)/12.
+</div>
+<p>The dense components follow from elementary G(n,½) union bounds:
+simultaneously every pair and triple lies in a closed neighborhood, while
+no bounded-size set dominates. Hence Steiner’s formal optimizer is the
+limit of actual graphs; factor-invariant reoptimization cannot exclude it.</p>
+
+<h2>20 · Indexed provider reuse obstruction</h2>
+<p>For one row, join an indexed terminal demand i to a selected coordinate
+a when a∈N[y<sub>i</sub>]\π<sub>i</sub>. Unavoidable reuse is exactly the
+Hall deficiency |I|−ν(P)=max<sub>J⊆I</sub>(|J|−|N(J)|).</p>
+<p>An explicit actual dominator in C<sub>5</sub>□H<sub>m</sub> has m
+identical exact terminal K<sub>3</sub> fibres, globally optimal canonical
+2-packings, and minimum size-preserving provider-row exchanges, yet the same
+selected point uniquely serves all m demands. The construction pays linear
+projection, additivity, subset, and vertical defects; the four-region tax is
+zero for each natural indexed packing. Hence indexed atoms or overlap tax
+alone do not control cross-index reuse.</p>
+<div class="eqn">
+  <span class="body">b²+2b(b−a)=(13−√73)/24≈0.18567&lt;c.</span>
+  <span class="no">(26)</span>
+</div>
+<p>At least eighteen independently additive triangle charges are needed
+merely to cross Steiner’s constant. A viable theorem must couple outgoing
+terminal indices to incoming private-hole two-packings and charge Hall
+deficiency to the full exact fibre-defect budget.</p>
+
+<h2>21 · Adaptive providers and labelled cell cycles</h2>
+<div class="env theorem">
+  <span class="label">Adaptive row-provider theorem.</span>
+  For every row g, let I<sub>g</sub>={i:g∈L<sub>i</sub>} and let
+  A<sub>g</sub> be its selected H-coordinates. There is an injection
+  μ<sub>g</sub>:I<sub>g</sub>→A<sub>g</sub> such that
+  μ<sub>g</sub>(i)∉π<sub>i</sub> and
+  N<sub>H</sub>[μ<sub>g</sub>(i)]∩π<sub>i</sub>≠∅.
+</div>
+<p>Hall’s condition follows from
+γ<sub>H</sub>(⋃<sub>i∈I<sub>g</sub></sub>π<sub>i</sub>)=|I<sub>g</sub>|:
+too few neighboring providers for J⊆I<sub>g</sub>, together with the
+retained centers for I<sub>g</sub>\J, would give a smaller dominator.</p>
+<p>Globally the matching leaves exactly
+v=|D|−Σ<sub>i</sub>|L<sub>i</sub>| selected points unused. At v=0 and
+|D<sub>i</sub>|=|L<sub>i</sub>|, its genuine cell transitions form a
+loopless Eulerian digraph and hence decompose into labelled directed cycles.
+Under the full external-private column hypotheses, they transfer injectively
+to singleton holes and give the local open-neighborhood cut</p>
+<div class="eqn">
+  <span class="body">Σ<sub>g∈U</sub>|I<sub>g</sub>|
+  ≤ρ(H)|N<sup>open</sup><sub>G</sub>(U)|
+  +2Σ<sub>x∈N<sup>open</sup><sub>G</sub>(U)</sub>e<sub>x</sub>.</span>
+  <span class="no">(27)</span>
+</div>
+<p>Adaptivity is essential. In C<sub>5</sub>□H<sub>m</sub>, the matching
+chooses t<sub>i</sub> with distinct provider a<sub>i</sub>, while the
+pre-prescribed s<sub>i</sub> demands still all require a<sub>0</sub>.
+The triangle-only scalar consequence is weaker than the existing
+all-incidence row-hole inequality, so no new constant follows.</p>
+
+<h2>22 · Exact verification and next gate</h2>
 <pre><code>$ cd problems/vizing-domination/harness
 $ python3 -m unittest -v
-Ran 35 tests
+Ran 38 tests
 OK</code></pre>
 <p>The checks use integers, rational numbers, and exact elements of
 ℚ(√73). They validate definitions and finite witnesses, not the universal
 conjecture. The gate is met by the capacity-two subset inequality and formal
 fibre-incidence classification, and strengthened by the external-private and
 row hole-packing theorems. Every averaged blocker/fractional hybrid attempted
-here is now closed. The typed profile clears the mandatory Cayley benchmark,
-and isolation now forces a quantitative density of labelled escape
-obligations. Further work must prove provider non-reuse across terminal
-systems or close the labelled escape paths before their owners dissipate
-into collision and cross-coordinate redundancy.</p>
+here is now closed. The typed profile clears the mandatory Cayley benchmark.
+Generic escape closure and factor-invariant relations are now exact stops.
+The adaptive Hall theorem resolves cell-level provider reuse. Further work
+must make its adaptive witnesses compatible with the prescribed terminal
+triangle-energy witnesses, using the full Steiner defect budget.</p>
 
 <div class="footer">
   <p><strong>Status:</strong> partial-results. Vizing’s domination conjecture

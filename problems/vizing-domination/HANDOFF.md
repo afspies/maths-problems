@@ -1,13 +1,15 @@
 # Handoff — Vizing’s domination conjecture
 
-Read these session-six notes first:
+Read these session-seven notes first:
 
-- `angles/typed-fibre-relaxation/README.md`
-- `angles/typed-partial-cover/README.md`
-- `angles/typed-fractional-charging/README.md`
-- `angles/isolation-escape-charging/README.md`
-- `angles/corner-dynamics/README.md`
+- `angles/overlap-tax/README.md`
+- `angles/provider-nonreuse/README.md`
+- `angles/adaptive-provider-cycles/README.md`
+- `angles/escape-realization/README.md`
+- `angles/factor-invariant-calibration/README.md`
 - `angles/incidence-balance/README.md`
+- `angles/external-private-holes/README.md`
+- `angles/fibre-slack/README.md`
 
 The best universal constant remains
 
@@ -15,202 +17,192 @@ The best universal constant remains
 
 The withdrawn `0.5809` claim is not a theorem and was not used.
 
-## Decisive session-six theorems
+## Decisive session-seven results
 
-### 1. Two-axis near-cover profile
+### 1. Corrected two-direction repair ledger
 
-For
-
-`u_K(t)=min_{|C|≤t}|V(K)\N_K[C]|`,
-
-every row-typed incidence set `A`, with row masses `a_g` and column masses
-`b_h`, satisfies
-
-`Σ_g u_H(a_g)+Σ_hu_G(b_h)≤|G||H|`.                          (1)
-
-The exact defect identity is
+For typed-feasible `A`, factor fractional packings `q,p`, and the notation
+of `angles/typed-fractional-charging`, retain
 
 ```text
-|G||H|-Σ_gu_H(a_g)-Σ_hu_G(b_h)
-=Σ_g(|V_g|-u_H(a_g))
- +Σ_h[|G|-u_G(b_h)-|N_G[B_h]|]
- +Σ_h|B_h\N_G^open(B_h)|.
+α_H=Σ_gq_g(|A_g|-γ_H(C_g)),
+α_G=Σ_hp_h(|B_h|-γ_G(D_h)).
 ```
 
-The final term is induced-fibre isolation. On the `C₅□C₅` perfect code,
-all five units of slack are isolation.
-
-For `d`-regular `G`,
-
-`Θ(G,H)≥|G|(t+1)u_H(t)/[u_H(t)+d(t+1)]`.                    (2)
-
-There is also a fractional-packing-weighted version in the angle note.
-
-### 2. Robust Cayley benchmark cleared
-
-A new robust adaptation of the Newman/Bollobás--Janson--Riordan random-set
-argument gives connected Cayley graphs on `F₂^m`, with
+Then
 
 ```text
-n=2^m,
-k=floor(n/m²),
-q=n/k,
-ℓ=log k,
-t*=floor(q(ℓ-10 log ℓ)),
-L=floor(ℓ⁶),
-u(t*)>L,
-t*<γ≤q(ℓ+1).
+|A|≥PQ+Z+max{E_H+α_H,E_G+α_G}.                              (1)
 ```
 
-Equation (2) proves
+The `α` terms cannot be discarded: a minimum dominator of `P₃□P₃` makes
+(1) sharp with `E_H=E_G=0` and `α_H=1`.
 
-`Θ(G,H)/(γ(G)γ(H))→∞`
+Let `I` be the selected cells isolated from both open-coordinate import
+systems, `J` the cells imported in both directions, and put
 
-for every pair of growing graphs from this robust family, regardless of
-relative scale. If one factor is fixed, the liminf is at least
-`|G|/γ(G)≥1`.
+`K=w(A\I)+w(J)`.
 
-Thus the asymmetric Cayley construction that drives `Ξ` to zero is a hard
-PASS for `Θ`, not an obstruction.
-
-Do not claim that the global minimum
-
-`min_{t<γ}u(t)/(γ-t)`
-
-is large. The construction leaves an `o(γ)` final window where a singleton
-private set could make it one.
-
-### 3. Correlated fractional repair energy
-
-For factor fractional packings `q,p`, totals `Q,P`, define
+For an actual product dominator,
 
 ```text
-C_g=H\V_g,       D_h=G\U_h,
-Z=Σ_{(g,h)∈A}(1-q_g)(1-p_h),
-E_H=Σ_gq_g[γ_H(C_g)-p(C_g)],
-E_G=Σ_hp_h[γ_G(D_h)-q(D_h)].
+|A|=PQ+Z+E_H+E_G+α_H+α_G-K,                                (2)
+E_H+E_G+α_H+α_G=2K+R+Δ,                                    (3)
 ```
 
-Then exactly
+where `R` counts repeated same-direction owners and `Δ` is factor-packing
+load slack. These identities explain exactly why the two repair energies
+cannot be added. Minimum dominators of `K₂□K₂` and `P₃□P₃` make the scalar
+bound sharp.
 
-`|A|≥PQ+Z+max{E_H,E_G}`.                                    (3)
+### 2. Generic escape closure is a hard STOP
 
-For a minimum dominator `T` of a target `C`,
+At zero isolation/collision/cross-redundancy defect, the dominator is a
+perfect code and its mixed escape relation is undirected.
+
+Every finite bipartite graph `F` without isolated vertices is realized as
+such an escape graph: subdivide every edge of `F`, take the product with
+`K₂`, and place codewords from the two parts in opposite rows. Subdivided
+stars have cyclic fraction `2/(k+1)→0` and only one unit of Vizing surplus;
+paths have arbitrarily long in-trees.
+
+Therefore no generic cycle-density, bounded-return, matching, or
+`ε|T|`-credit theorem can follow from the present escape defects. Any
+surviving dynamic theorem must use the indexed Steiner fibres themselves.
+
+### 3. Factor-invariant relations cannot cut the optimizer
+
+For every fixed `L`, there are finite graphs with
 
 ```text
-γ(C)-p(C)
-=Σ_{t∈T}[1-p(C∩N[t])]
- +Σ_{v∈C}p_v(|T∩N[v]|-1).
+γ>L,       ρ=1,       ρ^{\{2\}}=2.
 ```
 
-Hence zero energy means packing-saturated repair owners and exact-one
-coverage of every positive-packing target. For half of an integral
-2-packing, every failure costs at least `1/2`.
+A direct `G(n,1/2)` union bound proves this. Mixing these graphs with
+isolated vertices and `C₅` components in exact domination-mass proportions
 
-The maximum in (3) is sharp; `E_H+E_G` is false. The cap-only consequence
-has denominator `s+t-st`, but the formal-ratio counterfamily still bounds it
-by
+```text
+c=(5+√73)/24,
+t=(47-5√73)/24,
+s=(√73-7)/6
+```
 
-`(-247+37√73)/132≈0.523698<c`.
+makes
 
-### 4. Terminal triangle provider charge
+```text
+ρ/γ→a=(11-√73)/8,
+ρ²/(2γ)→b=(13-√73)/12.
+```
 
-For a terminal `K₁/K₃` equality set with `τ` triangle atoms and its
-canonical half-2-packing,
+Thus Steiner's formal minimizer is a limit of actual graph invariants.
+Relations using only `γ,ρ,ρ²` are a hard STOP, including stronger scalar
+packing hierarchies or connectedness-free realizability objections.
 
-`Z+E_H≥τQ/2`.                                                (4)
+### 4. Provider reuse is Hall deficiency, but indexed atoms do not control it
 
-Odd remaining-target intersection with a triangle charges `E_H`; even
-intersection forces an odd imported provider and charges `Z`.
+For a fixed row, form the provider graph from indexed demands to selected
+row labels. Reuse is exactly
 
-This is rigorous but far too weak. At the formal ratios (4) plus (3) gives
+```text
+|I|-ν(P)=max_{J⊆I}(|J|-|N(J)|).                             (4)
+```
+
+The external-private theorem makes incoming holes indexed by `J_g` a
+two-packing. Terminal triangle demands are indexed by outgoing cells
+`I_g`. There is no proved coordinate-preserving map between them.
+
+An explicit actual dominator of `C₅□H_m` has:
+
+- exact terminal `K₃` fibres;
+- globally optimal canonical 2-packings;
+- exact minimum row exchanges; and
+- one selected point serving all `m` indexed demands.
+
+The natural per-index overlap tax is zero. The example has linear exact
+Steiner defects, so it does not refute a theorem using the full defect
+package. It does prove that terminal atoms, optimality, and row exchange
+alone are insufficient.
+
+### 5. The constant requirement is severe
+
+At the formal ratios, even disjoint row and column triangle credits yield
 only
 
-`b(2b-a)=(10-√73)/9≈0.16178`,
+`b²+2b(b-a)=(13-√73)/24≈0.18567<c`.
 
-leaving `(11√73-65)/72≈0.40255` to Steiner. Row and column charges
-cannot be added. **STOP** for local atom parity alone.
-
-The missing provider theorem must use the fact that the terminal triangle
-systems vary with the fibre index. A single selected label should not be
-allowed to pay for arbitrarily many independent odd-import demands without
-creating collision, separation, or private-target slack.
-
-### 5. Isolation-to-escape density
-
-For a product dominator, let `I_G` count selected points isolated in their
-fixed-label `G`-fibres. Put
+Starting from `b²`, the required number of independently additive copies is
 
 ```text
-r_{x,h}=|N_G(x)∩B_h|,
-Ω_G=Σ_{x,h}(r_{x,h}-1)_+,
-X_H=Σ_x|V_x∩N_H[A_x]|.
+N>(c-b²)/(b(b-a))
+ =(249+21√73)/24
+ ≈17.851.
 ```
 
-If `Bad_G⊆I_G` lacks horizontal external-private neighbors, then
+A useful bridge must therefore create at least eighteen-fold effective
+amplification. A one- or two-direction local improvement cannot move the
+universal constant.
 
-`|Bad_G|≤2Ω_G+X_H`.                                         (5)
+### 6. Adaptive providers do match perfectly
 
-When both factors have no isolates, the number `T` of fibre-isolated points
-with external private neighbors in both directions satisfies
+The fixed-demand obstruction has a universal adaptive counterpart. For
+every row `g`, Hall's theorem gives an injection
 
 ```text
-|T|≥[
- I_G+I_H-|D|
- -2Ω_G-2Ω_H-X_H-X_G
-]_+.                                                        (6)
+μ_g:I_g→A_g,
+μ_g(i)∉π_i,
+N_H[μ_g(i)]∩π_i≠∅.
 ```
 
-Every point of `T` carries the labelled `(1,2)` or `(2,1)` private-corner
-escape obligation. Equation (6) is exact on the `C₅□C₅` 5-cycle and
-`K₂□P₃` 2-cycle.
+The matching chooses the target inside `π_i` after choosing its distinct
+provider. Globally it leaves exactly
 
-Escape density is not yet cycle density. Owners can leave `T`, and bounded
-indegree permits arbitrarily long in-trees.
+`v=|D|-Σ_i|L_i|`
 
-## Best next attacks
+selected points unused. At `v=0` and column equality, its loopless cell
+transitions form an Eulerian labelled digraph. Under the full
+external-private hypotheses, they transfer injectively to singleton holes
+and give, for every row set `U`,
 
-### A. Provider non-reuse across fibre indices
+```text
+Σ_{g∈U}|I_g|
+≤ρ(H)|N_G(U)|+2Σ_{x∈N_G(U)}e_x.
+```
 
-At formal equality, every Steiner fibre has fixed singleton/triangle atom
-counts, but the supported optimal 2-packing changes with the fibre index.
-Use the balanced red/blue cell matrices, column separation, and
-private-target injection to show that one selected coordinate cannot provide
-the odd-import alternative in (4) for too many indexed triangles.
+This theorem survives the `C₅□H_m` obstruction by choosing `t_i` with
+provider `a_i`; it does not match the pre-prescribed `s_i`. Its
+triangle-only scalar consequence is weaker than the old all-incidence
+bound, so there is still no constant improvement.
 
-A useful theorem must recover a product-scale term. Another local parity
-count is a STOP.
+## Only live attack
 
-### B. Escape closure or path length
+Work on the adaptive labelled cycles from
+`angles/adaptive-provider-cycles`, retaining all coordinates. The target is
+compatibility with the triangle-energy witness:
 
-Iterate the labelled red-diagonal/blue-cross-zero transition from every
-point counted by (6). Prove one of:
+1. choose the point in each terminal triangle so it is both detected by the
+   parity/repair energy and adjacent to the matched distinct provider;
+2. use the local expansion cuts before aggregating, and prove that every
+   failure of external-private transport consumes a quantified unit of
+   `v`, `p_i`, `d_i`, or `δ_i`;
+3. aggregate the resulting credit at product scale; and
+4. calculate the coefficient before investing in a long proof, because
+   less than eighteen-fold basic triangle credit cannot beat Steiner.
 
-1. a positive fraction of owners remain inside `T`;
-2. every escape path returns to `T` after bounded length; or
-3. each departure charges a fresh `Ω`, `X`, terminal, projection, or
-   partition-additivity defect.
-
-The third option aligns best with the exact Steiner slack identity.
-
-### C. Profile-isolation coupling
-
-Equation (1) alone permits a fictitious mass three on `C₄□C₄`, while
-exact typed enumeration gives four. The missing information is precisely
-the location of isolated fibres. Seek a Hall/matching statement coupling
-row and column isolation before passing to scalar masses.
+The alternative is a genuinely high-rank labelled dual whose constraints
+couple the fibre indices before taking factor marginals. It must be tested
+against both the `C₅□H_m` provider obstruction and the actual
+factor-invariant mixture.
 
 ## Hard stops
 
-- No numerical reoptimization of Steiner's six existing inequalities.
-- No additive `k`-packing hierarchy.
-- No saturation-defect or anchored-deficit campaign.
-- No cap correction by itself; `s+t-st` is already accounted for.
-- No full `Λ`, combined `Ξ`, or averaged factor-dominator lift.
-- No global-resilience claim for the random Cayley family.
-- No local `K₁/K₃` parity-only argument.
-- No bare escape count, cycle existence, or bounded-indegree argument.
-- Finite tests remain hygiene and falsification only.
+- No numerical reoptimization of Steiner's six inequalities.
+- No relation using only `γ,ρ,ρ²` or the additive packing hierarchy.
+- No generic escape closure, positive cycle density, or bounded path length.
+- No local `K₁/K₃` parity theorem or per-index rank-one overlap tax.
+- No provider non-reuse theorem that ignores `v,p_i,d_i,δ_i`.
+- No cap, saturation-defect, anchored, or ordinary-packing residual slice.
+- No unrestricted square-clique or owner-averaged factor LP.
+- Finite verification remains hygiene and falsification only.
 
-Any proposed provider-reuse or escape-closure proof requires a fresh
-independent GPT-5.6 Sol xhigh audit.
+Any proposed defect-weighted Hall or high-rank labelled theorem requires a
+fresh independent GPT-5.6 Sol xhigh audit.

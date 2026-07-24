@@ -3,8 +3,9 @@
 ## Status
 
 **Exact label-correlated inequality proved and independently audited by
-GPT-5.6 Sol at xhigh effort.** The new energy terms measure the failure of
-row and column repair sets to be packing-saturated exact-one covers. They are
+GPT-5.6 Sol at xhigh effort, then sharpened in session seven by restoring
+the typed cardinality slacks.** The energy terms measure the failure of row
+and column repair sets to be packing-saturated exact-one covers. They are
 the first fractional certificate in this campaign that survives the
 asymmetric Cayley obstruction because they depend on the actual fibre
 labels.
@@ -30,14 +31,19 @@ Define
 Z_A(p,q)=Σ_{(g,h)∈A}(1-q_g)(1-p_h),
 E_H=Σ_g q_g[γ_H(C_g)-p(C_g)],
 E_G=Σ_h p_h[γ_G(D_h)-q(D_h)].
+α_H=Σ_g q_g[|A_g|-γ_H(C_g)],
+α_G=Σ_h p_h[|B_h|-γ_G(D_h)].
 ```
 
 Then
 
-`M≥PQ+Z_A(p,q)+max{E_H,E_G}`.                               (1)
+```text
+M≥PQ+Z_A(p,q)+max{E_H+α_H,E_G+α_G}.                         (1)
+```
 
-The symmetric but weaker replacement of the maximum by
-`(E_H+E_G)/2` is sometimes convenient.
+All four correction terms are nonnegative for a typed-feasible set. The
+earlier session-six statement discarded `α_H,α_G`; the corrected form is
+strictly stronger.
 
 ### Exact proof identity
 
@@ -62,16 +68,28 @@ Typed feasibility and weak packing duality give
 
 `a_g≥γ_H(C_g)≥p(C_g)`.
 
-Therefore (2) implies `L≥E_H`; the symmetric identity implies
-`L≥E_G`. Finally, pointwise,
+Splitting
+
+```text
+a_g-p(C_g)
+=[a_g-γ_H(C_g)]+[γ_H(C_g)-p(C_g)]
+```
+
+shows that (2) implies `L≥α_H+E_H`; the symmetric identity implies
+`L≥α_G+E_G`. Finally, pointwise,
 
 `1=(q_g+p_h-q_gp_h)+(1-q_g)(1-p_h)`,
 
 so `M=PQ+L+Z_A`, proving (1).
 
 The maximum in (1) is sharp. On the antidiagonal in `K₂□K₂`, with both
-packings uniform one-half, `L=E_H=E_G=1/2`. Thus no sum of the two energies
-is available without another product-specific term.
+packings uniform one-half,
+
+`L=E_H=E_G=1/2` and `α_H=α_G=0`.
+
+Thus no sum of the two corrected directional ledgers is available without
+another product-specific term. The exact overlap and multiplicity
+decomposition is in `../overlap-tax/README.md`.
 
 ## Exact meaning of the repair energy
 
@@ -176,13 +194,15 @@ If `q_g≤s` and `p_h≤t`, then
 
 Consequently
 
-`M≥[PQ+max{E_H,E_G}]/(s+t-st)`.                              (6)
+```text
+M≥[PQ+max{E_H+α_H,E_G+α_G}]/(s+t-st).                       (6)
+```
 
 Discarding the energy gives
 
 `M≥PQ/(s+t-st)`.                                             (7)
 
-The subtraction `st` corrects the earlier weaker `s+t` envelope, but (5)
+The subtraction `st` corrects the earlier weaker `s+t` envelope, but (7)
 is not a new universal route. It is exactly the rank-one product fractional
 packing with local load
 
@@ -191,7 +211,7 @@ packing with local load
 For uniform packings on closed-neighborhood-regular factors, it is the
 `n_Gn_H/(R_G+R_H-1)` product term already present in `Ξ`, and the
 asymmetric Cayley family sends its normalized value to zero. The new
-content of (4) is `E_H,E_G`.
+content is the label-correlated repair energy and typed cardinality slack.
 
 ## Cover-resilience arm
 
