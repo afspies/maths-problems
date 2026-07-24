@@ -58,6 +58,8 @@
   <var>p</var>&lt;2, inscribes every prescribed rectangle. A Dini–Young
   condition reaches the critical scale. An explicit double spiral proves that
   the class includes curves that are neither rectifiable nor locally monotone.
+  At <var>p</var>=2, a positive-area ½-Hölder Jordan curve gives incompatible
+  inner and outer embedded primitive limits.
 </div>
 
 <h2>1 · Main theorem</h2>
@@ -77,8 +79,9 @@
 Boedihardjo–Geng construct arbitrarily fine affine interpolants that remain
 Jordan and converge in <var>q</var>-variation. Each finite polygon is rounded
 inside pairwise disjoint vertex disks, on the same parameter circle, with an
-arbitrarily small change in 1-variation. No convolution of the original rough
-curve is assumed to remain embedded.</p>
+arbitrarily small change in 1-variation. The result is a regular
+C<sup>1</sup> embedding, which Asano–Ike Remark 5.6 permits. No convolution
+of the original rough curve is assumed to remain embedded.</p>
 <p>For <var>c</var>=(<var>x</var>,<var>y</var>), Young–Lœve continuity gives</p>
 <div class="eqn">
   F<sub>n</sub>(t)=∫<sub>0</sub><sup>t</sup>y<sub>n</sub>dx<sub>n</sub>
@@ -99,11 +102,21 @@ every <var>p</var>&gt;<var>d</var>. Every projection oscillates infinitely
 often at the common origin, so it is not locally monotone.</p>
 
 <h2>4 · The critical p=2 obstruction</h2>
-<p>Uniform convergence plus bounded 2-variation does not determine area: a
-circle of radius n<sup>−1/2</sup> traversed n times shrinks uniformly to a
-point but retains constant signed area with multiplicity. This is not a
-Jordan counterexample; it identifies the missing geometric rough-path second
-level. The Dini condition above is a positive critical subclass.</p>
+<p>For any Jordan trace C=∂Ω, inner conformal level curves converge with
+parameter and have Liouville periods tending to −|Ω|. Outer conformal level
+curves converge to the same parametrization, but their periods tend to
+−|Ω̄|=−|Ω|−|C|. When |C|&gt;0, interleaving the two smooth Jordan sequences
+destroys primitive convergence.</p>
+<div class="env"><span class="label">Critical counterexample.</span>
+  A scale-controlled Hilbert–Osgood construction gives a positive-area
+  ½-Hölder Jordan curve, hence one of finite 2-variation. Thus finite
+  2-variation plus parameter-aligned embedded C<sup>0</sup> approximation
+  does not automatically control primitives.
+</div>
+<p>This refutes stability for a supplied approximation sequence, not the
+existential Asano–Ike criterion, and is not a counterexample to Square Peg.
+For zero-area traces the total periods are stable; local subarc area lifts
+remain the frontier.</p>
 
 <h2>5 · Exact hygiene checks</h2>
 <pre>$ python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
@@ -120,12 +133,13 @@ analytic universal theorem.</p>
     <tr><td>Rectifiable</td><td>Asano–Ike: every rectangle</td><td>not new</td></tr>
     <tr><td>Locally monotone</td><td>Asano–Ike: every rectangle</td><td>not new</td></tr>
     <tr><td>Finite p-variation, p&lt;2</td><td>no explicit peg theorem found</td><td>synthesis proved</td></tr>
+    <tr><td>Finite 2-variation</td><td>area lift not automatic</td><td>embedded anomaly proved</td></tr>
     <tr><td>General Jordan</td><td>open</td><td>still open</td></tr>
   </tbody>
 </table>
 <p>The contribution is a concise combination of published ingredients, not a
-new rough-integration theory. Targeted searches through 2026-07-24 found no
-explicit prior rectangular-peg statement in these terms, but expert priority
+new rough-integration theory. The independent priority audit classifies the
+finite-p result as an apparently unstated immediate synthesis. Expert
 confirmation remains appropriate.</p>
 
 <div class="footer">

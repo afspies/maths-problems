@@ -125,3 +125,23 @@ through 2026-07-24 stating the corollary proved in the accompanying
 `angles/p-variation/README.md`.  This is a novelty check, not a proof of
 priority: the result is a short synthesis of published theorems and may be
 regarded by experts as an immediate corollary once pointed out.
+
+## July 2026 addendum
+
+### Greene--Lobb, arXiv:2604.17116
+
+Greene--Lobb prove that every Jordan curve inscribes rectangles for a set of
+diagonal angles of measure at least \(A/R^2\), where \(A\) is enclosed area
+and \(R\) is half the diameter. This is a major arbitrary-Jordan result but
+does not guarantee any prescribed angle, including \(\pi/2\). It therefore
+neither subsumes the finite-\(p<2\) prescribed-rectangle consequence nor
+solves the Square Peg conjecture.
+
+### Antonelli--Young, arXiv:2605.15987
+
+Antonelli--Young define signed area for critical \(1/2\)-Hölder curves
+through polygonal approximations and prove geometric convergence criteria
+using beta-number control. Their work confirms that the \(p=2\) area problem
+requires geometry beyond a bare Hölder or variation bound. It is the first
+published input to test for any positive theorem on the remaining zero-area,
+local-primitive frontier.

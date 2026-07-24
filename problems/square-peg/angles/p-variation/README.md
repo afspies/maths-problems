@@ -1,7 +1,8 @@
 # Finite \(p\)-variation bridge
 
-**Status:** proof complete modulo the cited Asano--Ike v3 theorem and the
-published Boedihardjo--Geng interpolation theorem.
+**Status:** proof complete modulo the cited Asano--Ike v3 theorem (including
+its Remark 5.6, which allows \(C^1\) approximants) and the published
+Boedihardjo--Geng interpolation theorem.
 
 ## Theorem
 
@@ -42,12 +43,12 @@ This is the point at which an arbitrary polygonal or mollified approximation
 would be insufficient: Theorem 2.2 proves that these particular interpolants
 remain embedded.
 
-### 2. Smooth the polygon without losing embeddedness
+### 2. \(C^1\)-smooth the polygon without losing embeddedness
 
 We use the following elementary lemma.
 
 **Corner-rounding lemma.**  If \(a:S^1\to\mathbb R^2\) is a finite Jordan
-polygon and \(\varepsilon>0\), there is a smooth Jordan embedding
+polygon and \(\varepsilon>0\), there is a regular \(C^1\) Jordan embedding
 \(b:S^1\to\mathbb R^2\), on the same parameter circle, such that
 \[
  \|b-a\|_\infty<\varepsilon,\qquad
@@ -55,35 +56,46 @@ polygon and \(\varepsilon>0\), there is a smooth Jordan embedding
 \]
 
 **Proof.**  Retain every breakpoint of the affine parametrization, including
-the cyclic seam \(0=T\).  Around each noncollinear vertex choose pairwise
-disjoint disks, each meeting the polygon only in terminal subsegments of its
-two incident edges.  On the *original preimage interval* of such a disk,
-replace the broken pair by a regular \(C^\infty\) arc that equals the original
-affine map near the two interval endpoints.  Choose the arc in the component
-of the disk cut out by the two rays that contains no other polygonal point.
-The replacements are disjoint, meet the unchanged polygon only at their
-endpoints, and hence preserve embeddedness.
+the cyclic seam \(0=T\).  Choose pairwise disjoint vertex disks \(D_j\), each
+meeting the polygon only in terminal subsegments of its two incident edges.
+Shrink the disks until the sum of the lengths
+\(\ell_j=\operatorname{len}(a(I_j))\) of those broken subarcs is as small as
+desired, where \(I_j\) is the original preimage interval.
 
-If a breakpoint is geometrically collinear with positive incident directions,
-keep the same straight image and smoothly interpolate the scalar speed on its
-original parameter interval.  Negative-collinear incident velocities would
-retrace a segment and are impossible for a Jordan polygon.  Thus speed jumps
-are smoothed without deleting parameter data.
+At a noncollinear vertex, replace \(a|_{I_j}\) by the standard tangential
+fillet in the empty local sector between its incident subsegments.  Parametrize
+the fillet regularly on the *same* interval \(I_j\), with its endpoint
+velocities equal to the two constant velocities of \(a\).  (An
+orientation-preserving \(C^1\) change of speed on the fillet supplies any
+prescribed positive endpoint speeds.)  The replacement is a regular \(C^1\)
+arc and agrees with \(a\), including its first derivative, at the endpoints of
+\(I_j\).  Its length is at most \(K_j\ell_j\), where \(K_j<\infty\) depends
+only on that fixed vertex angle.
 
-For the interval \(I_j\) belonging to a disk of radius \(r_j\), choose a
-scaled rounding profile of length at most \(Cr_j\).  Then
+If the incident directions are positively collinear, retain the same straight
+image and replace its piecewise-constant positive speed on \(I_j\) by a
+positive \(C^1\) speed with the same endpoint speeds and the same integral.
+Negative-collinear incident directions would locally retrace a segment and
+are impossible for a Jordan polygon.  These replacements are confined to
+the pairwise disjoint disks, meet the unchanged polygon only at their
+endpoints, and are simple within each disk, so the resulting map remains an
+embedding.
+
+With \(K=\max_j K_j\) (and \(K=1\) for a collinear replacement),
 \[
  \operatorname{Var}(b-a;I_j)
  \le\operatorname{len}(b|_{I_j})+\operatorname{len}(a|_{I_j})
- \le C'r_j.                                           \tag{4}
+ \le (K+1)\ell_j.                                      \tag{4}
 \]
-The same bound holds for collinear speed smoothing.  The radii may be chosen
-with arbitrarily small sum, so take
-\(\sum_jr_j<\varepsilon/C'\).  All changes occur on the original parameter
-circle, and the map is unchanged near every local splice.  The resulting map
-is globally smooth and regular.  Making every radius smaller than
-\(\varepsilon\) gives the uniform bound; (4) gives the variation bound.
+Choose the disks so that
+\(\sum_j\ell_j<\varepsilon/(K+1)\) and
+\(\max_j\operatorname{diam}D_j<\varepsilon\).  This gives (3).  The resulting
+map is a regular \(C^1\) Jordan embedding on the original parameter circle.
 \(\square\)
+
+Asano--Ike Remark 5.6 explicitly weakens “smooth” in Theorem 1.1 to \(C^1\),
+so this relative \(C^1\) rounding is sufficient; no unproved
+\(C^\infty\)-smoothing step is being used.
 
 Apply the lemma to \(a_n\), choosing the error so small that
 \[
@@ -95,7 +107,7 @@ Since \(q\)-variation is bounded by \(1\)-variation,
 \[
        \|b_n-c\|_{q\text{-var};[0,T]}\to0.            \tag{6}
 \]
-Thus the \(b_n\) are the required smooth *Jordan* approximants and converge
+Thus the \(b_n\) are the required \(C^1\) *Jordan* approximants and converge
 uniformly with the correct parametrization.
 
 ### 3. Stability of the Liouville primitives

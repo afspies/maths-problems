@@ -4,6 +4,19 @@
 subclass is available.  No claim is made for all finite \(2\)-variation Jordan
 curves.
 
+The companion note `osgood-area-anomaly.md` proves a sharp embedded
+counterexample to bare \(C^0\) primitive stability: a positive-area,
+\(1/2\)-Hölder Jordan curve has inner and outer parameter-aligned smooth
+Jordan approximations whose Liouville periods differ in the limit by exactly
+the planar area of the trace. Thus the obstruction persists for finite
+\(2\)-variation paths and does not rely on nonembedded repeated loops.
+
+Antonelli--Young (arXiv:2605.15987, May 2026) independently develop a
+geometric approximation criterion for signed area of \(1/2\)-Hölder planar
+curves. Their beta-number framework is the most relevant published input for
+the remaining **zero-area, local-primitive** frontier; the positive-area
+inner/outer period anomaly below is logically separate.
+
 ## Why the proof stops at \(2\)
 
 The estimate in the finite-\(p\) proof needs an exponent \(q<2\), so that

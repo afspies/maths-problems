@@ -30,6 +30,14 @@ Asano--Ike, Boedihardjo--Geng's embedded polygonal interpolation, a controlled
 corner rounding, and Young integration.  It is a partial result; the
 unrestricted conjecture remains open.
 
+At the critical exponent, `angles/critical-p2/osgood-area-anomaly.md` proves
+that finite \(2\)-variation plus parameter-aligned embedded \(C^0\)
+approximation does not force primitive convergence. A positive-area,
+\(1/2\)-Hölder Jordan curve has inner and outer smooth Jordan approximations
+whose limiting Liouville periods differ by the area of the trace. This is an
+approximation-stability counterexample, not a counterexample to Square Peg or
+to the existential Asano--Ike criterion.
+
 ## Certificate + verifier
 
 - **Finite certificate:** a rational polygon, together with four rational
@@ -56,25 +64,28 @@ unrestricted conjecture remains open.
 - Below variation exponent \(2\), Young integration controls the primitive.
   At \(2\), uniform convergence plus a bounded \(2\)-variation norm does not
   determine Lévy area; a second-level lift or a Dini improvement is needed.
+- Positive-area Jordan traces admit inner and outer conformal level
+  approximations with incompatible limiting periods. For a zero-area trace,
+  total periods are stable, but local subarc primitives remain unresolved.
 
 ## Angle-of-attack menu
 
 - **Young/rough integration:** completed finite-\(p<2\) and Dini--Young
   criteria in `angles/p-variation/` and `angles/critical-p2/`.
-- **Geometric rough paths at \(p=2\):** seek an embedded approximation theorem
-  for a prescribed geometric area lift, or incompatible primitive limits.
+- **Geometric rough paths at \(p=2\):** the positive-area period anomaly is
+  complete; seek a local lift theorem or counterexample for zero-area traces.
 - **Sheaf criterion:** weaken the no-translate microsupport condition without
   requiring a single-valued continuous primitive.
 - **Planar topology:** find quantitative tubular/one-sided conditions that
   force primitive compactness for embedded approximants.
-- **Counterexample pressure test:** construct area-anomalous embedded
-  approximations with the same parametrization, if possible.
+- **Counterexample pressure test:** localize an embedded anomaly to a
+  zero-area trace, or prove a beta-number/tubular compactness condition.
 
 ## First steps for the next session
 
 1. Ask Asano--Ike and Boedihardjo--Geng for a priority/soundness check of the
    synthesis before claiming novelty.
-2. Replace the proof-sketch form of the Dini--Young arbitrary-partition lemma
-   by a fully cited or self-contained lemma with constants.
-3. Attack the \(p=2\) embedded area-lift question; do not spend time on
-   numerical square searches.
+2. Compare Antonelli--Young's beta-number signed-area criterion with the
+   parameter-aligned embedded approximation required by Asano--Ike.
+3. Attack the zero-area local-lift question; do not spend time on numerical
+   square searches.

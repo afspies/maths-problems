@@ -130,3 +130,111 @@ inputs, but the unrestricted Square Peg conjecture remains open.  Targeted
 search found no prior explicit peg theorem with these hypotheses; this is not
 proof of priority, so expert confirmation remains the next gate before a DOI
 or formal novelty claim.
+
+## 2026-07-24 — proof hardening and the finite-\(2\)-variation frontier
+
+### Parallel hardening tracks
+
+Launched three independent agents on nonoverlapping files while the main
+thread attacked \(p=2\):
+
+1. **Proof audit.** Checked Asano--Ike v3 Theorem 1.1/Remark 5.6 and
+   Boedihardjo--Geng Theorem 2.2/Lemma 3.1 from the primary PDFs. Verdict:
+   **MERGE** after replacing the unnecessarily strong and under-justified
+   relative \(C^\infty\) rounding claim by a regular \(C^1\) fillet
+   construction. Asano--Ike Remark 5.6 explicitly permits this regularity.
+   Artifact: `results/p-variation-proof-audit.md`.
+2. **Priority audit.** Checked the peg, Young/rough-path, and 2026 citation
+   trails, including Greene--Lobb arXiv:2604.17116 and Barber
+   arXiv:2604.27717. No explicit finite-\(p<2\) prescribed-rectangle theorem
+   was found. Verdict: the result is best described as an “apparently
+   unstated immediate corollary/synthesis,” not a new rough-integration
+   theorem. Artifact: `literature/PRIORITY_AUDIT.md`.
+3. **Paper package.** Produced `writeup/p-variation-note.md`; the main thread
+   reconciled it with the proof audit's \(C^1\) repair.
+
+No author was contacted and no external priority claim was made. A draft
+inquiry is preserved in the priority audit for human review.
+
+### Critical theorem and counterexample
+
+Proved in `angles/critical-p2/osgood-area-anomaly.md`:
+
+> For every parametrized Jordan curve \(c\) with trace
+> \(C=\partial\Omega\), there are parameter-aligned inner and outer smooth
+> Jordan approximation sequences whose Liouville periods tend to
+> \(-|\Omega|\) and \(-|\Omega|-|C|\), respectively.
+
+The construction uses interior and exterior Riemann maps, Carathéodory
+boundary extensions, smooth approximations to the two boundary phase
+homeomorphisms, and continuity of planar measure from below/above.
+Interleaving the sequences for \(|C|>0\) gives uniform, parameter-aligned,
+embedded smooth approximation with nonconvergent normalized primitives.
+This refutes automatic primitive stability for a supplied approximation
+sequence; it does not refute Asano--Ike's existential criterion.
+
+To place the anomaly at the critical regularity, constructed a
+positive-area \(1/2\)-Hölder Jordan curve by a four-corner Hilbert--Osgood
+routing. At level \(n\), child squares have side
+\[
+ \ell_n={(1-\varepsilon_n)\ell_{n-1}\over2},
+ \qquad \varepsilon_n=2^{-n-4}.
+\]
+The limiting four-corner set has area
+\(\prod_n(1-\varepsilon_n)^2>0\). Explicit adjacent corner gates and straight
+connectors prove embeddedness. Giving a level-\(n\) square interval length
+\(\ell_n^2\) and splitting the remaining parameter time among connectors
+gives a uniform \(1/2\)-Hölder estimate. Hence the closed curve has finite
+\(2\)-variation.
+
+Also proved the complementary global fact: if the limiting Jordan trace has
+zero planar area, winding-number invariance traps the symmetric difference of
+the approximating interiors in shrinking neighborhoods of the trace, so
+their total periods converge. The unresolved obstruction is now local
+primitive convergence on subarcs of zero-area traces.
+
+### New literature input
+
+Audited Antonelli--Young, arXiv:2605.15987v1 (15 May 2026), which develops
+geometric beta-number criteria for signed area of \(1/2\)-Hölder curves.
+This is the closest published input for the remaining zero-area local-lift
+problem. It does not remove the positive-area inner/outer period anomaly.
+
+### Required GPT-5.6 Sol xhigh review
+
+Submitted the full \(p=2\) theorem to GPT-5.6 Sol at xhigh.
+
+1. First verdict: **HOLD**. The conformal approximation, measure limits,
+   Liouville sign, null-trace proposition, and claim boundary passed, but the
+   Hilbert routing needed an explicit gate invariant, connector-length
+   control, a missing child--connector--child Hölder case, and a seam-safe
+   exterior closure.
+2. Added the explicit southwest/northwest/northeast/southeast gate table,
+   proved ancestor/descendant connector disjointness, used straight
+   connectors of exact length \(\varepsilon_n\ell_{n-1}\), supplied a
+   one-sided gate estimate and exhaustive least-common-parent split, and
+   fixed the closing arc.
+3. Second verdict: **HOLD** on one ambiguity in the gate endpoint estimate.
+   Replaced it by the direct endpoint-adjacent descendant-interval argument.
+4. Final verdict: **MERGE**. The reviewer confirmed the routing, injectivity,
+   \(H=9\) Hölder constant, closure, conformal approximants, measure limits,
+   and conservative Asano--Ike boundary.
+
+### Compute and verification
+
+All mathematical work and lightweight validation ran locally in the
+repository worktree. No private compute infrastructure was used. The exact
+verification commands were:
+
+```text
+python3 tools/board.py
+python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
+python3 -m py_compile problems/square-peg/harness/geometry.py problems/square-peg/harness/test_geometry.py
+xmllint --html --noout problems/square-peg/writeup/report.html problems/square-peg/writeup/artifact-template.html
+python3 -c 'import tomllib; tomllib.load(open("problems/square-peg/STATUS.toml","rb")); print("STATUS.toml OK")'
+git diff --check
+```
+
+The board regenerated with 18 problems. The exact harness passed 5/5 tests
+in 0.001 seconds. Python compilation, both HTML parses, TOML parsing, and
+`git diff --check` completed without error.

@@ -17,8 +17,11 @@ Dini condition
 An explicit double-spiral family is nonrectifiable and not locally monotone,
 yet has finite \(p\)-variation for some \(p<2\).  Thus the result gives
 rectangular pegs for a class not contained in the two named Asano--Ike
-corollaries.  The universal conjecture and the general finite-\(2\)-variation
-case remain open.
+corollaries. At the critical exponent we construct a positive-area,
+\(1/2\)-Hölder Jordan curve whose inner and outer smooth embedded
+approximations have incompatible Liouville-period limits. Thus finite
+\(2\)-variation plus parameter-aligned embedded \(C^0\) approximation does
+not force primitive convergence. The universal conjecture remains open.
 
 ## Main result
 
@@ -32,7 +35,7 @@ moduli satisfy
 \int_0^1\frac{\omega_x(r)\omega_y(r)}{r^2}\,dr<\infty.
 \]
 
-The complete argument, including the fixed-parameter embedded smoothing
+The complete argument, including the fixed-parameter embedded \(C^1\) rounding
 lemma and explicit Young--Loeve estimate, is in
 `../angles/p-variation/README.md`.  The Dini refinement and \(p=2\) boundary
 are in `../angles/critical-p2/README.md`.
@@ -43,9 +46,10 @@ Choose \(p<q<2\).  Boedihardjo--Geng construct partitions of mesh tending to
 zero whose affine interpolants are still Jordan; their separate variation
 lemma gives convergence to \(c\) in \(q\)-variation.  Each finite Jordan
 polygon can be rounded inside pairwise disjoint vertex disks so that the
-result is a smooth Jordan embedding on the same parameter circle and the
-\(1\)-variation of the change is arbitrarily small.  Thus the smooth curves
-also converge in \(q\)-variation.
+result is a regular \(C^1\) Jordan embedding on the same parameter circle and
+the \(1\)-variation of the change is arbitrarily small. Thus the approximants
+also converge in \(q\)-variation. Asano--Ike Remark 5.6 explicitly permits
+these \(C^1\) approximants.
 
 Writing \(c=(x,y)\), normalize the primitives by
 \[
@@ -97,14 +101,37 @@ analytic.
 
 ## Critical obstruction
 
-At \(p=2\), uniform convergence with bounded \(2\)-variation does not control
-signed area: a radius-\(n^{-1/2}\) circle traversed \(n\) times shrinks
-uniformly to a point, has bounded \(2\)-variation, and retains constant area
-with multiplicity.  This example is not Jordan and is not claimed as a
-counterexample to the embedded approximation condition.  It isolates the
-missing second-level datum.  The sharp next question is which
-finite-\(2\)-variation Jordan paths admit a canonical geometric area lift
-approximable by embedded smooth curves with the same parametrization.
+The obstruction persists with every approximant embedded. For any Jordan
+trace \(C=\partial\Omega\), inner conformal level curves converge with
+parameter to \(C\) and have Liouville periods tending to \(-|\Omega|\).
+Outer conformal level curves also converge with parameter to \(C\), but their
+periods tend to
+\[
+                         -|\overline\Omega|
+                         =-|\Omega|-|C|.
+\]
+If \(|C|>0\), interleaving the two smooth Jordan sequences destroys primitive
+convergence.
+
+A scale-controlled Hilbert--Osgood construction gives a positive-area
+\(1/2\)-Hölder Jordan curve. Since
+\[
+ |c(t)-c(s)|\le H|t-s|^{1/2}
+ \quad\Longrightarrow\quad
+ \sup_P\sum_{[u,v]\in P}|c(v)-c(u)|^2\le H^2,
+\]
+this is a finite-\(2\)-variation counterexample to **automatic primitive
+stability for a supplied embedded approximation sequence**. It does not show
+that the curve fails Asano--Ike's existential criterion, and it is not a
+counterexample to the Square Peg conjecture.
+
+For zero-area Jordan traces, winding-number stability forces the total
+periods of all uniformly convergent oriented Jordan approximants to converge.
+Local subarc primitives can still carry a second-level anomaly. The remaining
+frontier is therefore uniqueness or realizability of the local area lift for
+zero-area finite-\(2\)-variation Jordan curves. Antonelli--Young's May 2026
+beta-number criterion for signed area of \(1/2\)-Hölder curves is the most
+relevant published input.
 
 ## Relation to prior work and novelty boundary
 
@@ -113,9 +140,11 @@ curve; this report does not rediscover those results.  Boedihardjo--Geng
 already prove the hard embedded polygonal approximation and finite-\(p\)
 Green theorem.  The contribution here is a concise synthesis with
 Asano--Ike's newly available sheaf criterion, plus an explicit strict witness
-and a Dini-critical formulation.  Targeted searches through 2026-07-24 found
-no explicit prior peg theorem in these terms, but that is not proof of
-priority.  Expert confirmation should precede a formal novelty claim.
+and a Dini-critical formulation. An independent source-by-source audit found
+no explicit prior peg theorem in these terms, but classified the result as an
+apparently unstated immediate corollary/synthesis rather than a new
+rough-integration theorem. Expert confirmation should precede a formal
+priority claim.
 
 ## Cite as
 
