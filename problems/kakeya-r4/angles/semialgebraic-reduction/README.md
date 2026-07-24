@@ -67,7 +67,7 @@ truncation. The rational line
 parameterization and on-quadric identities are checked in
 `harness/incidence_models.py`.
 
-## Weakest degree-2 axiom visible from the audit
+## Known degree-2 polynomial Wolff control
 
 For every coefficient-normalized degree-at-most-two polynomial `P`, put
 `S=N_(C delta)(Z(P))∩B(0,2)`. Require
@@ -88,7 +88,17 @@ Equivalently, define the certificate-producing ratio
 The thinned split-quadric copy has
 `Delta_2(T)≳delta^(-1/2)`.
 
-A noncircular carrier-extraction target is: if a Convex-Wolff family fails
+Katz–Rogers, Theorem 1.1 (arXiv:1802.09094), proves this
+bounded-complexity semialgebraic inequality for every direction-separated
+tube family, with an arbitrary `delta^-epsilon` loss. Zahl's
+arXiv:1801.05106 also proves the fixed-hypersurface direction bound
+`O(delta^(-2-epsilon))` in R⁴. Therefore QW2 is a known input in the
+direction-separated Kakeya setting, not a candidate axiom awaiting proof.
+The thinned/copied quadric model evades the theorem because it has repeated
+directions.
+
+A noncircular carrier-extraction target for the broader essentially-distinct
+setting is: if a Convex-Wolff family fails
 the expected union gain, then after a subpolynomial refinement either the
 ordinary convex factorization advances the induction or an explicit
 quadratic `P`, scale `lambda`, and balanced subfamily violate the displayed
@@ -116,3 +126,21 @@ scale-stable union estimate for families with bounded
 controlled complexity under affine rescaling and intersection. Those
 closure and entropy requirements are where a naive “replace convex by
 semialgebraic” slogan can fail.
+
+For direction-separated tubes, the second-session results sharpen this
+further: one conditioned quadric carries only
+`O(delta^-2 lambda^-2)` directions, so a full Kakeya family needs roughly
+`delta^-1` carriers at constant overlap. The harmonic transverse-stack lemma
+proves a logarithmic-loss union bound when those carriers can be ordered with
+summable pairwise overlaps. Extraction of such an ordering is the remaining
+bridge.
+
+The distributed-catalog layer-cake lemma also handles the case where no tube
+is assigned to one carrier: average total catalog overlap `q` across `M`
+grains forces a single explicit QW2 witness of size
+
+`Delta_2≳N delta²(q/M)^4`
+
+once `q≥2Mdelta`. The fourth power is the exact cost of diffuse membership.
+What remains unproved is the implication from small union volume to either
+large distributed overlap or a transverse-stack decomposition.

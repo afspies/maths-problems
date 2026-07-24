@@ -68,8 +68,47 @@ produces `delta^-3` Convex-Wolff tubes with union volume about
 literal R⁴ convex-union theorem. Every thinned copy is still detected by
 the degree-2 semialgebraic test by a factor `delta^(-1/2)`.
 
-## Limit
+## Second-session all-scale audit
 
-The test does not establish Proposition 3.12 extremality, balanced shading,
-or two-scale persistence for this model. Those are the correct next checks;
-declaring the quadric incompatible with stickiness would be unsupported.
+That next check has now been carried out. On a compact smooth line patch, the
+raw quadric line family has three parameters: two null-direction parameters
+and one parallel-translation parameter. Nested regular nets satisfy
+
+`#T_h≈h^-3`,
+
+`#(h-tubes in one h-direction cap)≈h^-1`,
+
+and a coarse `rho`-tube contains `(rho/delta)^3` fine tubes. With full
+shadings:
+
+`sum_T |Y(T)|≈1`, `|N_delta(Q)|≈delta`,
+`mu_delta≈delta^-1`.
+
+Inside a coarse tube/cube incidence,
+
+`w≈rho^4`, `mu_fine≈rho/delta`,
+`w/mu_fine≈delta rho^3`.
+
+Thus the raw model really does have exact nesting, canonical incidence
+balance, a common refinement at all scales, coherent ruled data, a constant
+fraction of trilinear triples, and no 2-plany concentration. It is an exact
+countermodel to any two-scale rigidity statement using only those properties.
+
+It nevertheless fails the genuine sticky/extremal axioms:
+
+- at `rho=delta^a` it has `rho^-1=delta^-a` parallel cover tubes, exceeding
+  the allowed `delta^-eta` when `a>eta`;
+- coarse and fine multiplicities are `rho^-1` and
+  `(delta/rho)^-1`, violating the Proposition 3.12 bounds because
+  `sigma_4+epsilon<1`.
+
+Thinning by `delta^beta` does not repair this while retaining extremal mass.
+Extremal mass requires `beta≤eta`, while sticky directional multiplicity
+requires `beta≥1-eta`; these are incompatible for `eta<1/2`. The standard
+`beta=1/2` thinned copy, and its copied Convex-Wolff version, therefore remain
+nonsticky.
+
+A direction-separated section has only `delta^-2` tubes and total full
+shading mass `delta`: it satisfies directional nonconcentration but fails
+extremal mass. A sticky completion needs roughly `delta^-1` distinct
+quadratic carriers, matching the conditioned-quadric entropy theorem.

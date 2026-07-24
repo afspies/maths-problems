@@ -120,3 +120,64 @@ def ruled_quadric_lines() -> list[Line]:
         Line(base, vec((0, 1, 0, 1))),
         Line(base, vec((0, 5, 3, 4))),
     ]
+
+
+def split_quadric_sweep(p: F, q: F, t: F) -> Vector:
+    """A two-parameter line sweep of the split quadric.
+
+    In matrix coordinates this is
+      [[t, 1+t*q], [-1+t*p, p-q+t*p*q]],
+    whose determinant is identically one.  The returned vector is in the
+    x-coordinates used by quadric_value.
+    """
+    return (
+        (t + p - q + t * p * q) / 2,
+        1 + t * (q - p) / 2,
+        (t - p + q - t * p * q) / 2,
+        t * (p + q) / 2,
+    )
+
+
+def split_quadric_sweep_derivatives(
+    p: F, q: F, t: F
+) -> tuple[Vector, Vector, Vector]:
+    """Return dF/dp, dF/dq, dF/dt for split_quadric_sweep."""
+    d_p = (
+        (1 + t * q) / 2,
+        -t / 2,
+        (-1 - t * q) / 2,
+        t / 2,
+    )
+    d_q = (
+        (-1 + t * p) / 2,
+        t / 2,
+        (1 - t * p) / 2,
+        t / 2,
+    )
+    d_t = (
+        (1 + p * q) / 2,
+        (q - p) / 2,
+        (1 - p * q) / 2,
+        (p + q) / 2,
+    )
+    return d_p, d_q, d_t
+
+
+def split_quadric_direction_derivatives(
+    p: F, q: F
+) -> tuple[Vector, Vector, Vector]:
+    """Return the direction and its p,q derivatives."""
+    direction = split_quadric_sweep_derivatives(p, q, F(1))[2]
+    d_p = (q / 2, F(-1, 2), -q / 2, F(1, 2))
+    d_q = (p / 2, F(1, 2), -p / 2, F(1, 2))
+    return direction, d_p, d_q
+
+
+def transverse_pencil_seed_derivatives() -> list[Vector]:
+    """d/d(s,p,q,t) of the explicit pencil sweep at (0,0,0,1)."""
+    return [
+        (F(-1, 2), F(0), F(1, 4), F(0)),
+        (F(1, 2), F(-1, 2), F(-1, 2), F(1, 2)),
+        (F(-1, 2), F(1, 2), F(1, 2), F(1, 2)),
+        (F(1, 2), F(0), F(1, 2), F(0)),
+    ]

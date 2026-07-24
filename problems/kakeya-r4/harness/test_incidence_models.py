@@ -8,7 +8,11 @@ from incidence_models import (
     quadric_value,
     rank,
     ruled_quadric_lines,
+    split_quadric_direction_derivatives,
+    split_quadric_sweep,
+    split_quadric_sweep_derivatives,
     trilinear_model,
+    transverse_pencil_seed_derivatives,
     wedge_squared,
 )
 
@@ -39,6 +43,19 @@ class IncidenceModelTests(unittest.TestCase):
         self.assertEqual(rank(directions), 3)
         self.assertEqual(wedge_squared(*directions), 4)
         self.assertEqual(normalized_wedge_squared(*directions), F(1, 50))
+
+    def test_split_quadric_has_an_exact_two_parameter_line_sweep(self) -> None:
+        for p, q in ((F(0), F(0)), (F(1, 3), F(-2, 5)), (F(2), F(3))):
+            for t in (F(1), F(3, 2), F(2)):
+                self.assertEqual(quadric_value(split_quadric_sweep(p, q, t)), 1)
+
+    def test_split_quadric_sweep_and_direction_maps_have_full_rank(self) -> None:
+        p, q, t = F(1, 3), F(-2, 5), F(3, 2)
+        self.assertEqual(rank(list(split_quadric_sweep_derivatives(p, q, t))), 3)
+        self.assertEqual(rank(list(split_quadric_direction_derivatives(p, q))), 3)
+
+    def test_explicit_transverse_pencil_sweep_has_rank_four(self) -> None:
+        self.assertEqual(rank(transverse_pencil_seed_derivatives()), 4)
 
 
 if __name__ == "__main__":

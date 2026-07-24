@@ -1,67 +1,149 @@
-# Four-dimensional Kakeya: sticky grains campaign
+# Four-dimensional Kakeya: degree-two carrier campaign
 
-**Status:** partial-results, no new dimension bound · **Date:** 24 July 2026
+**Status:** partial-results, Bridge B gate GO · **Date:** 24 July 2026
 
 ## Abstract
 
-The current general Hausdorff benchmark in R⁴ is the corrected Katz–Zahl
-bound above 3.059; the current Kakeya maximal benchmark is the distinct
-3.0543 result of Borges et al.; and the current sticky Hausdorff benchmark is
-13/4. We reconstructed the 13/4 induction, found a repairable constants defect
-and a multiplicity-sign typo in the published bookkeeping, and verified a
-corrected rational parameter regime. We also built an exact split-quadric
-stress test: a ruled quadratic 3-fold can be pointwise trilinear, so a
-two-scale rigidity lemma cannot equate ruledness with 2-planiness. No strict
-sticky exponent gain, new full-dimensional subclass, inverse theorem, or
-semialgebraic union theorem is claimed.
+The full four-dimensional Kakeya conjecture remains open. The current
+benchmarks are unchanged: general Hausdorff dimension above `3.059`, sticky
+Hausdorff dimension `13/4`, and the distinct maximal-function estimate near
+`3.0543`.
 
-## Result
+This campaign proves a semialgebraic union theorem for an explicit infinite
+family of ruled quadratic obstructions. A stack of `M≈delta^-1` ruled
+quadric patches whose mutual normal angles grow like index separation has
+dense shaded union at least `lambda²/log(1/delta)`. Dense Kakeya
+discretizations satisfying finitely many such stack charts therefore have
+full Minkowski dimension four. No Hausdorff consequence, general carrier
+extraction, strict sticky improvement, or full-conjecture claim is made.
 
-### Verified bookkeeping result
+The campaign also proves exact one-carrier capacity, catalog-evasion,
+distributed-catalog extraction, and sticky carrier-entropy lemmas. All
+exponent arithmetic and algebraic models are checked by a 27-test exact
+rational harness.
 
-If `N` is minimal with `4/N<epsilon_0`, then
+## Main result
 
-`epsilon_0/(4+epsilon_0) ≤ 1/N < epsilon_0/4`.
+### Harmonic transverse-stack theorem
 
-The published Section 6 comparisons use `epsilon_0/4` on the wrong side. For
-`epsilon_0=1/10`, the exact counterexample is `N=41`. Replacing the unsafe
-choice by `epsilon_1<epsilon_0/5`, using `1/N>epsilon_0/5`, and shrinking the
-remaining losses repairs the closing exponent. The earlier printed
-multiplicity exponent must also be `-sigma_n+2 eta`, not
-`sigma_n+2 eta`.
+Let `P_1,...,P_M` be coefficient-normalized quadratics with
+`M≤C delta^-1`. Suppose each zero set contains a uniformly regular ruled
+patch `X_i` with a two-parameter line sweep, fixed reach and collars. On a
+maximal `delta`-net of ruling parameters, shade at least a `lambda` fraction
+of every line. Assume that throughout every possible double-overlap region,
 
-The scale interval additionally needs `eta_0≤1/N`. The printed use of the
-planebrush theorem at a two-ends exponent equal to one is outside its strict
-hypotheses; weaken it to any fixed `a` with `sigma_4<a<1`. These are
-elementary admissibility repairs, not new geometric input.
+`|grad P_i wedge grad P_j|≥c |i-j|/M`.
 
-### Verified geometric stress test
+Then
 
-Under
+`|union_i U_i|
+ ≥ c lambda² Mdelta/(1+Mdelta H_(M-1))`.
 
-`M(x)=[[x1+x3,x2+x4],[x4-x2,x1-x3]]`,
+In particular, for `M≈delta^-1`,
 
-the quadric `x1²+x2²-x3²-x4²=1` is `SL_2(R)`. Rank-one nilpotents give an
-infinite rational family of lines. The harness verifies three concurrent
-rational lines with normalized squared wedge `1/50`. Thus a ruled quadratic
-carrier need not be 2-plany even locally.
+`|union_i U_i|≥c lambda²/log(2+M)`.
 
-The exact Convex-Wolff countermodel is the thinned-and-copied quadric family
-from Zahl's survey, not the raw full line net. A degree-2 polynomial Wolff
-test detects each thinned copy by a factor `delta^(-1/2)`.
+### Proof ledger
 
-### Conditional exponent bridge
+The reach hypothesis and dense sweep give
 
-If a new multiscale trilinear theorem gave
-`|U|≥delta^(3/4-c+o(1))` uniformly for some `0<c<1/12`, the weakly plany
-recurrence retains gain `rho^(-(1/12-c))`. The existing induction would then
-give `dim_H K≥13/4+c`. The new trilinear theorem is not proved. The xhigh
-soundness review also rejected combining two separate Proposition 3.12
-refinements without proving that their balanced mass survives on a common
-refinement, and rejected ignoring polynomial model-selection losses. The
-session therefore ends STOP/PIVOT.
+`|U_i|≥c lambda delta`, while `|U_i|≤C delta`.
 
-## Verification
+On the rank-two locus, coarea and Crofton--Bézout give
+
+`|U_i intersect U_j|≤C delta² M/|i-j|`.
+
+The transversality hypothesis excludes common hypersurface factors from the
+overlap region. For `f=sum_i 1_(U_i)`,
+
+`integral f≥c Mlambda delta`,
+
+`integral f²≤C Mdelta+C M²delta² H_(M-1)`.
+
+Cauchy--Schwarz proves the result. The weighted sparse version replaces
+`lambda M` by the total integrated shading mass; it is not yet a complete
+Hausdorff covering argument.
+
+### Explicit infinite ruled family
+
+Write
+
+`q_0=x1²+x2²-x3²-x4²`,
+
+`q_1=2x1x3+x3²`,
+
+`P_s=q_0+s q_1-1`.
+
+Every member has split signature. With
+
+`L_s(x)=(x1+s x3,x2,sqrt(1-s+s²)x3,x4)`,
+
+one has `(q_0+s q_1)(x)=q_0(L_s x)`, so transporting the exact
+`SL_2(R)` line sweep gives a ruled sweep for every `s`.
+
+At the rational seed `(s,p,q)=(0,0,0)`, the carrier/direction chart
+determinant has absolute value `3/16`. Moreover,
+
+`grad P_s wedge grad P_(s')
+ =(s'-s) grad q_0 wedge grad q_1`.
+
+Compact restriction therefore produces the theorem's uniform
+transversality. Finitely many direction charts give the stated structured
+full-Minkowski subclass.
+
+## Carrier capacity and extraction
+
+### One conditioned quadric
+
+If a tube spends a `lambda` fraction near a quantitatively nondegenerate
+quadric, degree-two Remez forces its direction within
+`O(delta lambda^-2)` of the quadratic null cone. Thus one carrier holds at
+most
+
+`O(min(delta^-3,delta^-2 lambda^-2))`
+
+separated directions. At full overlap this is `O(delta^-2)`, so a full
+direction family needs about `delta^-1` carriers.
+
+### Low-entropy catalogs
+
+For `#T≥delta^(-3+tau)`, a catalog of `M≤delta^-h` grains, overlap
+`lambda=delta^a`, and QW2 loss `delta^-b`, the carried fraction is at most
+
+`C delta^(1-h-tau-4a-b)`.
+
+Katz--Rogers already prove QW2 with arbitrarily small power loss for
+direction-separated tubes. Hence a bounded catalog cannot explain a full
+Kakeya family; the missing geometry is multi-grain organization.
+
+### Distributed catalog theorem
+
+For grains `S_j`, put
+
+`q=N^-1 sum_T sum_j |T intersect S_j|/|T|`
+
+and `H=sum_j |S_j|^(1/4)`. If `Delta` is the normalized maximum QW2 load,
+layer cake gives
+
+`Delta≥c Ndelta³(q-Mdelta)_+^4/H^4`.
+
+A dyadic refinement outputs an explicit polynomial, overlap level, and
+balanced tube subfamily. The theorem converts catalog capture into a
+certificate; it does not infer capture from small union volume.
+
+### Sticky entropy obstruction
+
+At scale `h=delta^a`, if a sticky family puts fraction `delta^tau` at
+overlap `delta^ell` on at most `delta^-zeta` conditioned quadrics, then in
+the nontrivial overlap regime it must satisfy
+
+`tau+zeta+2ell≥a(1-2epsilon)`.
+
+This rules out the original symmetric low-entropy inverse output in a
+nonempty exponent regime. The split-quadric thinning stress test also cannot
+be both sticky and extremal for loss `eta<1/2`.
+
+## Exact verification
 
 From `problems/kakeya-r4/harness/`:
 
@@ -70,43 +152,26 @@ python3 exponent_ledger.py benchmark_ledger.json
 python3 -m unittest -v
 ```
 
-The first command prints the exact global exponent `3/4`, dimension `13/4`,
-and bottleneck `trilinear`. The test suite checks the branch ledger, the
-published parameter counterexample and repair, and exact rational incidence
-models. Runtime is below one second on a laptop.
+The ledger returns volume exponent `3/4`, dimension `13/4`, and bottleneck
+`trilinear`. All 27 tests pass. They verify exact recurrence arithmetic,
+harmonic second moments, catalog exponents, sticky persistence inequalities,
+the split-quadric sweep, and the transverse pencil's rank-four seed.
+Continuous coarea, reach, Remez, and algebraic-degree arguments are written
+as proofs rather than delegated to numerical tests.
 
-## Method
+## Gate verdict and boundary
 
-We audited primary sources through 24 July 2026, reconstructed Rai
-Choudhuri's Definitions 3.1–3.11, Proposition 3.12, Lemma 4.3, Theorems
-5.4–5.5, and the Section 6 induction, then independently reviewed both bridge
-formulations with GPT-5.6 Sol at xhigh effort. The campaign used only local
-exact rational tests and primary-source text; there was no numerical tube
-search and no substantial compute.
+Independent GPT-5.6 Sol reviews at xhigh effort first required repairs to the
+reach hypotheses, rank-two coarea argument, explicit pencil, weighted
+normalization, and Hausdorff wording. After repair the theorem received an
+`APPROVE` verdict, including its exponent signs and Minkowski-only
+consequence.
 
-## What we tried that didn't work
+The two-session gate is therefore **GO on Bridge B**: the main theorem is a
+nontrivial semialgebraic factoring/union lemma for an infinite family of
+ruled obstructions. The remaining decisive task is an extraction dichotomy
+that organizes grains from a small arbitrary union into harmonic stacks or
+a classified degenerate branch.
 
-- Reapplying the one-scale Guth–Zahl estimate cannot yield a fixed gain:
-  every normalized factor in its right-hand side is at most order one.
-- Proposition 3.12 balances mass and multiplicity but gives no cross-scale
-  stability or bounded-entropy algebraic model.
-- Replacing “convex” by “semialgebraic” in the abstract greedy factoring
-  lemma is formal and insufficient; the missing input is an inner/outer
-  incidence or carrier-extraction theorem.
-- A ruled carrier cannot simply be declared 2-plany: the exact quadric model
-  has trilinear concurrent directions.
-
-## Relation to prior work
-
-Rai Choudhuri proves the sticky 13/4 bound by combining Guth–Zahl's
-trilinear estimate with Katz–Zahl's 10/3 planebrush estimate and Wang–Zahl
-multiscale structure. Wang–Zahl's R³ full-to-sticky reduction relies on
-three-dimensional convex factor geometry and a full R³ sticky endpoint.
-Guth and Zahl identify ruled low-degree hypersurfaces as the obstruction to a
-literal R⁴ convex-union theorem. Full citations are in
-`../literature/refs.bib`.
-
-## Cite as
-
-See `CITATION.cff` in this folder. No DOI is assigned because no conjecture
-milestone is being released.
+No DOI is assigned because the general conjecture and Hausdorff problem
+remain open.

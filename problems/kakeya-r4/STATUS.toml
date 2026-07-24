@@ -3,9 +3,10 @@ title = "Four-dimensional Kakeya conjecture"
 question = "Must every Kakeya set in R^4 have Hausdorff and Minkowski dimension 4?"
 # proposed | scaffolded | active | partial-results | solved | excluded | retired
 status = "partial-results"
-best_result = "Exact repair ledger for the 13/4 induction; degree-2 split-quadric obstruction and QW2 detection lemma; no new dimension bound"
+best_result = "Harmonic transverse-stack union theorem for an infinite ruled-quadric subclass, giving full Minkowski dimension there; no new general, sticky, or Hausdorff bound"
 doi = ""
 sessions = [
     "2026-07-24 scaffolded from template",
     "2026-07-24 exact 13/4 audit, ruled-quadric stress test, STOP/PIVOT after xhigh review",
+    "2026-07-24 harmonic ruled-quadric stack theorem and carrier-entropy lemmas, Bridge B gate GO",
 ]

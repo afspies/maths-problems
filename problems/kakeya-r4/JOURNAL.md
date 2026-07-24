@@ -116,3 +116,113 @@ No numerical tube search or substantial compute was used. Work ran in the
 local Codex repository worktree; source extraction and all exact tests took
 negligible laptop-scale compute. No private infrastructure details are
 recorded.
+
+## 2026-07-24 — degree-two carriers and transverse stacks
+
+### Wide-net search and literature correction
+
+Continued on branch `problem/kakeya-r4/2026-07-24-quadric-carriers`. The
+search split cleanly into four independent theorem targets: one-carrier
+direction capacity, low-entropy catalog evasion, diffuse catalog extraction,
+and an inner/outer union theorem for an ordered carrier stack.
+
+The source audit corrected an important premise from the first session:
+Katz--Rogers already prove the bounded-complexity semialgebraic polynomial
+Wolff axiom, up to `delta^-epsilon`, for direction-separated tubes. Zahl also
+proves the sharper `O(delta^(-2-epsilon))` bound for tubes contained near one
+fixed low-degree hypersurface in R⁴. Thus QW2 itself is not the missing
+conjectural input; the missing step is organizing many detected grains and
+proving their union cannot remain small.
+
+### Exact carrier-capacity and extraction lemmas
+
+Proved four scale-explicit statements.
+
+1. A tube spending a `lambda` fraction near a quantitatively nondegenerate
+   quadric has direction within `O(delta lambda^-2)` of its null cone, hence
+   one carrier holds at most
+   `O(min(delta^-3,delta^-2 lambda^-2))` separated directions.
+2. QW2 forces a catalog of `M≤delta^-h` quadrics to miss almost every tube
+   whenever the exact saving `1-h-tau-4a-b` is positive.
+3. If overlap is spread among `M` grains rather than pre-assigned, layer cake
+   forces an explicit polynomial, dyadic overlap level, and balanced
+   subfamily. Its sharp normalized load satisfies
+   `Delta≥c N delta³(q-Mdelta)_+^4/H^4`.
+4. At a sticky scale `h`, a conditioned quadratic catalog persisting with
+   exponents `(tau,zeta,ell)` must pay
+   `tau+zeta+2ell≥a(1-2epsilon)`. In particular the earlier symmetric
+   low-entropy inverse output is impossible in a nonempty exponent regime.
+
+The exact split-quadric thinning stress test was also audited at every scale.
+It can be balanced and trilinear, but making it extremal by thinning destroys
+the sticky direction-cap requirement: the inequalities
+`beta≤eta` and `beta≥1-eta` are incompatible for `eta<1/2`.
+
+### Harmonic transverse-stack theorem
+
+Proved an inner/outer union theorem for an infinite family of ruled degree-two
+obstructions. For `M≤C delta^-1` ruled sweep patches with uniform reach,
+dense `lambda`-shadings, and
+
+`|grad P_i wedge grad P_j|≥c |i-j|/M`
+
+on every possible double-overlap region,
+
+`|union_i U_i|≥c lambda² Mdelta/(1+Mdelta H_(M-1))`.
+
+At `M≈delta^-1` this is `lambda²/log M`. The proof combines a reach-based
+`lambda delta` lower bound for each swept grain, a coarea plus
+Crofton--Bézout overlap estimate
+`|U_i intersect U_j|≤C delta²M/|i-j|`, and the exact second moment.
+A weighted sparse version is recorded separately.
+
+Nonvacuity is algebraic, not pictorial. The checked-in split-quadric sweep is
+transported by
+
+`L_s(x)=(x1+s x3,x2,sqrt(1-s+s²)x3,x4)`.
+
+For `P_s=q_0+s(2x1x3+x3²)-1`, the combined carrier/direction chart has exact
+seed determinant `3/16`, and
+`grad P_s wedge grad P_(s')=(s'-s) grad q_0 wedge grad q_1`.
+After compact restriction this supplies the required uniform stack.
+
+Consequently, dense Kakeya discretizations obeying finitely many such
+uniform stack charts have full lower and upper Minkowski dimension four.
+This does **not** prove Hausdorff dimension four: scale-dependent sparse
+directions need a further covering argument. It also assumes rather than
+extracts the carrier stack.
+
+### Independent soundness reviews and gate
+
+Independent GPT-5.6 Sol agents at `xhigh` effort audited the algebraic pencil,
+the coarea/rank locus, reach and collar hypotheses, exponent signs, the
+weighted normalization, circularity, scale losses, and
+Hausdorff-versus-Minkowski implications. The first review required explicit
+reach, common-factor exclusion, a viable transverse pencil, and deletion of
+an unsupported Hausdorff conclusion. After those repairs, the final verdict
+was **APPROVE**. A separate xhigh review approved the distributed-catalog
+layer-cake theorem and warned that it does not infer catalog capture from
+small union volume.
+
+The two-session gate is therefore **GO on Bridge B**: the harmonic
+transverse-stack theorem is a nontrivial semialgebraic union lemma for an
+explicit infinite family of ruled obstructions. The full Kakeya conjecture,
+a strict sticky exponent improvement, carrier extraction, and any new
+Hausdorff bound remain open.
+
+### Verification and compute
+
+Commands:
+
+```bash
+cd problems/kakeya-r4/harness
+python3 exponent_ledger.py benchmark_ledger.json
+python3 -m unittest -v
+git diff --check
+```
+
+The ledger printed global exponent `3/4`, dimension `13/4`, and bottleneck
+`trilinear`. All 27 exact tests passed in 0.021 seconds. No numerical tube
+search or substantial compute was used. Work and independent reviews ran in
+the local Codex worktree at negligible laptop scale; no private
+infrastructure details are recorded.

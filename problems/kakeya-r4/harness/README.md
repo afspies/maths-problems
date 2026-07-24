@@ -27,3 +27,16 @@ certifies three concurrent rational lines on
 
 whose directions have rank three. Thus “ruled quadric” does not imply
 pointwise 2-planiness, even at a single point.
+
+The second-session extensions add:
+
+- an exact two-parameter line sweep of the split quadric;
+- a rank-four seed for an explicit transverse pencil of ruled quadrics;
+- exact harmonic-number and second-moment union ledgers;
+- the quadratic direction-capacity, catalog-evasion, and sticky
+  mass/entropy exponent conversions.
+
+The suite currently contains 27 exact tests. The geometric coarea,
+Crofton--Bézout, reach, and Remez lemmas are proved in the result notes; the
+harness certifies their algebraic models and exponent bookkeeping, not those
+continuous theorems themselves.

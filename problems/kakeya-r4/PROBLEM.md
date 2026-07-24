@@ -47,7 +47,17 @@ See `literature/audit-2026-07-24.md`.
 - A thinned-and-copied split-quadric family satisfies Convex Wolff and still
   has small union. Thus the literal R³ convex-union theorem is false in R⁴.
 - Degree-2 polynomial/semialgebraic nonconcentration detects this
-  obstruction, but no carrier-extraction or union theorem is known.
+  obstruction. Katz–Rogers prove the full bounded-complexity semialgebraic
+  polynomial Wolff axiom for direction-separated tubes up to
+  `delta^-epsilon`; the missing input is multi-grain organization and union,
+  not single-grain nonconcentration.
+- One conditioned quadric can carry only
+  `O(h^-2 lambda^-2)` sticky direction caps (with the sticky multiplicity
+  loss). A full family therefore needs carrier entropy around `h^-1`.
+- A harmonically transverse stack of `M≈delta^-1` ruled quadrics has dense
+  shaded union at least `lambda²/log(1/delta)`, yielding full Minkowski
+  dimension for that structured subclass. Hausdorff and carrier extraction
+  remain open.
 
 ## Angle-of-attack menu (be exploratory — draw from different fields)
 
@@ -56,6 +66,8 @@ See `literature/audit-2026-07-24.md`.
   `13/4+c`.
 - `angles/semialgebraic-reduction/`: replace convex tests by a scale-aware
   bounded-complexity grain parameter, beginning with degree-two carriers.
+- `angles/transverse-quadric-stacks/`: organize the necessary
+  one-dimensional carrier entropy and exploit harmonic overlap summability.
 - Future projection/slicing angle: only after an exact exponent implication
   is written; no standalone qualitative projection heuristic counts.
 - Future algebraic classification angle: bounded-degree ruled 3-folds with
@@ -65,8 +77,9 @@ See `literature/audit-2026-07-24.md`.
 
 1. Extend the exact ledger if a corrected paper version or new recurrence is
    used.
-2. Prove a degree-2 carrier-extraction lemma, or give an exact counterexample
-   to the proposed QW2 factoring axiom.
+2. Prove an extraction theorem that organizes the roughly `delta^-1`
+   necessary degree-two carriers into transverse stacks, clusters, or a
+   lower-complexity degenerate class.
 3. In parallel, seek a stability theorem for the trilinear estimate whose
    model-selection entropy is only `delta^o(1)`.
 4. Submit every theorem-shaped claim to an adversarial soundness review before

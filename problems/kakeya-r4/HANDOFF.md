@@ -19,19 +19,25 @@ Work in problems/kakeya-r4/ of the maths-problems repo. Read, in order:
 4. problems/kakeya-r4/JOURNAL.md — recent sessions' detail, if needed.
 
 Current priorities (update each session):
-- The exact harness is built and currently has 15 passing tests. Run it before
+- The exact harness is built and currently has 27 passing tests. Run it before
   changing any exponent claim.
 - Treat `13/4` as the sticky benchmark and the corrected Katz–Zahl `>3.059`
   number as the general Hausdorff benchmark. Do not relabel the `3.0543`
   maximal estimate as Hausdorff.
-- Primary task: prove or refute a degree-two carrier-extraction lemma for the
-  QW2 parameter in `angles/semialgebraic-reduction/README.md`. Require the
-  conclusion to output a coefficient-normalized `P`, `lambda`, and balanced
-  subfamily, and verify affine-rescaling/entropy losses.
-- Begin with an independently defined infinite subclass, such as tube
-  families decomposable into boundedly many transverse interior patches of
-  nondegenerate quadrics. A fixed gain for such a stable subclass counts;
-  merely detecting the known split-quadric example does not.
+- Treat the polynomial Wolff/QW2 axiom as known for direction-separated
+  tubes (Katz--Rogers), not as a conjectural input. The live Bridge B problem
+  is multi-grain organization.
+- Primary task: prove an extraction dichotomy from small union and graininess.
+  Its outputs should be one of: a distributed catalog with explicit `q`; an
+  ordered family of about `delta^-1` harmonically transverse ruled patches;
+  or a classified degenerate/ill-conditioned quadratic branch.
+- Use `results/distributed-quadratic-catalog.md` to turn diffuse catalog
+  capture into an explicit polynomial, overlap level, and balanced subfamily.
+  Use `results/transverse-quadric-stack-union.md` for the transverse branch.
+  Do not silently assume either output.
+- The harmonic stack theorem is approved and gives full Minkowski dimension
+  for a structured infinite ruled-quadric subclass. It does not give
+  Hausdorff dimension. A weighted covering upgrade is a separate target.
 - Keep Bridge A separate. Before revisiting it, define a common two-scale
   refinement and a bounded-entropy model selector. Proposition 3.12 alone
   supplies neither. Any proposed gain must be relative to the full
@@ -39,5 +45,6 @@ Current priorities (update each session):
 - Submit any theorem-shaped output to GPT-5.6 Sol xhigh, explicitly asking it
   to audit circularity, model entropy, scale loss, strict hypotheses, and
   Hausdorff-versus-Minkowski consequences.
-- The previous session ended STOP/PIVOT: no new dimension bound, inverse
-  theorem, or semialgebraic union theorem was proved.
+- The second-session gate is GO on Bridge B. No new general or sticky
+  dimension bound was proved, but there is now a genuine semialgebraic union
+  theorem for an explicit infinite family of ruled obstructions.

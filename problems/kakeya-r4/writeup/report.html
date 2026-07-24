@@ -1,83 +1,117 @@
-<title>Four-dimensional Kakeya — sticky grains campaign</title>
+<title>Four-dimensional Kakeya — degree-two carrier campaign</title>
 <style>
   :root { --paper:#fbfaf7; --ink:#21211d; --muted:#66645d; --rule:#d9d5ca;
-    --blue:#1e4f8f; --box:#f1efe8; --open:#ececef; }
-  body { max-width:46rem; margin:auto; padding:3rem 1.25rem 4rem;
+    --blue:#1e4f8f; --box:#f1efe8; --green:#226b3b; --greenbg:#e4f0e7; }
+  @media(prefers-color-scheme:dark){:root{--paper:#191a1c;--ink:#e6e4dd;
+    --muted:#aaa79d;--rule:#3a3b3e;--blue:#7aa7dd;--box:#232529;
+    --green:#7fc796;--greenbg:#1d2b21}}
+  body { max-width:48rem; margin:auto; padding:3rem 1.25rem 4rem;
     background:var(--paper); color:var(--ink); font:1.04rem/1.55 Georgia,serif; }
-  h1,h2 { line-height:1.2; font-weight:600; } h1{font-size:1.75rem;margin-bottom:.3rem}
-  h2{font-size:1.22rem;margin-top:2.2rem;border-bottom:1px solid var(--rule)}
+  h1,h2,h3 { line-height:1.2; font-weight:600 } h1{font-size:1.8rem;margin-bottom:.3rem}
+  h2{font-size:1.25rem;margin-top:2.2rem;border-bottom:1px solid var(--rule)}
+  h3{font-size:1.05rem;margin-top:1.5rem}
   code,pre { font-family:ui-monospace,Menlo,monospace; font-size:.86em }
-  code { background:#eef0f2; padding:.1em .3em } pre { background:#eef0f2;
-    border-left:3px solid #226b3b; padding:.8rem; overflow:auto }
+  code { background:var(--box); padding:.1em .3em } pre { background:var(--box);
+    border-left:3px solid var(--green); padding:.8rem; overflow:auto }
   .subtitle,.meta,.footer { color:var(--muted) } .meta{border-bottom:1px solid var(--rule);
-    padding-bottom:1rem}.badge{background:var(--open);padding:.25rem .5rem;
-    border-radius:999px;font:700 .72rem ui-monospace,monospace;text-transform:uppercase}
+    padding-bottom:1rem}.badge{color:var(--green);background:var(--greenbg);
+    padding:.25rem .5rem;border-radius:3px;font:700 .72rem ui-monospace,monospace;
+    text-transform:uppercase}
   .abstract,.env { margin:1.2rem 0;padding:1rem 1.1rem;background:var(--box);
     border-left:3px solid var(--blue) }.label{font-weight:700}.footer{margin-top:3rem;
     padding-top:1rem;border-top:1px solid var(--rule);font-size:.88rem}
-  table{border-collapse:collapse;width:100%}th,td{padding:.4rem;border-bottom:1px solid var(--rule);
-    text-align:left;vertical-align:top}
+  table{border-collapse:collapse;width:100%;font-size:.92rem}
+  th,td{padding:.45rem;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
 </style>
 
-<h1>Four-dimensional Kakeya: sticky grains campaign</h1>
-<p class="subtitle">Exact audit of the 13/4 sticky bound and the ruled-quadric obstruction</p>
-<p class="meta"><span class="badge">partial-results · open</span> · 24 July 2026 ·
-<code>problems/kakeya-r4</code></p>
+<h1>Four-dimensional Kakeya: degree-two carriers</h1>
+<p class="subtitle">A harmonic union theorem for transverse stacks of ruled quadrics</p>
+<p class="meta"><span class="badge">partial-results · bridge B go</span> ·
+24 July 2026 · <code>problems/kakeya-r4</code></p>
 
 <div class="abstract"><span class="label">Abstract.</span>
-The current general Hausdorff benchmark in R⁴ is above 3.059, the distinct
-maximal-function benchmark is 3.0543, and the sticky Hausdorff benchmark is
-13/4. This campaign reconstructed the sticky induction, found repairable
-bookkeeping defects, and built an exact ruled-quadric stress test. No new
-Kakeya dimension bound is claimed.</div>
+The full R⁴ Kakeya conjecture remains open. This campaign proves a
+semialgebraic union theorem for an explicit infinite family of ruled
+quadratic obstructions. Harmonically transverse stacks have dense shaded
+union at least λ²/log(1/δ), yielding full Minkowski dimension for a
+structured subclass. No new general, sticky, or Hausdorff bound is claimed.
+</div>
 
-<h2>Verified bookkeeping</h2>
-<div class="env"><span class="label">Proposition 1.</span>
-If <var>N</var> is minimal with 4/<var>N</var>&lt;ε<sub>0</sub>, then
-ε<sub>0</sub>/(4+ε<sub>0</sub>)≤1/<var>N</var>&lt;ε<sub>0</sub>/4.
-The published comparisons using ε<sub>0</sub>/4 on the other side do not
-follow. The lower bound ε<sub>0</sub>/5, a smaller ε<sub>1</sub>, and a
-shrunk η-hierarchy repair the exponent budget.</div>
-<p>For ε<sub>0</sub>=1/10, exact arithmetic gives <var>N</var>=41.
-The printed multiplicity exponent also needs the sign
-−σ<sub>4</sub>+2η. Two elementary admissibility fixes are recorded: impose
-η<sub>0</sub>≤1/<var>N</var> for the intermediate-scale interval, and weaken
-the available exponent-one two-ends condition to an exponent strictly below
-one before applying the planebrush theorem.</p>
+<h2>Main theorem</h2>
+<div class="env"><span class="label">Harmonic transverse-stack theorem.</span>
+Let <var>M</var>≤<var>C</var>δ<sup>−1</sup> uniformly regular ruled
+quadric patches carry dense λ-shadings. If every double-overlap region
+satisfies
+<br><br>
+|∇<var>P</var><sub>i</sub>∧∇<var>P</var><sub>j</sub>|
+≥<var>c</var>|<var>i</var>−<var>j</var>|/<var>M</var>,
+<br><br>
+then
+<br><br>
+|⋃<var>U</var><sub>i</sub>| ≥
+<var>c</var>λ²<var>M</var>δ /
+(1+<var>M</var>δ<var>H</var><sub>M−1</sub>).
+For <var>M</var>≈δ<sup>−1</sup>, this is
+<var>c</var>λ²/log(2+<var>M</var>).
+</div>
 
-<h2>Ruled-quadric stress test</h2>
-<div class="env"><span class="label">Proposition 2.</span>
-The quadric <var>x</var><sub>1</sub>²+<var>x</var><sub>2</sub>²−
-<var>x</var><sub>3</sub>²−<var>x</var><sub>4</sub>²=1 contains three
-concurrent rational lines with normalized squared trilinear wedge 1/50.
-Thus a ruled quadratic carrier need not be 2-plany even locally.</div>
-<p>The linear identification with SL<sub>2</sub>(R) verifies the ruling
-exactly. The Convex-Wolff obstruction is the thinned line net followed by
-δ<sup>−1/2</sup> moved copies; the raw full net itself fails Convex Wolff.
-A degree-two polynomial test detects each thinned copy by
-δ<sup>−1/2</sup>.</p>
+<h3>Proof mechanism</h3>
+<p>Reach and the dense line sweep give
+|<var>U</var><sub>i</sub>|≥<var>c</var>λδ. Coarea on the rank-two
+locus, together with Crofton–Bézout, gives</p>
+<p style="text-align:center">|<var>U</var><sub>i</sub>∩<var>U</var><sub>j</sub>|
+≤<var>C</var>δ²<var>M</var>/|<var>i</var>−<var>j</var>|.</p>
+<p>The pairwise losses sum to the harmonic number. The exact second moment
+then proves the displayed union bound. A weighted sparse form is also proved,
+but it is not yet a Hausdorff covering theorem.</p>
 
-<h2>Exact verification</h2>
-<pre><code>python3 exponent_ledger.py benchmark_ledger.json
-python3 -m unittest -v</code></pre>
+<h2>Explicit nonvacuous family</h2>
+<p>Put</p>
+<p style="text-align:center">
+<var>q</var><sub>0</sub>=x<sub>1</sub>²+x<sub>2</sub>²−x<sub>3</sub>²−x<sub>4</sub>²,
+&nbsp; <var>q</var><sub>1</sub>=2x<sub>1</sub>x<sub>3</sub>+x<sub>3</sub>²,
+&nbsp; <var>P</var><sub>s</sub>=<var>q</var><sub>0</sub>+s<var>q</var><sub>1</sub>−1.
+</p>
+<p>Every member has split signature and inherits the exact
+SL<sub>2</sub>(R) line sweep. The combined carrier/direction chart has
+rational seed determinant 3/16, while</p>
+<p style="text-align:center">
+∇<var>P</var><sub>s</sub>∧∇<var>P</var><sub>s′</sub>
+=(s′−s)∇<var>q</var><sub>0</sub>∧∇<var>q</var><sub>1</sub>.
+</p>
+<p>Compact restriction yields the theorem’s uniform hypotheses. Dense Kakeya
+discretizations covered by finitely many such direction charts have full
+lower and upper Minkowski dimension four.</p>
+
+<h2>What the carrier ledgers establish</h2>
 <table>
-  <tr><th>Bridge</th><th>Verified output</th><th>Missing theorem</th></tr>
-  <tr><td>Sticky multiscale</td><td>Exact implication for 0&lt;c&lt;1/12</td>
-      <td>bounded-entropy inverse theorem and common two-scale refinement</td></tr>
-  <tr><td>Semialgebraic</td><td>Degree-two obstruction detected</td>
-      <td>carrier extraction and inner/outer union estimate</td></tr>
+  <tr><th>Result</th><th>Exact conclusion</th><th>Boundary</th></tr>
+  <tr><td>One conditioned quadric</td>
+    <td>At most min(δ<sup>−3</sup>,δ<sup>−2</sup>λ<sup>−2</sup>) directions</td>
+    <td>Needs quantitative nondegeneracy</td></tr>
+  <tr><td>Low-entropy catalog</td>
+    <td>Carried fraction ≤Cδ<sup>1−h−τ−4a−b</sup></td>
+    <td>QW2 is already known for separated directions</td></tr>
+  <tr><td>Distributed catalog</td>
+    <td>Δ≥cNδ³(q−Mδ)<sub>+</sub><sup>4</sup>/H<sup>4</sup></td>
+    <td>Does not infer q from small union</td></tr>
+  <tr><td>Sticky persistence</td>
+    <td>τ+ζ+2ℓ≥a(1−2ε)</td>
+    <td>Degenerate quadrics remain a separate class</td></tr>
 </table>
 
-<h2>Conditional bridge and gate verdict</h2>
-<p>A uniform multiscale gain |U|≥δ<sup>3/4−c+o(1)</sup>, with
-0&lt;c&lt;1/12, would leave plany gain
-ρ<sup>−(1/12−c)</sup> and imply dim<sub>H</sub>K≥13/4+c. This theorem is
-not proved. Independent GPT-5.6 Sol xhigh review rejected inferring it from
-the scalar near-equality conditions or from independently selected balanced
-scales.</p>
-<p><strong>STOP/PIVOT:</strong> the two-session milestone gate is not met.
-Continue only as a degree-two carrier-extraction project or after proving a
-quantified inverse theorem with all entropy and scale losses charged.</p>
+<h2>Verification and gate</h2>
+<pre><code>python3 exponent_ledger.py benchmark_ledger.json
+python3 -m unittest -v
+# 27 exact tests pass</code></pre>
+<p>Independent GPT-5.6 Sol xhigh reviews checked reach, coarea, common
+factors, the explicit pencil, exponent signs, circularity, and
+Hausdorff-versus-Minkowski wording. After repairs the final verdict was
+<strong>APPROVE</strong>.</p>
+<p><strong>Gate: GO on Bridge B.</strong> The theorem handles an infinite
+family of ruled obstructions. The general conjecture still requires an
+extraction dichotomy that organizes grains from a small arbitrary union into
+harmonic stacks or a classified degenerate branch.</p>
 
 <div class="footer">Canonical source: <code>writeup/report.md</code>.
-See <code>literature/refs.bib</code> for sources. No DOI release was made.</div>
+Sources: <code>literature/refs.bib</code>. No DOI release was made.</div>

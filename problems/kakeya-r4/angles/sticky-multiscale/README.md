@@ -102,3 +102,19 @@ conditions as an inverse theorem, (ii) assuming two independently chosen
 balanced refinements coexist, and (iii) allowing a polynomial-size model
 pigeonhole loss without subtracting it from `kappa`. This angle is therefore
 STOP/PIVOT, not a claimed structural theorem.
+
+## Second-session quadratic entropy obstruction
+
+The exact incidence lemma in
+`../../results/conditioned-quadric-sticky-capacity.md` sharpens the STOP
+verdict. At an intermediate tube scale `h=delta^a`, sticky angular
+multiplicity implies that a catalog of `M≤delta^-zeta` conditioned quadrics
+carrying shading fraction `delta^tau` at overlap `delta^ell` must satisfy
+
+`tau+zeta+2 ell ≥ a(1-2 epsilon)`.
+
+Thus the earlier symmetric choice `M≤delta^-tau` with full containment is
+impossible when `2tau<a(1-2epsilon)`. This is not merely a missing proof:
+that low-entropy inverse conclusion is false in its intended scale regime.
+The natural replacement has carrier entropy around `h^-1`, which connects
+Bridge A to the harmonic transverse-stack union lemma in Bridge B.
