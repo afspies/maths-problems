@@ -33,3 +33,27 @@ same minimum dominating set `D`. If this fails, classify equality in the
 terminal matching constructions more graph-theoretically. Do not spend a
 session numerically optimizing the current inequalities.
 
+## Session 2 deltas
+
+- Two-sparse subset domination is exactly `|S|-ν(F_G(S))`; the matching
+  bound is tight iff the conflict graph is a disjoint union of odd cliques.
+- The total slack in Steiner's oriented product theorem has an exact
+  four-source decomposition. Any near extremizer must simultaneously satisfy
+  row, column, partition-additivity, and subset-structure constraints.
+- Every additive integer packing/domination level preserves the exact
+  Steiner obstruction. The five-vertex gadget has
+  `ρ^k=⌊3k/2⌋`, `γ^k=⌈3k/2⌉`, so local hierarchy slack cannot be forced.
+- Fractional packing tensors give a genuinely orthogonal bound with local
+  concentration `κ`. `P4` proves that totals or connectedness alone do not
+  control `κ`.
+
+## Revised next move
+
+Do one of two things:
+
+1. combine the row-wise minimum `H`-set conditions with the column-wise
+   injective projections and odd-clique terminal structures; or
+2. prove a quantitative tradeoff between `γ/γ_f` and the least attainable
+   tensor concentration among near-optimal fractional packings.
+
+Do not extend the additive `k`-packing hierarchy further.

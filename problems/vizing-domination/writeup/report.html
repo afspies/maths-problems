@@ -1,5 +1,5 @@
 <!-- Self-contained presentation layer; canonical source: report.md. -->
-<title>Peeling defect in Steiner's subset-domination lemma</title>
+<title>Equality and stability in Steiner's Vizing bound</title>
 <style>
   :root {
     --paper:#fbfaf7; --ink:#21211d; --muted:#6b6a62; --accent:#1e4f8f;
@@ -74,20 +74,21 @@
   }
 </style>
 
-<h1>Peeling defect in Steiner’s subset-domination lemma</h1>
+<h1>Equality and stability in Steiner’s Vizing bound</h1>
 <p class="subtitle">A proof-first partial result towards Vizing’s domination conjecture</p>
 <div class="meta">
-  <span class="badge">partial results</span>
+  <span class="badge">partial-results</span>
   <span><code>problems/vizing-domination</code></span>
-  <span>23 July 2026</span>
+  <span>24 July 2026</span>
 </div>
 
 <div class="abstract">
   <span class="label">Abstract</span>
   We reconstruct the exact optimization behind Steiner’s 0.5643 bound, locate
   the algebraic failure in the withdrawn 0.5809 claim, and prove a strict
-  instance-sensitive strengthening of Steiner’s key subset lemma. The new
-  peeling-defect term propagates to the Cartesian-product bound, but no improved
+  instance-sensitive strengthening of Steiner’s key subset lemma. We classify
+  terminal equality by odd-clique conflict graphs, decompose every unit of
+  product-proof slack, and isolate a new fractional tensor bridge. No improved
   universal constant is claimed.
 </div>
 
@@ -194,20 +195,71 @@ It yields γ(<var>G</var>□<var>H</var>)≥
 The old exact equality point extends to this new parameter, so the universal
 constant remains 0.5643 without another structural constraint.</p>
 
-<h2>6 · Exact verification and next gate</h2>
+<h2>6 · Terminal and fibre equality</h2>
+<p>For a two-sparse target <var>S</var>, join two target vertices in a conflict
+graph <var>F</var> when one vertex of <var>G</var> can dominate both. Then</p>
+<div class="eqn">
+  <span class="body">γ<sub><var>G</var></sub>(<var>S</var>) =
+  |<var>S</var>|−ν(<var>F</var>), &nbsp;
+  ρ<sub><var>G</var></sub>(<var>S</var>)=α(<var>F</var>).</span>
+  <span class="no">(5)</span>
+</div>
+<p>The inequality α(<var>F</var>)+2ν(<var>F</var>)≥|<var>F</var>| is tight
+exactly when every component is a complete graph of odd order. Thus every
+tight terminal remainder has an odd-clique conflict decomposition.</p>
+<div class="env theorem">
+  <span class="label">Exact fibre-slack identity.</span>
+  With <var>k</var>=γ(<var>H</var>), <var>R</var>=ρ<sup>{2}</sup>(<var>G</var>),
+  and the nonnegative vertical, projection, partition-additivity, and subset
+  defects <var>v</var>, <var>p</var><sub><var>i</var></sub>,
+  <var>d</var><sub><var>i</var></sub>, δ<sub><var>i</var></sub>,
+  <div class="eqn"><span class="body">
+  4|<var>D</var>|−<var>k</var>(3γ(<var>G</var>)−<var>R</var>) =
+  <var>v</var>+3Σ<sub><var>i</var></sub>(<var>p</var><sub><var>i</var></sub>+
+  <var>d</var><sub><var>i</var></sub>)+Σ<sub><var>i</var></sub>δ<sub><var>i</var></sub>.
+  </span><span class="no">(6)</span></div>
+</div>
+<p>Equality therefore requires simultaneous row-wise cell equality, injective
+minimum column projections, domination additivity across every
+<var>L</var><sub><var>i</var></sub>, and terminal odd-clique structure.</p>
+
+<h2>7 · A closed hierarchy and an orthogonal bridge</h2>
+<p>All additive integer-packing levels can be derived exactly:
+(3<var>m</var>)γ≤<var>m</var>|<var>S</var>|+ρ<sup>{2<var>m</var>}</sup>
+and (3<var>m</var>+2)γ≤(<var>m</var>+1)|<var>S</var>|+
+ρ<sup>{2<var>m</var>+1}</sup>. The same formal minimax point saturates every
+level, while the five-vertex witness realizes
+ρ<sup>{<var>k</var>}</sup>=⌊3<var>k</var>/2⌋ and
+γ<sup>{<var>k</var>}</sup>=⌈3<var>k</var>/2⌉. This closes the additive
+hierarchy as a route past 0.5643.</p>
+<p>A different construction tensors nonzero fractional packings
+<var>p</var>,<var>q</var>. With totals <var>P</var>,<var>Q</var> and</p>
+<div class="eqn">
+  <span class="body">κ=max<sub><var>u,v</var></sub>[
+  <var>q</var><sub><var>v</var></sub><var>p</var>(<var>N</var>[<var>u</var>])+
+  <var>p</var><sub><var>u</var></sub><var>q</var>(<var>N</var>[<var>v</var>])−
+  <var>p</var><sub><var>u</var></sub><var>q</var><sub><var>v</var></sub>],
+  &nbsp; γ(<var>G</var>□<var>H</var>)≥<var>PQ</var>/κ.</span>
+  <span class="no">(7)</span>
+</div>
+<p>For regular factors this gives |<var>G</var>||<var>H</var>|/(<var>r</var>+
+<var>s</var>+1). The concentrated optimal packing of <var>P</var><sub>4</sub>
+shows that totals alone cannot control κ.</p>
+
+<h2>8 · Exact verification and next gate</h2>
 <pre><code>$ cd problems/vizing-domination/harness
 $ python3 -m unittest -v
-Ran 11 tests
+Ran 16 tests
 OK</code></pre>
 <p>The checks use integers, rational numbers, and exact elements of
 ℚ(√73). They validate definitions and finite witnesses, not the universal
-conjecture. The next proof session must force positive aggregate fibre defect,
-sharpen terminal equality, or pivot to a different bridge. Reoptimizing
-Steiner’s existing six inequalities cannot beat 0.5643 because their relaxed
-minimax attains equality.</p>
+conjecture. The two-session gate is met by the odd-clique classification and
+fibre-slack theorem. Further work should attack simultaneous row/column
+incidence or prove an integrality/concentration tradeoff for the fractional
+tensor bridge.</p>
 
 <div class="footer">
-  <p><strong>Status:</strong> partial result. Vizing’s domination conjecture
+  <p><strong>Status:</strong> partial-results. Vizing’s domination conjecture
   remains open.</p>
   <p>Canonical source: <code>writeup/report.md</code>. Citations:
   <code>literature/refs.bib</code>.</p>

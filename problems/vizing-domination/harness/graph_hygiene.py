@@ -7,6 +7,7 @@ and definitions, not an attack on Vizing's conjecture.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from fractions import Fraction
 from itertools import combinations, product
 from typing import Iterable, Iterator, Sequence
 
@@ -86,6 +87,83 @@ class Graph:
                 return size
         return 0
 
+    def independence_number(self) -> int:
+        best = 0
+        for mask in range(1 << self.n):
+            chosen = [v for v in range(self.n) if mask & (1 << v)]
+            if all((min(u, v), max(u, v)) not in self.edges for u, v in combinations(chosen, 2)):
+                best = max(best, len(chosen))
+        return best
+
+    def matching_number(self) -> int:
+        neighbors = [
+            frozenset(b if a == v else a for a, b in self.edges if a == v or b == v)
+            for v in range(self.n)
+        ]
+        memo: dict[int, int] = {}
+
+        def recurse(remaining: int) -> int:
+            if remaining == 0:
+                return 0
+            if remaining in memo:
+                return memo[remaining]
+            first_bit = remaining & -remaining
+            v = first_bit.bit_length() - 1
+            without_v = remaining ^ first_bit
+            best = recurse(without_v)
+            for u in neighbors[v]:
+                if without_v & (1 << u):
+                    best = max(best, 1 + recurse(without_v ^ (1 << u)))
+            memo[remaining] = best
+            return best
+
+        return recurse((1 << self.n) - 1)
+
+    def connected_components(self) -> tuple[frozenset[int], ...]:
+        unseen = set(range(self.n))
+        answer: list[frozenset[int]] = []
+        while unseen:
+            seed = min(unseen)
+            component = {seed}
+            frontier = [seed]
+            unseen.remove(seed)
+            while frontier:
+                v = frontier.pop()
+                adjacent = {
+                    b if a == v else a
+                    for a, b in self.edges
+                    if a == v or b == v
+                }
+                new = adjacent & unseen
+                unseen -= new
+                component |= new
+                frontier.extend(new)
+            answer.append(frozenset(component))
+        return tuple(answer)
+
+    def is_disjoint_union_of_odd_cliques(self) -> bool:
+        for component in self.connected_components():
+            size = len(component)
+            if size % 2 == 0:
+                return False
+            expected_edges = size * (size - 1) // 2
+            actual_edges = sum(1 for u, v in self.edges if u in component and v in component)
+            if actual_edges != expected_edges:
+                return False
+        return True
+
+    def closed_neighborhood_conflict_graph(self, target: Iterable[int]) -> "Graph":
+        target_tuple = tuple(sorted(target))
+        if not frozenset(target_tuple) <= frozenset(range(self.n)):
+            raise ValueError("target contains an invalid vertex")
+        edges = []
+        for i, j in combinations(range(len(target_tuple)), 2):
+            if not self.closed_neighborhood(target_tuple[i]).isdisjoint(
+                self.closed_neighborhood(target_tuple[j])
+            ):
+                edges.append((i, j))
+        return Graph.from_edges(len(target_tuple), edges)
+
     def integer_weight_functions(self, k: int) -> Iterator[tuple[int, ...]]:
         if k < 0:
             raise ValueError("k must be nonnegative")
@@ -113,6 +191,14 @@ class Graph:
             sum(weights)
             for weights in self.integer_weight_functions(k)
             if self.is_k_dominating_function(weights, k)
+        )
+
+    def is_fractional_packing_function(self, weights: Sequence[Fraction]) -> bool:
+        if len(weights) != self.n or any(weight < 0 for weight in weights):
+            return False
+        return all(
+            sum((weights[u] for u in self.closed_neighborhood(v)), Fraction(0)) <= 1
+            for v in range(self.n)
         )
 
     def excess_peeling_parameter(self, target: Iterable[int]) -> int:
@@ -155,3 +241,33 @@ def cycle(n: int) -> Graph:
 
 def complete(n: int) -> Graph:
     return Graph.from_edges(n, combinations(range(n), 2))
+
+
+def fractional_tensor_lower_bound(
+    left: Graph,
+    right: Graph,
+    left_weights: Sequence[Fraction],
+    right_weights: Sequence[Fraction],
+) -> Fraction:
+    """Return the exact two-sided fractional tensor lower bound."""
+    if not left.is_fractional_packing_function(left_weights):
+        raise ValueError("left weights are not a fractional packing")
+    if not right.is_fractional_packing_function(right_weights):
+        raise ValueError("right weights are not a fractional packing")
+    left_total = sum(left_weights, Fraction(0))
+    right_total = sum(right_weights, Fraction(0))
+    if left_total == 0 or right_total == 0:
+        raise ValueError("fractional packings must be nonzero")
+
+    kappa = max(
+        right_weights[v]
+        * sum((left_weights[x] for x in left.closed_neighborhood(u)), Fraction(0))
+        + left_weights[u]
+        * sum((right_weights[y] for y in right.closed_neighborhood(v)), Fraction(0))
+        - left_weights[u] * right_weights[v]
+        for u in range(left.n)
+        for v in range(right.n)
+    )
+    if kappa <= 0:
+        raise AssertionError("nonzero packings must give positive kappa")
+    return left_total * right_total / kappa

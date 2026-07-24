@@ -1,40 +1,55 @@
 # Handoff — Vizing’s domination conjecture
 
-Continue the proof-first attack. Read `PROBLEM.md`,
-`literature/steiner-reconstruction.md`,
-`angles/subset-slack/README.md`, and `angles/k3-analogue/README.md` first.
+Read the four session-two angle notes first:
 
-The first session produced two rigorous session-derived subset inequalities:
+- `angles/fibre-slack/README.md`
+- `angles/terminal-conflict/README.md`
+- `angles/packing-hierarchy/README.md`
+- `angles/fractional-tensor/README.md`
 
-1. `3γ_G(S)≤|S|+ρ²(G)-p_G(S)`, with an exact equality/stability
-   decomposition and an additive `(Σ_i p_G(L_i))/4` term in Steiner's product
-   proof.
-2. `5γ_G(S)≤2|S|+ρ³(G)`, yielding
-   `γ(G□H)≥((5γ(G)-ρ³(G))/7)γ(H)`.
+## What is now proved
 
-Neither raises the global constant by reoptimization: the old exact relaxed
-minimizer extends to the `ρ³` parameter and saturates the new product bound.
+1. Two-sparse subset domination is exactly a matching-cover parameter of the
+   closed-neighborhood conflict graph. Equality in Steiner's matching bound
+   occurs exactly for disjoint unions of odd cliques.
+2. Steiner's oriented product slack has the exact decomposition
 
-## Next-session target
+   `E=v+3Σ_i(p_i+d_i)+Σ_iδ_i`.
 
-Prove or refute a structural obstruction to simultaneous tightness of the
-vertically dominated fibre sets `L_i`. In priority order:
+   Equality forces simultaneous row-wise cell equality, injective minimum
+   column projections, partition additivity, and recursively tight
+   odd-clique terminal remainders.
+3. The full additive integer packing/domination hierarchy preserves the
+   0.5643 obstruction at every level. Do not continue this route.
+4. Nonzero fractional packings `p,q` give the orthogonal tensor bound
 
-1. Can all `L_i` have `p_G(L_i)=0` for a minimum product dominator at the
-   relaxed worst parameter point?
-2. If yes, can all their complete peeling sequences terminate with both
-   matching/packing bounds tight?
-3. Can equality `ρ³=ρ²+ρ` coexist with those terminal equalities near the
-   Steiner thresholds?
+   `γ(G□H)≥PQ/κ`,
 
-Use exact small graphs only to falsify bridge lemmas and extract witnesses.
-Any proposed proof must receive a GPT-5.6 Sol xhigh adversarial review.
+   with the exact local-concentration denominator defined in
+   `angles/fractional-tensor/README.md`.
 
-## Gate
+## Next-session choices
 
-This is session two of the stated two-session gate. Continue beyond it only
-if the work yields a further rigorous subset-domination inequality, a sharper
-nontrivial equality classification, or a certified universal constant above
-0.5643. Otherwise record the obstruction and STOP/PIVOT to a different
-product decomposition.
+### A. Row/column incidence
+
+Assume all defects in the fibre identity are small. Use the fact that for
+every row `g`, `P_H(D_g)` plus the nonvertical partition centers is a
+minimum `H`-dominating set, while every column projection is injective and
+minimum. Try to prove these conditions incompatible with all terminal
+conflict graphs being odd-clique unions near the Steiner ratios.
+
+### B. Fractional concentration
+
+Define the least `κ` among optimal or `(1-ε)`-optimal fractional packings.
+Seek a theorem trading `γ/γ_f` against this concentration. `P4` blocks any
+claim based only on connectedness or total packing mass.
+
+## Hard stops
+
+- Do not numerically reoptimize Steiner's existing inequalities.
+- Do not add more levels to the additive integer packing hierarchy.
+- Do not treat finite graph enumeration as progress; use it only to falsify
+  bridge lemmas.
+
+Any proposed proof requires an independent GPT-5.6 Sol xhigh review.
 

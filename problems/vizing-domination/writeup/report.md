@@ -1,4 +1,4 @@
-# Peeling defect in Steiner's subset-domination lemma
+# Equality and stability in Steiner's Vizing bound
 
 **Status:** partial result; Vizing's conjecture remains open.
 
@@ -10,10 +10,12 @@ audit the withdrawn 0.5809 claim. The latter replaces the valid
 Chen–Piotrowski–Shreve expression `AB-xy` by the unequal expression
 `3AB-2Ay-2xB+xy`. Our new result is an exact slack decomposition for
 Steiner's key subset-domination lemma and a strict strengthening by an
-excess-peeling parameter. It yields an instance-sensitive additive
-improvement in Steiner's product bound, but no improved universal constant:
-the remaining question is whether product fibre geometry forces positive
-aggregate peeling defect.
+excess-peeling parameter. A second session classifies terminal equality by
+odd-clique conflict graphs, decomposes every unit of slack in Steiner's
+product proof, and proves that the entire additive integer packing/domination
+hierarchy retains the same exact 0.5643 obstruction. No improved universal
+constant is claimed; the surviving target is simultaneous row/column
+realizability of all equality conditions.
 
 ## Definitions
 
@@ -112,6 +114,81 @@ parameter and makes (6) equal exactly to `(5+√73)/24`; its corresponding
 Hou–Lu mixed term is smaller. Therefore (5)–(6) are genuine new inequalities
 but do not alone improve the universal constant.
 
+## Terminal conflict-graph theorem
+
+In the two-sparse terminal regime, define a graph `F` on `S` by joining
+`s,t` when one vertex of `G` can dominate both. Then
+
+`γ_G(S)=|S|-ν(F)` and `ρ_G(S)=α(F)`.                            (7)
+
+Moreover, `α(F)+2ν(F)≥|V(F)|`, with equality exactly when every
+component of `F` is a complete graph of odd order. Hence terminal equality
+in Steiner's subset lemma requires an odd-clique conflict decomposition plus
+zero ambient packing slack. The matching slack is the sum of positive
+integer component defects, so slack at most two permits at most two
+non-odd-clique components.
+
+## Exact fibre-slack identity
+
+Let `k=γ(H)`, `R=ρ²(G)`, and use Steiner's fibre sets `D_i,L_i`. Define
+
+```text
+δ_i=|L_i|+R-3γ_G(L_i),
+p_i=|D_i|-γ_G(V(G)\L_i),
+d_i=γ_G(V(G)\L_i)+γ_G(L_i)-γ(G),
+v=|D|-Σ_i|L_i|.
+```
+
+All four defect types are nonnegative, and the full oriented product slack is
+the exact identity
+
+`4|D|-k(3γ(G)-R)=v+3Σ_i(p_i+d_i)+Σ_iδ_i`.                      (8)
+
+Thus equality forces row-wise equality in the vertical-cell count, injective
+minimum projections in every column, exact domination additivity across
+every `L_i`, and recursive odd-clique terminal structure. Equation (8) is a
+cross-proof stability theorem, though it does not yet prove these conditions
+incompatible.
+
+## Full packing-hierarchy obstruction
+
+For every `m≥1` and `m≥0`, respectively,
+
+```text
+3mγ_G(S)≤m|S|+ρ^{2m}(G),
+(3m+2)γ_G(S)≤(m+1)|S|+ρ^{2m+1}(G).                            (9)
+```
+
+Their exact slacks are sums of the two base subset slacks and packing
+superadditivity defects. Their product corollaries are saturated by the same
+formal `(a,b)` minimax point for every `m`. The five-vertex graph above is an
+actual all-level equality gadget:
+
+`ρ^{k}(G)=⌊3k/2⌋` and `γ^{k}(G)=⌈3k/2⌉`.
+
+Therefore arbitrarily many additive integer packing and domination levels
+cannot raise 0.5643 without a structural relation outside this cone.
+
+## Fractional tensor bridge
+
+For nonzero fractional packings `p,q` on `G,H`, put `P=Σp`, `Q=Σq` and
+
+`κ=max_{u,v}[q_v p(N_G[u])+p_u q(N_H[v])-p_uq_v]`.
+
+Then the weights `p_uq_v/κ` form a fractional packing on `G□H`, so
+
+`γ(G□H)≥γ_f(G□H)≥PQ/κ`.                                      (10)
+
+For `r`- and `s`-regular factors, uniform packings yield
+
+`γ(G□H)≥|V(G)||V(H)|/(r+s+1)`.
+
+This is genuinely two-sided and outside Steiner's additive hierarchy.
+However, `P4` has the unique optimal fractional packing `(1,0,0,1)`, so
+connectedness does not prevent concentration and totals alone cannot control
+`κ`. A universal improvement needs a tradeoff between fractional
+integrality gaps and local concentration.
+
 ## Withdrawn 0.5809 claim
 
 With `A=γ(G)`, `B=γ(H)`, `x=A-ρ(G)`, `y=B-ρ(H)`, the valid
@@ -132,20 +209,23 @@ From `problems/vizing-domination/harness` run:
 python3 -m unittest -v
 ```
 
-Eleven exact tests check named graph products, domination and `k`-function
+Sixteen exact tests check named graph products, domination and `k`-function
 definitions, Steiner's subset inequality, equation (3), the exact
 `Q(√73)` threshold identities, the withdrawn algebra witness, and the
 five-vertex `k=3` counterexample together with corrected inequality (5).
-These are hygiene and adversarial checks, not a finite proof of the universal
-conjecture.
+They also exhaustively verify the matching-cover classification through five
+vertices, check the all-level hierarchy gadget, and verify the fractional
+tensor bound on regular and concentrated examples. These are hygiene and
+adversarial checks, not a finite proof of the universal conjecture.
 
 ## Relation to prior work and next gate
 
 The dependency reconstruction is in
 `literature/steiner-reconstruction.md`. The exact relaxed minimax underlying
 0.5643 attains equality, so reoptimization without a new combinatorial
-inequality is a dead end. Equations (1)–(4) supply such an inequality and a
-stability target. The next session should continue only by proving that the
-sets `L_i` have aggregate positive defect, sharpening the terminal equality
-classification, or finding a different bridge lemma. Failure to do so is a
-STOP/PIVOT under the two-session gate.
+inequality is a dead end. The two-session gate is met by the terminal
+odd-clique classification and exact fibre-slack theorem. The additive
+packing hierarchy is now closed as a route to a better constant. Future work
+should attack the simultaneous row/column incidence conditions in (8), or
+develop the fractional tensor bridge (10) through a provable
+integrality/concentration tradeoff.

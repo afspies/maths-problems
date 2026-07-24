@@ -51,6 +51,13 @@ its precise failure is audited in
   the corrected inequality `5γ_G(S)≤2|S|+ρ^{\{3\}}(G)` holds and yields a new
   product bound. The old relaxed equality point extends to this bound, so it
   does not alone improve 0.5643; see `angles/k3-analogue/README.md`.
+- In the two-sparse terminal regime, the closed-neighborhood conflict graph
+  converts subset domination exactly to matching cover. Lemma 2.2 is tight
+  exactly for disjoint unions of odd cliques.
+- Every unit of slack in Steiner's oriented product bound splits exactly into
+  vertical, projection, partition-additivity, and subset-domination defects.
+- The full additive integer packing/domination hierarchy retains the same
+  formal 0.5643 obstruction at every level.
 
 ## Angle-of-attack menu (be exploratory — draw from different fields)
 
@@ -60,6 +67,8 @@ its precise failure is audited in
   additional obstruction parameter; the parameter-free `k=3` guess is dead.
 - **LP/integer duality:** compare integer `k`-packing defects with fractional
   domination and identify rounding structure that product fibres enforce.
+- **Fractional tensoring:** optimize the exact local-concentration denominator
+  for two fractional packings and relate it to the two integrality gaps.
 - **Extremal constructions:** build graphs/subsets realizing equality in every
   step to decide whether the 0.5643 framework is structurally sharp.
 - **Proof-logged constraints:** use SAT/ILP only to falsify proposed finite
@@ -68,9 +77,10 @@ its precise failure is audited in
 
 ## First steps
 
-1. Determine whether the fibre sets `L_i` can all have zero peeling defect and
-   terminal-tight matching structure simultaneously.
-2. Classify terminal equality in the two auxiliary matching bounds more
-   graph-theoretically (beyond the exact slack equations).
-3. If no aggregate defect can be forced, pivot to a different product
-   decomposition rather than reoptimizing Steiner's six inequalities.
+1. Use the exact fibre-slack identity to test incompatibility of row-wise
+   minimum `H`-sets with column-wise injective minimum projections and
+   odd-clique terminal remainders.
+2. Seek a tradeoff between `γ/γ_f` and the minimum tensor concentration `κ`
+   among near-optimal fractional packings.
+3. Do not pursue the additive `k`-packing hierarchy further: it is now proved
+   to preserve the exact obstruction at every level.

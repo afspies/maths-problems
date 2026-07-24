@@ -1,7 +1,14 @@
 from fractions import Fraction
+from itertools import combinations
 import unittest
 
-from graph_hygiene import Graph, complete, cycle, path
+from graph_hygiene import (
+    Graph,
+    complete,
+    cycle,
+    fractional_tensor_lower_bound,
+    path,
+)
 from optimization import (
     Surd73,
     steiner_exact_constants,
@@ -46,6 +53,34 @@ class GraphHygieneTests(unittest.TestCase):
             for mask in range(1 << graph.n):
                 subset = [v for v in range(graph.n) if mask & (1 << v)]
                 self.assertLessEqual(3 * graph.domination_number(subset), len(subset) + rho2)
+
+    def test_terminal_conflict_graph_formula(self) -> None:
+        graphs = [path(5), cycle(4), cycle(5), complete(5)]
+        for graph in graphs:
+            for mask in range(1 << graph.n):
+                subset = [v for v in range(graph.n) if mask & (1 << v)]
+                if all(
+                    len(graph.closed_neighborhood(v) & frozenset(subset)) <= 2
+                    for v in range(graph.n)
+                ):
+                    conflict = graph.closed_neighborhood_conflict_graph(subset)
+                    self.assertEqual(
+                        graph.domination_number(subset),
+                        len(subset) - conflict.matching_number(),
+                    )
+                    self.assertEqual(graph.two_packing_number(subset), conflict.independence_number())
+
+    def test_matching_cover_extremal_classification(self) -> None:
+        # Exhaust every graph through five vertices.
+        for n in range(6):
+            pairs = list(combinations(range(n), 2))
+            for edge_mask in range(1 << len(pairs)):
+                graph = Graph.from_edges(
+                    n,
+                    [edge for i, edge in enumerate(pairs) if edge_mask & (1 << i)],
+                )
+                equality = graph.independence_number() + 2 * graph.matching_number() == n
+                self.assertEqual(equality, graph.is_disjoint_union_of_odd_cliques())
 
     def test_strengthened_peeling_inequality(self) -> None:
         graphs = [path(5), cycle(4), cycle(5), complete(5)]
@@ -114,6 +149,49 @@ class GraphHygieneTests(unittest.TestCase):
                     5 * graph.domination_number(subset),
                     2 * len(subset) + rho3,
                 )
+
+    def test_all_level_packing_domination_gadget(self) -> None:
+        graph = Graph.from_edges(
+            5,
+            [(0, 1), (0, 3), (0, 4), (1, 2), (1, 4), (2, 3)],
+        )
+        subset = [2, 3, 4]
+        for k in range(7):
+            self.assertEqual(graph.k_packing_number(k), 3 * k // 2)
+            self.assertEqual(graph.k_domination_number(k), (3 * k + 1) // 2)
+        gamma = graph.domination_number(subset)
+        size = len(subset)
+        for m in range(1, 4):
+            self.assertEqual(3 * m * gamma, m * size + graph.k_packing_number(2 * m))
+        for m in range(4):
+            self.assertEqual(
+                (3 * m + 2) * gamma,
+                (m + 1) * size + graph.k_packing_number(2 * m + 1),
+            )
+
+    def test_fractional_tensor_regular_bound(self) -> None:
+        left = cycle(4)
+        right = cycle(4)
+        weights = [Fraction(1, 3)] * 4
+        self.assertTrue(left.is_fractional_packing_function(weights))
+        self.assertEqual(
+            fractional_tensor_lower_bound(left, right, weights, weights),
+            Fraction(16, 5),
+        )
+        self.assertGreaterEqual(
+            left.cartesian_product(right).domination_number(),
+            Fraction(16, 5),
+        )
+
+    def test_p4_fractional_packing_concentration(self) -> None:
+        graph = path(4)
+        concentrated = [Fraction(1), Fraction(0), Fraction(0), Fraction(1)]
+        self.assertTrue(graph.is_fractional_packing_function(concentrated))
+        self.assertEqual(sum(concentrated), 2)
+        self.assertEqual(
+            fractional_tensor_lower_bound(graph, graph, concentrated, concentrated),
+            Fraction(4),
+        )
 
 
 if __name__ == "__main__":
