@@ -12,7 +12,10 @@ Read, in order:
 5. `angles/critical-p2/README.md`.
 6. `angles/critical-p2/antonelli-young-bridge.md`.
 7. `results/critical-spiral-comb.md`.
-8. the latest `JOURNAL.md` section.
+8. `angles/unrestricted-zero-trace/README.md`.
+9. `results/null-spiral-no-primitive.md`.
+10. `literature/UNRESTRICTED_AUDIT.md`.
+11. the latest `JOURNAL.md` section.
 
 The finite-\(p<2\) proof has now received an independent primary-source audit
 and been packaged as `writeup/p-variation-note.md`. The audit verdict is
@@ -46,24 +49,38 @@ The strict spiral-comb witness uses
 infinite length, and is not locally monotone. GPT-5.6 Sol at xhigh returned
 MERGE after three local proof repairs.
 
-This does **not** cover every finite-\(2\)-variation Jordan curve. The actual
-frontier is now:
+The unrestricted session then proved that the approximation bridge itself is
+not universal.  Asano--Ike Remark 5.5 already handles positive-measure
+traces, so only null traces remain.  Nevertheless the interleaved spirals
+\[
+a(\theta)=\theta^{-1/2},\qquad
+b(\theta)=\frac{a(\theta)+a(\theta+2\pi)}2
+\]
+close to a planar-null Jordan curve with finite enclosed area but
+logarithmically divergent action along one smooth arm.
 
-> Which zero-area finite-\(2\)-variation Jordan curves outside the
-> Antonelli--Young \(\sigma\)-class possess a canonical local area lift
-> realizable by parameter-aligned embedded smooth approximations?
+A local action-rigidity lemma shows that uniform convergence of
+parameter-aligned \(C^1\) Jordan curves and their primitives forces the
+limiting primitive to equal the classical integral on every regular smooth
+subarc.  The logarithmic divergence therefore excludes **every** possible
+Asano--Ike Theorem 1.1 approximation sequence for this curve.  GPT-5.6 Sol at
+xhigh independently returned MERGE.  The example has infinite
+\(2\)-variation, so the finite-\(2\) frontier remains separately open.
 
-Seek either:
+The actual unrestricted frontier is now exactly Asano--Ike Remark 4.2:
 
-- a weaker geometric/tubular condition implying uniform local primitives;
-- an embedded realization theorem for a prescribed geometric \(2\)-rough
-  lift; or
-- a zero-area Jordan trace with two embedded approximation sequences having
-  the same total-period limit but incompatible local primitive limits.
+> For a null Jordan trace and \(\theta=\pi/2\), prove the diagonal
+> \(\mu hom\)-cohomology vanishing at the critical value without constructing
+> a single-valued continuous primitive.
+
+Do not retry two audited false shortcuts.  Conservative \(C^0\) smoothing
+does not control action potentials: shrinking high-turn radial twists have
+order-one action.  Greene--Lobb square-angle duality swaps spectral degrees
+\(1\) and \(2\), while the triangle inequality applies only to degree \(2\);
+it does not pin either action at half the enclosed area.
 
 Do not run numerical square searches. The rational harness is conjecture
-hygiene only. Consult GPT-5.6 Sol at xhigh for any proposed \(p=2\) theorem or
-counterexample. Preserve both claim boundaries: the general Square Peg
-conjecture remains open, and failure of primitive convergence for one
-approximation sequence does not refute an existential approximation
-criterion.
+hygiene only. Consult GPT-5.6 Sol at xhigh for any proposed microlocal
+vanishing theorem. Preserve both claim boundaries: the general Square Peg
+conjecture remains open, and failure of the primitive criterion does not
+refute the weaker diagonal-cohomology criterion.

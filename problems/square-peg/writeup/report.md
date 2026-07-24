@@ -25,7 +25,10 @@ corollaries. At the critical exponent we construct a positive-area,
 \(1/2\)-Hölder Jordan curve whose inner and outer smooth embedded
 approximations have incompatible Liouville-period limits. Thus finite
 \(2\)-variation plus parameter-aligned embedded \(C^0\) approximation does
-not force primitive convergence. The universal conjecture remains open.
+not force primitive convergence. More sharply, an explicit planar-null
+double spiral admits no parameter-aligned \(C^1\) Jordan approximation with
+convergent Liouville primitives. Thus the Asano--Ike primitive criterion
+cannot cover all Jordan curves. The universal conjecture remains open.
 
 ## Main result
 
@@ -170,6 +173,59 @@ The Antonelli--Young theorem now also controls the full local primitive when
 the curve is \(1/2\)-Hölder and \(\sigma(c)<\infty\). The remaining frontier
 is uniqueness or realizability of the local area lift outside this
 quadratic-diameter class.
+
+## Unrestricted zero-trace obstruction
+
+Asano--Ike Remark 5.5 already supplies every prescribed rectangle when the
+Jordan trace has positive planar measure. Hence the unrestricted problem
+reduces to null traces. Null trace stabilizes total enclosed areas and permits
+an area-preserving Hamiltonian filling, but it does not force a continuous
+boundary action lift.
+
+Let
+\[
+a(\theta)=\theta^{-1/2},\qquad
+b(\theta)=\frac{a(\theta)+a(\theta+2\pi)}2.
+\]
+Follow \(a(\theta)e^{i\theta}\) inward to the origin, follow
+\(b(\theta)e^{i\theta}\) outward, and close across the outer radial gap.
+The inequalities
+\[
+a(\theta)>b(\theta)>a(\theta+2\pi)
+\]
+prove that the curve is Jordan. Its trace is a countable union of rectifiable
+arcs and therefore has planar measure zero. Its enclosed area is finite
+because
+\[
+a(\theta)^2-b(\theta)^2=O(\theta^{-2}).
+\]
+However, for \(\alpha=(x\,dy-y\,dx)/2\),
+\[
+\int_{\theta_0}^{\Theta}\alpha
+=\frac12\int_{\theta_0}^{\Theta}\frac{d\theta}{\theta}
+=\frac12\log(\Theta/\theta_0).
+\]
+
+A local action-rigidity lemma makes this divergence unavoidable. If
+parameter-aligned \(C^1\) Jordan curves and their normalized primitives both
+converge uniformly, then on every regular smooth subarc of the limit the
+limiting primitive equals the classical line integral. The proof extracts a
+proper crosscut in a shrinking tubular rectangle and applies Green's theorem;
+uniform primitive convergence removes its moving-endpoint errors. Applied to
+the inward spiral, it would force a continuous function at the origin
+parameter to diverge.
+
+Therefore this null Jordan curve satisfies no Asano--Ike Theorem 1.1
+approximation. Explicit nested finite-spiral truncations have convergent
+periods but local primitives diverging like \(-\tfrac12\log N\), even after
+smooth embedded corner rounding.
+
+This is not a counterexample to Square Peg. It shows that a universal proof
+must instead establish Asano--Ike Remark 4.2's weaker diagonal
+\(\mu hom\)-cohomology vanishing, or use a different no-shrinkout mechanism.
+The square symmetry \(R_{\pi/2}^2=R_\pi\) does not settle it formally:
+Greene--Lobb duality swaps the two spectral degrees rather than identifying
+their actions.
 
 ## Relation to prior work and novelty boundary
 

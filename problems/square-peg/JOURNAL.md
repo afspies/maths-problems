@@ -345,3 +345,126 @@ git diff --check
 The exact harness passed 5/5 tests in 0.001 seconds. Python compilation, both
 HTML parses, TOML parsing, and `git diff --check` emitted no errors. The board
 regenerated with 18 problems.
+
+## 2026-07-24 — unrestricted zero-trace obstruction
+
+### Literature reduction
+
+Audited Asano--Ike v3 through Remarks 4.2 and 5.5--5.7 and Greene--Lobb's
+2026 positive-measure-angle paper.  A fact missing from the earlier live
+summary materially sharpens the frontier: Asano--Ike Remark 5.5 already
+proves every positive-planar-measure Jordan trace inscribes every prescribed
+rectangle by Lebesgue density.  The unrestricted problem therefore reduces
+to null traces.
+
+For a null trace, Schoenflies plus relative Oxtoby--Ulam gives a compactly
+supported area-preserving/Hamiltonian homeomorphism taking the circle to the
+curve.  This defines the canonical sheaf quantization \(F_C\), but does not
+prove Remark 4.2's diagonal \(\mu hom\)-cohomology vanishing.  Remark 5.7
+explicitly identifies that vanishing as the remaining universal step.
+
+### Two false universal shortcuts
+
+The action of a conservative smoothing is not \(C^0\)-continuous.  For
+\[
+\phi_n(r,\theta)=(r,\theta+\alpha_n(r))
+\]
+supported in a disk of radius \(\rho_n\), with \(N_n\) turns,
+\[
+\|\phi_n-\mathrm{id}\|_{C^0}\leq2\rho_n,\qquad
+dS_n=\phi_n^*\lambda-\lambda
+=\tfrac12r^2\alpha_n'(r)\,dr.
+\]
+Taking \(N_n\asymp\rho_n^{-2}\) keeps
+\(\operatorname{osc}S_n\) bounded below.  Thus Oxtoby--Ulam plus conservative
+smoothing supplies no boundary action estimate.
+
+The square-angle Floer symmetry also does not pin the critical action.
+Greene--Lobb's triangle inequality applies to the top invariant only and
+gives \(\ell_2(\pi/2)\geq A/2\).  Duality gives
+\(\ell_1(\pi/2)=A-\ell_2(\pi/2)\), but swaps the two degrees rather than
+identifying them.  The stated axioms permit
+\(\ell_2(\pi/2)\to A\) and \(\ell_1(\pi/2)\to0\), precisely the two shrink-out
+endpoints.  Null support measure does not repair their no-shrinkout capping
+estimate because the projected loops may have unbounded winding
+multiplicity.
+
+### The sharp obstruction
+
+Proved `results/null-spiral-no-primitive.md`.  Put
+\[
+a(\theta)=\theta^{-1/2},\qquad
+b(\theta)=\frac{a(\theta)+a(\theta+2\pi)}2.
+\]
+Traverse \(a(\theta)e^{i\theta}\) inward, the interleaved
+\(b(\theta)e^{i\theta}\) arm outward, and close across the outer radial gap.
+The order
+\[
+a(\theta)>b(\theta)>a(\theta+2\pi)
+\]
+proves embeddedness.  The trace is a countable union of finite rectifiable
+arcs and hence is planar-null.  The full enclosed area is finite since
+\[
+a(\theta)^2-b(\theta)^2=O(\theta^{-2}).
+\]
+But for \(\alpha=(x\,dy-y\,dx)/2\), the inward-arm action is
+\[
+\int_{\theta_0}^{\Theta}\alpha
+=\frac12\log(\Theta/\theta_0).
+\]
+
+The decisive local action-rigidity lemma is proved in
+`angles/unrestricted-zero-trace/README.md`: if parameter-aligned regular
+\(C^1\) Jordan curves and their normalized primitives converge uniformly,
+then the limiting primitive agrees with the classical line integral on every
+regular smooth subarc.  The proof extracts moving endpoints which form a
+proper crosscut of a shrinking tubular rectangle, closes it along a parallel
+side, and applies Green's theorem.  Uniform convergence of the primitives
+removes the moving-endpoint errors.  Applied to the inward spiral, the lemma
+would force a continuous primitive at the origin parameter to diverge.
+
+Therefore this null curve admits no Asano--Ike Theorem 1.1 approximation
+sequence at all.  Natural finite-spiral truncations make the distinction
+visible: their total periods converge, while a central prefix primitive
+diverges like \(-\tfrac12\log N\).  Embedded corner rounding preserves both
+facts.
+
+This is not a counterexample to Square Peg.  It proves instead that the
+continuous-primitive route cannot solve the unrestricted problem.  The next
+target is the weaker diagonal cohomology vanishing at \(\theta=\pi/2\).
+
+### Novelty and independent review
+
+Targeted searches through 2026-07-24 found no explicit local action-rigidity
+lemma or null double-spiral obstruction in the peg, Young/rough-integration,
+or conservative-smoothing literature.  Indexing is incomplete, so the result
+is described as an explicit campaign counterexample to universality of the
+primitive criterion, with no priority claim.
+
+GPT-5.6 Sol at xhigh was consulted at route selection and on the final proof.
+It returned **HOLD/PIVOT** on action-controlled conservative smoothing,
+exhibited the shrinking radial-twist obstruction, and independently returned
+**MERGE** on the local-rigidity lemma and double spiral.  The audit checked
+the polar ordering, compact parametrization, planar-null trace, action signs,
+moving-crosscut extraction, absence of derivative control, conversion
+between \(\alpha\) and \(\lambda=y\,dx\), and the existential quantifier in
+Asano--Ike.
+
+### Compute and verification
+
+All work ran locally in the repository worktree; no private compute
+infrastructure was used.  The rational harness remains conjecture hygiene and
+does not count as evidence for the theorem.  Commands run:
+
+```text
+python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
+python3 -m py_compile problems/square-peg/harness/geometry.py problems/square-peg/harness/test_geometry.py
+xmllint --html --noout problems/square-peg/writeup/report.html problems/square-peg/writeup/artifact-template.html
+python3 -c 'import tomllib; tomllib.load(open("problems/square-peg/STATUS.toml","rb")); print("STATUS.toml OK")'
+python3 tools/board.py
+git diff --check
+```
+
+The exact harness passed 5/5 tests in 0.001 seconds.  Python compilation,
+both HTML parses, TOML parsing, board regeneration (18 problems), and
+`git diff --check` completed without error.

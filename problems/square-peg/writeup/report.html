@@ -60,7 +60,9 @@
 	  An explicit critical spiral comb has infinite <var>p</var>-variation for
 	  every <var>p</var>&lt;2, yet still gets every rectangle.
   At <var>p</var>=2, a positive-area ½-Hölder Jordan curve gives incompatible
-  inner and outer embedded primitive limits.
+  inner and outer embedded primitive limits. More sharply, a planar-null
+  double spiral admits no parameter-aligned C<sup>1</sup> approximation with
+  convergent primitives.
 </div>
 
 <h2>1 · Main theorem</h2>
@@ -143,7 +145,33 @@ existential Asano–Ike criterion, and is not a counterexample to Square Peg.
 	theorem now controls one strict critical local-lift class; curves outside
 	that class remain the frontier.</p>
 
-<h2>5 · Exact hygiene checks</h2>
+<h2>5 · Unrestricted zero-trace obstruction</h2>
+<p>Asano–Ike already handle every positive-measure Jordan trace by density,
+so the unrestricted problem reduces to null traces. Put</p>
+<div class="eqn">
+  a(θ)=θ<sup>−1/2</sup>, &nbsp;
+  b(θ)=(a(θ)+a(θ+2π))/2.
+</div>
+<p>Following the <var>a</var>-spiral inward and the interleaved
+<var>b</var>-spiral outward gives a null Jordan curve with finite enclosed
+area: a(θ)&gt;b(θ)&gt;a(θ+2π), while
+a(θ)<sup>2</sup>−b(θ)<sup>2</sup>=O(θ<sup>−2</sup>). But its inward action is</p>
+<div class="eqn">
+  ½∫<sub>θ₀</sub><sup>Θ</sup>θ<sup>−1</sup>dθ
+  =½ log(Θ/θ₀).
+</div>
+<div class="env"><span class="label">Obstruction theorem.</span>
+  This null Jordan curve admits no parameter-aligned regular
+  C<sup>1</sup> Jordan approximants with locally uniformly convergent
+  Liouville primitives.
+</div>
+<p>A tubular-crosscut rigidity lemma forces any limiting primitive to equal
+the classical integral on every smooth subarc, contradicting continuity at
+the spiral’s origin parameter. Thus the Asano–Ike primitive criterion is not
+universal. This is not a counterexample to Square Peg: the remaining target
+is their weaker diagonal μhom-cohomology vanishing at θ=π/2.</p>
+
+<h2>6 · Exact hygiene checks</h2>
 <pre>$ python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
 Ran 5 tests
 OK</pre>
@@ -151,7 +179,7 @@ OK</pre>
 primitives under subdivision, and candidate squares. It does not certify the
 analytic universal theorem.</p>
 
-<h2>6 · Scope</h2>
+<h2>7 · Scope</h2>
 <table>
   <thead><tr><th>Class</th><th>Prior status</th><th>Here</th></tr></thead>
   <tbody>
@@ -160,6 +188,7 @@ analytic universal theorem.</p>
 	    <tr><td>Finite p-variation, p&lt;2</td><td>no explicit peg theorem found</td><td>synthesis proved</td></tr>
 	    <tr><td>½-Hölder + finite quadratic-diameter energy</td><td>signed area: Antonelli–Young</td><td>every rectangle</td></tr>
 	    <tr><td>General finite 2-variation</td><td>area lift not automatic</td><td>strict class + embedded anomaly</td></tr>
+    <tr><td>Null double spiral</td><td>unrestricted frontier</td><td>primitive criterion impossible</td></tr>
     <tr><td>General Jordan</td><td>open</td><td>still open</td></tr>
   </tbody>
 </table>
@@ -170,6 +199,7 @@ analytic universal theorem.</p>
 
 <div class="footer">
   Canonical source: <code>writeup/report.md</code>. Detailed proofs:
-  <code>angles/p-variation/</code> and <code>angles/critical-p2/</code>.
+  <code>angles/p-variation/</code>, <code>angles/critical-p2/</code>, and
+  <code>angles/unrestricted-zero-trace/</code>.
   No DOI has been minted.
 </div>

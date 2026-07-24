@@ -40,6 +40,15 @@ finite-\(p<2\) class.  The explicit critical spiral comb in
 every prescribed rectangle.  The proof is in
 `angles/critical-p2/antonelli-young-bridge.md`.
 
+The unrestricted campaign now has a sharp negative result about the present
+bridge.  Asano--Ike already handle positive-measure traces by density, so the
+remaining case is a planar-null trace.  Nevertheless,
+`results/null-spiral-no-primitive.md` constructs an explicit null double
+spiral for which **no** parameter-aligned \(C^1\) Jordan approximants can have
+locally uniformly convergent Liouville primitives.  Thus their Theorem 1.1
+criterion is not universal.  This does not refute their weaker Remark 4.2
+diagonal-cohomology route or the Square Peg conjecture.
+
 At the critical exponent, `angles/critical-p2/osgood-area-anomaly.md` proves
 that finite \(2\)-variation plus parameter-aligned embedded \(C^0\)
 approximation does not force primitive convergence. A positive-area,
@@ -77,6 +86,11 @@ to the existential Asano--Ike criterion.
 - Positive-area Jordan traces admit inner and outer conformal level
   approximations with incompatible limiting periods. For a zero-area trace,
   total periods are stable.
+- Total-period stability for null traces does not imply a local primitive.
+  The interleaved \(r=\theta^{-1/2}\) double spiral has finite total enclosed
+  area but logarithmically divergent action along one smooth arm.  A tubular
+  crosscut lemma proves that any uniformly convergent approximating primitive
+  would have to reproduce that divergence.
 - Antonelli--Young's all-partitions signed-area theorem turns
   \(1/2\)-Hölder regularity plus \(\sigma(c)<\infty\) into a
   partition-independent local primitive. Combined with embedded Jordan
@@ -89,8 +103,9 @@ to the existential Asano--Ike criterion.
 - **Geometric rough paths at \(p=2\):** the positive-area period anomaly is
   complete, and the Antonelli--Young \(\sigma\)-class is complete; seek a
   weaker local lift theorem or a counterexample outside that class.
-- **Sheaf criterion:** weaken the no-translate microsupport condition without
-  requiring a single-valued continuous primitive.
+- **Sheaf criterion:** prove Asano--Ike Remark 4.2's diagonal
+  \(\mu hom\)-cohomology vanishing at \(\theta=\pi/2\), without requiring a
+  single-valued continuous primitive.
 - **Planar topology:** find quantitative tubular/one-sided conditions that
   force primitive compactness for embedded approximants.
 - **Counterexample pressure test:** localize an embedded anomaly to a
@@ -103,6 +118,7 @@ to the existential Asano--Ike criterion.
    synthesis before claiming novelty.
 2. Obtain an independent expert check of the critical uniform-prefix bridge
    and spiral-comb witness.
-3. Seek a geometric weakening of \(\sigma(c)<\infty\), or attack the
-   zero-area local-lift question outside this class. Do not spend time on
-   numerical square searches.
+3. Do not seek a universal continuous local lift: the null double spiral
+   rules it out. Attack the square-angle diagonal cohomology directly, while
+   keeping clear that Floer duality swaps rather than identifies the two
+   spectral degrees. Do not spend time on numerical square searches.

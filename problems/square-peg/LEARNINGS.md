@@ -4,8 +4,9 @@
 
 - Obtain human/expert priority and soundness feedback on both the packaged
   finite-\(p<2\) synthesis and the critical Antonelli--Young bridge.
-- Seek a geometric weakening of the finite dyadic quadratic-diameter sum, or
-  a zero-area local anomaly outside that class.
+- For the unrestricted problem, work directly on Asano--Ike Remark 4.2's
+  diagonal cohomology at \(\theta=\pi/2\).  Do not assume every null trace has
+  a continuous area primitive: the explicit double spiral disproves that.
 
 ## Results
 
@@ -44,6 +45,24 @@
   nonrectifiable, finite \(p\)-variation for every \(p>d\), and not locally
   monotone.  It proves the new class is strictly outside Asano--Ike's two
   named corollaries.
+- Asano--Ike Remark 5.5 already solves every positive-planar-measure Jordan
+  trace by density.  The unrestricted problem therefore reduces to null
+  traces.
+- A null trace still need not satisfy Asano--Ike Theorem 1.1.  Interleave
+  \(a(\theta)=\theta^{-1/2}\) with
+  \(b(\theta)=(a(\theta)+a(\theta+2\pi))/2\).  The logarithmically divergent
+  arm actions cancel in the full period to an integrable
+  \(O(\theta^{-2})\) remainder.
+- Local action rigidity: on every regular smooth subarc of the limit, uniform
+  convergence of both parametrized Jordan curves and their primitives forces
+  the limiting primitive to equal the classical line integral.  The proof
+  extracts a proper crosscut in a shrinking tubular rectangle and applies
+  Green's theorem; uniform primitive convergence removes the moving-endpoint
+  errors.
+- Consequently the null double spiral admits no parameter-aligned regular
+  \(C^1\) approximants with convergent primitives.  This excludes every
+  possible Asano--Ike Theorem 1.1 sequence, not just conformal or polygonal
+  approximants.
 
 ## Dead ends and cautions
 
@@ -55,6 +74,17 @@
   Jordan. The positive-area Osgood construction now supplies a genuinely
   embedded approximation anomaly, but only for a supplied sequence: it does
   not show failure of Asano--Ike's existential condition.
+- That last limitation does not apply to the new null double spiral: local
+  action rigidity proves failure of the existential primitive criterion
+  itself.  The curve has infinite \(2\)-variation, so it does not weaken the
+  positive finite-\(2\)-variation results.
+- Conservative \(C^0\) smoothing controls maps, not action potentials.
+  Shrinking high-turn radial twists have vanishing displacement and
+  order-one action oscillation.
+- Square-angle Floer symmetry does not pin the top action at half the area.
+  Duality exchanges degrees \(1\) and \(2\), while the available triangle
+  inequality is only for degree \(2\).  The axioms permit the two actions to
+  tend to \(0\) and the full enclosed area.
 - The finite-\(p\) theorem is likely a short, nearly formal synthesis rather
   than deep novelty.  Targeted search found no explicit statement, but that
   does not establish priority. The independent audit recommends “apparently

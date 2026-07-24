@@ -137,6 +137,21 @@ does not guarantee any prescribed angle, including \(\pi/2\). It therefore
 neither subsumes the finite-\(p<2\) prescribed-rectangle consequence nor
 solves the Square Peg conjecture.
 
+### Unrestricted null-trace reduction
+
+Asano--Ike Remark 5.5 separately proves every positive-planar-measure Jordan
+trace has every prescribed rectangle by Lebesgue density.  Thus the
+unrestricted problem reduces to null traces.  Remarks 4.2 and 5.7 identify
+diagonal \(\mu hom\)-cohomology vanishing as the missing universal step.
+
+The explicit interleaved \(r=\theta^{-1/2}\) spiral in
+`../results/null-spiral-no-primitive.md` shows that the stronger
+primitive-approximation hypothesis in their Theorem 1.1 is not universal,
+even among null traces.  A local tubular-crosscut lemma excludes every
+parameter-aligned \(C^1\) approximation with convergent primitives.  This is
+a new obstruction to the sufficient criterion, not a counterexample to
+Square Peg and not a refutation of the weaker Remark 4.2 condition.
+
 ### Antonelli--Young, arXiv:2605.15987
 
 Antonelli--Young define signed area for critical \(1/2\)-Hölder curves

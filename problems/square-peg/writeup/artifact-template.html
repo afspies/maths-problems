@@ -178,7 +178,9 @@
   hypothesis reaches the critical scale. An explicit double spiral shows
   that the class includes curves that are neither rectifiable nor locally
   monotone. At <var>p</var>=2, a positive-area ½-Hölder Jordan curve gives
-  incompatible inner and outer embedded primitive limits.
+  incompatible inner and outer embedded primitive limits. More sharply, a
+  planar-null double spiral admits no parameter-aligned C<sup>1</sup>
+  approximation with convergent primitives.
 </div>
 
 <h2>1 · Result</h2>
@@ -246,7 +248,28 @@ existential Asano–Ike criterion, and is not a counterexample to Square Peg.
 For zero-area traces the total periods are stable; local subarc area lifts
 remain the frontier.</p>
 
-<h2>5 · Exact hygiene checks</h2>
+<h2>5 · Unrestricted zero-trace obstruction</h2>
+<p>Asano–Ike already handle every positive-measure Jordan trace by density,
+so the unrestricted problem reduces to null traces. Put</p>
+<div class="eqn">
+  <span class="body">a(θ)=θ<sup>−1/2</sup>, &nbsp;
+  b(θ)=(a(θ)+a(θ+2π))/2.</span>
+</div>
+<p>Following the <var>a</var>-spiral inward and the interleaved
+<var>b</var>-spiral outward gives a null Jordan curve with finite enclosed
+area. Its inward action nevertheless grows as ½ log(Θ/θ₀).</p>
+<div class="env theorem"><span class="label">Obstruction theorem.</span>
+  This null Jordan curve admits no parameter-aligned regular
+  C<sup>1</sup> Jordan approximants with locally uniformly convergent
+  Liouville primitives.
+</div>
+<p>A tubular-crosscut rigidity lemma forces any limiting primitive to equal
+the classical integral on every smooth subarc, contradicting continuity at
+the origin parameter. The Asano–Ike primitive criterion is therefore not
+universal. This is not a counterexample to Square Peg; the remaining target
+is their weaker diagonal μhom-cohomology vanishing at θ=π/2.</p>
+
+<h2>6 · Exact hygiene checks</h2>
 <p>The finite harness does not prove the analytic theorem. It checks rational
 polygon simplicity, Liouville/shoelace primitives under subdivision, and
 candidate squares exactly.</p>
@@ -255,7 +278,7 @@ candidate squares exactly.</p>
 Ran 5 tests
 OK</code></pre>
 
-<h2>6 · Scope and prior work</h2>
+<h2>7 · Scope and prior work</h2>
 <div class="tablewrap">
   <table>
     <thead><tr><th>Class</th><th>Status before this report</th><th>Here</th></tr></thead>
@@ -264,6 +287,7 @@ OK</code></pre>
       <tr><td>Locally monotone</td><td>Asano–Ike: every rectangle</td><td>not new</td></tr>
       <tr><td>Finite p-variation, p&lt;2</td><td>no explicit peg theorem found</td><td>proved by synthesis</td></tr>
       <tr><td>Finite 2-variation</td><td>area lift not automatic</td><td>embedded anomaly proved</td></tr>
+      <tr><td>Null double spiral</td><td>unrestricted frontier</td><td>primitive criterion impossible</td></tr>
       <tr><td>General Jordan</td><td>open</td><td>still open</td></tr>
     </tbody>
   </table>
@@ -277,5 +301,6 @@ confirmation remains appropriate.</p>
   <p><strong>Cite as:</strong> see <code>writeup/CITATION.cff</code>
   (no DOI minted).</p>
   <p>Canonical source: <code>writeup/report.md</code>. Detailed proofs:
-  <code>angles/p-variation/</code> and <code>angles/critical-p2/</code>.</p>
+  <code>angles/p-variation/</code>, <code>angles/critical-p2/</code>, and
+  <code>angles/unrestricted-zero-trace/</code>.</p>
 </div>
