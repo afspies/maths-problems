@@ -645,3 +645,144 @@ git diff --check
 The exact harness passed 5/5 tests in 0.001 seconds.  Python compilation,
 both HTML parses, TOML parsing, board regeneration (19 problems), and
 `git diff --check` completed without error.
+
+## 2026-07-24 — action-retaining eye and square-envelope area
+
+### Primary-source reconstruction
+
+Re-read Asano--Ike v3, especially Proposition 2.4, Lemma 3.3, Remark 4.2,
+Proposition 5.1, and the twisted action-period identification.  Also audited
+their completeness paper, arXiv:2201.02598, Theorem 4.3 and Corollary 4.5.
+After a summable subsequence the metric completion is explicitly
+\[
+ F_\infty\simeq\operatorname*{hocolim}_n
+ T_{-\varepsilon_{\ge n}}F_n.
+\]
+It is a telescope of chosen interleaving morphisms, not an ordinary
+\(!\), \(*\), or middle extension.  The source proves convergence and a
+microsupport limsup estimate, but does not compute the telescope at a
+collapsed prime end.
+
+Audited Hugelmeyer, arXiv:2301.01340, Definition 1 and Theorem 1.  A
+square-free Jordan curve has a continuous square envelope with its two
+outer vertices in the exterior, its two rotated vertices in the interior,
+side length tending to zero at both ends, and outer winding one on the
+Jordan domain.  The theorem does not assert finite variation, simple
+ribbons, one-sided winding, or endpoint convergence.
+
+### Correction of the helical-eye model
+
+The previous toy model incorrectly collapsed
+\(\{r=0\}\times S^1_t\) to one point.  The actual set
+\(\rho^{-1}\Delta\) retains the complete action circle.  It also compared
+\(j_!\mathbb k_U\) and \(Rj_*\mathbb k_U\), which already differ on the
+punctured side boundary, and inferred a sheaf morphism from a common stalk.
+Naturality makes that alleged translated morphism zero.
+
+For one fixed punctured eye sheaf \(F\), recollement gives
+\[
+ k_!F\to Rk_*F\to i_*Q\to+1.
+\]
+In the monotone helical model,
+\[
+ Q_t\simeq(\prod_{n\ge0}\mathbb k)/(\bigoplus_{n\ge0}\mathbb k)
+\]
+with shift monodromy.  It is locally constant in \(t\), hence its
+microsupport has \(\tau_t=0\).  Thus the \(!\)-versus-\(*\) distinction
+vanishes after Tamarkin localization.  A half-open eye of width \(w\) is
+\(w\)-torsion; the null spiral's deep eye, of width
+\(\pi/\theta+O(\theta^{-2})\), is arbitrarily torsion.
+
+The remaining local datum is the Milnor boundary term of the continuation
+telescope.  One must show that restriction to the diagonal commutes with
+the relevant inverse limit and that the cross-stage tower is pro-zero away
+from \(\pi\mathbb Z\).
+
+### Exact failure of the zero-Hofer germ proof
+
+The conjugated Hamiltonian
+\[
+ H^\phi(z,w)=|\phi(z)-\phi(w)|^2/4
+\]
+can be cut off in an invariant diagonal tube, after a compact midpoint
+cut-off, without changing its shrinking germ and with Hofer oscillation
+\(O(\varepsilon)\).  This geometric step is sound.
+
+The categorical inference is false.  The constructible objects
+\[
+ V_\varepsilon
+ =V_{\rm std}\oplus\mathbb k_{[a_0,a_0+\varepsilon)}
+\]
+converge to \(V_{\rm std}\) while their microstalk at the fixed endpoint
+\(a_0\) retains an extra \(\mathbb k\).  More sharply, an action
+skyscraper has zero one-sided interleaving distance from zero but non-zero
+ordinary global cohomology.  Restricted diagonal \(\mu hom\) is not known
+to be a limit-constructible Tamarkin object, so zero-distance rigidity does
+not apply.  This exactly models the zero-lifetime critical class that
+Remark 4.2 must eliminate.
+
+A GPT-5.6 Sol xhigh audit and an independent categorical audit both returned
+**HOLD**.  They confirmed the cut-off geometry and rejected both the
+unsupported passage of smooth GKS locality through metric completion and the
+zero-distance-to-isomorphism step for ordinary restricted \(\mu hom\).
+
+### Square-envelope area conservation
+
+For outer paths \(a,b\), write \(v=b-a\) and take the opposite square paths
+\(c=a+Jv,d=b+Jv\).  Direct Young calculus, equivalently an exact synchronized
+polygon calculation, gives
+\[
+ \mathcal A(\Gamma_{\rm in})-\mathcal A(\Gamma_{\rm out})
+ =\frac{|v(s)|^2-|v(t)|^2}{2}.
+\]
+The long-side integrands cancel identically; only the straight connectors
+remain.  A compactified finite-\(p<2\) square envelope with simple nested
+ribbons is therefore impossible.
+
+The existing envelope theorem does not supply the needed one-sided winding.
+An exterior loop can wind once on the Jordan domain while adding a clockwise
+exterior lobe; an inner loop can repeat many times.  Equal signed areas are
+therefore compatible with the stated inside/outside conditions.
+
+A second exact polygonal obstruction defeats the obvious paired closure.
+For a \(\Pi\)-shaped domain and vertical translation \(v\), the set
+\[
+ \operatorname{Ext}(\gamma)\cap(\operatorname{Int}(\gamma)-v)
+\]
+has distinct components containing the two admissible outer vertices.
+There is no outer connector whose translate remains inside.  Scaled notches
+reproduce the failure at arbitrarily small square sizes.
+
+The required final GPT-5.6 Sol xhigh audit first returned **HOLD** on the
+phrase “one-sided winding”: a sixteen-fold positive inner loop is already a
+counterexample.  After replacing it by the exact sufficient bounds
+\[
+ n_{\rm out}\geq\mathbf1_\Omega,\qquad
+ 0\leq n_{\rm in}\leq\mathbf1_\Omega,\qquad
+ \int_\Omega(1-n_{\rm in})>0
+\]
+(or \(n_{\rm in}\leq0\)), the verdict was **MERGE**.  The audit independently
+checked the sign in the ribbon identity and the components of the
+\(\Pi\)-notch translation set.
+
+### Claim boundary and compute
+
+The unrestricted Square Peg conjecture remains open.  This session made two
+proof-grade corrections/reductions and one exact conditional invariant; it
+did not prove an unrestricted square.  The rational harness remains
+conjecture hygiene only.
+
+All work ran locally in the repository worktree; no private compute
+infrastructure was used.  Commands included:
+
+```text
+python3 -m unittest problems.square-peg.harness.test_geometry
+# failed during collection: ModuleNotFoundError: No module named 'geometry'
+# (the harness uses its documented discovery-mode import path)
+python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py'
+python3 -m py_compile problems/square-peg/harness/geometry.py problems/square-peg/harness/test_geometry.py
+xmllint --html --noout problems/square-peg/writeup/report.html problems/square-peg/writeup/artifact-template.html
+python3 -c 'import tomllib; tomllib.load(open("problems/square-peg/STATUS.toml","rb"))'
+python3 tools/board.py
+git diff --check
+```

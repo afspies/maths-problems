@@ -132,6 +132,25 @@ invariant from that continuum which cannot be reproduced by isolated
 nested motifs, then connect it to the conformal action-concentration or
 diagonal-persistence class.
 
+There is now one such exact invariant for a genuine path.  If
+\(a,b\) are the two outer vertices of a moving square and
+\(c=a+J(b-a),d=b+J(b-a)\) the inner vertices, the two closed ribbons have
+signed-area difference
+\[
+ \mathcal A_{\rm in}-\mathcal A_{\rm out}
+ =\frac{|b(s)-a(s)|^2-|b(t)-a(t)|^2}{2}.
+\]
+Hence a compactified finite-\(p<2\) envelope with simple nested ribbons is
+impossible.  The calculation and its exact hypotheses are in
+`square-envelope-area.md`.
+
+The continuation theorem does not yet supply those hypotheses.  Its
+carrier can be a topologist's sine continuum, and even a spanning path can
+have infinite variation and multiply-wound ribbons.  Homologically it
+records only the vertical generator of
+\(H_1(S^1\times I,S^1\times\partial I;\mathbb F_2)\); two such generators
+need not intersect.
+
 ## Primary sources
 
 - B. Matschke, *On the Square Peg Problem and Its Relatives*,

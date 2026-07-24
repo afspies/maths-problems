@@ -214,22 +214,46 @@ required unrestricted theorem is therefore bar-level.</p>
   a∉πℤ.
 </div>
 <p>Equivalently, all interior-action generators collapsing to the diagonal
-must pair into persistence bars whose lengths vanish. Small local
-Hamiltonian oscillation alone does not prove this, because microlocal Hom
-need not commute with the shrinking-neighborhood limit.</p>
+must pair into persistence bars whose lengths vanish and leave no
+exact-action endpoint microstalk. Small local Hamiltonian oscillation alone
+does not prove this, because microlocal Hom need not commute with the
+shrinking-neighborhood limit.</p>
 <p>For every finite smooth null-spiral truncation, the diagonal complex lies
 only at action 0 mod π. In the limit its common phase winds through the full
 action circle while the sheet gap is
-π/(2θ)+O(θ<sup>−2</sup>). The exact missing datum is the derived boundary
-extension of this infinitely winding, vanishing-width eye: !- and
-*-extensions agree off the endpoint but can have different point-supported
-translated morphisms.</p>
+π/(2θ)+O(θ<sup>−2</sup>). The original collapsed-point eye model was
+incorrect: the actual restriction retains the full action circle, the
+!-versus-* cone has τ<sub>t</sub>=0, and the deep eye is arbitrarily
+torsion. The exact missing datum is a possible Milnor boundary term in the
+metric-completion telescope.</p>
+<p>The interval k<sub>[a,a+ε)</sub> converges to zero while keeping a
+nonzero microstalk at its fixed left endpoint. An action skyscraper likewise
+has zero one-sided interleaving distance but nonzero cohomology. Hence an
+arbitrarily small Hofer cutoff of the diagonal germ does not prove the
+required vanishing.</p>
 <p>Matschke’s every-scale trapezoids also strengthen to a connected
 fixed-type continuum spanning every compact positive scale interval. Local
 prime-end topology excludes none of its collision screens, so any useful
 configuration obstruction must be global along this continuum.</p>
 
-<h2>8 · Exact hygiene checks</h2>
+<h2>8 · Square-envelope area conservation</h2>
+<p>For outer paths <var>a</var>,<var>b</var>, put
+<var>v</var>=<var>b</var>−<var>a</var> and take the opposite square vertices
+<var>c</var>=<var>a</var>+J<var>v</var>,
+<var>d</var>=<var>b</var>+J<var>v</var>. The two closed ribbons obey</p>
+<div class="eqn">
+  A<sub>in</sub>−A<sub>out</sub>
+  =(‖v(s)‖<sup>2</sup>−‖v(t)‖<sup>2</sup>)/2.
+</div>
+<p>The long-side integrands cancel identically; only the straight end
+connectors remain. Thus a compactified finite-p-variation square envelope
+with simple nested ribbons is impossible. Hugelmeyer’s envelope does not
+currently supply simplicity, the required outer/inner winding bounds, or a
+joint rough lift, so
+this is an exact conditional obstruction rather than a proof of the general
+conjecture.</p>
+
+<h2>9 · Exact hygiene checks</h2>
 <pre>$ python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
 Ran 5 tests
 OK</pre>
@@ -237,7 +261,7 @@ OK</pre>
 primitives under subdivision, and candidate squares. It does not certify the
 analytic universal theorem.</p>
 
-<h2>9 · Scope</h2>
+<h2>10 · Scope</h2>
 <table>
   <thead><tr><th>Class</th><th>Prior status</th><th>Here</th></tr></thead>
   <tbody>

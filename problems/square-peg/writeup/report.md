@@ -308,9 +308,10 @@ Q=(\phi\times\phi)^{-1}R_{\pi/2}(\phi\times\phi)
 \]
 and \(L_0\cap Q(L_0)=\Delta_0\).  At approximation level, arbitrary
 interior-action generators collapsing to the diagonal must pair into
-persistence bars whose lengths vanish.  No audited source supplies this
-\(C^0\) clean-intersection theorem, and small interleaving distance alone
-does not imply it because \(\mu hom\) does not commute with metric limits.
+persistence bars whose lengths vanish and leave no exact-action endpoint
+microstalk.  No audited source supplies this \(C^0\) clean-intersection
+theorem, and small interleaving distance alone does not imply it because
+\(\mu hom\) does not commute with metric limits.
 
 For every finite smooth truncation of the null spiral, the clean diagonal
 complex is \(H^*(S^1;\mathbb F_2)\) entirely at action \(0\pmod\pi\).
@@ -325,9 +326,24 @@ collapsed prime end.  The two sheets form a vanishing-width eye with gap
 \[
 \delta(\theta)=\frac{\pi}{2\theta}+O(\theta^{-2}).
 \]
-The missing calculation is therefore the derived boundary extension of
-this eye: \(!\)- and \(*\)-extensions have identical punctured geometry but
-different point-supported translated morphisms.
+The original collapsed-point eye model was incorrect.  The actual
+restriction retains the full action circle.  After fixing one punctured
+side-boundary convention, the \(!\)-versus-\(*\) cone is locally constant
+along that circle, has \(\tau_t=0\), and vanishes in the Tamarkin quotient.
+The deep eye itself is arbitrarily torsion.
+
+The remaining calculation is instead the Milnor boundary term of the
+metric-completion telescope.  This distinction matters: the constructible
+objects
+\[
+ V_\varepsilon
+ =V_{\rm std}\oplus\mathbb k_{[a_0,a_0+\varepsilon)}
+\]
+converge to \(V_{\rm std}\) while retaining a non-zero microstalk at the
+fixed endpoint \(a_0\).  An action skyscraper has zero one-sided
+interleaving distance from zero but non-zero global cohomology.  Therefore
+an arbitrarily small Hofer cut-off of the diagonal germ does not prove
+Asano--Ike Remark 4.2.
 
 Matschke's obstruction gives a complementary exact degeneration statement:
 a square-free Jordan curve has a special trapezoid at every parameter
@@ -339,6 +355,26 @@ trapezoid locus contains a fixed-type connected continuum spanning the two
 endpoint scales.  Local prime-end topology still excludes no screen; any
 remaining configuration-space obstruction must be global along that
 continuum.
+
+Hugelmeyer's square envelope supplies a second global formulation.  If
+\(a,b\) are its outer paths, \(v=b-a\), and
+\(c=a+Jv,d=b+Jv\) are the inner paths, direct Young calculus gives
+\[
+ \mathcal A(\Gamma_{\rm in})-\mathcal A(\Gamma_{\rm out})
+ =\frac{|v(s)|^2-|v(t)|^2}{2}.                            \tag{*}
+\]
+Thus a compactified finite-\(p<2\) envelope with simple nested ribbons is
+impossible: the endpoint gaps vanish, so the two ribbon areas are equal,
+while strict containment makes them unequal.  The calculation is exact for
+synchronized polygons as well.
+
+This remains conditional.  Hugelmeyer's definition gives outer winding one,
+not simple ribbons or the stronger bounds
+\(n_{\rm out}\geq\mathbf1_\Omega\) and
+\(0\leq n_{\rm in}\leq\mathbf1_\Omega\) with strict area deficit; the paths
+also need not have a joint geometric rough lift.  Signed areas can cancel
+through repeated positive and negative winding.  Matschke's connected
+carrier need not even contain a spanning path.
 
 ## Relation to prior work and novelty boundary
 

@@ -82,30 +82,61 @@ Equations (1), (4), and (7) are the exact limiting puzzle: every finite
 diagonal complex vanishes at interior action, the limiting support is
 maximal, and the sheet separation tends to zero.
 
-## Why support closure does not decide cohomology
+## Corrected action-retaining toy model
 
-A one-dimensional toy model makes the extension ambiguity explicit.
-Compactify
+The action circle must not be collapsed.  The correct local space is
 \[
- X^\circ=(0,\varepsilon)_r\times(\mathbb R/\pi\mathbb Z)_t
+ Y=[0,\varepsilon)_r\times(\mathbb R/\pi\mathbb Z)_t,\qquad
+ B=\{0\}\times(\mathbb R/\pi\mathbb Z)_t.                 \tag{8}
 \]
-by collapsing \(\{0\}\times S^1\) to one point \(p\).  Let \(g(r)\) wind
-unboundedly modulo \(\pi\), let \(\delta(r)\to0\), and set
-\[
- U=\{0<r<\varepsilon:
- 0<(t-g(r))\bmod\pi<\delta(r)\}.
-\]
-For every fixed \(a\notin\pi\mathbb Z\), \(U\) and \(T_aU\) are disjoint
-near \(p\), although both closures contain \(p\).  The extensions
-\[
- E_!=j_!\mathbb k_U,\qquad E_*=Rj_*\mathbb k_U
-\]
-have the same punctured helical eye.  But \(E_!\) has zero boundary stalk,
-whereas \(E_*\) has a non-zero stalk at \(p\); the latter admits a
-point-supported translated morphism that the former does not.  Punctured
-finite data and the projected support closure therefore do not determine
-the boundary \(\mu hom\).
+This matches \(\rho^{-1}\Delta_C\), which retains every \(t\)-phase over the
+collapsed spatial point.
 
-The actual metric-limit quantization \(F_C\) selects a specific derived
-extension.  Computing that extension—rather than another finite truncation
-or a support intersection—is the exact local problem for the null spiral.
+There are two corrections to the earlier \(!\)-versus-\(*\) model.  First,
+\(j_!\mathbb k_U\) and \(Rj_*\mathbb k_U\) already differ along the
+punctured side boundary of the ribbon; they are not two extensions of one
+fixed punctured sheaf.  Second, a common endpoint stalk does not define a
+translated sheaf morphism.  Naturality along the translated arm forces the
+putative scalar to vanish.
+
+Fix instead one punctured eye sheaf \(F\) on
+\((0,\varepsilon)\times S^1_t\), including its side-boundary convention, and
+compare its two extensions across \(B\).  Recollement gives
+\[
+ k_!F\longrightarrow Rk_*F\longrightarrow i_*Q
+ \xrightarrow{+1}.                                      \tag{9}
+\]
+For a monotone infinitely winding constant ribbon,
+\[
+ Q_t\simeq
+ \frac{\prod_{n\ge0}\mathbb k}{\bigoplus_{n\ge0}\mathbb k},              \tag{10}
+\]
+with shift monodromy.  It is locally constant along \(S^1_t\), so
+\[
+ SS(i_*Q)\subset\{\tau_t=0\}.                            \tag{11}
+\]
+Consequently \(k_!F\) and \(Rk_*F\) are canonically isomorphic after
+Tamarkin localization to \(\tau_t>0\).  The proposed \(!\)-versus-\(*\)
+ambiguity is invisible in the category relevant to Asano--Ike.
+
+Moreover, a half-open eye of fiber width at most \(w\) is \(w\)-torsion:
+its canonical forward-translation map vanishes after translating farther
+than \(w\).  By (7), every sufficiently deep null-spiral tail is arbitrarily
+torsion.  Infinite winding and full support closure alone therefore cannot
+create a positive-length boundary bar.
+
+## What remains
+
+The metric completion is a telescope
+\[
+ F_C\simeq\operatorname*{hocolim}_n
+ T_{-\varepsilon_{\ge n}}F_{C_n},                        \tag{12}
+\]
+not an ordinary \(!\), \(*\), or middle extension.  To finish the null-eye
+calculation one must construct the continuation triangle between successive
+truncations and prove that its cone is confined to the narrow eye.  A cap
+could otherwise create an exact-action, zero-lifetime Milnor boundary term.
+The four-sheet geometry alone does not determine the transition maps.
+
+The precise general failure of a zero-Hofer argument is recorded in
+`metric-germ-cutoff-no-go.md`.

@@ -127,11 +127,16 @@ Thus the reduced limiting microsupport contains the whole \(t\)-circle
 over the collapsed prime end, even though every finite diagonal complex
 vanishes there.
 
-The full calculation and a toy \(!\)-versus-\(*\) extension model are in
-`../../results/null-spiral-microlocal-eye.md`.  They show that the missing
-continuity theorem must identify the derived boundary extension of an
-infinitely winding, vanishing-width eye.  Closed microsupport and global
-barcode convergence do not determine that extension.
+The full calculation and corrected action-retaining extension model are in
+`../../results/null-spiral-microlocal-eye.md`.  The original model collapsed
+the action circle and incorrectly inferred a translated morphism from a
+common boundary stalk.  With the full action circle retained, the
+\(!\)-versus-\(*\) cone is a local system with \(\tau_t=0\) and vanishes in
+the Tamarkin quotient.  The deep eye is arbitrarily torsion.
+
+The genuine missing datum is the telescope of continuation maps.  One must
+show that its cap/limiting cone cannot leave an exact-action Milnor boundary
+term after restricting \(\mu hom\) to the collapsed diagonal.
 
 ## Square symmetry does not supply the pairing
 
@@ -145,14 +150,39 @@ filtrations and cohomological degrees; it does not identify a diagonal
 complex with a non-trivial shift of itself, pin the critical action to
 \(\pi/2\), or construct the required short-bar pairing.
 
+## Why an arbitrarily small diagonal cut-off is still insufficient
+
+The conjugated Hamiltonian
+\[
+ H^\phi(z,w)=|\phi(z)-\phi(w)|^2/4
+\]
+vanishes on the diagonal.  Composing it with a cut-off which is the identity
+near zero gives a flow with the same shrinking diagonal germ and arbitrarily
+small Hofer oscillation.  This does **not** prove (2).
+
+The persistence objects
+\[
+ V_\varepsilon
+ =V_{\rm std}\oplus\mathbb k_{[a_0,a_0+\varepsilon)}
+\]
+converge to \(V_{\rm std}\) in interleaving distance while retaining a
+non-zero microstalk at the fixed endpoint \(a_0\) for every
+\(\varepsilon\).  An ordinary action skyscraper has zero one-sided
+interleaving distance from zero but non-zero global cohomology.  These are
+exact models of the zero-lifetime class that Remark 4.2 must exclude.
+
+Thus a valid cut-off proof additionally needs a \(C^0\)-locality theorem for
+completed GKS kernels and a no-ephemeral/derived-Milnor theorem for the
+restricted diagonal \(\mu hom\).  See
+`../../results/metric-germ-cutoff-no-go.md`.
+
 ## Adversarial verdict
 
 GPT-5.6 Sol at xhigh returned **HOLD** on the unrestricted proof.  The
-geometric reduction to (2) is sound, but the inference from local
-Hamiltonian smallness to diagonal \(\mu hom\) vanishing is precisely an
-unproved \(C^0\) clean-intersection theorem.  Any future proof must work at
-the bar level; bounding individual collapsing actions is false.  A second
-adversarial pass confirmed that every finite null-spiral truncation has the
-desired vanishing, but that its metric limit has maximal projected action
-support.  The resulting extension problem is categorical, not a missing
-finite Floer calculation.
+geometric reduction to (2) and the small-Hofer cut-off are sound.  The
+inference to diagonal \(\mu hom\) vanishing is false without an additional
+no-ephemeral theorem: a vanishing-length interval keeps a fixed endpoint
+microstalk.  A second audit corrected the collapsed-eye model and identified
+the exact remaining object as a Milnor defect in the completed continuation
+telescope.  Any future proof must compute that defect, not merely bound bar
+lengths or projected support.

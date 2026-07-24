@@ -224,6 +224,10 @@ global barcode at the collapsed diagonal; Hamiltonian homeomorphisms can
 carry multiple spectral values on a very small fixed set.  The null spiral
 makes the local failure explicit: finite truncations vanish at interior
 diagonal action, while the limit has full projected action microsupport and
-a vanishing-width two-sheet eye.  Determining its \(!\), \(*\), or
-intermediate boundary extension is strictly stronger than global bottleneck
-continuity.
+a vanishing-width two-sheet eye.  The corrected action-retaining toy model
+shows that the \(!\)-versus-\(*\) cone has \(\tau_t=0\); it is not the
+obstruction.  What is strictly stronger than global bottleneck continuity is
+excluding an exact-action Milnor/ephemeral term in the continuation
+telescope.  The interval
+\(\mathbb k_{[a,a+\varepsilon)}\) is the exact persistence countermodel:
+its lifetime vanishes while its left-end microstalk remains non-zero.

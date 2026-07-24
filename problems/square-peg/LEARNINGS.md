@@ -2,13 +2,18 @@
 
 ## What the next session should do first
 
-- Compute the derived boundary extension selected by the metric-limit
-  quantization of the null double spiral.  Every finite truncation already
-  vanishes at interior diagonal action, so another finite calculation is
-  insufficient.
+- Compute the Milnor boundary term of the normalized null-spiral telescope.
+  The corrected action-retaining eye has no intrinsic \(!\)-versus-\(*\)
+  obstruction and its deep tail is arbitrarily torsion; the only possible
+  survivor is an exact-action defect in the continuation maps.
 - Attack the persistent diagonal-locality theorem in
-  `angles/diagonal-microlocal/README.md`.  Individual chord actions cannot be
-  bounded; only a bar-level pairing can work.
+  `angles/diagonal-microlocal/README.md` via a genuine no-ephemeral theorem.
+  Small Hofer norm and zero interleaving distance do not control endpoint
+  microstalks.
+- On the finite-dimensional side, try to upgrade Hugelmeyer's square
+  envelope to simple compactified ribbons or the explicit outer/inner
+  winding bounds in `square-envelope-area.md`; the exact signed-area identity
+  would then give an immediate contradiction.
 
 ## Results
 
@@ -96,6 +101,14 @@
 - Under the no-square hypothesis, Matschke's special-trapezoid locus contains
   a connected fixed-type continuum spanning each compact positive scale
   interval.
+- In the action-retaining helical-eye model, the boundary quotient between
+  \(!\) and \(*\) is locally constant along the action circle and has
+  \(\tau_t=0\).  The two extensions are therefore identical after Tamarkin
+  localization.  A narrow eye of width \(w\) is \(w\)-torsion.
+- For any moving square with outer paths \(a,b\) and inner paths
+  \(a+J(b-a),b+J(b-a)\), the two ribbon areas differ only by half the
+  endpoint side-length squares.  A simple compactified square envelope is
+  therefore impossible.
 
 ## Dead ends and cautions
 
@@ -123,15 +136,23 @@
   action spike disappears in \(L^2\) but can support a skyscraper sheaf.
 - Even critical \(H^{1/2}\) trace capacity is too weak: the null spiral puts
   fixed action on intervals whose capacity tends to zero.
-- Closed microsupport and \(C^0\) barcode convergence do not identify a
-  collapsed boundary extension.  Toy \(j_!\) and \(Rj_*\) helical eyes agree
-  off the endpoint but have different point-supported translated morphisms.
+- The old collapsed-point helical-eye model was wrong: it discarded the
+  action circle, compared different punctured side-boundary conventions,
+  and inferred a sheaf morphism from a common stalk.  Do not reuse it.
+- Closed microsupport and \(C^0\) barcode convergence still do not identify
+  exact-action cohomology.  The correct obstruction is a Milnor/ephemeral
+  term in the continuation telescope, not a \(!\)-versus-\(*\) choice.
 - Jordan separation and square symmetry do not cancel the two projected
   capping windings.  Two disjoint spiral fjords make their sum have order-one
   integral on support of vanishing area.
 - Small local Hamiltonian oscillation gives a small interleaving estimate,
-  not equality of microlocal germs.  The required neighborhoods shrink with
-  the error, and \(\mu hom\) does not commute with metric limits.
+  not equality of microlocal germs or endpoint microstalks.  The interval
+  \(\mathbb k_{[a,a+\varepsilon)}\) converges to zero while keeping a
+  non-zero microstalk at \(a\); an action skyscraper has zero one-sided
+  distance but non-zero global cohomology.
+- Matschke's all-scales carrier need not contain a spanning path.  Even a
+  path need not have finite variation or simple/one-sided-winding ribbons,
+  so the square-envelope area identity is conditional rather than a proof.
 - Ordinary Fulton--MacPherson collision screens require tangent data.
   Arbitrary Jordan arcs can have normalized square screens, so the standard
   compactification has no curve-independent nonzero boundary test map.

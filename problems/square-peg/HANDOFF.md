@@ -108,15 +108,29 @@ R\Gamma\!\left(\rho^{-1}\Delta_0;
 where \(Q=(\phi\times\phi)^{-1}R_{\pi/2}(\phi\times\phi)\), assuming
 \((C_0\times C_0)\cap Q(C_0\times C_0)=\Delta_0\).  At approximation level
 this must pair arbitrary interior-action collapsing generators into
-persistence bars whose lengths vanish.
+persistence bars whose lengths vanish **and** exclude their exact-action
+endpoint microstalks.  The latter is strictly stronger than interleaving
+convergence.
 
 The null spiral now supplies the exact local model.  Every finite smooth
 truncation has diagonal cohomology only at \(0\pmod\pi\), but the limit's
 common phase winds through the entire action circle while its two sheets
 have separation \(\pi/(2\theta)+O(\theta^{-2})\).  The decisive question is
-which derived boundary extension the metric completion selects.  A toy
-helical eye shows that \(j_!\) vanishes while \(Rj_*\) can retain a
-point-supported translated morphism, despite identical punctured geometry.
+the Milnor boundary term of the metric-completion telescope.  The earlier
+collapsed-point toy was false: the actual space retains the action circle,
+the \(!\)-versus-\(*\) cone has \(\tau_t=0\), and a common boundary stalk
+does not create a translated morphism.  Every deep eye tail is arbitrarily
+torsion, but a cap/continuation telescope could still leave a zero-lifetime
+exact-action class.
+
+An attractive cut-off attack is also fully audited and false as stated.
+The conjugated Hamiltonian vanishes on the diagonal and can be cut off to
+arbitrarily small Hofer norm without changing its shrinking germ.  However
+\(\mathbb k_{[a,a+\varepsilon)}\to0\) while retaining a fixed endpoint
+microstalk, and an action skyscraper has zero one-sided interleaving distance
+but non-zero cohomology.  The missing theorem is no-ephemeral rigidity for
+restricted diagonal \(\mu hom\), equivalently a pro-zero statement for the
+derived cross-stage tower.  See `results/metric-germ-cutoff-no-go.md`.
 
 Matschke supplies a second exact input: a square-free Jordan curve has a
 special trapezoid at every parameter scale.  More strongly, one fixed-type
@@ -125,11 +139,23 @@ collision screens are classified in
 `angles/configuration-degeneration/README.md`; all can occur locally at one
 prime end, so any useful obstruction must be global along the continuum.
 
+There is a new exact global invariant.  For a moving square with outer
+vertices \(a,b\) and inner vertices \(a+J(b-a),b+J(b-a)\), the two closed
+ribbon areas differ only by half the endpoint side-length squares.  A
+compactified square envelope with simple nested ribbons is therefore
+impossible.  Hugelmeyer supplies neither simple ribbons nor one-sided
+winding bounds \(n_{\rm out}\geq1_\Omega\),
+\(0\leq n_{\rm in}\leq1_\Omega\) with strict area deficit, and Matschke's
+continuum need not contain a spanning path.
+`angles/configuration-degeneration/square-envelope-area.md` gives the
+identity and the exact missing topological lemma.
+
 Do not retry two audited false shortcuts.  Conservative \(C^0\) smoothing
 does not control action potentials: shrinking high-turn radial twists have
 order-one action.  Greene--Lobb square-angle duality swaps spectral degrees
 \(1\) and \(2\), while the triangle inequality applies only to degree \(2\);
-it does not pin either action at half the enclosed area.
+it does not pin either action at half the enclosed area.  Arbitrarily small
+Hofer cut-offs do not control endpoint microstalks.
 
 Do not run numerical square searches. The rational harness is conjecture
 hygiene only. Consult GPT-5.6 Sol at xhigh for any proposed microlocal

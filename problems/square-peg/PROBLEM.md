@@ -75,8 +75,10 @@ concentrated at action \(0\pmod\pi\).  In the limit, however, the reduced
 microsupport contains the full action circle over the collapsed point while
 the two phase sheets have gap \(\pi/(2\theta)+O(\theta^{-2})\).
 `results/null-spiral-microlocal-eye.md` identifies the exact missing datum:
-the derived \(!\), \(*\), or intermediate boundary extension of this
-infinitely winding, vanishing-width eye.
+after retaining the action circle, the \(!\)-versus-\(*\) difference has
+\(\tau_t=0\) and the deep eye is arbitrarily torsion.  The exact missing
+datum is instead a possible exact-action Milnor defect in the metric
+completion's continuation telescope.
 
 At the critical exponent, `angles/critical-p2/osgood-area-anomaly.md` proves
 that finite \(2\)-variation plus parameter-aligned embedded \(C^0\)
@@ -146,6 +148,10 @@ to the existential Asano--Ike criterion.
 - **Sheaf criterion:** prove Asano--Ike Remark 4.2's diagonal
   \(\mu hom\)-cohomology vanishing at \(\theta=\pi/2\), in the persistent
   diagonal-locality form in `angles/diagonal-microlocal/README.md`.
+- **Square envelopes:** combine Hugelmeyer's outer/inner envelope with the
+  exact ribbon-area identity in
+  `angles/configuration-degeneration/square-envelope-area.md`; it remains to
+  obtain simple ribbons or the required outer/inner winding bounds.
 - **Conformal concentration:** compute the diagonal \(\mu hom\) of the null
   double spiral by identifying the metric-limit extension of its
   vanishing-width eye.
@@ -159,11 +165,12 @@ to the existential Asano--Ike criterion.
 
 ## First steps for the next session
 
-1. Compute whether the metric completion defining \(F_C\) selects the
-   \(!\), \(*\), or an intermediate extension of the explicit spiral eye.
-   Finite truncations alone cannot decide this.
-2. Prove or refute persistent diagonal locality for this one
-   action-concentrating prime end before attempting the full diagonal.
+1. Compute the derived inverse-limit/Milnor term of the explicit
+   null-spiral continuation telescope.  The \(!\)-versus-\(*\) distinction is
+   not the obstruction in the positive-\(\tau\) category.
+2. Prove a no-ephemeral theorem for restricted diagonal \(\mu hom\), or show
+   directly that the spiral's cross-stage tower is pro-zero away from
+   \(\pi\mathbb Z\).
 3. Do not try to bound individual shrinking-square actions: fixed-vertex
    Hamiltonian twists make them arbitrary.  Do not spend time on numerical
    square searches.
