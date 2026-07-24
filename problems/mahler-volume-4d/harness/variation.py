@@ -2,7 +2,7 @@
 
 from fractions import Fraction
 from functools import lru_cache
-from itertools import permutations
+from itertools import combinations, permutations
 
 from polytope import (
     affine_rank,
@@ -592,6 +592,193 @@ def boundary_trace_deficit(polytope):
                 }
             )
     return sum((entry["weighted"] for entry in local), Fraction()), tuple(local)
+
+
+def terminal_excess_data(polytope):
+    """Exact weighted row-capacity data behind robust terminality.
+
+    A facet with ``m`` vertices contributes ``m-4`` independent affine
+    relations.  ``beta3`` is the largest total excess on three
+    nonsimplicial facets with independent normals.
+    """
+    nonsimplicial = tuple(
+        (
+            index,
+            len(incident) - 4,
+            tuple(value / offset for value in normal),
+        )
+        for index, (incident, normal, offset) in enumerate(polytope.facets)
+        if len(incident) > 4
+    )
+    beta3 = max(
+        (
+            sum(entry[1] for entry in triple)
+            for triple in combinations(nonsimplicial, 3)
+            if rank([entry[2] for entry in triple]) == 3
+        ),
+        default=0,
+    )
+    return {
+        "vertex_count": len(polytope.vertices),
+        "facet_count": len(polytope.facets),
+        "incidence_count": sum(
+            len(incident) for incident, _, _ in polytope.facets
+        ),
+        "nonsimplicial_facet_count": len(nonsimplicial),
+        "excess": sum(entry[1] for entry in nonsimplicial),
+        "beta3": beta3,
+    }
+
+
+def quadratic_circuit_coupling(polytope):
+    """Ranks of the intrinsic primal/dual degree-two circuit data.
+
+    Circuit relations, rather than shadow-speed residuals, index the
+    intrinsic second-moment tensors.  The mixed matrix has entries
+
+        gamma^T (N o N) delta = tr(Q_gamma Q_delta^polar).
+
+    Its rank is basis-independent even though the displayed circuit rows
+    may be redundant.
+    """
+    polar, _, _, _ = paired_geometry(polytope)
+    primal_circuits = polytope.admissible_matrix_waiving(())
+    polar_circuits = polar.admissible_matrix_waiving(())
+
+    def quadratic_rows(vertices, circuits):
+        return tuple(
+            tuple(
+                sum(
+                    (
+                        coefficient * vertex[row] * vertex[column]
+                        for coefficient, vertex in zip(circuit, vertices)
+                    ),
+                    Fraction(),
+                )
+                for row in range(4)
+                for column in range(4)
+            )
+            for circuit in circuits
+        )
+
+    pairing_squared = tuple(
+        tuple(dot(vertex, dual) ** 2 for dual in polar.vertices)
+        for vertex in polytope.vertices
+    )
+    mixed = tuple(
+        tuple(
+            sum(
+                (
+                    primal_circuit[vertex]
+                    * pairing_squared[vertex][facet]
+                    * polar_circuit[facet]
+                    for vertex in range(len(polytope.vertices))
+                    for facet in range(len(polar.vertices))
+                ),
+                Fraction(),
+            )
+            for polar_circuit in polar_circuits
+        )
+        for primal_circuit in primal_circuits
+    )
+    return {
+        "primal_circuit_rank": rank(primal_circuits),
+        "polar_circuit_rank": rank(polar_circuits),
+        "primal_quadratic_rank": rank(
+            quadratic_rows(polytope.vertices, primal_circuits)
+        ),
+        "polar_quadratic_rank": rank(
+            quadratic_rows(polar.vertices, polar_circuits)
+        ),
+        "mixed_rank": rank(mixed),
+    }
+
+
+def boundary_regression_data(polytope):
+    """Exact regression/Pythagorean invariants for the boundary normals.
+
+    The covariance-deficit interpretation assumes that the primal and polar
+    centroids are both zero; callers are responsible for this hypothesis.
+    This helper is currently restricted by ``facet_cone_moment_data`` to
+    four-polytopes with triangular ridges.
+    """
+    polar, _, _, _ = paired_geometry(polytope)
+    primal_data = facet_cone_moment_data(polytope)
+    polar_data = facet_cone_moment_data(polar)
+
+    dimension = 4
+    primal_second = tuple(
+        tuple(
+            sum(
+                (
+                    weight * second[row][column]
+                    for weight, _, second in primal_data
+                ),
+                Fraction(),
+            )
+            for column in range(dimension)
+        )
+        for row in range(dimension)
+    )
+    polar_second = tuple(
+        tuple(
+            sum(
+                (
+                    weight * second[row][column]
+                    for weight, _, second in polar_data
+                ),
+                Fraction(),
+            )
+            for column in range(dimension)
+        )
+        for row in range(dimension)
+    )
+
+    polar_facet_weights = {}
+    for facet_index, (incident, normal, offset) in enumerate(polar.facets):
+        primal_vertex = tuple(value / offset for value in normal)
+        polar_facet_weights[primal_vertex] = polar_data[facet_index][0]
+    if len(polar_facet_weights) != len(polytope.vertices):
+        raise ValueError("could not match every primal vertex to a polar facet")
+
+    normal_squared_moment = sum(
+        (
+            primal_data[facet_index][0]
+            * polar_facet_weights[vertex]
+            * dot(vertex, tuple(value / offset for value in normal)) ** 2
+            for facet_index, (incident, normal, offset)
+            in enumerate(polytope.facets)
+            for vertex in polytope.vertices
+        ),
+        Fraction(),
+    )
+    covariance_pairing = sum(
+        (
+            primal_second[row][column] * polar_second[column][row]
+            for row in range(dimension)
+            for column in range(dimension)
+        ),
+        Fraction(),
+    )
+    inverse_primal = inverse(primal_second)
+    inverse_polar = inverse(polar_second)
+    inverse_trace = sum(
+        (
+            inverse_primal[row][column] * inverse_polar[column][row]
+            for row in range(dimension)
+            for column in range(dimension)
+        ),
+        Fraction(),
+    )
+    linear_baseline = inverse_trace / 256
+    return {
+        "boundary_covariance_trace": covariance_pairing,
+        "deficit": Fraction(1, 4) - covariance_pairing,
+        "normal_squared_moment": normal_squared_moment,
+        "inverse_trace": inverse_trace,
+        "linear_baseline": linear_baseline,
+        "regression_residual": normal_squared_moment - linear_baseline,
+    }
 
 
 def reduced_log_mahler_second(polytope, first_velocities, second_velocities=None):

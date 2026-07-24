@@ -27,8 +27,13 @@ tangent dimensions, and reduce the connected trace gap to a global
 facet-boundary transport inequality. That boundary deficit is exactly the
 negative entropic-metric Laplacian of Klartag's cone-duality defect. An
 exact hypersimplex calculation proves cone-volume subspace concentration
-alone cannot control its sign. The full four-dimensional conjecture is not
-proved.
+alone cannot control its sign. Finally, robust terminality strengthens the
+flag bound to \(2f_{03}\ge5(f_0+f_3)-4\) and proves every terminal
+non-pyramid has at least six nonsimplicial facets. Exact regression and flip
+cancellations rule out a universal unweighted quadratic identity, the raw
+regression-residual energy, and a fixed-geometry one-sided flip ansatz,
+isolating a global oriented cofactor transport problem. The full
+four-dimensional conjecture is not proved.
 
 ## Principal negative result
 
@@ -371,19 +376,84 @@ P\text{ terminal}
 for every nonaffine vertex function \(\alpha\). This follows immediately by
 choosing a shadow direction orthogonal to the displayed span. It is stronger
 than circuit connectivity, but still annihilates the degree-one polarity
-columns. The first plausible Bochner variables are the circuit
-second-moment tensors
-\[
-Q_{F,\alpha}=\sum_{v\in F}\alpha_vx_vx_v^\mathsf T.
-\]
-They are individually indefinite, so the missing sign must come from a
-coupled primal--dual quadratic form.
+columns.
 
 A homogeneous pointed polyhedral cone is simplicial: the identity component
 of its automorphism group fixes every extreme ray, while transitivity forces
 the full positive diagonal group in a basis of extreme rays, excluding any
 additional ray. Hence homogeneous polyhedral equality in dimension five
 already reduces to the 4-simplex.
+
+### Theorem 5: weighted terminal rigidity
+
+For a terminal non-simplex put
+\[
+e_F=|V(F)|-4,\qquad E(P)=f_{03}-4f_3,
+\]
+and let \(\beta_3(P)\) be the maximum total excess on three nonsimplicial
+facets with independent normals. Robust terminality after erasing their
+rank-three normal flat gives
+\[
+\boxed{E(P)\ge f_0-5+\beta_3(P).}
+\]
+Consequently
+\[
+f_{03}\ge4f_3+f_0-2,
+\qquad
+\boxed{2f_{03}\ge5(f_0+f_3)-4}
+\]
+for a pair-terminal non-simplex.
+
+A coloop in the matroid of nonsimplicial-facet normals forces a facet with
+\(f_0-1\) vertices and hence a pyramid. A coloop-free rank-four
+configuration of exactly five such facets would be \(U_{4,5}\). Robust
+erasure then makes the five vertex complements pairwise disjoint. Each
+complement has at least two vertices because \(P\) is not a pyramid, but
+all its vertices lie on the other four independent facet hyperplanes, whose
+common intersection has at most one point. Thus
+\[
+\boxed{\text{a terminal non-pyramid has at least six nonsimplicial facets.}}
+\]
+For a pair-terminal non-pyramid, applying the theorem to the polar gives
+at least six nonsimple vertices.
+
+### Exact limits of two local quadratic ansatzes
+
+The intrinsic degree-two circuit tensor is
+\[
+\mathcal Q_F(\gamma)=
+\sum_{v\in F}\gamma_vx_vx_v^\mathsf T,
+\qquad \gamma\in\operatorname{Rel}(F).
+\]
+A shadow-speed residual is instead a covector in
+\(\operatorname{Rel}(F)^*\), so the required positive Hodge identification
+is missing. The complete direct mixed datum is
+\[
+D_P(N\circ N)D_{P^\circ}^\mathsf T.
+\]
+Its exact primal/polar/mixed ranks are \(9,9,9\) at the regular 24-cell and
+\(10,9,9\) at a generic Paffenholz member, but the mixed rank is zero for
+both the segment--square join and centered \(\Delta(2,5)\), despite their
+positive trace deficits. These controls are nonterminal, so this rules out
+only a universal identity based solely on the unweighted mixed datum; a
+terminality-dependent Hodge operator or separate primal/dual Gram data
+remain possible.
+
+At a bi-centered pair there is a basis-free cancellation. For independent
+cone-boundary pairs
+\((U,Y),(W,X)\), put \(H=\mathbb E UU^\mathsf T\),
+\(H^\circ=\mathbb E WW^\mathsf T\), \(N=X\cdot Y\), and \(Z=U\cdot W\).
+The nonlinear residual after linear regression of \(Y\) on \(U\) and \(X\)
+on \(W\) is orthogonal to every bilinear \(U^\mathsf TTW\). Hence
+\[
+D_\partial=\frac14-\operatorname{tr}(HH^\circ)
+\]
+contains no direct nonlinear-residual energy. Retriangulating one fixed
+facet while holding the opposite tetrahedron and geometry fixed also
+cancels. This does not exclude a geometric or oriented two-sided flip.
+The surviving finite gate is nonvanishing of the mixed quadratic datum on
+every connected pair-terminal non-simplex; the sign still requires a
+global oriented cofactor transport identity.
 
 ## Verification
 
@@ -393,7 +463,7 @@ Run:
 python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ```
 
-Expected: twenty tests pass. The harness uses rational arithmetic only. It checks
+Expected: twenty-two tests pass. The harness uses rational arithmetic only. It checks
 the centered simplex's polar, incidences, speed dimension, and exact product
 \(3125/576\); verifies cube/cross-polytope polarity; and supplies negative
 speed controls for the cross-polytope, cube, and pyramid over a cube.
@@ -479,8 +549,11 @@ establish the equivalent boundary transport inequality, or prove the same
 sign as superharmonicity of the cone-duality defect. Henk--Linke subspace
 concentration alone is insufficient, as the exact hypersimplex witness
 shows. Repartitioning incidence and nonincidence brackets alone is also
-tautological; the next route is GO only for a degree-two terminal Bochner
-identity with a proved positive coupled form.
+tautological. The universal unweighted quadratic contraction, raw
+regression residual, and fixed-geometry one-sided flip now fail exactly,
+but a terminality-dependent Hodge operator remains possible. The next
+route is GO for the robust quadratic-coupling rank gate followed by a
+global oriented cofactor transport identity.
 
 ## Relation to prior work
 

@@ -859,3 +859,187 @@ certificate completed in about 95 seconds and returned
 `unique-bicenter-root True`, `covariance-trace-below-one-ninth True`,
 `bi-centered-root-pair-terminal True`, and
 `projective-local-minimum False`.
+
+## 2026-07-24 — robust terminal excess and exact quadratic no-go tests
+
+The full conjecture remains open. This session attacked the connected
+pair-terminal branch at the first unsolved combinatorial and analytic
+gates. It produced one new infinite-subclass classification and three exact
+falsifications of overly local curvature ansatzes.
+
+### Weighted terminal-excess theorem
+
+For a terminal non-simplex \(P\), write
+\[
+E=f_{03}-4f_3=\sum_F(|V(F)|-4)
+\]
+and let \(\beta_3\) be the maximum total excess on three nonsimplicial
+facets with independent normals. The robust-support characterization of
+terminality implies
+\[
+E\ge f_0-5+\beta_3.
+\]
+Indeed, erase the rank-three normal flat containing a maximizing triple.
+The circuit rows outside that flat must still have rank \(f_0-5\), while
+the erased flat has row capacity at least \(\beta_3\). Since the
+nonsimplicial-facet normals span \(\mathbb R^4\), \(\beta_3\ge3\), and
+\[
+f_{03}\ge4f_3+f_0-2.
+\]
+Applying this to both members of a pair-terminal polar pair gives
+\[
+2f_{03}\ge5(f_0+f_3)-4,
+\]
+improving the previous constant \(-10\) to \(-4\).
+
+Equality has rigid matroidal consequences. If
+\(E=f_0-2\), every nonsimplicial facet has five vertices, its normal
+matroid is \(U_{4,f_0-2}\), and the corresponding one-row circuit matroid
+is \(U_{f_0-5,f_0-2}\). Equality on both sides forces
+\[
+f_0=f_3=n,\qquad f_{03}=5n-2,
+\]
+with exactly two tetrahedral facets and two simple vertices.
+
+### Six-nonsimplicial-facet theorem
+
+A coloop in the rank-four matroid of nonsimplicial-facet normals forces the
+remaining blocks to lie in a rank-three flat. Robust erasure then makes the
+coloop facet contain \(f_0-1\) vertices, so \(P\) is a pyramid.
+
+If a terminal non-pyramid had exactly five nonsimplicial facets, their
+normal matroid would be \(U_{4,5}\). Let \(\mathcal G\) be the global Gale
+dependency space and \(D_i\) its subspace supported on facet \(F_i\).
+Erasing any other three facets gives \(D_i+D_j=\mathcal G\). Therefore the
+five vertex complements \(C_i=V(P)\setminus V(F_i)\) are pairwise
+disjoint: a common vertex would give a nonzero Gale coordinate in
+\(D_i^\perp\cap D_j^\perp\). Non-pyramidality gives \(|C_i|\ge2\).
+Pairwise disjointness makes every vertex of \(C_i\) lie on the other four
+facet hyperplanes; their normals are independent, so their common
+intersection contains at most one point. Thus \(|C_i|\le1\), a
+contradiction.
+
+Hence every terminal non-pyramid has at least six nonsimplicial facets.
+Dually, every pair-terminal non-pyramid also has at least six nonsimple
+vertices. Together with the earlier pyramid theorem, this classifies every
+terminal four-polytope with at most five nonsimplicial facets without
+enumerating face lattices.
+
+### Intrinsic quadratic data and exact falsifications
+
+The earlier notation \(Q_{F,\alpha}\) was not intrinsic. A shadow-speed
+residual is a covector in \(\operatorname{Rel}(F)^*\), whereas the
+intrinsic circuit second moment is
+\[
+\mathcal Q_F(\gamma)=\sum_{v\in F}\gamma_vx_vx_v^\mathsf T,
+\qquad\gamma\in\operatorname{Rel}(F).
+\]
+A positive identification between these two spaces is additional Hodge
+data, not a consequence of terminality.
+
+The direct mixed contraction is
+\[
+C=D_P(N\circ N)D_{P^\circ}^{\mathsf T},
+\qquad
+C_{\gamma,\delta}=\operatorname{tr}
+(\mathcal Q_P(\gamma)\mathcal Q_{P^\circ}(\delta)).
+\]
+Exact ranks (primal, polar, mixed) are \(9,9,9\) for the regular 24-cell,
+\(10,9,9\) for a generic Paffenholz cell, \(1,1,0\) for the
+segment--square join, \(5,5,0\) for centered \(\Delta(2,5)\), and
+\(6,0,0\) for the cube/cross-polytope pair. The first two zero-mixed-rank
+controls have positive boundary deficits, \(1/72\) and \(125/3168\).
+They are nonterminal, so this rules out only a universal identity based
+solely on the unweighted mixed contractions. A terminality-dependent Hodge
+operator, separate primal/dual Gram data, or a terminal-only identity
+remains possible.
+
+For a bi-centered pair, exact least-squares decomposition gives
+\[
+\mathbb E N^2
+=\frac1{256}\operatorname{tr}((H^\circ)^{-1}H^{-1})
+ \mathbb E(N-N_{\rm lin})^2,
+\]
+while \(N-N_{\rm lin}\) is orthogonal to every bilinear
+\(U^\mathsf TTW\), including the target \(Z=U\cdot W\). Thus the raw
+nonlinear regression residual cancels from the boundary deficit. At the
+regular 24-cell the exact data are
+\[
+\operatorname{tr}(HH^\circ)=\frac{169}{800},\quad
+\mathbb E N^2=\frac12,\quad
+\frac1{256}\operatorname{tr}((H^\circ)^{-1}H^{-1})=\frac{50}{169},\quad
+\mathbb E(N-N_{\rm lin})^2=\frac{69}{338}.
+\]
+This leaves the concrete sufficient target
+\[
+\operatorname{tr}((H^{1/2}H^\circ H^{1/2})^{-1})>64
+\]
+at any hypothetical non-simplex minimum.
+
+Finally, retriangulating one fixed facet across a five-point bistellar
+circuit, while holding the opposite tetrahedron and geometry fixed, leaves
+the signed volume-weighted local boundary bracket unchanged. This kills
+that fixed-geometry one-sided flip energy, but does not exclude geometric
+or oriented two-sided flips.
+
+### Exploratory sweeps
+
+Exact rational evaluations were used to check candidate identities; floats
+were used only to rank search directions. Twenty random centrally symmetric
+rational 12-vertex examples and sixteen sampled Paffenholz parameters all
+had covariance trace below \(1/9\). The best observed floating values were
+approximately \(0.09188\) and \(0.10036\), respectively. These finite
+samples are discovery evidence only and support no exclusion claim.
+
+### GPT-5.6 Sol xhigh reviews
+
+Two independent xhigh reviews were run at the classification and analytic
+decision points.
+
+- The terminal-rigidity audit returned **GO** on the weighted inequality,
+  coloop lemma, five-facet contradiction, and equality matroids.
+- The quadratic audit returned **STOP** on a universal unweighted
+  contraction, raw residual energy, and fixed-geometry one-sided flips;
+  **GO** on the robust coupling rank gate and global oriented cofactor
+  transport.
+- The final adversarial audit required the scope corrections now present in
+  the result: the zero-coupling examples are nonterminal; regression needs
+  bi-centering; a fixed-facet flip calculation does not exclude geometric
+  two-sided flips; and no claim about unoriented singular values was
+  justified.
+
+The next finite gate is therefore
+\[
+D_P(N\circ N)D_{P^\circ}^{\mathsf T}\ne0
+\]
+for every connected pair-terminal non-simplex, with the sufficient
+rank-sum target \(\rho(P)+\rho(P^\circ)>10\). Even that would establish
+coupling, not the required sign; the full proof still needs oriented
+cofactor transport.
+
+### Commands and compute
+
+```text
+python3 -m py_compile \
+  problems/mahler-volume-4d/harness/polytope.py \
+  problems/mahler-volume-4d/harness/variation.py \
+  problems/mahler-volume-4d/harness/test_polytope.py
+python3 -m unittest discover \
+  -s problems/mahler-volume-4d/harness -v
+python3 -m unittest discover \
+  -s problems/mahler-volume-4d/harness \
+  -p test_polytope.py \
+  -k terminal_excess_and_quadratic_coupling_diagnostics -v
+python3 problems/mahler-volume-4d/harness/verify_bridge_counterexample.py
+python3 problems/mahler-volume-4d/harness/bicenter_certificate.py
+```
+
+The exact suite passed `Ran 22 tests in 61.083s — OK`; after adding the
+simplex and cube/cross quadratic-rank sanity assertions, the focused test
+passed again in 7.095 seconds. The bridge verifier returned
+`all-speed-dimensions 5` and
+`terminal-pair-implies-simplex False`. The interval certificate returned
+`unique-bicenter-root True`, `covariance-trace-below-one-ninth True`,
+`circuit-support-connected True`, `bi-centered-root-pair-terminal True`,
+and `projective-local-minimum False`. The two standalone certificates took
+about 28 and 95 seconds.

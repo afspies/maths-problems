@@ -25,6 +25,7 @@ from polytope import (
     simplex_volume,
 )
 from variation import (
+    boundary_regression_data,
     boundary_trace_deficit,
     constrained_reduced_log_bilinear,
     incidence_kkt_multiplier,
@@ -37,9 +38,11 @@ from variation import (
     paired_tangent_from_vertex_path,
     projective_orbit_tangent_vectors,
     projective_vertex_path,
+    quadratic_circuit_coupling,
     reduced_log_mahler_second,
     second_order_incidence_rhs,
     simplex_pair_energy,
+    terminal_excess_data,
     triangulation_slack_mass_trace,
 )
 
@@ -221,6 +224,100 @@ class ExactPolytopeHarnessTests(unittest.TestCase):
         self.assertEqual(
             ten_dimensional_trace - Fraction(5, 72),
             Fraction(847, 5907816),
+        )
+
+    def test_terminal_excess_and_quadratic_coupling_diagnostics(self):
+        regular = paffenholz_24_cell((0, 0, 0, 0))
+        generic = paffenholz_24_cell()
+        join = join_segment_square_4()
+        hypersimplex = centered_hypersimplex_2_5()
+        join_coupling = quadratic_circuit_coupling(join)
+        hypersimplex_coupling = quadratic_circuit_coupling(hypersimplex)
+
+        self.assertEqual(
+            quadratic_circuit_coupling(centered_simplex_4()),
+            {
+                "primal_circuit_rank": 0,
+                "polar_circuit_rank": 0,
+                "primal_quadratic_rank": 0,
+                "polar_quadratic_rank": 0,
+                "mixed_rank": 0,
+            },
+        )
+        self.assertEqual(
+            quadratic_circuit_coupling(regular),
+            {
+                "primal_circuit_rank": 19,
+                "polar_circuit_rank": 19,
+                "primal_quadratic_rank": 9,
+                "polar_quadratic_rank": 9,
+                "mixed_rank": 9,
+            },
+        )
+        self.assertEqual(
+            quadratic_circuit_coupling(generic)[
+                "primal_quadratic_rank"
+            ],
+            10,
+        )
+        self.assertEqual(
+            quadratic_circuit_coupling(generic)["mixed_rank"],
+            9,
+        )
+        self.assertEqual(
+            (
+                join_coupling["primal_quadratic_rank"],
+                join_coupling["polar_quadratic_rank"],
+                join_coupling["mixed_rank"],
+            ),
+            (1, 1, 0),
+        )
+        self.assertEqual(
+            (
+                hypersimplex_coupling["primal_quadratic_rank"],
+                hypersimplex_coupling["polar_quadratic_rank"],
+                hypersimplex_coupling["mixed_rank"],
+            ),
+            (5, 5, 0),
+        )
+        cube_coupling = quadratic_circuit_coupling(cube_4())
+        self.assertEqual(
+            (
+                cube_coupling["primal_quadratic_rank"],
+                cube_coupling["polar_quadratic_rank"],
+                cube_coupling["mixed_rank"],
+            ),
+            (6, 0, 0),
+        )
+
+        hypersimplex_excess = terminal_excess_data(hypersimplex)
+        self.assertEqual(
+            (
+                hypersimplex_excess["excess"],
+                hypersimplex_excess["beta3"],
+            ),
+            (10, 6),
+        )
+        self.assertLess(
+            hypersimplex_excess["excess"],
+            hypersimplex_excess["vertex_count"]
+            - 5
+            + hypersimplex_excess["beta3"],
+        )
+
+    def test_boundary_regression_cancellation_at_regular_24_cell(self):
+        data = boundary_regression_data(
+            paffenholz_24_cell((0, 0, 0, 0))
+        )
+        self.assertEqual(data["boundary_covariance_trace"], Fraction(169, 800))
+        self.assertEqual(data["deficit"], Fraction(31, 800))
+        self.assertEqual(data["normal_squared_moment"], Fraction(1, 2))
+        self.assertEqual(data["inverse_trace"], Fraction(12800, 169))
+        self.assertEqual(data["linear_baseline"], Fraction(50, 169))
+        self.assertEqual(data["regression_residual"], Fraction(69, 338))
+        self.assertEqual(
+            data["normal_squared_moment"],
+            data["linear_baseline"] + data["regression_residual"],
         )
 
     def test_direction_flat_enumeration_matches_known_examples(self):

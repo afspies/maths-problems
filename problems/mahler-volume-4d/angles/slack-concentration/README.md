@@ -236,11 +236,25 @@ This cannot act on the degree-one polarity columns, since they are global
 affine functions. The next viable object is the degree-two tensor
 
 \[
-Q_{F,\alpha}=\sum_{v\in F}\alpha_vx_vx_v^\mathsf T.
+Q_F(\gamma)=\sum_{v\in F}\gamma_vx_vx_v^\mathsf T,
+\qquad\gamma\in\operatorname{Rel}(F).
 \]
 
-Seek a coupled primal--dual Bochner identity expressing
-\(-\Delta_gJ=16D_\partial\) as a nonnegative quadratic form in these
-tensors. Individual tensors are indefinite, so positivity must come from
-the polar coupling; a first-moment martingale or ordinary Markov chain
-cannot supply it.
+The universal unweighted version of this proposal is now exactly ruled out
+on nonterminal controls.  The
+intrinsic tensor is indexed by a facet relation
+\(\gamma\in\operatorname{Rel}(F)\), while a speed residual is a covector in
+\(\operatorname{Rel}(F)^*\); there is no canonical positive identification.
+Moreover, boundary-normal regression makes the nonlinear residual
+orthogonal to the bilinear target, and a fixed-geometry one-sided
+bistellar flip energy cancels. A terminality-dependent Hodge operator,
+separate primal/dual Gram data, and geometric two-sided flips remain open.
+
+The finite surviving gate is
+\[
+D_P(N\circ N)D_{P^\circ}^{\mathsf T}\ne0
+\]
+for connected pair-terminal non-simplices.  A sufficient dimension target
+is \(\rho(P)+\rho(P^\circ)>10\).  Even this would prove only nonzero
+quadratic coupling, not the trace sign.  A completion must use a global
+oriented determinant/cofactor transport operator, not a local tensor norm.

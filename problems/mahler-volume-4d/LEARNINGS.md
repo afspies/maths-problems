@@ -6,13 +6,13 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 
 ## What the next session should do first
 
-- Work only on the connected circuit-support branch. Seek a global
-  terminal Bochner/carre-du-champ formula proving
-  \(\Delta_g(\Phi_{V^*}-\Phi_V^*)<0\), equivalently a determinant-weighted
-  flip/divergence identity for
-  \(\sum|\det L_{ST}|(E_{ST}-100)\). Falsify the route with an exact
-  bi-centered pair-terminal trace counterexample. Do not retry conventional
-  circuit Poincare or cone-volume subspace concentration.
+- Work only on the connected circuit-support branch. First prove or
+  falsify the robust quadratic-coupling gate
+  \(D_P(N\circ N)D_{P^\circ}^{\mathsf T}\ne0\), preferably through the
+  rank-sum target \(\rho(P)+\rho(P^\circ)>10\). Completion requires a
+  global oriented cofactor transport identity. The universal unweighted
+  contraction, raw regression residual, and fixed-geometry one-sided flip
+  energies are exactly dead; a terminality-dependent Hodge operator is not.
 - If a candidate passes the projective covariance block, compute the exact
   KKT multiplier and search the correctly stress-adjusted Schur complement
   on q-regular moduli directions. Pure dimension/spanning arguments cannot
@@ -70,6 +70,17 @@ Keep this short enough to read in two minutes — the journal holds the detail.
   tautological:
   \(D_\partial=\mathbb E[Z(N-Z)]\), with the two terms separately
   factorizing to \(1/4\) and \(9\operatorname{tr}(AB)/4\).
+- No universal identity valid for all polytopes can recover the boundary
+  deficit solely from the unweighted mixed datum
+  \(D_P(N\circ N)D_{P^\circ}^{\mathsf T}\): it vanishes for the
+  nonterminal segment--square join and \(\Delta(2,5)\), although their
+  boundary deficits are positive. This does not exclude a
+  terminality-dependent Hodge operator or separate primal/dual Gram data.
+- Boundary-normal regression removes the nonlinear residual from the target
+  exactly: \(N-N_{\rm lin}\) is orthogonal to every bilinear
+  \(U^\mathsf TTW\), including \(Z=U\cdot W\). The fixed-geometry
+  one-sided bistellar flip contribution cancels for the same second-moment
+  reason; geometric or oriented two-sided flips remain open.
 
 ## Surprises / structure discovered
 
@@ -178,3 +189,20 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 - Pulling moments were independently cross-checked by a boundary-facet cone
   triangulation. Outward dyadic rounding keeps rigorous rational interval
   arithmetic fast enough for the Krawczyk certificate.
+- Robust terminality yields the weighted row-capacity inequality
+  \[
+  f_{03}-4f_3\ge f_0-5+\beta_3,
+  \qquad
+  2f_{03}\ge5(f_0+f_3)-4.
+  \]
+  A normal-matroid coloop forces a pyramid, and a coloop-free rank-four
+  configuration of only five nonsimplicial facets is impossible. Hence a
+  terminal non-pyramid has at least six nonsimplicial facets, with the dual
+  six-nonsimple-vertex conclusion for pair-terminal polytopes.
+- Circuit second moments must be indexed by affine relations
+  \(\gamma\), not by speed functions. A speed supplies a residual covector
+  in \(\operatorname{Rel}(F)^*\); the missing positive Hodge map to
+  \(\operatorname{Rel}(F)\) is genuine mathematical content, not notation.
+- The regression Pythagorean identity replaces the failed SOS by a
+  sufficient inverse-trace target. At a local minimum the inverse trace is
+  at most \(64\); the regular 24-cell has exact value \(12800/169>64\).

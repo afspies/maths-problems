@@ -70,8 +70,11 @@
   Closed covariance formulas exclude eight smooth 24-cell curves, and a
   q-regular stress arc enters an open smooth pair-terminal family. Exact KKT
   stress correction, projective-radical, spanning-germ, and boundary-trace
-  reductions now isolate the connected case. The general 4D conjecture
-  remains open.
+  reductions now isolate the connected case. Robust terminality gives a
+  stronger flag inequality and a six-nonsimplicial-facet theorem, while
+  exact regression and flip cancellations rule out a universal unweighted
+  quadratic identity and a fixed-geometry one-sided flip ansatz. The
+  general 4D conjecture remains open.
 </div>
 
 <h2>1 · The terminal-pair bridge is false</h2>
@@ -334,10 +337,9 @@ a nonterminal negative control.</p>
 <p>Terminality itself has the exact robust-support form: for every
 nonaffine vertex function α, the normals of facets on which α is nonaffine
 must span ℝ<sup>4</sup>. This is stronger than circuit connectivity, but
-still annihilates degree-one polarity columns. The first viable Bochner
-variables are the indefinite circuit second-moment tensors
-Q<sub>F,α</sub>=Σ<sub>v∈F</sub>α<sub>v</sub>x<sub>v</sub>x<sub>v</sub><sup>T</sup>;
-any positivity must come from a coupled primal–dual form.</p>
+still annihilates degree-one polarity columns. Intrinsic quadratic tensors
+are indexed by facet relations γ; a speed residual is instead a covector,
+so a positive Hodge identification is missing.</p>
 <p>A homogeneous pointed polyhedral cone is simplicial: its connected
 automorphism group fixes every extreme ray, while transitivity forces all
 positive coordinate scalings. Thus homogeneous equality in five cone
@@ -346,9 +348,9 @@ dimensions already means a 4-simplex section.</p>
 <h2>8 · Surviving terminal subclasses</h2>
 <p>For a facet <var>F</var>, admissibility is the family of exact equations
 λ<sup>T</sup>α|<sub>F</sub>=0 over all affine dependences λ of its vertices.
-Choosing a direction parallel to a largest facet gives, for every
-pair-terminal 4-polytope,</p>
-<div class="eqn">2f<sub>03</sub> ≥ 5(f<sub>0</sub>+f<sub>3</sub>)−10.</div>
+Robustly erasing every rank-three normal flat gives, for every pair-terminal
+non-simplex,</p>
+<div class="eqn">2f<sub>03</sub> ≥ 5(f<sub>0</sub>+f<sub>3</sub>)−4.</div>
 <p>The supporting flag identity is
 f<sub>03</sub>−f<sub>02</sub>+2f<sub>2</sub>=2f<sub>3</sub>.</p>
 <div class="env">
@@ -360,6 +362,34 @@ f<sub>03</sub>−f<sub>02</sub>+2f<sub>2</sub>=2f<sub>3</sub>.</p>
 A<sub>(u,0)</sub>(pyr <var>Q</var>) ≅ A<sub>u</sub>(<var>Q</var>)⊕ℝ.
 The polar is again a pyramid over a dual 3-polytope, so the audited 3D
 dual-pair count forces a tetrahedral base.</p>
+<div class="env">
+  <span class="label">Theorem 5.</span>
+  A terminal non-pyramid has at least six nonsimplicial facets. Dually, a
+  pair-terminal non-pyramid has at least six nonsimplicial facets and six
+  nonsimple vertices.
+</div>
+<p>Writing e<sub>F</sub>=|V(F)|−4 and β<sub>3</sub> for the largest total
+excess on three facets with independent normals, the stronger weighted form
+is</p>
+<div class="eqn">
+  f<sub>03</sub>−4f<sub>3</sub> ≥ f<sub>0</sub>−5+β<sub>3</sub>.
+</div>
+<p>A normal-matroid coloop forces a facet containing all but one vertex,
+hence a pyramid. With exactly five non-coloop normals, robust erasure makes
+the five vertex complements pairwise disjoint. Each complement has at least
+two vertices because the polytope is not a pyramid, but its vertices lie on
+the other four independent facet hyperplanes, whose common intersection
+has at most one point.</p>
+<p>The direct mixed quadratic datum
+D<sub>P</sub>(N∘N)D<sub>P°</sub><sup>T</sup> has rank nine at the regular
+24-cell but vanishes for the nonterminal segment–square join and centered
+Δ(2,5), despite positive trace deficits. This rules out a universal identity
+based only on that unweighted datum, not a terminality-dependent Hodge
+operator. At a bi-centered pair, boundary-normal regression makes the
+nonlinear residual orthogonal to every bilinear U<sup>T</sup>TW, and a
+fixed-geometry one-sided bistellar flip energy cancels. Geometric two-sided
+flips remain open. The surviving gate is global, oriented cofactor
+transport—not a local quadratic norm.</p>
 
 <h2>9 · Source audit</h2>
 <p>The Meyer–Reisner convexity/rigidity theorem, volume-affinity, compactness,
@@ -374,7 +404,7 @@ obstacle.</p>
 <h2>10 · Exact verification</h2>
 <pre><code>$ python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ...
-Ran 20 tests
+Ran 22 tests
 
 OK
 
@@ -405,9 +435,12 @@ cone-volume subspace concentration alone are now exactly ruled out. The
 next campaign must prove or falsify superharmonicity of the cone-duality
 defect—equivalently the global boundary transport inequality—on the
 connected circuit-support branch. Incidence repartition alone is
-tautological; the route is GO only for a degree-two terminal Bochner
-identity with a proved positive coupled form. Any candidate passing the
-projective covariance test must then face the stress-corrected Schur
+tautological, while the universal unweighted contraction, raw regression
+residual, and fixed-geometry one-sided flip fail exactly. A
+terminality-dependent Hodge operator remains possible. The route is GO for
+the robust quadratic-coupling rank gate followed by a global oriented
+cofactor identity. Any candidate passing
+the projective covariance test must then face the stress-corrected Schur
 complement.</p>
 
 <div class="footer">

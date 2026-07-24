@@ -174,16 +174,31 @@ injective. This **robust-support lemma** is stronger than circuit-support
 connectivity and is the precise every-direction content of terminality.
 
 It still acts trivially on degree-one polarity columns, which are global
-affine functions. The first features on which it can carry new information
-are the circuit second-moment tensors
+affine functions. There is an important variance/covariance distinction at
+degree two. A speed \(\alpha\) determines a residual covector in the facet
+relation space:
 
 \[
-Q_{F,\alpha}=\sum_{v\in F}\alpha_vx_vx_v^\mathsf T.
+R_F(\alpha)(\gamma)=\sum_{v\in F}\gamma_v\alpha_v,
+\qquad
+\gamma\in\operatorname{Rel}(F).
 \]
 
-These tensors are generally indefinite. The remaining missing lemma must
-therefore be a coupled primal--dual positivity statement, not an ordinary
-Markov or convex-order argument.
+The intrinsic second-moment tensor is indexed by the relation,
+
+\[
+\mathcal Q_F(\gamma)
+=\sum_{v\in F}\gamma_vx_vx_v^\mathsf T,
+\]
+
+not directly by \(\alpha\). There is no canonical identification
+\(\operatorname{Rel}(F)^*\to\operatorname{Rel}(F)\). Constructing a
+positive, intrinsic Hodge operator of this kind would be new mathematical
+content. The follow-up exact calculations in
+`terminal-quadratic-rigidity.md` show that a universal unweighted
+contraction, the raw regression residual, and a fixed-geometry one-sided
+flip cannot control the trace sign. They do not exclude a
+terminality-dependent Hodge operator.
 
 ## 4. Why subspace concentration alone cannot work
 
@@ -359,13 +374,14 @@ The reduction suggests a dimension-specific maximum-principle statement:
 
 The word *pair-terminal* is essential. A dimension-free version is false,
 and even centered polytopes with the strongest available subspace
-concentration do not suffice. The next proof attempt should express the
-metric Laplacian as a nonnegative quadratic form in coupled primal and dual
-circuit second-moment tensors, with vanishing forcing an affine join. It
-should be abandoned unless the missing positivity is proved; the boundary
-repartition and first-degree circuit identities alone are tautological.
-Alternatively, falsify the statement with an exact connected pair-terminal
-trace counterexample.
+concentration do not suffice. The universal unweighted quadratic form
+proposed in the first version of this note is ruled out on nonterminal
+controls, while the raw regression residual and a fixed-geometry
+one-sided flip cancel; see `terminal-quadratic-rigidity.md`.
+The surviving route is a global oriented determinant/cofactor transport
+identity, after first proving or falsifying nonzero robust quadratic
+coupling. Alternatively, falsify the trace statement with an exact
+connected pair-terminal counterexample.
 
 ## References
 

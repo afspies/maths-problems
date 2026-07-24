@@ -13,6 +13,9 @@ builds the paired primal/polar incidence tangent matrix and the 24 standard
 infinitesimal projective motions. The paired KKT routines compute the exact
 incidence multiplier and its stress-corrected Lagrangian Hessian. The slack
 mass routines verify the global barycentric mass identity exactly.
+They now also compute the weighted terminal excess, intrinsic quadratic
+circuit-image ranks, mixed primal--dual quadratic rank, and the exact
+boundary-normal regression decomposition.
 
 For each constrained facet `F`, a matrix row is an affine dependence `lambda`
 of its vertices, and the verified speed equation is
@@ -76,6 +79,19 @@ matches the direct four-dimensional geometry at \(m=5\) and certifies
 \]
 an exact centered-polytopal no-go for deriving the covariance ceiling from
 cone-volume subspace concentration alone.
+
+The quadratic diagnostics verify ranks \(9,9,9\) for the regular 24-cell,
+\(10,9,9\) for a generic Paffenholz member, and mixed rank zero for both
+the segment--square join and \(\Delta(2,5)\).  At the regular 24-cell the
+boundary regression check gives
+\[
+\operatorname{tr}(HH^\circ)=169/800,\quad
+\mathbb E N^2=1/2,\quad
+\mathbb E N_{\rm lin}^2=50/169,\quad
+\mathbb E(N-N_{\rm lin})^2=69/338.
+\]
+These are falsification checks for the universal unweighted degree-two
+contraction ansatz, not a finite proof of a global sign.
 
 At the regular 24-cell the paired verifier checks the exact constrained
 blocks

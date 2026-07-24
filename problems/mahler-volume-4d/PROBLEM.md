@@ -57,6 +57,13 @@ Partial results:
 - a second-fundamental-form criterion proving the singular Paffenholz
   q-regular germ spans its full 50-dimensional incidence tangent, plus a
   facet-boundary integration formula for the trace defect.
+- a weighted terminal-excess inequality
+  \(f_{03}-4f_3\ge f_0-5+\beta_3\), the strengthened pair-terminal bound
+  \(2f_{03}\ge5(f_0+f_3)-4\), and a proof that every terminal non-pyramid
+  has at least six nonsimplicial facets;
+- exact regression and fixed-geometry bistellar-flip cancellations proving
+  that the universal unweighted quadratic contraction and raw residual
+  ansatzes cannot encode the trace sign.
 
 ## Certificate + verifier
 
@@ -133,7 +140,24 @@ Partial results:
 - Terminality has the exact robust-support form: for every nonaffine vertex
   function, the normals of facets on which its restriction is nonaffine
   span \(\mathbb R^4\). This still annihilates degree-one polarity columns;
-  any Bochner proof must act on circuit second-moment tensors.
+  the intrinsic degree-two tensor is indexed by a facet relation, while a
+  speed residual is a covector.  No canonical positive Hodge star between
+  the two is currently known.
+- A terminal non-pyramid has at least six nonsimplicial facets.  Dually, a
+  pair-terminal non-pyramid has at least six nonsimplicial facets and six
+  nonsimple vertices.  The weighted excess theorem gives
+  \[
+  f_{03}-4f_3\ge f_0-5+\beta_3,\qquad
+  2f_{03}\ge5(f_0+f_3)-4.
+  \]
+- The direct mixed quadratic datum is
+  \(D_P(N\circ N)D_{P^\circ}^{\mathsf T}\), but raw regression residuals
+  and fixed-geometry one-sided bistellar flips cancel exactly.  These
+  calculations do not exclude a terminality-dependent Hodge operator,
+  separate primal/dual Gram data, or geometric two-sided flips. A
+  successful proof must retain a global oriented cofactor transport term.
+  The first finite gate is to prove this mixed quadratic datum is nonzero
+  on every connected pair-terminal non-simplex.
 - Every incidence-stress quadric has the 24-dimensional PGL tangent in its
   radical. Thus integrability descends modulo PGL, while curvature still
   retains four denominator-projective directions after quotienting only the
@@ -174,11 +198,13 @@ Partial results:
 ## First steps
 
 1. Read `LEARNINGS.md` and the source audit.
-2. Attack the connected terminal trace gap through the equivalent
-   entropic-Laplacian or determinant-weighted global forms in
-   `angles/slack-concentration/`. Do not retry an ordinary circuit Poincare
-   inequality or cone-volume subspace concentration: neither controls the
-   target sign.
+2. Attack the connected terminal trace gap through a global oriented
+   cofactor/determinant transport identity.  First prove or falsify the
+   robust quadratic-coupling rank gate in
+   `results/terminal-quadratic-rigidity.md`.  Do not retry ordinary circuit
+   Poincare, cone-volume concentration, the universal unweighted quadratic
+   contraction, the raw regression residual, or a fixed-geometry one-sided
+   flip energy: each is now exactly ruled out.
 3. On any candidate passing the projective covariance test, use the exact
    KKT multiplier and Schur complement on the q-regular stress cone.
    Dimension counts alone cannot force a negative sign. The disconnected

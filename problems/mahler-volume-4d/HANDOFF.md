@@ -66,6 +66,16 @@ Current priorities (update each session):
   robust-support characterization of terminality, and shows boundary
   incidence repartition is tautological without a new degree-two circuit
   inequality.
+- Read `results/terminal-quadratic-rigidity.md`: robust terminality gives
+  \[
+  f_{03}-4f_3\ge f_0-5+\beta_3,\qquad
+  2f_{03}\ge5(f_0+f_3)-4,
+  \]
+  and every terminal non-pyramid has at least six nonsimplicial facets.
+  The note corrects the intrinsic circuit tensor and proves that a universal
+  unweighted quadratic contraction, the raw regression-residual energy,
+  and a fixed-geometry one-sided bistellar-flip energy all cancel or miss
+  the trace sign. A terminality-dependent Hodge operator remains possible.
 - Terminality plus disconnected facet-circuit support gives an affine join,
   now solved. In the connected branch the projective orbit has dimension 24
   and the realization-moduli quotient tangent count is
@@ -73,15 +83,18 @@ Current priorities (update each session):
 - Do not quotient all 24 PGL directions in the Mahler Hessian. Only the 20
   affine directions are gauges; the four denominator-projective directions
   carry the covariance block and must be retained or Schur-complemented.
-- Do not return to terminal face-lattice enumeration. The next theorem-shaped
-  target is a terminal Bochner/carre-du-champ identity proving strict
-  superharmonicity of the cone-duality defect. Equivalently prove the global
-  facet-boundary transport inequality or a determinant-weighted
-  flip/divergence identity forcing
-  \(\sum|\det L_{ST}|(E_{ST}-100)<0\). Pointwise estimates, ordinary circuit
-  spectral gaps, and cone-volume subspace concentration alone are dead. On
-  candidates passing the projective covariance test, use the KKT-corrected
-  Schur complement on the q-regular moduli cone.
+- Do not return to terminal face-lattice enumeration. First prove or falsify
+  the robust quadratic-coupling gate
+  \(D_P(N\circ N)D_{P^\circ}^{\mathsf T}\ne0\); the clean sufficient target
+  is \(\rho(P)+\rho(P^\circ)>10\). Even success gives curvature, not sign.
+  Completion requires a global oriented determinant/cofactor transport
+  identity which distinguishes positive and negative regular-24-cell local
+  brackets. Pointwise estimates, ordinary circuit spectral gaps,
+  cone-volume concentration, the universal unweighted quadratic
+  contraction, raw regression residual, and fixed-geometry one-sided flips
+  are dead. On candidates passing the
+  projective covariance test, use the KKT-corrected Schur complement on the
+  q-regular moduli cone.
 - Run the exact harness before and after changes:
   `python3 -m unittest discover -s problems/mahler-volume-4d/harness -v`,
   `verify_bridge_counterexample.py`, and `bicenter_certificate.py` as

@@ -32,3 +32,9 @@
   the entropic-metric Laplacian of the cone-duality defect, proves
   cone-volume subspace concentration alone cannot control its sign, and
   classifies the homogeneous polyhedral equality case as simplicial.
+- `terminal-quadratic-rigidity.md`: strengthens the pair-terminal flag
+  inequality to \(2f_{03}\ge5(f_0+f_3)-4\), proves a terminal non-pyramid
+  has at least six nonsimplicial facets, corrects the intrinsic quadratic
+  circuit object, and proves exact regression/flip cancellations which
+  rule out a universal unweighted quadratic identity and a fixed-geometry
+  one-sided flip ansatz.
