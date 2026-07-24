@@ -37,7 +37,15 @@ non-simplex has quadratic Hilbert excess at least three and hence at least
 eight vertices. Quadratic coupling is exactly the obstruction to the
 Hadamard-square slack Zariski tangent; its four uniform barycentric
 cofactor residues cancel as \(C-C-C+C\), isolating a
-terminality-dependent nonlocal transport problem. The full
+terminality-dependent nonlocal transport problem. A graph-theoretic
+simple-vertex theorem, the published complete list of nineteen
+four-dimensional two-level types, and eight exact speed certificates now
+classify the terminal two-level bodies as precisely
+\(\Delta_4\) and \(\Delta_2\times\Delta_2\); the latter's polar is
+nonterminal, so the entire pair-terminal two-level branch reduces to the
+simplex. We also define an intrinsic cone-volume Green energy for the
+remaining mixed quadratic coupling and record exact controls and
+discovery-level failures of three universal scalar comparisons. The full
 four-dimensional conjecture is not proved.
 
 ## Principal negative result
@@ -505,6 +513,78 @@ identically. A successful argument must add geometry- or
 terminality-dependent weights before this cancellation, or classify the
 globally realizable low-Hilbert configurations.
 
+### Theorem 7: complete two-level terminal boundary
+
+Every terminal two-level four-polytope is affinely equivalent to
+\[
+\boxed{\Delta_4\quad\text{or}\quad\Delta_2\times\Delta_2.}
+\]
+Consequently every pair-terminal two-level four-polytope is a simplex.
+
+For the structural part, normalize at a simple vertex. The vertices become
+stable-set vectors of a graph \(G\) on four vertices. For each nonedge
+\(ij\), the speed \(x_ix_j\) and terminal robust support force both
+\[
+N(i)\setminus N(j)\ne\varnothing,\qquad
+N(j)\setminus N(i)\ne\varnothing.
+\]
+On four vertices this gives \(G=K_4\) or \(G=2K_2\), hence the simplex or
+\(\Delta_2\times\Delta_2\). The product is terminal: a vertex speed is a
+\(3\times3\) matrix, global affine speeds are exactly the row-plus-column
+matrices, and every nonadditive matrix violates enough row and column
+facets to span both complementary normal planes.
+
+Bohn--Faenza--Fiorini--Fisikopoulos--Macchia--Pashkovich prove completeness
+of the nineteen affine two-level types in dimension four, eleven with a
+simple vertex. An independent exact Boolean audit recovers the same
+nineteen incidence classes from \(65\,535\) nonempty cube subsets. For each
+of the remaining eight nonsimple-vertex representatives, an explicit
+squarefree quadratic speed and rational shadow direction certify
+nonterminality. Since the polar of
+\(\Delta_2\times\Delta_2\) is simplicial and nonsimplex, it is nonterminal.
+
+This also corrects the tempting but false Boolean saturation conjecture:
+\(\Delta_2\times\Delta_2\) is terminal with connected rectangle circuits
+but has \(\rho=4\), not six. More generally
+\[
+\Delta_p\times\Delta_q\text{ is terminal and has }\rho=pq
+\qquad(p,q\ge2).
+\]
+
+### Intrinsic cone-volume Green diagnostic
+
+Let \(D,E\) be affine-dependency bases and let \(\mu,\nu\) be the normalized
+dual/primal cone-volume weights. With
+\[
+K=D\operatorname{diag}(\mu)^{-1}D^\mathsf T,\quad
+L=E\operatorname{diag}(\nu)^{-1}E^\mathsf T,\quad
+C=D(S\circ S)E^\mathsf T,
+\]
+the quantity
+\[
+\boxed{\mathcal G_{\rm cv}
+=\operatorname{tr}(K^{-1}CL^{-1}C^\mathsf T)}
+\]
+is basis-, relabeling-, and \(GL(4)\)-invariant, nonnegative, and vanishes
+exactly when the mixed quadratic coupling vanishes. It is the weighted
+squared norm of \(S\circ S\) after affine regression on both sides,
+equivalently the trace overlap of the primal and polar residual-quadratic
+covariance operators.
+
+Exactly,
+\[
+\mathcal G_{\rm cv}(\text{regular 24-cell})=\frac14,\qquad
+D_\partial=\frac{31}{800},
+\]
+while \(\mathcal G_{\rm cv}=0\) on the segment--square join and centered
+\(\Delta(2,5)\). High-precision bi-centered Paffenholz tests drive
+\(D_\partial/\mathcal G_{\rm cv}\) below \(31/200\), \(1/8\), and
+\(1/10\); the smallest recorded value is about \(0.096765\). These are
+discovery-level counterexamples, not interval certificates. Thus
+\(\mathcal G_{\rm cv}\) is a canonical diagnostic, but a proof still needs
+a configuration-dependent spectral factor, a signed refinement, or a new
+global Veronese-gluing theorem.
+
 ## Verification
 
 Run:
@@ -513,7 +593,7 @@ Run:
 python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ```
 
-Expected: twenty-four tests pass. The harness uses rational arithmetic only. It checks
+Expected: twenty-seven tests pass. The harness uses rational arithmetic only. It checks
 the centered simplex's polar, incidences, speed dimension, and exact product
 \(3125/576\); verifies cube/cross-polytope polarity; and supplies negative
 speed controls for the cross-polytope, cube, and pyramid over a cube.
@@ -548,6 +628,9 @@ full KKT projective/realization block. The hypersimplex test independently
 matches the four-dimensional geometric covariance calculation to the
 closed Weyl-chamber formula and verifies the exact ten-dimensional
 subspace-concentration counterexample.
+It further checks terminality and \(\rho=4\) for
+\(\Delta_2\times\Delta_2\), the eight exact no-simple-vertex two-level
+speed certificates, and the exact regular-24-cell cone-volume Green energy.
 
 This computation verifies the finite linear-algebra interfaces. The
 infinite-family results are proofs, not extrapolations from tested examples.
@@ -579,6 +662,11 @@ the projective-radical/KKT formulas. The reviewer first caught that nearby
 rational terminal points do not certify the exact bi-centering root, then
 supplied and audited the normal-determinant transport certificate which
 closes that gap without a limiting argument.
+An additional xhigh proof audit checked every implication in the
+simple-vertex graph theorem and returned GO on the classification-backed
+completion after verifying the exact representative/certificate contract.
+A separate audit returned GO on the Green identities but STOP on using the
+sign-blind scalar energy for any universal positive comparison.
 
 ## What we tried that didn't work
 
@@ -602,9 +690,11 @@ shows. Repartitioning incidence and nonincidence brackets alone is also
 tautological. The universal unweighted quadratic contraction, raw
 regression residual, and uniform oriented Plucker residues now fail
 exactly; geometry-dependent or nonlocal cofactor weights remain open.
-The rank-sum shortcut also cannot cover \(f_0+f_3\le20\). The next route is
-GO for global low-Hilbert/Veronese gluing or a terminality-dependent
-nonlocal Hodge/Green operator acting before the \(C-C-C+C\) cancellation.
+The rank-sum shortcut also cannot cover \(f_0+f_3\le20\), and the two-level
+boundary is now completely closed. The next route is GO for global
+low-Hilbert/Veronese gluing in the necessarily non-two-level branch or a
+terminality-dependent signed/anisotropic Hodge operator acting before the
+\(C-C-C+C\) cancellation.
 
 ## Relation to prior work
 

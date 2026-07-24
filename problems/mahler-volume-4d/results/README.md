@@ -44,3 +44,10 @@
   non-simplices, gives exact abstract sharpness models, and proves that
   the displayed uniform oriented cofactor residues cancel as
   \(C-C-C+C=0\).
+- `two-level-green-boundary.md`: classifies terminal two-level
+  four-polytopes as \(\Delta_4\) or
+  \(\Delta_2\times\Delta_2\), excluding every non-simplex two-level body
+  from pair-terminality. It also defines the intrinsic cone-volume Green
+  energy, verifies its exact regular-24-cell value, and numerically violates
+  three tempting universal scalar comparison constants on bi-centered
+  Paffenholz members; those last witnesses are not interval certificates.

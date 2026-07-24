@@ -92,6 +92,17 @@ Current priorities (update each session):
   global polytopes, but prove that robust erasure, normal matroids, and
   local convex-facet data alone cannot establish the old \(\rho\ge6\)
   target. Global Veronese gluing is indispensable.
+- Read `results/two-level-green-boundary.md`. It proves that every terminal
+  two-level four-polytope is \(\Delta_4\) or
+  \(\Delta_2\times\Delta_2\); the latter has a nonterminal simplicial polar,
+  so pair-terminal two-level bodies are simplices. It also defines the
+  intrinsic cone-volume Green energy
+  \(\operatorname{tr}(K^{-1}CL^{-1}C^\mathsf T)\). This projects before
+  squaring and avoids applying the uniform cofactor functional, but
+  constants \(31/200,1/8,1/10\) all fail high-precision bi-centered
+  Paffenholz tests. These numerical witnesses are not interval
+  certificates. The xhigh audit returned GO on the identities and STOP on
+  any universal positive scalar comparison.
 - Terminality plus disconnected facet-circuit support gives an affine join,
   now solved. In the connected branch the projective orbit has dimension 24
   and the realization-moduli quotient tangent count is
@@ -102,13 +113,13 @@ Current priorities (update each session):
 - Do not return to terminal face-lattice enumeration. Do not use
   \(\rho(P)+\rho(P^\circ)>10\) as the primary gate: it is impossible when
   \(f_0+f_3\le20\), which current terminal inequalities do not exclude.
-  First attack the globally realizable low-Hilbert configurations through
+  First attack the globally realizable non-two-level low-Hilbert
+  configurations through
   the common tensors \(zz^\mathsf T-\operatorname{diag}(z)\), prioritizing
-  \(f_0+f_3\le20\) and terminal two-level exclusion. In parallel, seek a
-  terminality-dependent nonlocal Hodge/Green weighting which redistributes
-  the four oriented cofactor residues before they cancel. The first
-  two-level target is the Boolean--Veronese saturation lemma: connected
-  terminal non-simplex two-level \(P\) should satisfy \(\rho(P)=6\).
+  \(f_0+f_3\le20\). In parallel, seek a terminality-dependent signed or
+  anisotropic Hodge/Green weighting which redistributes the four oriented
+  cofactor residues before they cancel. Do not seek a universal scalar
+  multiple of the cone-volume Green energy.
   The displayed uniform Cauchy--Binet/Plucker residues, pointwise
   estimates, ordinary circuit spectral gaps, cone-volume concentration,
   the universal unweighted contraction, raw regression residual, and

@@ -68,6 +68,13 @@ Partial results:
   coupling, the terminal Hilbert-rank bound \(\rho\ge3\), and an oriented
   double-circuit calculation proving that the uniform barycentric cofactor
   residues cancel componentwise as \(C-C-C+C=0\).
+- a complete dimension-four classification of terminal two-level
+  polytopes: only \(\Delta_4\) and
+  \(\Delta_2\times\Delta_2\), so pair-terminality forces the simplex;
+- the intrinsic cone-volume Green energy
+  \(\mathcal G_{\rm cv}=\operatorname{tr}(K^{-1}CL^{-1}C^\mathsf T)\),
+  together with exact controls and high-precision numerical violations of
+  three tempting universal scalar comparisons to the trace deficit.
 
 ## Certificate + verifier
 
@@ -158,12 +165,24 @@ Partial results:
   \(D_P(N\circ N)D_{P^\circ}^{\mathsf T}\), but raw regression residuals
   and fixed-geometry one-sided bistellar flips cancel exactly.  These
   calculations do not exclude a terminality-dependent Hodge operator,
-  separate primal/dual Gram data, or geometric two-sided flips. A
-  Quadratic coupling is exactly the obstruction to the fixed-incidence
-  slack tangent \(\dot S=S\circ S\). Every terminal non-simplex has
+  separate primal/dual Gram data, or geometric two-sided flips.
+  Quadratic coupling is exactly the obstruction to the fixed-support
+  Zariski slack tangent \(\dot S=S\circ S\). Every terminal non-simplex has
   \(\rho=h_V(2)-5\ge3\), hence at least eight vertices, but exact abstract
   models show robust rank data alone cannot force \(\rho>3\). The former
   rank-sum target also cannot hold when \(f_0+f_3\le20\).
+- Every terminal two-level four-polytope is affinely equivalent to
+  \(\Delta_4\) or \(\Delta_2\times\Delta_2\). The second body is terminal
+  with \(\rho=4\), but its simplicial polar is nonterminal and its Mahler
+  product is the already-excluded \(243/32\). Thus the two-level boundary
+  is closed for hypothetical minimizers.
+- The cone-volume Green energy is the squared weighted double-affine
+  residual of \(S\circ S\), equivalently
+  \(\operatorname{tr}(\Gamma_P\Gamma_{P^\circ})\). It avoids the linear
+  cofactor functional, but no tested fixed positive comparison constant to
+  \(D_\partial\) survives high-precision Paffenholz experiments. These
+  numerical witnesses are not interval certificates. A useful completion
+  must supply a configuration-dependent signed or spectral factor.
 - On two affine circuits, the mixed coupling is the first oriented cofactor
   response of \(\det(S+t(N\circ N))\). In the actual simplex moment energy
   its four residues cancel as \(C-C-C+C=0\). A successful proof must add a
@@ -204,8 +223,12 @@ Partial results:
 - **Gale transforms:** express nontrivial admissible speeds as low-codimension
   dependencies and seek a dual obstruction without enumerating face lattices.
 - **Low-Hilbert gluing:** classify globally realizable spans of
-  \(zz^\mathsf T-\operatorname{diag}(z)\), prioritizing pair-terminal
-  configurations with \(f_0+f_3\le20\) and the two-level boundary case.
+  \(zz^\mathsf T-\operatorname{diag}(z)\), prioritizing non-two-level
+  pair-terminal configurations with \(f_0+f_3\le20\).
+- **Cone-volume Green operators:** refine
+  \(\operatorname{tr}(\Gamma_P\Gamma_{P^\circ})\) with
+  terminality-dependent signed or anisotropic spectral information; a
+  universal scalar Poincare coefficient is ruled out.
 - **Targeted exact computation:** falsify candidate lemmas on structured
   families (products, joins, wedges), never claim classification from samples.
 
@@ -215,9 +238,9 @@ Partial results:
 2. Read `results/quadratic-slack-cofactor.md`. Do not use the rank-sum
    shortcut as a prerequisite: it cannot cover \(f_0+f_3\le20\), and
    robust abstract tensor data permit every \(\rho=3,4,5\). Attack either
-   global Veronese gluing (including terminal two-level exclusion) or a
-   terminality-dependent nonlocal Hodge/Green weighting that acts before
-   the exact \(C-C-C+C\) cofactor cancellation.
+   global Veronese gluing on the now necessarily non-two-level branch, or
+   a terminality-dependent signed/anisotropic Hodge weighting that acts
+   before the exact \(C-C-C+C\) cofactor cancellation.
 3. On any candidate passing the projective covariance test, use the exact
    KKT multiplier and Schur complement on the q-regular stress cone.
    Dimension counts alone cannot force a negative sign. The disconnected

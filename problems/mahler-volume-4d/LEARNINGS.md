@@ -10,10 +10,10 @@ Keep this short enough to read in two minutes — the journal holds the detail.
   \(\rho(P)+\rho(P^\circ)>10\) a prerequisite: it is impossible when
   \(f_0+f_3\le20\), a range not yet excluded. Use the exact identity
   \(C=0\iff\dot S=S\circ S\) as a fixed-support rank-five slack Zariski
-  tangent, not an automatically integrating curve. Attack global Veronese
-  gluing, especially the two-level boundary case and \(f_0+f_3\le20\), or
-  construct a terminality-dependent nonlocal Hodge/Green weight before the
-  \(C-C-C+C\) cofactor cancellation.
+  tangent, not an automatically integrating curve. The two-level branch is
+  now closed. Attack global Veronese gluing for non-two-level configurations
+  with \(f_0+f_3\le20\), or construct a terminality-dependent signed or
+  anisotropic Hodge/Green weight before the \(C-C-C+C\) cancellation.
 - If a candidate passes the projective covariance block, compute the exact
   KKT multiplier and search the correctly stress-adjusted Schur complement
   on q-regular moduli directions. Pure dimension/spanning arguments cannot
@@ -90,6 +90,17 @@ Keep this short enough to read in two minutes — the journal holds the detail.
   Vandermonde models with correct triangular-bipyramid inertia satisfy all
   normal-flat erasure axioms for each \(\rho=3,4,5\). They are not global
   polytope realizations; simultaneous Veronese gluing is the missing input.
+- The first Boolean saturation conjecture was false:
+  \(\Delta_2\times\Delta_2\) is terminal, connected, two-level, and has
+  \(\rho=4\). Its polar is nonterminal and its Mahler product is already
+  strictly excluded. The corrected terminal two-level classification is
+  \(\Delta_4\) or \(\Delta_2\times\Delta_2\).
+- The intrinsic cone-volume Green energy is useful diagnostically, but no
+  plausible universal scalar comparison to \(D_\partial\) has survived.
+  Constants \(31/200\), \(1/8\), and \(1/10\) all fail high-precision
+  bi-centered Paffenholz tests, though these are not interval-certified
+  counterexamples. Terminality must enter through anisotropy, sign, or a
+  configuration-dependent spectral coefficient.
 
 ## Surprises / structure discovered
 
@@ -98,12 +109,16 @@ Keep this short enough to read in two minutes — the journal holds the detail.
   matrix admits the fixed-support Zariski tangent
   \(\dot S=S\circ S\). No integrating rank-five curve is implied. Every
   two-level polytope lies in this zero-coupling boundary.
-- A focused two-level target is Boolean--Veronese saturation: a connected,
-  terminal, non-simplex two-level four-polytope should have maximal
-  \(\rho=6\). The simplex, joins, cube/cross-polytope, 24-cell, and
-  \(\Delta(2,5)\) do not refute it. Combined on both sides with the
-  ten-dimensional trace pairing, it would put every pair-terminal
-  two-level body in the already-solved join branch.
+- A terminal two-level four-polytope is exactly \(\Delta_4\) or
+  \(\Delta_2\times\Delta_2\). The simple-vertex part has a structural graph
+  proof; eight exact squarefree-quadratic speed certificates plus the
+  published nineteen-type completeness theorem close the no-simple-vertex
+  cases. Hence pair-terminal two-level bodies are simplices.
+- The cone-volume Green energy
+  \(\mathcal G_{\rm cv}=\operatorname{tr}(K^{-1}CL^{-1}C^\mathsf T)\)
+  is intrinsic and equals the overlap of the primal and polar residual
+  quadratic covariance operators. It is \(1/4\) at the regular 24-cell and
+  vanishes exactly with mixed quadratic coupling.
 - A self-contained symmetric-pencil argument upgrades terminal rigidity to
   \(\rho(P)\ge3\). Thus terminal non-simplices have \(f_0\ge8\), and
   pair-terminal non-simplices have \(f_0,f_3\ge8\).

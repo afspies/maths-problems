@@ -1,8 +1,9 @@
 import unittest
 from fractions import Fraction
-from itertools import combinations
+from itertools import combinations, product
 
 from polytope import (
+    boolean_4_polytope,
     cell_24,
     centered_hypersimplex_2_5,
     centered_simplex_4,
@@ -23,12 +24,14 @@ from polytope import (
     pyramid_mahler_factor,
     pyramid_over_cube_3,
     rank,
+    simplex_product_2_2,
     simplex_volume,
 )
 from variation import (
     boundary_regression_data,
     boundary_trace_deficit,
     circuit_cofactor_response,
+    cone_volume_green_data,
     constrained_reduced_log_bilinear,
     incidence_kkt_multiplier,
     incidence_stress_bilinear,
@@ -46,6 +49,7 @@ from variation import (
     reduced_log_mahler_second,
     second_order_incidence_rhs,
     simplex_pair_energy,
+    speed_affinity_data,
     terminal_excess_data,
     triangulation_slack_mass_trace,
 )
@@ -141,6 +145,144 @@ class ExactPolytopeHarnessTests(unittest.TestCase):
             * joined.polar().volume_and_centroid()[0],
             join_mahler_factor(1, 2) * segment_product * Fraction(8),
         )
+
+    def test_terminal_two_level_simplex_product_boundary(self):
+        polytope = simplex_product_2_2()
+        self.assertEqual(
+            polytope.incidence_summary(),
+            {
+                "f0": 9,
+                "f3": 6,
+                "f03": 36,
+                "Delta": 6,
+                "delta": 4,
+                "facet_sizes": (6,) * 6,
+                "vertex_facet_degrees": (4,) * 9,
+            },
+        )
+        self.assertTrue(
+            all(
+                entry["dimension"] == 5
+                for entry in polytope.direction_flat_dimensions()
+            )
+        )
+        self.assertEqual(
+            max(
+                entry["dimension"]
+                for entry in polytope.polar().direction_flat_dimensions()
+            ),
+            6,
+        )
+        coupling = quadratic_circuit_coupling(polytope)
+        self.assertEqual(coupling["primal_quadratic_rank"], 4)
+        self.assertEqual(
+            product_free_sum_mahler_factor(2, 2) * Fraction(27, 4) ** 2,
+            Fraction(243, 32),
+        )
+
+    def test_no_simple_vertex_two_level_speed_certificates(self):
+        certificates = (
+            ((1, 2, 3, 4, 5, 6, 8), (1, 2), (0, 1, 0, 0), 1, 7),
+            ((1, 2, 4, 6, 8, 9), (0, 3), (1, 1, 1, 1), 0, 6),
+            (
+                (1, 2, 3, 4, 5, 6, 8, 9),
+                (1, 2),
+                (0, 1, 0, 0),
+                1,
+                6,
+            ),
+            (
+                (1, 2, 3, 4, 5, 6, 8, 9, 10),
+                (2, 3),
+                (0, 0, 1, 0),
+                2,
+                7,
+            ),
+            (
+                (1, 2, 3, 4, 5, 6, 8, 9, 10, 12),
+                (0, 1),
+                (1, -1, 0, 0),
+                3,
+                6,
+            ),
+            (
+                (3, 5, 6, 7, 8, 9, 10, 12),
+                (0, 1),
+                (1, 1, 1, 1),
+                0,
+                8,
+            ),
+            (
+                (3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+                (0, 1),
+                (1, 1, 1, 1),
+                0,
+                6,
+            ),
+            (
+                (2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13),
+                (0, 1),
+                (1, 0, 0, 0),
+                1,
+                7,
+            ),
+        )
+        cube = tuple(product((0, 1), repeat=4))
+        incidence_signatures = set()
+        for indices, pair, direction, normal_rank, speed_dimension in (
+            certificates
+        ):
+            with self.subTest(indices=indices):
+                polytope = boolean_4_polytope(indices)
+                summary = polytope.incidence_summary()
+                self.assertNotIn(4, summary["vertex_facet_degrees"])
+                incidence_signatures.add(
+                    (
+                        summary["f0"],
+                        summary["f3"],
+                        summary["f03"],
+                        summary["facet_sizes"],
+                        summary["vertex_facet_degrees"],
+                    )
+                )
+                self.assertTrue(
+                    all(
+                        len(
+                            {
+                                offset - sum(
+                                    normal[coordinate] * vertex[coordinate]
+                                    for coordinate in range(4)
+                                )
+                                for vertex in polytope.vertices
+                            }
+                        )
+                        == 2
+                        for _, normal, offset in polytope.facets
+                    )
+                )
+                speeds = tuple(
+                    cube[index][pair[0]] * cube[index][pair[1]]
+                    for index in indices
+                )
+                data = speed_affinity_data(polytope, speeds)
+                self.assertFalse(data["is_globally_affine"])
+                self.assertEqual(
+                    data["violated_normal_rank"], normal_rank
+                )
+                for facet_index in data["violated_facets"]:
+                    normal = polytope.facets[facet_index][1]
+                    self.assertEqual(
+                        sum(
+                            normal[coordinate] * direction[coordinate]
+                            for coordinate in range(4)
+                        ),
+                        0,
+                    )
+                self.assertEqual(
+                    polytope.admissible_dimension(direction),
+                    speed_dimension,
+                )
+        self.assertEqual(len(incidence_signatures), len(certificates))
 
     def test_product_free_sum_and_join_covariance_trace_factors(self):
         segment_trace = Fraction(1, 9)
@@ -711,6 +853,26 @@ class ExactPolytopeHarnessTests(unittest.TestCase):
         self.assertEqual(
             {entry["bracket"] for entry in incident},
             {Fraction(3, 16)},
+        )
+
+    def test_intrinsic_cone_volume_green_energy(self):
+        regular = cone_volume_green_data(
+            paffenholz_24_cell((0, 0, 0, 0))
+        )
+        self.assertEqual(regular["green_energy"], Fraction(1, 4))
+        self.assertEqual(regular["boundary_deficit"], Fraction(31, 800))
+        self.assertEqual(
+            regular["deficit_to_energy_ratio"], Fraction(31, 200)
+        )
+        self.assertEqual(
+            cone_volume_green_data(join_segment_square_4())["green_energy"],
+            0,
+        )
+        self.assertEqual(
+            cone_volume_green_data(centered_hypersimplex_2_5())[
+                "green_energy"
+            ],
+            0,
         )
 
     def test_full_rank_24_cell_family_exact_invariants_and_covariance_gap(self):
