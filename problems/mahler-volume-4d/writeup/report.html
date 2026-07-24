@@ -302,7 +302,48 @@ although the weighted average is 169/2.</p>
 is 31/800. The remaining theorem is a global transport inequality on the
 connected circuit network.</p>
 
-<h2>7 · Surviving terminal subclasses</h2>
+<h2>7 · Cone-duality superharmonicity</h2>
+<p>Let <var>V</var>⊂ℝ<sup>5</sup> be the homogenizing cone and put
+<var>J</var>=Φ<sub>V*</sub>−Φ<sub>V</sub><sup>*</sup>. At a bi-centered
+section, with the entropic Hessian metric
+<var>g</var>=∇<sup>2</sup>Φ<sub>V</sub><sup>*</sup>,</p>
+<div class="eqn">
+  Δ<sub>g</sub>J =
+  36tr(cov(<var>K</var>)cov(<var>K</var>°))−4 =
+  −16D<sub>∂</sub>.
+</div>
+<p>The boundary transport target is therefore exactly strict
+superharmonicity of the cone-duality defect. A local minimum requires the
+opposite weak sign. The simplex has Laplacian zero, while the regular
+24-cell has −31/50.</p>
+<div class="env">
+  <span class="label">Exact no-go witness.</span>
+  For the centered ten-dimensional hypersimplex
+  <var>K</var><sub>11</sub>=Δ(2,11)−2<strong>1</strong>/11,
+  <div class="eqn">
+    tr(cov(<var>K</var><sub>11</sub>)cov(<var>K</var><sub>11</sub>°))
+    = 51389/738477 = 5/72 + 847/5907816 &gt; 10/12<sup>2</sup>.
+  </div>
+</div>
+<p>This centered polytope satisfies cone-volume subspace concentration, so
+that condition alone cannot control the Laplacian sign. The exact formula
+comes from Irwin–Hall slice moments and a Weyl-chamber simplex
+decomposition of the polar. In dimension four, Δ(2,5) has trace
+667/7128&lt;1/9 but speed dimensions five and six on both sides, making it
+a nonterminal negative control.</p>
+<p>Terminality itself has the exact robust-support form: for every
+nonaffine vertex function α, the normals of facets on which α is nonaffine
+must span ℝ<sup>4</sup>. This is stronger than circuit connectivity, but
+still annihilates degree-one polarity columns. The first viable Bochner
+variables are the indefinite circuit second-moment tensors
+Q<sub>F,α</sub>=Σ<sub>v∈F</sub>α<sub>v</sub>x<sub>v</sub>x<sub>v</sub><sup>T</sup>;
+any positivity must come from a coupled primal–dual form.</p>
+<p>A homogeneous pointed polyhedral cone is simplicial: its connected
+automorphism group fixes every extreme ray, while transitivity forces all
+positive coordinate scalings. Thus homogeneous equality in five cone
+dimensions already means a 4-simplex section.</p>
+
+<h2>8 · Surviving terminal subclasses</h2>
 <p>For a facet <var>F</var>, admissibility is the family of exact equations
 λ<sup>T</sup>α|<sub>F</sub>=0 over all affine dependences λ of its vertices.
 Choosing a direction parallel to a largest facet gives, for every
@@ -320,7 +361,7 @@ A<sub>(u,0)</sub>(pyr <var>Q</var>) ≅ A<sub>u</sub>(<var>Q</var>)⊕ℝ.
 The polar is again a pyramid over a dual 3-polytope, so the audited 3D
 dual-pair count forces a tetrahedral base.</p>
 
-<h2>8 · Source audit</h2>
+<h2>9 · Source audit</h2>
 <p>The Meyer–Reisner convexity/rigidity theorem, volume-affinity, compactness,
 and the minimizer/polar chain are dimension-independent. The printed
 Chen–Li–Xi–Xu persistence proof follows intersections of two and three facets
@@ -330,10 +371,10 @@ replacement. The analytic reduction survives, but terminal classification
 cannot be the global bridge; full second variation is the remaining
 obstacle.</p>
 
-<h2>9 · Exact verification</h2>
+<h2>10 · Exact verification</h2>
 <pre><code>$ python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ...
-Ran 18 tests
+Ran 20 tests
 
 OK
 
@@ -355,15 +396,19 @@ covariances, the q-regular spanning germ, the full KKT Hessian blocks, and
 the global slack/facet-boundary identities. It is a falsification tool, not
 a substitute for classification.</p>
 
-<h2>10 · Limits and next route</h2>
+<h2>11 · Limits and next route</h2>
 <p>Generic rigidity is too weak: the cube is rigid generically but not in
 facet-parallel directions. More decisively, exact pair-terminality does not
 force a simplex, and a raw singular tangent need not integrate. Ordinary
-circuit Poincaré, cellwise slack bounds, and facet-pair positivity are now
-exactly ruled out. The next campaign must prove or falsify the global
-boundary transport inequality on the connected circuit-support branch, and
-apply the stress-corrected Schur complement to any candidate passing the
-projective covariance test.</p>
+circuit Poincaré, cellwise slack bounds, facet-pair positivity, and
+cone-volume subspace concentration alone are now exactly ruled out. The
+next campaign must prove or falsify superharmonicity of the cone-duality
+defect—equivalently the global boundary transport inequality—on the
+connected circuit-support branch. Incidence repartition alone is
+tautological; the route is GO only for a degree-two terminal Bochner
+identity with a proved positive coupled form. Any candidate passing the
+projective covariance test must then face the stress-corrected Schur
+complement.</p>
 
 <div class="footer">
   <p><strong>Status:</strong> partial results. The full four-dimensional

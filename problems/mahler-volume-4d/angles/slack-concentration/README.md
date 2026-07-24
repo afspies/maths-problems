@@ -201,3 +201,46 @@ work. The route remains **GO** only for a genuinely global
 determinant-weighted flip/divergence identity, or an equivalent comparison
 of the two volume Hodge stars. It should be abandoned upon finding an exact
 bi-centered connected pair-terminal example with trace above \(1/9\).
+
+## Cone-duality form and a concentration no-go
+
+Let \(V\subset\mathbb R^5\) be the homogenizing cone and put
+\(J=\Phi_{V^*}-\Phi_V^*\). At a bi-centered section, the entropic Hessian
+metric satisfies
+
+\[
+\Delta_gJ
+=36\operatorname{tr}(
+\operatorname{cov}P\operatorname{cov}P^\circ)-4
+=-16D_\partial.
+\]
+
+Thus the determinant, boundary-transport, and cone/Laplace formulations
+are the same scalar target. The connected theorem can be restated as strict
+superharmonicity of \(J\) at every pair-terminal nonhomogeneous
+five-dimensional polyhedral cone section.
+
+Do not try to derive this sign from cone-volume subspace concentration
+alone. Henk--Linke concentration holds for every centered polytope, whereas
+Klartag's high-dimensional counterexamples to Kuperberg's covariance
+functional persist under symmetric polytopal approximation. Terminal
+circuit geometry must enter essentially.
+
+The exact terminal input is the robust-support lemma: for every nonaffine
+vertex function \(\alpha\), the normals of facets on which
+\(\alpha|_F\) is nonaffine must span \(\mathbb R^4\). Equivalently, after
+quotienting global affine functions, facets outside every proper normal flat
+give an injective circuit operator.
+
+This cannot act on the degree-one polarity columns, since they are global
+affine functions. The next viable object is the degree-two tensor
+
+\[
+Q_{F,\alpha}=\sum_{v\in F}\alpha_vx_vx_v^\mathsf T.
+\]
+
+Seek a coupled primal--dual Bochner identity expressing
+\(-\Delta_gJ=16D_\partial\) as a nonnegative quadratic form in these
+tensors. Individual tensors are indefinite, so positivity must come from
+the polar coupling; a first-moment martingale or ordinary Markov chain
+cannot supply it.

@@ -35,8 +35,8 @@ python3 -B problems/mahler-volume-4d/harness/bicenter_certificate.py
 The positive object is the centered 4-simplex: its polar, incidences,
 five-dimensional speed space, and exact Mahler product `3125/576` are checked.
 Negative controls are the 4-cross-polytope, the 4-cube in a facet-parallel
-direction, and a pyramid over the 3-cube; each has certified non-globally
-affine admissible speeds.
+direction, a pyramid over the 3-cube, and the centered hypersimplex
+\(\Delta(2,5)\); each has certified non-globally affine admissible speeds.
 
 `verify_bridge_counterexample.py` exhausts every direction flat for a
 rational Santaló-normalized Paffenholz 24-cell. It proves that the polytope
@@ -59,6 +59,23 @@ factors; the Santaló-centered segment--square join; paired incidence tangent
 dimensions for two 24-cell realizations; and the complete four-dimensional
 Paffenholz Hessian
 \(-61I_4/234\) at the regular 24-cell.
+
+The cone-duality helpers check
+\[
+\Delta_g(\Phi_{V^*}-\Phi_V^*)
+=(n+2)^2\operatorname{tr}(
+\operatorname{cov}K\operatorname{cov}K^\circ)-n.
+\]
+For \(\Delta(2,m)\), an independent exact formula combines Irwin--Hall
+slice moments with a Weyl-chamber simplex decomposition of the polar. It
+matches the direct four-dimensional geometry at \(m=5\) and certifies
+\[
+\phi(\Delta(2,11))
+=51389/738477
+=5/72+847/5907816,
+\]
+an exact centered-polytopal no-go for deriving the covariance ceiling from
+cone-volume subspace concentration alone.
 
 At the regular 24-cell the paired verifier checks the exact constrained
 blocks

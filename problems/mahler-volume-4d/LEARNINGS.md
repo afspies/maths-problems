@@ -7,10 +7,12 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 ## What the next session should do first
 
 - Work only on the connected circuit-support branch. Seek a global
-  determinant-weighted flip/divergence identity for
-  \(\sum|\det L_{ST}|(E_{ST}-100)\), or falsify the trace gap with an exact
-  bi-centered pair-terminal example. Do not retry a conventional
-  circuit-Poincare estimate: the polarity matrix is exactly circuit-harmonic.
+  terminal Bochner/carre-du-champ formula proving
+  \(\Delta_g(\Phi_{V^*}-\Phi_V^*)<0\), equivalently a determinant-weighted
+  flip/divergence identity for
+  \(\sum|\det L_{ST}|(E_{ST}-100)\). Falsify the route with an exact
+  bi-centered pair-terminal trace counterexample. Do not retry conventional
+  circuit Poincare or cone-volume subspace concentration.
 - If a candidate passes the projective covariance block, compute the exact
   KKT multiplier and search the correctly stress-adjusted Schur complement
   on q-regular moduli directions. Pure dimension/spanning arguments cannot
@@ -57,6 +59,17 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 - Stress-cone dimension or q-regular spanning cannot by itself force a
   quadratic form to have a negative direction; a volume-specific sign
   identity is indispensable.
+- Cone-volume subspace concentration is too weak. It holds for every
+  centered polytope, while the exact centered ten-dimensional hypersimplex
+  \(\Delta(2,11)\) has
+  \[
+  \operatorname{tr}(\operatorname{cov}K\operatorname{cov}K^\circ)
+  =51389/738477>5/72.
+  \]
+- Incidence/nonincidence boundary “transport” without a new inequality is
+  tautological:
+  \(D_\partial=\mathbb E[Z(N-Z)]\), with the two terms separately
+  factorizing to \(1/4\) and \(9\operatorname{tr}(AB)/4\).
 
 ## Surprises / structure discovered
 
@@ -142,6 +155,26 @@ Keep this short enough to read in two minutes — the journal holds the detail.
   one-sidedly if no independent four-normal set becomes dependent. This
   reduced the interval proof to 20,986 nonvanishing determinant checks and
   avoided interval RREF.
+- The facet-boundary deficit is exactly the negative entropic-metric
+  Laplacian of Klartag's cone-duality defect:
+  \[
+  \Delta_g(\Phi_{V^*}-\Phi_V^*)
+  =36\operatorname{tr}(AB)-4=-16D_\partial.
+  \]
+  This unifies the boundary, determinant, and cone/Laplace routes. A
+  homogeneous pointed polyhedral cone is simplicial, so equality in a future
+  superharmonicity theorem already forces the simplex.
+- Terminality is equivalent to a robust-support lemma: every nonaffine
+  vertex function violates facet affinity on facets whose normals span all
+  of \(\mathbb R^4\). This is stronger than circuit connectivity, but degree
+  one remains harmonic. The first plausible terminal Bochner variables are
+  the indefinite tensors
+  \(Q_{F,\alpha}=\sum_{v\in F}\alpha_vx_vx_v^\mathsf T\).
+- Exact Irwin--Hall slice moments and a Weyl-chamber triangulation give a
+  closed rational covariance-trace formula for every centered
+  \(\Delta(2,m)\). In 4D, \(\Delta(2,5)\) has trace \(667/7128<1/9\) but
+  exact direction-flat speed dimensions \(\{5,6\}\) on both sides, making it
+  a useful nonterminal negative control.
 - Pulling moments were independently cross-checked by a boundary-facet cone
   triangulation. Outward dyadic rounding keeps rigorous rational interval
   arithmetic fast enough for the Krawczyk certificate.

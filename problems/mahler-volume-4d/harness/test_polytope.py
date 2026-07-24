@@ -3,11 +3,14 @@ from fractions import Fraction
 
 from polytope import (
     cell_24,
+    centered_hypersimplex_2_5,
     centered_simplex_4,
+    cone_duality_defect_laplacian,
     cross_polytope_4,
     cube_4,
     full_rank_24_cell,
     full_rank_24_cell_invariants,
+    hypersimplex_2_m_covariance_trace,
     inverse,
     join_covariance_trace,
     join_mahler_factor,
@@ -167,6 +170,57 @@ class ExactPolytopeHarnessTests(unittest.TestCase):
                 1, 2, segment_trace, square_trace
             ),
             Fraction(1, 10),
+        )
+
+    def test_cone_duality_defect_laplacian(self):
+        self.assertEqual(cone_duality_defect_laplacian(4, Fraction(1, 9)), 0)
+        self.assertEqual(
+            cone_duality_defect_laplacian(4, Fraction(169, 1800)),
+            Fraction(-31, 50),
+        )
+        boundary_deficit = Fraction(1, 4) - Fraction(9, 4) * Fraction(
+            169, 1800
+        )
+        self.assertEqual(
+            cone_duality_defect_laplacian(4, Fraction(169, 1800)),
+            -16 * boundary_deficit,
+        )
+
+    def test_hypersimplex_trace_formula_and_concentration_no_go(self):
+        hypersimplex = centered_hypersimplex_2_5()
+        polar = hypersimplex.polar()
+        _, primal_center, primal_covariance = (
+            hypersimplex.volume_centroid_covariance()
+        )
+        _, polar_center, polar_covariance = polar.volume_centroid_covariance()
+        geometric_trace = sum(
+            primal_covariance[row][column]
+            * polar_covariance[column][row]
+            for row in range(4)
+            for column in range(4)
+        )
+        self.assertEqual(primal_center, (0, 0, 0, 0))
+        self.assertEqual(polar_center, (0, 0, 0, 0))
+        self.assertEqual(geometric_trace, Fraction(667, 7128))
+        self.assertEqual(hypersimplex_2_m_covariance_trace(5), geometric_trace)
+        self.assertEqual(
+            cone_duality_defect_laplacian(4, geometric_trace),
+            Fraction(-125, 198),
+        )
+        self.assertEqual(
+            {case["dimension"] for case in hypersimplex.direction_flat_dimensions()},
+            {5, 6},
+        )
+        self.assertEqual(
+            {case["dimension"] for case in polar.direction_flat_dimensions()},
+            {5, 6},
+        )
+
+        ten_dimensional_trace = hypersimplex_2_m_covariance_trace(11)
+        self.assertEqual(ten_dimensional_trace, Fraction(51389, 738477))
+        self.assertEqual(
+            ten_dimensional_trace - Fraction(5, 72),
+            Fraction(847, 5907816),
         )
 
     def test_direction_flat_enumeration_matches_known_examples(self):

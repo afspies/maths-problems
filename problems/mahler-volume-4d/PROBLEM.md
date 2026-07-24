@@ -118,6 +118,22 @@ Partial results:
   spectral gap on it. The remaining trace route is a comparison of
   volume-derived mass forms, equivalently a determinant-weighted global
   simplex identity.
+- For the homogenizing five-cone and
+  \(J=\Phi_{V^*}-\Phi_V^*\), the entropic-metric Laplacian is
+  \[
+  \Delta_gJ
+  =36\operatorname{tr}(
+  \operatorname{cov}K\operatorname{cov}K^\circ)-4
+  =-16D_\partial.
+  \]
+  Thus the boundary target is strict cone-duality superharmonicity.
+  Cone-volume subspace concentration alone cannot imply it: the exact
+  centered hypersimplex \(\Delta(2,11)\) violates Kuperberg's covariance
+  ceiling in dimension ten.
+- Terminality has the exact robust-support form: for every nonaffine vertex
+  function, the normals of facets on which its restriction is nonaffine
+  span \(\mathbb R^4\). This still annihilates degree-one polarity columns;
+  any Bochner proof must act on circuit second-moment tensors.
 - Every incidence-stress quadric has the 24-dimensional PGL tangent in its
   radical. Thus integrability descends modulo PGL, while curvature still
   retains four denominator-projective directions after quotienting only the
@@ -147,6 +163,9 @@ Partial results:
   that reduce dimension; pyramids are complete.
 - **Stress-matrix duality:** reinterpret facet compatibility as an affine
   rigidity or cohomology problem and pair it with the dual complex.
+- **Cone-duality superharmonicity:** derive a Bochner/carre-du-champ formula
+  for the entropic Laplacian and identify the terminal circuit term that is
+  absent from ordinary cone-volume concentration.
 - **Gale transforms:** express nontrivial admissible speeds as low-codimension
   dependencies and seek a dual obstruction without enumerating face lattices.
 - **Targeted exact computation:** falsify candidate lemmas on structured
@@ -155,9 +174,11 @@ Partial results:
 ## First steps
 
 1. Read `LEARNINGS.md` and the source audit.
-2. Attack the connected terminal trace gap through the determinant-weighted
-   global sum in `angles/slack-concentration/`. Do not retry an ordinary
-   circuit Poincare inequality: the polarity matrix is exactly harmonic.
+2. Attack the connected terminal trace gap through the equivalent
+   entropic-Laplacian or determinant-weighted global forms in
+   `angles/slack-concentration/`. Do not retry an ordinary circuit Poincare
+   inequality or cone-volume subspace concentration: neither controls the
+   target sign.
 3. On any candidate passing the projective covariance test, use the exact
    KKT multiplier and Schur complement on the q-regular stress cone.
    Dimension counts alone cannot force a negative sign. The disconnected

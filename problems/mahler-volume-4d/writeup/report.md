@@ -24,8 +24,11 @@ bi-centered representatives remain projective saddles. We further derive
 the exact KKT stress correction, prove every stress quadric has the full PGL
 tangent in its radical, prove the singular q-regular germ spans all 50
 tangent dimensions, and reduce the connected trace gap to a global
-facet-boundary transport inequality. The full four-dimensional conjecture
-is not proved.
+facet-boundary transport inequality. That boundary deficit is exactly the
+negative entropic-metric Laplacian of Klartag's cone-duality defect. An
+exact hypersimplex calculation proves cone-volume subspace concentration
+alone cannot control its sign. The full four-dimensional conjecture is not
+proved.
 
 ## Principal negative result
 
@@ -309,6 +312,79 @@ facet pairs split into 288 positive and 288 negative values; the total is
 \(31/800\). The remaining theorem must globally transport positive
 incidence contributions across the connected circuit network.
 
+### Cone-duality superharmonicity
+
+Let \(V\subset\mathbb R^5\) be the homogenizing cone and write
+
+\[
+J=\Phi_{V^*}-\Phi_V^*
+\]
+
+for the difference between the dual-cone logarithmic Laplace transform and
+the Legendre transform of the primal logarithmic Laplace transform. At a
+bi-centered section, Klartag's exact Hessian formulas and the entropic
+metric \(g=\nabla^2\Phi_V^*\) give
+
+\[
+\boxed{
+\Delta_gJ
+=36\operatorname{tr}(
+\operatorname{cov}K\operatorname{cov}K^\circ)-4
+=-16D_\partial.
+}
+\]
+
+Thus the remaining boundary inequality is exactly strict superharmonicity
+of \(J\) at a connected pair-terminal nonhomogeneous five-cone. A local
+minimum requires the opposite weak sign. The simplex has Laplacian zero;
+the regular 24-cell has \(-31/50\).
+
+Cone-volume subspace concentration cannot supply this sign by itself. For
+the centered hypersimplex \(K_m=\Delta(2,m)-2\mathbf1/m\), exact
+Irwin--Hall slice moments and a Weyl-chamber simplex decomposition of the
+polar give
+
+\[
+\operatorname{tr}(
+\operatorname{cov}K_{11}\operatorname{cov}K_{11}^\circ)
+=\frac{51389}{738477}
+=\frac5{72}+\frac{847}{5907816}
+>\frac{10}{12^2}.
+\]
+
+This ten-dimensional centered polytope satisfies Henk--Linke subspace
+concentration but violates Kuperberg's covariance ceiling. In dimension
+four, \(K_5\) has trace \(667/7128<1/9\), but exact direction-flat
+enumeration gives speed dimensions five and six on both sides, so it is a
+nonterminal negative control. Terminal circuit geometry is therefore
+essential.
+
+Terminality itself has the exact robust-support form
+
+\[
+P\text{ terminal}
+\iff
+\operatorname{span}\{y_F:\alpha|_F\text{ is nonaffine}\}
+=\mathbb R^4
+\]
+
+for every nonaffine vertex function \(\alpha\). This follows immediately by
+choosing a shadow direction orthogonal to the displayed span. It is stronger
+than circuit connectivity, but still annihilates the degree-one polarity
+columns. The first plausible Bochner variables are the circuit
+second-moment tensors
+\[
+Q_{F,\alpha}=\sum_{v\in F}\alpha_vx_vx_v^\mathsf T.
+\]
+They are individually indefinite, so the missing sign must come from a
+coupled primal--dual quadratic form.
+
+A homogeneous pointed polyhedral cone is simplicial: the identity component
+of its automorphism group fixes every extreme ray, while transitivity forces
+the full positive diagonal group in a basis of extreme rays, excluding any
+additional ray. Hence homogeneous polyhedral equality in dimension five
+already reduces to the 4-simplex.
+
 ## Verification
 
 Run:
@@ -317,7 +393,7 @@ Run:
 python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ```
 
-Expected: eighteen tests pass. The harness uses rational arithmetic only. It checks
+Expected: twenty tests pass. The harness uses rational arithmetic only. It checks
 the centered simplex's polar, incidences, speed dimension, and exact product
 \(3125/576\); verifies cube/cross-polytope polarity; and supplies negative
 speed controls for the cross-polytope, cube, and pyramid over a cube.
@@ -348,7 +424,10 @@ vectors, the four diagonal plus six polarized entries of the Paffenholz
 realization Hessian, the smooth signed-family covariance formulas, and the
 q-regular analytic-arc and second-fundamental spanning certificates. It also
 checks the global slack mass identity, the facet-boundary deficit, and the
-full KKT projective/realization block.
+full KKT projective/realization block. The hypersimplex test independently
+matches the four-dimensional geometric covariance calculation to the
+closed Weyl-chamber formula and verifies the exact ten-dimensional
+subspace-concentration counterexample.
 
 This computation verifies the finite linear-algebra interfaces. The
 infinite-family results are proofs, not extrapolations from tested examples.
@@ -396,7 +475,12 @@ The ordinary circuit-Hodge route is now ruled out more strongly: circuit
 operators annihilate the polarity matrix identically. Local simplex and
 facet-pair trace inequalities also fail on the regular 24-cell. Any global
 proof must compare the two volume mass forms on the affine harmonic spaces,
-or establish the equivalent boundary transport inequality.
+establish the equivalent boundary transport inequality, or prove the same
+sign as superharmonicity of the cone-duality defect. Henk--Linke subspace
+concentration alone is insufficient, as the exact hypersimplex witness
+shows. Repartitioning incidence and nonincidence brackets alone is also
+tautological; the next route is GO only for a degree-two terminal Bochner
+identity with a proved positive coupled form.
 
 ## Relation to prior work
 

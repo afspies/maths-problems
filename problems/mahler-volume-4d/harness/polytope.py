@@ -209,6 +209,80 @@ def join_covariance_trace(
     ) / denominator
 
 
+def cone_duality_defect_laplacian(dimension, covariance_trace):
+    """Entropic-metric Laplacian of Klartag's cone-duality defect.
+
+    At a bi-centered section K of a proper cone, with
+    ``covariance_trace = tr(Cov(K) Cov(K°))``, the logarithmic Laplace
+    transforms give
+
+        Delta_g (Phi_{V*} - Phi_V^*) =
+            (dimension + 2)^2 * covariance_trace - dimension.
+
+    The formula is affine invariant and uses exact arithmetic here.
+    """
+    if dimension < 1:
+        raise ValueError("dimension must be positive")
+    return (dimension + 2) ** 2 * Q(covariance_trace) - dimension
+
+
+def hypersimplex_2_m_covariance_trace(vertex_ground_set_size):
+    """Exact trace for the centered hypersimplex Delta(2,m) and its polar.
+
+    The primal moment is an Irwin--Hall conditional moment.  The polar is
+    cut into permutation chambers; each chamber is a simplex whose vertices
+    are scaled fundamental weights of the A_{m-1} Weyl chamber.
+    """
+    m = vertex_ground_set_size
+    if m < 4:
+        raise ValueError("Delta(2,m) must have dimension at least three")
+
+    p = m - 2
+    integral_shifted = (
+        4 * Fraction(2 ** (p + 1) - 1, p + 1)
+        - 4 * Fraction(2 ** (p + 2) - 1, p + 2)
+        + Fraction(2 ** (p + 3) - 1, p + 3)
+    )
+    integral_beta = Fraction(2, (m - 1) * m * (m + 1))
+    second_coordinate_moment = Fraction(
+        m - 1, 2 ** (m - 1) - m
+    ) * (integral_shifted - (m - 1) * integral_beta)
+    primal_eigenvalue = Fraction(m, m - 1) * (
+        second_coordinate_moment - Fraction(4, m * m)
+    )
+
+    chamber_vertices = []
+    for j in range(1, m):
+        fundamental_weight = tuple(
+            Fraction(m - j, m) if coordinate < j else Fraction(-j, m)
+            for coordinate in range(m)
+        )
+        chamber_height = (
+            Fraction(m - 2, m)
+            if j == 1
+            else Fraction(2 * (m - j), m)
+        )
+        chamber_vertices.append(
+            tuple(value / chamber_height for value in fundamental_weight)
+        )
+
+    vertex_sum = tuple(
+        sum((vertex[coordinate] for vertex in chamber_vertices), Fraction())
+        for coordinate in range(m)
+    )
+    polar_squared_radius = (
+        sum((value * value for value in vertex_sum), Fraction())
+        + sum(
+            (
+                sum((value * value for value in vertex), Fraction())
+                for vertex in chamber_vertices
+            ),
+            Fraction(),
+        )
+    ) / (m * (m + 1))
+    return primal_eigenvalue * polar_squared_radius
+
+
 class RationalPolytope:
     """A small full-dimensional rational polytope containing the origin."""
 
@@ -523,6 +597,19 @@ def centered_simplex_4():
             (0, 0, 1, 0),
             (0, 0, 0, 1),
             (-1, -1, -1, -1),
+        ]
+    )
+
+
+def centered_hypersimplex_2_5():
+    """The four-dimensional centered hypersimplex Delta(2,5)."""
+    return RationalPolytope(
+        [
+            tuple(
+                Fraction(int(coordinate in chosen)) - Fraction(2, 5)
+                for coordinate in range(4)
+            )
+            for chosen in combinations(range(5), 2)
         ]
     )
 

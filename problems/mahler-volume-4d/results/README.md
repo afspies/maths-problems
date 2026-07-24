@@ -28,3 +28,7 @@
   stress lemma and exact KKT Hessian formula, replaces the dead circuit
   Poincare route by a volume-mass/determinant target, and certifies the full
   regular-24-cell projective/realization Hessian blocks.
+- `entropic-laplacian-reduction.md`: identifies the boundary deficit with
+  the entropic-metric Laplacian of the cone-duality defect, proves
+  cone-volume subspace concentration alone cannot control its sign, and
+  classifies the homogeneous polyhedral equality case as simplicial.

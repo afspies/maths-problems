@@ -58,6 +58,14 @@ Current priorities (update each session):
   \(A=-31I/13,B=-31I/78,C=-61I/234\). It also proves the exact Paffenholz
   q-regular germ spans all 50 tangent dimensions and gives a facet-boundary
   formula for the trace defect.
+- Read `results/entropic-laplacian-reduction.md`: the facet-boundary deficit
+  equals \(-1/16\) times the entropic-metric Laplacian of
+  \(\Phi_{V^*}-\Phi_V^*\). It also gives an exact hypersimplex witness proving
+  Henk--Linke cone-volume subspace concentration cannot control this sign,
+  classifies homogeneous polyhedral equality as simplicial, proves the
+  robust-support characterization of terminality, and shows boundary
+  incidence repartition is tautological without a new degree-two circuit
+  inequality.
 - Terminality plus disconnected facet-circuit support gives an affine join,
   now solved. In the connected branch the projective orbit has dimension 24
   and the realization-moduli quotient tangent count is
@@ -66,13 +74,14 @@ Current priorities (update each session):
   affine directions are gauges; the four denominator-projective directions
   carry the covariance block and must be retained or Schur-complemented.
 - Do not return to terminal face-lattice enumeration. The next theorem-shaped
-  target is a global transport inequality on the facet-boundary deficit:
-  positive incidence brackets must dominate negative nonincidence brackets.
-  Equivalently seek a determinant-weighted flip/divergence identity forcing
-  \(\sum|\det L_{ST}|(E_{ST}-100)<0\). Pointwise estimates and ordinary
-  circuit spectral gaps are dead. On candidates passing the projective
-  covariance test, use the KKT-corrected Schur complement on the q-regular
-  moduli cone.
+  target is a terminal Bochner/carre-du-champ identity proving strict
+  superharmonicity of the cone-duality defect. Equivalently prove the global
+  facet-boundary transport inequality or a determinant-weighted
+  flip/divergence identity forcing
+  \(\sum|\det L_{ST}|(E_{ST}-100)<0\). Pointwise estimates, ordinary circuit
+  spectral gaps, and cone-volume subspace concentration alone are dead. On
+  candidates passing the projective covariance test, use the KKT-corrected
+  Schur complement on the q-regular moduli cone.
 - Run the exact harness before and after changes:
   `python3 -m unittest discover -s problems/mahler-volume-4d/harness -v`,
   `verify_bridge_counterexample.py`, and `bicenter_certificate.py` as

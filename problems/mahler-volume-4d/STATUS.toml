@@ -3,7 +3,7 @@ title = "Four-dimensional Mahler volume conjecture"
 question = "For every convex body K⊂R^4, prove |K| |(K-s(K))°| ≥ 3125/576, with equality only for simplices."
 # proposed | scaffolded | active | partial-results | solved | excluded | retired
 status = "partial-results"
-best_result = "Sharp inequality for every 4D affine join; certified bi-centered connected pair-terminal 24-cell has trace <1/9; KKT/spanning lemmas reduce the connected case to a global facet-boundary inequality."
+best_result = "Sharp inequality for every 4D affine join; connected case equals strict entropic superharmonicity, with a robust-support terminal lemma and exact degree-two Bochner target."
 doi = ""
 sessions = [
     "2026-07-23 scaffolded from template",
@@ -12,4 +12,5 @@ sessions = [
     "2026-07-24 proved sharp join factorization, product/free-sum gaps, and an exact negative-definite realization Hessian at the regular 24-cell",
     "2026-07-24 proved full-rank 24-cell covariance exclusions and integrated the singular pair-terminal cell into a smooth q-regular family",
     "2026-07-24 certified the exact connected pair-terminal bi-centered root, proved KKT/projective-radical and q-germ spanning lemmas, and derived the facet-boundary trace identity",
+    "2026-07-24 identified the boundary deficit as an entropic Laplacian, proved the robust-support terminal lemma, and gave an exact hypersimplex concentration no-go",
 ]

@@ -699,3 +699,163 @@ unit tests passed in 54.344 seconds; the strengthened bi-centering,
 connectivity, terminality, trace, and covariance certificate passed in about
 60 seconds; and the independent terminal-bridge certificate again checked
 1,941 primal and 580 polar flats in 26.3 seconds.
+
+## 2026-07-24 — cone-duality Laplacian and a degree-two terminal target
+
+### Exact Laplace/boundary identification
+
+For the homogenizing cone \(V\subset\mathbb R^{n+1}\), set
+\[
+J=\Phi_{V^*}-\Phi_V^*.
+\]
+Klartag's Hessian identities at a bi-centered section give
+\[
+\frac1{n+1}\nabla^2J
+=(n+2)B-\frac1{n+2}A^{-1},
+\qquad
+g=\nabla^2\Phi_V^*
+=\frac{n+1}{n+2}A^{-1}.
+\]
+Taking the entropic-metric trace yields
+\[
+\Delta_gJ=(n+2)^2\operatorname{tr}(AB)-n.
+\]
+In dimension four,
+\[
+\Delta_gJ=36\operatorname{tr}(AB)-4=-16D_\partial.
+\]
+Thus the determinant-weighted slack sum, facet-boundary deficit, and
+cone-duality superharmonicity are exactly the same scalar target. The
+simplex has Laplacian zero; the regular 24-cell gives \(-31/50\), matching
+\(-16(31/800)\).
+
+Conditioning the boundary formula gives a further no-go. If \(F,v\) have
+independent cone-volume laws and \(U,W\) are uniform on the corresponding
+facets, then with \(N=x_v\cdot y_F\) and \(Z=U\cdot W\),
+\[
+D_\partial=\mathbb E[Z(N-Z)].
+\]
+The two terms already factor to \(1/4\) and
+\((9/4)\operatorname{tr}(AB)\). Merely transporting incidence and
+nonincidence terms is therefore a tautological repartition unless a new
+terminal inequality is supplied.
+
+### Exact robust-support characterization
+
+For a vertex function \(\alpha\), let \(S(\alpha)\) be the facets on which
+its restriction is nonaffine. Proved
+\[
+P\text{ terminal}
+\iff
+\operatorname{span}\{y_F:F\in S(\alpha)\}=\mathbb R^4
+\quad\text{for every nonaffine }\alpha.
+\]
+If the span is proper, a direction orthogonal to it waives every violated
+facet and makes \(\alpha\) a nonaffine admissible speed. The converse is
+immediate from the violated facets of an admissible speed. This is the
+precise every-direction strengthening of circuit connectivity.
+
+It still annihilates the degree-one polarity columns. The first plausible
+variables are the circuit second-moment tensors
+\[
+Q_{F,\alpha}
+=\sum_{v\in F}\alpha_vx_vx_v^\mathsf T.
+\]
+They are individually indefinite, so the surviving theorem must be a
+coupled primal--dual Bochner positivity identity.
+
+### Exact hypersimplex falsification
+
+For
+\[
+K_m=\Delta(2,m)-\frac2m\mathbf1
+\subset\{\sum_i x_i=0\},
+\]
+derived a closed exact trace formula. The primal covariance is obtained by
+conditioning \(m\) independent uniforms on sum \(2\), using the
+Irwin--Hall density
+\[
+f_m(2)=\frac{2^{m-1}-m}{(m-1)!}.
+\]
+On the polar, each \(A_{m-1}\) Weyl chamber is the simplex cut from the
+fundamental-weight cone by \(y_1+y_2\leq1\). The simplex second-moment
+formula then gives the polar scalar covariance exactly.
+
+At \(m=11\), dimension ten, the result is
+\[
+\operatorname{tr}(
+\operatorname{cov}K_{11}\operatorname{cov}K_{11}^\circ)
+=\frac{51389}{738477}
+=\frac5{72}+\frac{847}{5907816}
+>\frac{10}{12^2}.
+\]
+This is an exact centered polytope satisfying Henk--Linke subspace
+concentration, so concentration alone cannot prove the covariance ceiling.
+
+At \(m=5\), the closed formula matches a completely independent exact
+four-dimensional facet enumeration:
+\[
+\operatorname{tr}(AB)=\frac{667}{7128},\qquad
+\Delta_gJ=-\frac{125}{198}.
+\]
+All 26 primal and 101 polar normal flats have speed dimensions in
+\(\{5,6\}\), with six occurring on both sides, so the centered
+hypersimplex is a nonterminal negative control.
+
+A short Lie-group argument also proves every homogeneous pointed
+polyhedral cone is simplicial. Hence equality in a future superharmonicity
+theorem would already force the simplex section, provided the analytic
+equality case upgrades zero Laplacian to homogeneity.
+
+### Independent source audit and xhigh verdict
+
+Primary sources checked:
+
+- Klartag, arXiv:1710.08084, for the cone/Laplace Hessian formulas and the
+  high-dimensional failure of Kuperberg's covariance conjecture;
+- Henk--Linke, arXiv:1305.5335, for centroid-zero polytopal cone-volume
+  subspace concentration and its equality case.
+
+The GPT-5.6 Sol xhigh reviewer independently rederived the Irwin--Hall
+moment, Weyl-chamber vertices and heights, simplex moment normalization,
+the exact \(m=11\) fraction, both Laplacian checks, the robust-support
+lemma, and the homogeneous-cone argument. It required one clarification:
+the identity component is transitive because it has the same Lie algebra
+orbit dimension as the full transitive automorphism group, hence open
+orbits in a connected interior.
+
+Its blunt route verdict was:
+
+- **STOP** pairwise boundary repartition, first-degree circuits, ordinary
+  Markov mixing, and subspace concentration as proof mechanisms;
+- **GO** only for a degree-two terminal Bochner identity expressing
+  \(-\Delta_gJ\) as a nonnegative coupled quadratic form in primal and dual
+  circuit second-moment tensors, with zero forcing an affine join.
+
+No terminality-to-superharmonicity proof was found. The full conjecture
+remains open.
+
+### Commands and compute
+
+```text
+python3 -m py_compile \
+  problems/mahler-volume-4d/harness/polytope.py \
+  problems/mahler-volume-4d/harness/test_polytope.py
+python3 -m unittest discover \
+  -s problems/mahler-volume-4d/harness \
+  -p test_polytope.py -k cone_duality_defect_laplacian -v
+python3 -m unittest discover \
+  -s problems/mahler-volume-4d/harness \
+  -p test_polytope.py -k hypersimplex -v
+```
+
+Both focused exact tests passed in under one second. An initial direct
+module invocation failed with `ModuleNotFoundError: polytope` because the
+harness is intentionally imported via discovery/PYTHONPATH; rerunning with
+the documented discovery form passed. The full exact suite then passed:
+`Ran 20 tests in 46.496s — OK`. The terminal-bridge certificate again
+returned `terminal-pair-implies-simplex False`. The independent interval
+certificate completed in about 95 seconds and returned
+`unique-bicenter-root True`, `covariance-trace-below-one-ninth True`,
+`bi-centered-root-pair-terminal True`, and
+`projective-local-minimum False`.
