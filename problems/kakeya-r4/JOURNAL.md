@@ -487,3 +487,128 @@ git diff --check
 All 39 exact tests pass. No numerical tube search or substantial compute was
 used. Work and reviews ran in the local repository worktree at negligible
 laptop scale; no private infrastructure details are recorded.
+
+## 2026-07-24 — endpoint rotating stacks and one-shot cover partitions
+
+### Session target
+
+Continued on branch
+`problem/kakeya-r4/2026-07-24-rotating-rank-one`. The target was the sharp
+parabolic obstruction left by the previous session and the earliest
+remaining full-conjecture extraction step.
+
+### Endpoint affine-rotating rank-one theorem
+
+For
+
+`A_s=A_0+integral_0^s(p+tq)(p+tq)^Tdt`,
+
+with linearly independent `p,q`, the scalar graph height at spatial
+coordinates `a=p dot y`, `b=q dot y` is
+
+`h_(a,b)(s)=a²s+ab s²+b²s³/3`,
+
+and has exact square speed `h'=(a+bs)²`. At its critical point,
+
+`h(s)-h(s_0)=b²(s-s_0)³/3`.
+
+The full graph-collar multiplicity
+
+`m_r=r^-1 |{s:|z-h_(a,b)(s)|≤Cr}|`
+
+satisfies
+
+`integral m_r^(3/2) da db dz≤C log(2/r)`.
+
+The critical one-dimensional pushforward costs
+`|b|^-1 log(2+b²/r)` in `L^(3/2)`, while the critical wedge has
+`a`-width `O(|b|)`; these factors cancel. The small
+`a²+b²≤r` region contributes only `O(r^(1/2))`.
+
+For any jointly measurable shading of a fixed uniformly swept stack, the
+normalized shaded multiplicity is pointwise dominated by this full collar.
+Holder therefore gives the cubic SSI
+
+`|N_(Cr)(V)|≥c A(V)³/log(2/r)²`.
+
+A new cubic Hausdorff covering lemma shows that
+
+`sum r^((4-s)/2)L(r)^(1/2)->0`
+
+is sufficient for dimension four when the lower bound is `A³/L`. The
+log-squared loss qualifies for every `s<4`. This proves full Hausdorff
+dimension for a new infinite affine-rotating rank-one parabolic subclass.
+It does not extract a fixed coefficient path from a general Kakeya set.
+
+The pairwise route is genuinely weaker: the two active coefficient scales
+`h,h³` give only an `11/3` second-moment conclusion. The endpoint proof
+recovers the lost power by retaining the square-speed order structure.
+
+### Full-tree ancestry no-go and one-shot alternative
+
+Recursive dyadic hyperplane bisection gives an exact obstruction to
+subpolynomial ancestry. At leaf scale `r=2^-L`, the line
+`ell(t)=(t,0,0,0)`, `0<=t<=1`, crosses `Theta(r^-1)` distinct degree-one
+parents. Any polynomial vanishing globally on all parent hyperplanes has
+all their distinct linear factors and hence degree `Omega(r^-1)`.
+
+For a dyadic Hausdorff cover group with `n_k` radius-`r_k` balls, a single
+degree `D_k≈n_k^(1/4)` partition has only one parent. After normalizing
+`||grad P||_infinity≤1`, its transverse error is
+
+`e_k≤C D_k r_k/alpha_k
+    ≤C alpha_k^-1 c_k^(1/4)r_k^((4-s)/4)`.
+
+If a proposed `s`-cost is bounded and
+`alpha_k≥r_k^epsilon`, `epsilon<(4-s)/4`, Holder makes the dyadic transverse
+tail tend to zero. Thus the transverse wall branch can be discarded without
+deep ancestry. The unresolved residue is the cellular branch or the
+tangent/singular part of a possibly power-degree wall.
+
+### Independent reviews and repairs
+
+GPT-5.6 Sol at `xhigh` effort reviewed the endpoint theorem independently.
+One reviewer first obtained only the `L²`/pairwise power-loss estimate, then
+approved the stronger `L^(3/2)` argument after checking the cubic
+pushforward, small-parameter region, collar domination, and cover exponents.
+A second adversarial review found two real statement gaps:
+
+- the abstract cover theorem had not explicitly assumed positive line-family
+  measure, so the zero-incidence family was a counterexample;
+- mere ambient Lebesgue measurability did not ensure parameter preimages
+  were measurable.
+
+Both were repaired by using standard Borel finite positive parameter spaces,
+a positive-length interval, Borel sweeps and cover groups, and explicit
+joint measurability of the shaded collars. The collar-to-vertical-sublevel
+inclusion, small-region contribution, and fixed ambient affine invariance
+were also made explicit.
+
+The ancestry obstruction and cover-cost alternative were independently
+derived with exact per-line root accounting. Its xhigh review required an
+explicit crossing line, a global-factor formulation of product compression,
+an at-most-`D_k` partition degree budget, exact gradient normalization,
+definitions of the integrated transverse error and positive aggregate
+incidence, and the corrected bounded-cost estimate
+`D_k=O(r_k^(-s/4))`. After repair the verdict was **APPROVE**. No
+full-conjecture claim is made: the high-degree nontransverse/singular
+organization and cellular induction remain open.
+
+### Verification and compute
+
+Commands:
+
+```bash
+cd problems/kakeya-r4/harness
+python3 exponent_ledger.py benchmark_ledger.json
+python3 -m unittest -q
+python3 -m py_compile *.py
+git diff --check
+```
+
+All 44 exact tests pass. New tests verify the moment-height coefficients,
+square derivative, exact critical cubic identity, and cubic-SSI cover-cost
+ledger, as well as the exact dyadic parent-wall count and one-shot
+transverse-tail threshold. No numerical tube search or substantial compute
+was used. Work and reviews ran in the local repository worktree at
+negligible laptop scale; no private infrastructure details are recorded.

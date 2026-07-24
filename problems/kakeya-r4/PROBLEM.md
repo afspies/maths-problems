@@ -75,6 +75,14 @@ See `literature/audit-2026-07-24.md`.
   `Mdelta` catalog baseline by `K D delta/alpha`, where `K` is the number of
   parent wall labels seen by a line. The remaining nontransverse-or-singular
   mass still needs a chart-organization theorem.
+- Full-tree subpolynomial ancestry is false even for recursive hyperplane
+  bisection. A one-shot cover-adapted partition instead makes transverse
+  wall incidence summably negligible after charging bounded Hausdorff cover
+  cost.
+- For the affine-rotating rank-one path
+  `A_s=A_0+integral_0^s(p+tq)(p+tq)^Tdt`, the full collar multiplicity has an
+  endpoint `L^(3/2)` logarithmic bound. Its cubic SSI yields Hausdorff
+  dimension four for every fixed stack with uniform sweep/collar geometry.
 
 ## Angle-of-attack menu (be exploratory — draw from different fields)
 
@@ -98,13 +106,13 @@ See `literature/audit-2026-07-24.md`.
 
 1. Extend the exact ledger if a corrected paper version or new recurrence is
    used.
-2. Preserve subpolynomial parent-wall ancestry through the partition tree.
-   The proved line-sublevel lemma makes transverse descendants a summable
-   additive error; organize the nontransverse-or-singular remainder into
-   fixed continuum charts.
+2. Use the one-shot cover-adapted partition to discard transverse wall mass.
+   Close its cellular induction or organize its tangent/singular high-degree
+   wall into fixed continuum charts.
 3. Prove quantitative stability for dense approximate rank-one-difference
-   graphs and rotating rank-one parabolic paths. The exact complete-clique
-   case is already a common-square pencil.
+   graphs and extend the affine-rotating endpoint theorem to
+   bounded-complexity projective rotation. The exact complete-clique case is
+   already a common-square pencil.
 4. In parallel, seek a stability theorem for the trilinear estimate whose
    model-selection entropy is only `delta^o(1)`.
 5. Submit every theorem-shaped claim to an adversarial soundness review before

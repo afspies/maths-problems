@@ -34,10 +34,18 @@
   replacing the `Mdelta` baseline by `K D delta/alpha` when descendant grains
   retain only `K` parent wall labels, together with an additive-error
   Hausdorff criterion.
+- `rotating-rank-one-endpoint.md`: an endpoint `L^(3/2)` full-collar
+  multiplicity theorem for affine-rotating rank-one coefficient paths,
+  giving cubic SSI and Hausdorff dimension four for arbitrary jointly measurable
+  shadings of every fixed stack in this infinite class.
+- `one-shot-cover-partition.md`: an exact hyperplane-tree obstruction to
+  subpolynomial ancestry, and a cover-cost-charged one-shot partition theorem
+  making quantitatively transverse wall incidence summably negligible.
 
 The first two results do not improve the Kakeya dimension bound. The
 fixed-stack covering theorem now gives Hausdorff dimension four for a new
 structured all-scale transverse-stack subclass. The parabolic theorem
-extends this to a family whose normals may coincide on a locus. Neither
-result extracts its organized coefficient path from a general Kakeya set,
-so no general or sticky benchmark changes.
+extends this to a family whose normals may coincide on a locus, and the
+endpoint theorem handles an affine-rotating rank-one family that pairwise
+second moments miss. None extracts its organized coefficient path from a
+general Kakeya set, so no general or sticky benchmark changes.

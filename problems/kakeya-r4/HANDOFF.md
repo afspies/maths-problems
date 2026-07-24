@@ -19,7 +19,7 @@ Work in problems/kakeya-r4/ of the maths-problems repo. Read, in order:
 4. problems/kakeya-r4/JOURNAL.md — recent sessions' detail, if needed.
 
 Current priorities (update each session):
-- The exact harness is built and currently has 39 passing tests. Run it before
+- The exact harness is built and currently has 44 passing tests. Run it before
   changing any exponent claim.
 - Treat `13/4` as the sticky benchmark and the corrected Katz–Zahl `>3.059`
   number as the general Hausdorff benchmark. Do not relabel the `3.0543`
@@ -34,11 +34,12 @@ Current priorities (update each session):
 - Any carrier output must cross the ordinary `Mdelta` overlap baseline by
   assigned overlap `lambda>>delta`, excess `q-Mdelta`, or a geometric
   exclusion of transverse slab-grid crossings.
-- Preserve parent wall labels. `results/parent-ancestry-tangency-excess.md`
-  proves that descendants under only `K` degree-`D` parents contribute
-  transverse additive error `O(K D delta/alpha)`, independent of descendant
-  count, provided incidences are unioned or uniquely assigned. The remaining
-  output is nontransverse-or-singular unless gradients are bounded below.
+- Do not seek subpolynomial ancestry through a full recursive tree:
+  `results/one-shot-cover-partition.md` gives an exact hyperplane-bisection
+  countermodel with `K≈r^-1`. Instead use one cover-adapted partition of
+  degree `n^(1/4)`. Under bounded proposed `s`-cost its quantitatively
+  transverse wall mass is summably negligible. The remaining cellular and
+  tangent/singular high-degree wall branches are open.
 - Use `results/distributed-quadratic-catalog.md` to turn diffuse catalog
   capture into an explicit polynomial, overlap level, and balanced subfamily.
   Use `results/transverse-quadric-stack-union.md` for the transverse branch.
@@ -63,10 +64,14 @@ Current priorities (update each session):
   and fixed-family Hausdorff theorem when
   `sigma_2(A_s-A_t)≳|s-t|`. It also proves exact common-square rigidity for a
   complete clique of rank-one-dangerous differences.
-- The live parabolic obstruction is a dense approximate rank-one graph or a
-  rotating rank-one tangent. The exact moment path has second singular value
-  only cubic in parameter separation; do not apply the rank-two theorem to it
-  at the original spacing.
+- `results/rotating-rank-one-endpoint.md` proves that affine projective
+  rotation is no longer an inner union obstruction. For
+  `A_s=A_0+integral_0^s(p+tq)(p+tq)^Tdt`, the full collar multiplicity obeys
+  an endpoint `L^(3/2)` logarithmic bound, yielding cubic SSI and Hausdorff
+  dimension four for every fixed stack with uniform sweep/collar geometry.
+- The live parabolic obstruction is now extraction of a bounded-complexity
+  coefficient path, dense approximate rank-one graphs, common-square
+  pencils, and projective rotations with higher-order stationary points.
 - Lusin selection can make discarded cover incidence a summable additive
   error, but supplies no SSI chart, quantitative modulus, or subpolynomial
   chart count.
@@ -77,9 +82,8 @@ Current priorities (update each session):
 - Submit any theorem-shaped output to GPT-5.6 Sol xhigh, explicitly asking it
   to audit circularity, model entropy, scale loss, strict hypotheses, and
   Hausdorff-versus-Minkowski consequences.
-- The second-session gate is GO on Bridge B. No new general or sticky
-  dimension bound was proved. The third session sharpens the full-conjecture
-  bottleneck to uniform shaded extraction with subpolynomial chart entropy;
-  the fourth session handles the generic rank-two parabolic path and removes
-  descendant transverse baselines under bounded ancestry. Do not claim that
-  the remaining chart-organization theorem is known.
+- The second-session gate remains GO on Bridge B. No new general or sticky
+  dimension bound was proved. The fifth session closes the affine-rotating
+  rank-one inner estimate and disproves the proposed full-tree ancestry
+  route. Do not claim that the remaining high-degree wall
+  organization/cellular induction theorem is known.

@@ -19,18 +19,27 @@ For indefinite parabolic graph carriers, the pointwise-normal hypothesis can
 be weakened: two linearly separated coefficient singular directions give a
 squared-log union and Hausdorff SSI theorem.
 
+The affine-rotating rank-one model also has a power-free endpoint estimate,
+but by a different mechanism. Its square-speed moment height gives an
+`L^(3/2)` full-collar multiplicity bound and a cubic SSI theorem, yielding
+Hausdorff dimension four for every fixed uniformly swept stack in this
+infinite class. Separately, recursive subpolynomial parent ancestry is
+disproved by an exact hyperplane tree; a one-shot cover-adapted partition
+nevertheless makes transverse wall mass summably negligible.
+
 The campaign also proves that small union alone extracts only a
 high-multiplicity incidence level, not a quadratic carrier, and gives an
 exact transverse-slab countermodel to constant distributed overlap. Once
 carriers are supplied, small union forces quantified low-Jacobian energy.
 A separate normal-form theorem classifies the degenerate quadratic branches
 and isolates indefinite rank-three parabolics as the genuine nonlinear
-exception. No new general or sticky dimension bound, and no
+exception. The high-degree tangent/singular wall organization and cellular
+induction remain open. No new general or sticky dimension bound, and no
 full-conjecture claim, is made.
 
 The campaign also proves exact one-carrier capacity, catalog-evasion,
 distributed-catalog extraction, and sticky carrier-entropy lemmas. All
-exponent arithmetic and algebraic models are checked by a 39-test exact
+exponent arithmetic and algebraic models are checked by a 44-test exact
 rational harness.
 
 ## Main result
@@ -310,6 +319,61 @@ Thus subpolynomial parent ancestry makes transverse crossings harmless. The
 organization of the remaining incidence into admissible charts is still
 open.
 
+## Endpoint affine-rotating rank-one stacks
+
+Let
+
+`A_s=A_0+integral_0^s(p+tq)(p+tq)^Tdt`,
+
+where `p,q` are linearly independent. At a spatial point write
+`a=p dot y`, `b=q dot y`. The varying graph height is
+
+`h_(a,b)(s)=a²s+ab s²+b²s³/3`,
+
+so `h'=(a+bs)²` and at the critical point
+
+`h(s)-h(s_0)=b²(s-s_0)³/3`.
+
+The normalized full-collar multiplicity satisfies the endpoint bound
+
+`integral m_r^(3/2) da db dz≤C log(2/r)`.
+
+The cubic pushforward contributes
+`|b|^-1 log(2+b²/r)` at fixed `b`; the critical wedge has `a`-width
+`O(|b|)`, exactly cancelling that singular coefficient. Any jointly
+measurable shading of a fixed uniformly swept graph stack is pointwise
+dominated by the full collar. Holder yields
+
+`|N_(Cr)(V)|≥c A(V)³/log(2/r)²`.
+
+For a cubic SSI `|N_r(V)|≥A(V)³/L(r)`, the Hausdorff scale sum is
+
+`sum r^((4-s)/2)L(r)^(1/2)`.
+
+It tends to zero for `L(r)=log(2/r)²` and every `s<4`, proving Hausdorff
+dimension four for the fixed affine-rotating subclass. The result is
+strictly stronger than the pairwise second-moment calculation, which sees
+only dimension `11/3`.
+
+## One-shot cover partition
+
+Deep-tree subpolynomial ancestry is impossible in general. Recursive
+dyadic hyperplane bisection to scale `r` makes one transverse line cross
+`Theta(r^-1)` distinct parents, and any polynomial compressing those exact
+crossings has degree `Omega(r^-1)`.
+
+For one dyadic cover group with `n_k` radius-`r_k` balls, instead take one
+degree `D_k≈n_k^(1/4)` partition. With
+`c_k=n_k r_k^s`, the normalized transverse wall error is
+
+`e_k≤C alpha_k^-1 c_k^(1/4)r_k^((4-s)/4)`.
+
+Under bounded proposed `s`-cost and
+`alpha_k≥r_k^epsilon`, `epsilon<(4-s)/4`, Holder makes the dyadic error tail
+vanish. This eliminates the transverse wall branch by cover cost, not by
+ancestry. The cellular branch and tangent/singular high-degree wall remain
+the exact full-conjecture frontier.
+
 ## Exact verification
 
 From `problems/kakeya-r4/harness/`:
@@ -320,12 +384,14 @@ python3 -m unittest -v
 ```
 
 The ledger returns volume exponent `3/4`, dimension `13/4`, and bottleneck
-`trilinear`. All 39 tests pass. They verify exact recurrence arithmetic,
+`trilinear`. All 44 tests pass. They verify exact recurrence arithmetic,
 harmonic second moments, catalog exponents, sticky persistence inequalities,
 high-multiplicity and carrier-energy ledgers, the split-quadric sweep,
 rank-three parabolic line conditions, normal-wedge identities,
-parent-ancestry errors, two parabolic coefficient paths, and exact
-direction/sweep determinants.
+parent-ancestry errors, two parabolic coefficient paths, exact
+direction/sweep determinants, the rotating moment cubic, and the cubic-SSI
+cover-cost ledger, plus the exact dyadic ancestry count and one-shot tail
+threshold.
 Continuous coarea, reach, Remez, and algebraic-degree arguments are written
 as proofs rather than delegated to numerical tests.
 
@@ -338,16 +404,19 @@ hyperplane exception, and measurable-cover sampling. The repaired statements
 then received `APPROVE` verdicts for exponent signs, circularity, scale loss,
 and endpoint consequences. A further review round approved the parabolic
 sublevel theorem, complete-clique rigidity, parent-assignment semantics, and
-additive Hausdorff summation after explicit repairs.
+additive Hausdorff summation after explicit repairs. The endpoint and
+one-shot theorems were then separately approved after repairs to positive
+incidence, Borel/joint measurability, partition degree, normalization, and
+bounded-cost semantics.
 
 The two-session gate remains **GO on Bridge B**: the union theorem handles an
 infinite family of ruled obstructions, and the fixed-family criterion gives
 full Hausdorff dimension for a structured all-scale subclass. The
-full-conjecture gate itself is **OPEN**. The decisive missing theorem is
-preservation of subpolynomial parent ancestry through the full partition
-tree, followed by organization of the nontransverse-or-singular incidence
+full-conjecture gate itself is **OPEN**. Full-tree subpolynomial ancestry is
+now disproved. The decisive missing theorem is a loss-controlled cellular
+induction or organization of the one-shot tangent/singular high-degree wall
 into subpolynomially many fixed continuum charts. Dense approximate
-rank-one graphs and rotating rank-one tangents are the sharp parabolic
-subproblem.
+rank-one graphs, common-square pencils, and higher-order projective rotation
+are the sharp parabolic subproblems.
 
 No DOI is assigned because the general conjecture remains open.

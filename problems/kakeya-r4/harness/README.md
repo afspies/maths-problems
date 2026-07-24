@@ -46,8 +46,13 @@ The second-session extensions add:
 - the parent-ancestry transverse error `K D delta/alpha`;
 - a rotating rank-one tangent whose second coefficient direction appears
   only at cubic order.
+- the exact moment-height cubic, its square derivative, and its critical
+  cubic gap;
+- the cubic-SSI Hausdorff cover-cost ledger at exact integer half-codimension.
+- the exact `2^L-1` dyadic parent-wall count and one-shot transverse tail
+  threshold `4-s-4epsilon>0`.
 
-The suite currently contains 39 exact tests. The geometric coarea,
+The suite currently contains 44 exact tests. The geometric coarea,
 Crofton--Bézout, reach, and Remez lemmas are proved in the result notes; the
 harness certifies their algebraic models and exponent bookkeeping, not those
 continuous theorems themselves.

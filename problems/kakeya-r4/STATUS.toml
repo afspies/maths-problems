@@ -3,7 +3,7 @@ title = "Four-dimensional Kakeya conjecture"
 question = "Must every Kakeya set in R^4 have Hausdorff and Minkowski dimension 4?"
 # proposed | scaffolded | active | partial-results | solved | excluded | retired
 status = "partial-results"
-best_result = "Full Hausdorff dimension for fixed all-scale transverse and rank-two-separated parabolic stacks; parent-ancestry tangency lemma removes descendant Mdelta baseline, with no new general or sticky bound"
+best_result = "Full Hausdorff dimension for fixed transverse, rank-two-separated, and affine-rotating rank-one parabolic stacks; one-shot cover partitions eliminate transverse wall mass, with no new general or sticky bound"
 doi = ""
 sessions = [
     "2026-07-24 scaffolded from template",
@@ -11,4 +11,5 @@ sessions = [
     "2026-07-24 harmonic ruled-quadric stack theorem and carrier-entropy lemmas, Bridge B gate GO",
     "2026-07-24 full-conjecture extraction audit, fixed-stack Hausdorff theorem, and degenerate quadratic classification",
     "2026-07-24 rank-two-separated parabolic stack theorem and parent-ancestry tangency excess",
+    "2026-07-24 endpoint affine-rotating rank-one SSI and one-shot cover partition barrier",
 ]

@@ -36,8 +36,12 @@ all-scale continuum stack satisfies a scale-sensitive incidence inequality,
 giving Hausdorff dimension four for that structured subclass. Exact
 countermodels show why small union does not itself extract such carriers,
 and a quadratic-sublevel theorem now handles linearly rank-two-separated
-parabolic coefficient paths. No new general or sticky dimension bound is
-claimed.
+parabolic coefficient paths. The affine-rotating rank-one path has an
+endpoint L<sup>3/2</sup> collar bound and cubic SSI, giving Hausdorff
+dimension four for every fixed uniformly swept stack in that class.
+Full-tree subpolynomial ancestry is false, but a one-shot cover partition
+eliminates transverse wall mass after charging cover cost. No new general or
+sticky dimension bound is claimed.
 </div>
 
 <h2>Main theorem</h2>
@@ -190,19 +194,66 @@ provided the A<sub>ν</sub> are genuine fixed or cell-averaged continuum
 chart functionals satisfying SSI. Organizing the nontransverse-or-singular
 remainder into those charts is still open.</p>
 
+<h2>Endpoint affine-rotating rank-one stacks</h2>
+<div class="env"><span class="label">Endpoint collar theorem.</span>
+For
+A<sub>s</sub>=A<sub>0</sub>+
+∫<sub>0</sub><sup>s</sup>(p+tq)(p+tq)<sup>T</sup>dt,
+with p,q linearly independent, the varying graph height at
+a=p·y, b=q·y is
+<br><br>
+h<sub>a,b</sub>(s)=a²s+ab s²+b²s³/3,
+&nbsp; h′(s)=(a+bs)².
+<br><br>
+The normalized full-collar multiplicity obeys
+∫m<sub>r</sub><sup>3/2</sup>≤C log(2/r). Hence every jointly measurable
+shading of a fixed uniformly swept stack satisfies
+<br><br>
+|N<sub>Cr</sub>(V)|≥cA(V)³/log²(2/r),
+<br><br>
+and the swept set has Hausdorff dimension four.
+</div>
+<p>At the critical point,
+h(s)−h(s<sub>0</sub>)=b²(s−s<sub>0</sub>)³/3. The fixed-b
+L<sup>3/2</sup> cost is |b|<sup>−1</sup>log(2+b²/r), while the
+critical a-wedge has width O(|b|); the singular factors cancel. A cubic SSI
+uses the Hausdorff scale sum
+Σr<sup>(4−s)/2</sup>L(r)<sup>1/2</sup>, which converges at every s&lt;4.
+Pairwise second moments see only dimension 11/3.</p>
+
+<h2>One-shot cover partition</h2>
+<p>Recursive dyadic hyperplane bisection to scale r makes one transverse
+line cross Θ(r<sup>−1</sup>) distinct parents. Any polynomial compressing
+those exact crossings has degree Ω(r<sup>−1</sup>), so full-tree
+subpolynomial ancestry is false.</p>
+<p>For one cover group with n<sub>k</sub> radius-r<sub>k</sub> balls, take
+one degree D<sub>k</sub>≈n<sub>k</sub><sup>1/4</sup> partition. If
+c<sub>k</sub>=n<sub>k</sub>r<sub>k</sub><sup>s</sup>, its normalized
+transverse error is</p>
+<p style="text-align:center">
+e<sub>k</sub>≤Cα<sub>k</sub><sup>−1</sup>
+c<sub>k</sub><sup>1/4</sup>
+r<sub>k</sub><sup>(4−s)/4</sup>.
+</p>
+<p>Under bounded proposed s-cost and
+α<sub>k</sub>≥r<sub>k</sub><sup>ε</sup>,
+ε&lt;(4−s)/4, Hölder makes this tail vanish. The cellular branch and the
+tangent/singular high-degree wall remain open.</p>
+
 <h2>Verification and gate</h2>
 <pre><code>python3 exponent_ledger.py benchmark_ledger.json
 python3 -m unittest -v
-# 39 exact tests pass</code></pre>
+# 44 exact tests pass</code></pre>
 <p>Independent GPT-5.6 Sol xhigh reviews checked reach, coarea, common
 factors, the explicit pencils, exponent signs, circularity, the ρ scale loss,
 measurable-cover sampling, parent-assignment semantics, every logarithmic
-factor, and Hausdorff-versus-Minkowski wording. After repairs the final
-verdicts were <strong>APPROVE</strong>.</p>
+factor, endpoint cubic multiplicity, Borel/joint measurability, and
+Hausdorff-versus-Minkowski wording. After repairs the final verdicts were
+<strong>APPROVE</strong>.</p>
 <p><strong>Bridge B gate: GO. Full-conjecture gate: OPEN.</strong> The exact
-missing result is subpolynomial parent ancestry through the full partition
-tree plus organization of the nontransverse-or-singular incidence into
-admissible continuum charts.</p>
+missing result is a loss-controlled cellular induction or organization of
+the one-shot tangent/singular high-degree wall into admissible continuum
+charts.</p>
 
 <div class="footer">Canonical source: <code>writeup/report.md</code>.
 Sources: <code>literature/refs.bib</code>. No DOI release was made.</div>

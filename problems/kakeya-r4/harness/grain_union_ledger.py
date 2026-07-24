@@ -356,3 +356,69 @@ def transverse_parent_ancestry_error(
         * scale
         / derivative_threshold
     )
+
+
+def cubic_ssi_cover_cost_lower_bound(
+    *,
+    total_line_incidence: Fraction,
+    radii: list[Fraction],
+    square_root_losses: list[Fraction],
+    dimension: Fraction,
+) -> Fraction:
+    """Exact Hausdorff ledger for |N_r(V)| >= A(V)^3/L(r).
+
+    Holder with exponents 3 and 3/2 gives
+
+      cost >= A_total^3 /
+        (sum_r r^((4-s)/2) sqrt(L(r)))^2.
+
+    The exact harness accepts only integer (4-s)/2 and takes sqrt(L) as an
+    explicit rational input.  The analytic proof treats every real s<4.
+    """
+    if total_line_incidence <= 0:
+        raise ValueError("total incidence must be positive")
+    if (
+        len(radii) != len(square_root_losses)
+        or not radii
+    ):
+        raise ValueError(
+            "radii and square-root losses must be nonempty and equally sized"
+        )
+    exponent = (Fraction(4) - dimension) / 2
+    if exponent.denominator != 1 or exponent < 0:
+        raise ValueError("exact harness requires nonnegative integer (4-s)/2")
+    power = exponent.numerator
+    if any(not 0 < radius <= 1 for radius in radii):
+        raise ValueError("radii must lie in (0,1]")
+    if any(loss <= 0 for loss in square_root_losses):
+        raise ValueError("square-root losses must be positive")
+    scale_sum = sum(
+        (radius**power) * loss
+        for radius, loss in zip(radii, square_root_losses, strict=True)
+    )
+    return total_line_incidence**3 / (scale_sum**2)
+
+
+def dyadic_partition_parent_walls(depth: int) -> int:
+    """Distinct internal dyadic walls through depth L on the unit interval."""
+    if depth < 0:
+        raise ValueError("depth must be nonnegative")
+    return 2**depth - 1
+
+
+def one_shot_transverse_tail_margin(
+    *, dimension: Fraction, derivative_threshold_exponent: Fraction
+) -> Fraction:
+    """Numerator of the one-shot dyadic tail exponent.
+
+    With alpha=r^epsilon, Holder produces the scale weight
+
+      r^((4-s-4 epsilon)/3).
+
+    The tail is summable exactly when this returned numerator is positive.
+    """
+    if not 0 <= dimension < 4:
+        raise ValueError("dimension must lie in [0,4)")
+    if derivative_threshold_exponent < 0:
+        raise ValueError("threshold exponent must be nonnegative")
+    return 4 - dimension - 4 * derivative_threshold_exponent

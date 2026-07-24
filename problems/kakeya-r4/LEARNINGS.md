@@ -6,19 +6,21 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 
 ## What the next session should do first
 
-- Preserve polynomial **parent ancestry** through the partition tree.
-  Descendants of only `K` degree-`D` parents contribute transverse
-  longitudinal error `O(K D delta/alpha)`, independent of descendant count.
-  Prove `K D/alpha=delta^-o(1)` or identify the exact tree obstruction.
-- Organize the resulting nontransverse-or-singular cover incidence into
-  `delta^-o(1)` genuine fixed/cell-averaged continuum charts satisfying SSI.
-  The additive error may be summable; the chart theorem remains missing.
+- Use a **one-shot cover-adapted partition**, not a full ancestry tree.
+  Recursive hyperplane bisection already gives `K≈delta^-1` on one line.
+  The one-shot transverse error is summable after charging the assumed
+  Hausdorff cover cost; make the cellular induction close or classify the
+  tangent/singular high-degree wall.
+- Organize the remaining cover incidence into genuine fixed/cell-averaged
+  continuum charts. Affine-rotating rank-one paths now have a power-free
+  cubic SSI, so extraction and parameterization—not their inner union
+  estimate—is the live obstruction.
 - In the parabolic branch, prove quantitative stability for dense graphs of
   approximate rank-one square differences. Exact complete cliques are common
   square pencils; linearly rank-two-separated paths are already handled.
-- Attack the rotating rank-one tangent model across two separated scales.
-  Its second coefficient singular value appears only cubically, so a
-  one-scale application loses a power.
+- Extend the endpoint collar argument from affine rotation `p+sq` to
+  bounded-complexity projective curves, tracking higher-order stationary
+  points and chart entropy exactly.
 
 ## Dead ends (and why)
 
@@ -45,6 +47,10 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 - Lusin regularity gives additive aggregate incidence retention, but no
   quantitative modulus, admissible carrier charts, or subpolynomial chart
   entropy. Treating continuity as SSI is circular.
+- Subpolynomial ancestry through a full partition tree is false even for
+  recursively bisected hyperplanes: a transverse line sees `Theta(r^-1)`
+  distinct parents, and exact product compression needs degree
+  `Theta(r^-1)`.
 
 ## Surprises / structure discovered
 
@@ -95,3 +101,12 @@ Keep this short enough to read in two minutes — the journal holds the detail.
   `Mdelta` catalog baseline: descendant multiplicity disappears only for
   unioned or uniquely assigned incidences under a bounded number of parent
   polynomials.
+- Pairwise overlap is not the right endpoint tool for rotating rank-one
+  paths. The moment height has square speed and a cubic stationary point;
+  after integrating the two active spatial coordinates, the full collar
+  multiplicity is `L^(3/2)` with one logarithm. Cubic Holder then gives
+  Hausdorff dimension four for any fixed affine-rotating stack.
+- A single cover-adapted degree `n^(1/4)` partition avoids deep ancestry.
+  Under bounded proposed `s`-cost, its quantitatively transverse wall mass
+  is summably negligible. The price is a power-sized high-degree
+  tangent/singular wall that still lacks a chart theorem.

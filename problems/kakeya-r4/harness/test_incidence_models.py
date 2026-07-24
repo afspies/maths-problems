@@ -21,6 +21,10 @@ from incidence_models import (
     rank_two_separated_sweep_seed_derivatives,
     rank,
     ruled_quadric_lines,
+    rotating_rank_one_critical_gap,
+    rotating_rank_one_height,
+    rotating_rank_one_height_coefficients,
+    rotating_rank_one_height_derivative_coefficients,
     rotating_rank_one_moment_matrix,
     split_quadric_direction_derivatives,
     split_quadric_sweep,
@@ -140,6 +144,38 @@ class IncidenceModelTests(unittest.TestCase):
             matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
         )
         self.assertEqual(principal_determinant, h**4 / 12)
+
+    def test_rotating_rank_one_height_has_square_speed(self) -> None:
+        a, b = F(-2, 3), F(5, 7)
+        self.assertEqual(
+            rotating_rank_one_height_coefficients(a, b),
+            (F(0), a * a, a * b, b * b / 3),
+        )
+        self.assertEqual(
+            rotating_rank_one_height_derivative_coefficients(a, b),
+            (a * a, 2 * a * b, b * b),
+        )
+        for s in (F(-1, 3), F(0), F(4, 5)):
+            h = F(1, 1000)
+            symmetric_difference = (
+                rotating_rank_one_height(a, b, s + h)
+                - rotating_rank_one_height(a, b, s - h)
+            ) / (2 * h)
+            # A cubic's centered difference has the exact h^2 remainder.
+            self.assertEqual(
+                symmetric_difference,
+                (a + b * s) ** 2 + b * b * h * h / 3,
+            )
+
+    def test_rotating_rank_one_critical_height_is_exactly_cubic(self) -> None:
+        for b, s, s_0 in (
+            (F(2), F(3, 5), F(1, 4)),
+            (F(-3, 7), F(-1, 2), F(2, 3)),
+        ):
+            self.assertEqual(
+                rotating_rank_one_critical_gap(b, s, s_0),
+                b * b * (s - s_0) ** 3 / 3,
+            )
 
 
 if __name__ == "__main__":

@@ -3,6 +3,8 @@ from fractions import Fraction as F
 
 from grain_union_ledger import (
     assigned_catalog_required_carrier_exponent,
+    cubic_ssi_cover_cost_lower_bound,
+    dyadic_partition_parent_walls,
     dyadic_harmonic_bound,
     distributed_catalog_load_exponent,
     hausdorff_cover_cost_lower_bound,
@@ -11,6 +13,7 @@ from grain_union_ledger import (
     inverse_tangency_mass_lower_bound,
     normalized_union_lower_bound,
     normalized_weighted_union_lower_bound,
+    one_shot_transverse_tail_margin,
     rank_two_parabolic_stack_union_lower_bound,
     transverse_parent_ancestry_error,
     quadratic_catalog_evasion_exponent,
@@ -199,6 +202,52 @@ class GrainUnionLedgerTests(unittest.TestCase):
                 derivative_threshold=F(1, 8),
             ),
             F(3, 64),
+        )
+
+    def test_cubic_ssi_cover_cost_diverges_below_dimension_four(self) -> None:
+        # At s=2, (4-s)/2=1.  If L(r)=(k+1)^2 on r=2^-k,
+        # sqrt(L)=k+1 and the tail scale sum tends to zero.
+        def bound(k0: int) -> F:
+            radii = [F(1, 2**k) for k in range(k0, k0 + 20)]
+            square_root_losses = [F(k + 1) for k in range(k0, k0 + 20)]
+            return cubic_ssi_cover_cost_lower_bound(
+                total_line_incidence=F(1),
+                radii=radii,
+                square_root_losses=square_root_losses,
+                dimension=F(2),
+            )
+
+        self.assertGreater(bound(20), bound(10))
+        with self.assertRaisesRegex(ValueError, "integer"):
+            cubic_ssi_cover_cost_lower_bound(
+                total_line_incidence=F(1),
+                radii=[F(1, 2)],
+                square_root_losses=[F(1)],
+                dimension=F(3),
+            )
+
+    def test_full_dyadic_tree_has_linear_inverse_scale_ancestry(self) -> None:
+        for depth in range(0, 12):
+            walls = dyadic_partition_parent_walls(depth)
+            self.assertEqual(walls, 2**depth - 1)
+            self.assertLess(walls, 2**depth)
+            if depth:
+                self.assertGreaterEqual(walls, 2 ** (depth - 1))
+
+    def test_one_shot_transverse_tail_has_exact_threshold(self) -> None:
+        self.assertEqual(
+            one_shot_transverse_tail_margin(
+                dimension=F(15, 4),
+                derivative_threshold_exponent=F(1, 32),
+            ),
+            F(1, 8),
+        )
+        self.assertEqual(
+            one_shot_transverse_tail_margin(
+                dimension=F(15, 4),
+                derivative_threshold_exponent=F(1, 16),
+            ),
+            0,
         )
 
 

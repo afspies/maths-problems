@@ -325,3 +325,30 @@ def rotating_rank_one_moment_matrix(s: F) -> list[Vector]:
         (s * s / 2, s**3 / 3, F(0), F(0)),
         (F(0), F(0), F(0), F(0)),
     ]
+
+
+def rotating_rank_one_height(a: F, b: F, s: F) -> F:
+    """The exact scalar moment height integral_0^s (a+t*b)^2 dt."""
+    return a * a * s + a * b * s * s + b * b * s**3 / 3
+
+
+def rotating_rank_one_height_coefficients(
+    a: F, b: F
+) -> tuple[F, F, F, F]:
+    """Coefficients of the height cubic in ascending powers of s."""
+    return (F(0), a * a, a * b, b * b / 3)
+
+
+def rotating_rank_one_height_derivative_coefficients(
+    a: F, b: F
+) -> tuple[F, F, F]:
+    """Coefficients of the derivative, exactly the square (a+s*b)^2."""
+    return (a * a, 2 * a * b, b * b)
+
+
+def rotating_rank_one_critical_gap(b: F, s: F, s_0: F) -> F:
+    """Height gap when a=-s_0*b, exposing the exact cubic singularity."""
+    a = -s_0 * b
+    return rotating_rank_one_height(a, b, s) - rotating_rank_one_height(
+        a, b, s_0
+    )
