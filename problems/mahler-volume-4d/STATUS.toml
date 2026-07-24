@@ -3,7 +3,7 @@ title = "Four-dimensional Mahler volume conjecture"
 question = "For every convex body K⊂R^4, prove |K| |(K-s(K))°| ≥ 3125/576, with equality only for simplices."
 # proposed | scaffolded | active | partial-results | solved | excluded | retired
 status = "partial-results"
-best_result = "Sharp inequality for every 4D affine join; exact covariance formulas exclude eight smooth 24-cell curves; a q-regular stress arc yields and excludes an open 24-dimensional moduli family of smooth pair-terminal 24-cells."
+best_result = "Sharp inequality for every 4D affine join; certified bi-centered connected pair-terminal 24-cell has trace <1/9; KKT/spanning lemmas reduce the connected case to a global facet-boundary inequality."
 doi = ""
 sessions = [
     "2026-07-23 scaffolded from template",
@@ -11,4 +11,5 @@ sessions = [
     "2026-07-24 falsified the terminal bridge exactly and certified a projective-saddle branch of nonregular 24-cells",
     "2026-07-24 proved sharp join factorization, product/free-sum gaps, and an exact negative-definite realization Hessian at the regular 24-cell",
     "2026-07-24 proved full-rank 24-cell covariance exclusions and integrated the singular pair-terminal cell into a smooth q-regular family",
+    "2026-07-24 certified the exact connected pair-terminal bi-centered root, proved KKT/projective-radical and q-germ spanning lemmas, and derived the facet-boundary trace identity",
 ]

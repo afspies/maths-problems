@@ -68,8 +68,10 @@
   Santaló-reduced Hessian excludes an open realization neighborhood of the
   regular 24-cell; interval covariance excludes a second nonregular branch.
   Closed covariance formulas exclude eight smooth 24-cell curves, and a
-  q-regular stress arc enters an open smooth pair-terminal family. The
-  general 4D conjecture remains open.
+  q-regular stress arc enters an open smooth pair-terminal family. Exact KKT
+  stress correction, projective-radical, spanning-germ, and boundary-trace
+  reductions now isolate the connected case. The general 4D conjecture
+  remains open.
 </div>
 
 <h2>1 · The terminal-pair bridge is false</h2>
@@ -113,7 +115,17 @@ for the Paffenholz chart in a radius-10<sup>−10</sup> box centered at</p>
 <p>On the entire box the e<sub>1</sub> covariance gap is less than
 −0.0075809. Hence the exact critical body is a projective saddle.
 Nonsingularity and strictness exclude an open four-parameter critical branch
-of nonregular 24-cells from local minimality.</p>
+of nonregular 24-cells from local minimality. The same interval calculation
+certifies
+0.0999343391&lt;tr(cov(<var>K</var>)cov(<var>K</var>°))
+&lt;0.0999343607&lt;1/9.</p>
+<p>Fixed-active-set circuit ranks are preserved by projective diagonal
+column scaling. Exact center checks give 1,941 primal and 1,911 polar normal
+flats, all terminal. All 10,498 primal and 10,488 polar four-normal
+determinants that are nonzero at the center stay away from zero throughout
+the interval box. Both circuit-support graphs are connected. Consequently
+the exact root is a bi-centered, connected, pair-terminal non-simplex—not
+merely a limit of rational terminal points.</p>
 <div class="env">
   <span class="label">Theorem 0.2.</span>
   Every member of the eight signed full-rank 24-cell curves violates the
@@ -234,7 +246,63 @@ the Schur term</p>
 It is negative definite, so continuity excludes an open non-pyramidal
 realization neighborhood from local minimality.</p>
 
-<h2>6 · Surviving terminal subclasses</h2>
+<h2>6 · Connected trace and stress reductions</h2>
+<p>At a constrained-critical paired realization, choose the exact KKT
+multiplier ∇(log|<var>P</var>|+log|<var>P</var>°|)=
+<var>J</var><sup>T</sup>λ. If <var>H</var><sub>0</sub> is the straight
+ambient Santaló-envelope Hessian, then every second-liftable tangent has
+the exact constrained curvature</p>
+<div class="eqn">
+  <var>Q</var><sub>λ</sub>(u)=<var>H</var><sub>0</sub>(u)−2q<sub>λ</sub>(u).
+</div>
+<p>Every self-stress quadric has the entire 24-dimensional PGL tangent in
+its bilinear radical. Integrability therefore descends modulo PGL, although
+curvature still retains the four denominator-projective directions after
+only the 20 affine gauges are removed.</p>
+<div class="env">
+  <span class="label">Exact 24-cell block.</span>
+  For the four denominator-projective and four Paffenholz directions,
+  <var>A</var>=−(31/13)I<sub>4</sub>,
+  <var>B</var>=−(31/78)I<sub>4</sub>, and
+  <var>C</var>=−(61/234)I<sub>4</sub>.
+</div>
+<p>The nonzero mixed block is a direct certificate that quotienting all 24
+projective directions changes the Hessian.</p>
+<p>A q-regular quadratic zero has a locally spanning regular germ when the
+restricted quadratic second fundamental form is onto:</p>
+<div class="eqn">
+  span{q(v): v∈ker Dq<sub>u</sub>}=Ω*.
+</div>
+<p>At the singular Paffenholz cell this exact rank is two. Consequently the
+integrable q-regular germ spans all 50 incidence-tangent dimensions, closing
+the KKT-existence gap at that singularity.</p>
+<p>The global slack route has an exact obstruction and replacement. Facet
+circuits annihilate the whole polarity matrix
+<var>N</var><sub>vF</sub>=x<sub>v</sub>·y<sub>F</sub>, so an ordinary
+circuit-Poincaré inequality has zero energy on the target. Instead,</p>
+<div class="eqn">
+  900 tr(cov(<var>P</var>)cov(<var>P</var>°)) =
+  tr(ℳ<sub>P</sub><var>N</var>ℳ<sub>P°</sub><var>N</var><sup>T</sup>).
+</div>
+<p>For simplex cells
+|det(1−x<sub>i</sub>·y<sub>j</sub>)|=(4!)<sup>2</sup>|S||T|.
+The desired trace gap is therefore a global determinant-weighted energy
+inequality. Pointwise control is false: in the canonical regular-24-cell
+triangulations, 1,784 of 5,184 blocks exceed 100 and the maximum is 344,
+although the weighted average is 169/2.</p>
+<p>Cone-measure integration by parts gives the sharper facet target</p>
+<div class="eqn">
+  1/4−(9/4)tr(cov(<var>P</var>)cov(<var>P</var>°)) =
+  Σ<sub>F,v</sub>r<sub>F</sub>s<sub>v</sub>
+  [(x<sub>v</sub>·y<sub>F</sub>)(c<sub>F</sub>·d<sub>v</sub>)
+  −tr(H<sub>F</sub>H<sub>v</sub>°)].
+</div>
+<p>At the regular 24-cell all 144 incidence brackets equal 3/16, but the
+576 facet pairs split into 288 positive and 288 negative values; the total
+is 31/800. The remaining theorem is a global transport inequality on the
+connected circuit network.</p>
+
+<h2>7 · Surviving terminal subclasses</h2>
 <p>For a facet <var>F</var>, admissibility is the family of exact equations
 λ<sup>T</sup>α|<sub>F</sub>=0 over all affine dependences λ of its vertices.
 Choosing a direction parallel to a largest facet gives, for every
@@ -252,7 +320,7 @@ A<sub>(u,0)</sub>(pyr <var>Q</var>) ≅ A<sub>u</sub>(<var>Q</var>)⊕ℝ.
 The polar is again a pyramid over a dual 3-polytope, so the audited 3D
 dual-pair count forces a tetrahedral base.</p>
 
-<h2>7 · Source audit</h2>
+<h2>8 · Source audit</h2>
 <p>The Meyer–Reisner convexity/rigidity theorem, volume-affinity, compactness,
 and the minimizer/polar chain are dimension-independent. The printed
 Chen–Li–Xi–Xu persistence proof follows intersections of two and three facets
@@ -262,10 +330,10 @@ replacement. The analytic reduction survives, but terminal classification
 cannot be the global bridge; full second variation is the remaining
 obstacle.</p>
 
-<h2>8 · Exact verification</h2>
+<h2>9 · Exact verification</h2>
 <pre><code>$ python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ...
-Ran 15 tests
+Ran 18 tests
 
 OK
 
@@ -276,20 +344,26 @@ terminal-pair-implies-simplex False
 $ python3 problems/mahler-volume-4d/harness/bicenter_certificate.py
 ...
 unique-bicenter-root True
+covariance-trace-below-one-ninth True
+bi-centered-root-pair-terminal True
+circuit-support-connected True
 projective-local-minimum False</code></pre>
 <p>The rational harness also checks join/product/free-sum factors, a centered
 segment–square join, incidence tangent ranks, the 24 projective directions,
 the complete four-parameter realization Hessian, the signed smooth-family
-covariances, and the q-regular stress-arc ranks. It is a falsification tool,
-not a substitute for classification.</p>
+covariances, the q-regular spanning germ, the full KKT Hessian blocks, and
+the global slack/facet-boundary identities. It is a falsification tool, not
+a substitute for classification.</p>
 
-<h2>9 · Limits and next route</h2>
+<h2>10 · Limits and next route</h2>
 <p>Generic rigidity is too weak: the cube is rigid generically but not in
 facet-parallel directions. More decisively, exact pair-terminality does not
-force a simplex, and a raw singular tangent need not integrate. The next
-campaign must build a smooth realization chart in the connected
-circuit-support branch, quotient by projective motion, and seek a
-coordinate-free Gale/stress descent lemma.</p>
+force a simplex, and a raw singular tangent need not integrate. Ordinary
+circuit Poincaré, cellwise slack bounds, and facet-pair positivity are now
+exactly ruled out. The next campaign must prove or falsify the global
+boundary transport inequality on the connected circuit-support branch, and
+apply the stress-corrected Schur complement to any candidate passing the
+projective covariance test.</p>
 
 <div class="footer">
   <p><strong>Status:</strong> partial results. The full four-dimensional

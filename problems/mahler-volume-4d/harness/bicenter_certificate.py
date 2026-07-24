@@ -7,9 +7,17 @@ floating-point arithmetic or external interval package.
 """
 
 from fractions import Fraction
-from itertools import permutations
+from itertools import combinations, permutations
+from math import gcd, lcm
 
-from polytope import inverse, paffenholz_24_cell
+from polytope import (
+    affine_rank,
+    determinant,
+    inverse,
+    paffenholz_24_cell,
+    rank,
+    rowspace_key,
+)
 
 
 def Q(value):
@@ -170,10 +178,16 @@ def positive_simplex_weight(vertices):
     ]
     determinant = determinant_generic(matrix)
     value = determinant.value if isinstance(determinant, AD) else determinant
-    if value.low > 0:
-        return determinant
-    if value.high < 0:
-        return -determinant
+    if isinstance(value, Interval):
+        if value.low > 0:
+            return determinant
+        if value.high < 0:
+            return -determinant
+    else:
+        if value > 0:
+            return determinant
+        if value < 0:
+            return -determinant
     raise ValueError("simplex orientation is not certified in the box")
 
 
@@ -222,6 +236,51 @@ def moments(vertices, simplices, with_covariance=True):
     return centroid, covariance
 
 
+def projective_pair_data(variables):
+    """Vertices of the polar-centered projective image and its polar."""
+    polytope = paffenholz_24_cell()
+    polar_simplices = polytope.polar().pulling_triangulation()
+    polar_vertices = []
+    facet_denominators = []
+    for _, normal, offset in polytope.facets:
+        denominator = offset - sum(
+            (normal[index] * variables[index] for index in range(4)), 0
+        )
+        facet_denominators.append(denominator)
+        polar_vertices.append(
+            tuple(normal[index] / denominator for index in range(4))
+        )
+    polar_centroid, _ = moments(
+        polar_vertices, polar_simplices, with_covariance=False
+    )
+
+    transformed_vertices = []
+    projective_denominators = []
+    for vertex in polytope.vertices:
+        shifted = tuple(vertex[index] - variables[index] for index in range(4))
+        denominator = 1 - sum(
+            (polar_centroid[index] * shifted[index] for index in range(4)), 0
+        )
+        projective_denominators.append(denominator)
+        transformed_vertices.append(
+            tuple(shifted[index] / denominator for index in range(4))
+        )
+    centered_polar_vertices = tuple(
+        tuple(
+            polar_vertex[index] - polar_centroid[index]
+            for index in range(4)
+        )
+        for polar_vertex in polar_vertices
+    )
+    return (
+        tuple(transformed_vertices),
+        centered_polar_vertices,
+        tuple(facet_denominators),
+        tuple(projective_denominators),
+        tuple(polar_vertices),
+    )
+
+
 def centroid_system(box, derivatives=True, with_covariance=False):
     polytope = paffenholz_24_cell()
     primal_simplices = polytope.pulling_triangulation()
@@ -235,32 +294,137 @@ def centroid_system(box, derivatives=True, with_covariance=False):
     else:
         variables = list(box)
 
-    polar_vertices = []
-    for _, normal, offset in polytope.facets:
-        denominator = offset - sum(
-            (normal[index] * variables[index] for index in range(4)), 0
-        )
-        polar_vertices.append(
-            tuple(normal[index] / denominator for index in range(4))
-        )
-    polar_centroid, polar_covariance = moments(
-        polar_vertices, polar_simplices, with_covariance
+    (
+        transformed_vertices,
+        centered_polar_vertices,
+        _,
+        _,
+        translated_polar_vertices,
+    ) = projective_pair_data(variables)
+    _, polar_covariance = moments(
+        translated_polar_vertices, polar_simplices, with_covariance
     )
-    parameter = tuple(-entry for entry in polar_centroid)
-
-    transformed_vertices = []
-    for vertex in polytope.vertices:
-        shifted = tuple(vertex[index] - variables[index] for index in range(4))
-        denominator = 1 + sum(
-            (parameter[index] * shifted[index] for index in range(4)), 0
-        )
-        transformed_vertices.append(
-            tuple(shifted[index] / denominator for index in range(4))
-        )
     centroid, covariance = moments(
         transformed_vertices, primal_simplices, with_covariance
     )
     return centroid, covariance, polar_covariance
+
+
+def normal_flat_waived_sets(normals):
+    """Enumerate every hyperplane-waivable normal flat from exact normals."""
+    def primitive(row):
+        denominator = 1
+        for value in row:
+            denominator = lcm(denominator, value.denominator)
+        integers = [
+            value.numerator * (denominator // value.denominator)
+            for value in row
+        ]
+        divisor = 0
+        for value in integers:
+            divisor = gcd(divisor, abs(value))
+        integers = [value // divisor for value in integers]
+        first = next(value for value in integers if value)
+        if first < 0:
+            integers = [-value for value in integers]
+        return tuple(Fraction(value) for value in integers)
+
+    normals = tuple(primitive(normal) for normal in normals)
+    span_keys = {()}
+    for size in range(1, 4):
+        for chosen in combinations(range(len(normals)), size):
+            key = rowspace_key([normals[index] for index in chosen])
+            if len(key) < 4:
+                span_keys.add(key)
+    result = set()
+    for key in sorted(span_keys):
+        span_rank = len(key)
+        result.add(
+            tuple(
+                index
+                for index, normal in enumerate(normals)
+                if rank([*key, normal]) == span_rank
+            )
+        )
+    return tuple(sorted(result))
+
+
+def terminal_dimensions_from_reference(reference, normals):
+    """Use projective circuit-rank transport with a new normal arrangement."""
+    return tuple(
+        len(reference.vertices)
+        - rank(reference.admissible_matrix_waiving(waived))
+        for waived in normal_flat_waived_sets(normals)
+    )
+
+
+def polar_normals_in_facet_order(reference, transformed_vertices):
+    """Order transformed primal vertices as normals of reference° facets."""
+    polar = reference.polar()
+    vertex_index = {vertex: index for index, vertex in enumerate(reference.vertices)}
+    result = []
+    for _, normal, offset in polar.facets:
+        original_vertex = tuple(value / offset for value in normal)
+        result.append(transformed_vertices[vertex_index[original_vertex]])
+    return tuple(result)
+
+
+def certify_nonzero_four_normal_determinants(center_normals, box_normals):
+    exact_nonzero = 0
+    exact_zero = 0
+    unresolved = 0
+    for chosen in combinations(range(len(center_normals)), 4):
+        exact = determinant([center_normals[index] for index in chosen])
+        if not exact:
+            exact_zero += 1
+            continue
+        exact_nonzero += 1
+        enclosure = determinant_generic(
+            [box_normals[index] for index in chosen]
+        )
+        if enclosure.low <= 0 <= enclosure.high:
+            unresolved += 1
+    if unresolved:
+        raise AssertionError("a nonzero normal determinant may vanish in the box")
+    return exact_nonzero, exact_zero, unresolved
+
+
+def minimal_facet_circuit_supports(polytope):
+    supports = set()
+    for incident, _, _ in polytope.facets:
+        for size in range(2, min(5, len(incident)) + 1):
+            for chosen in combinations(incident, size):
+                points = [polytope.vertices[index] for index in chosen]
+                if affine_rank(points) == size - 1:
+                    continue
+                if all(
+                    affine_rank(
+                        [
+                            polytope.vertices[index]
+                            for index in chosen
+                            if index != removed
+                        ]
+                    )
+                    == size - 2
+                    for removed in chosen
+                ):
+                    supports.add(tuple(chosen))
+    return tuple(sorted(supports))
+
+
+def circuit_support_connected(vertex_count, supports):
+    adjacency = [set() for _ in range(vertex_count)]
+    for support in supports:
+        for left in support:
+            adjacency[left].update(index for index in support if index != left)
+    seen = {0}
+    frontier = [0]
+    while frontier:
+        current = frontier.pop()
+        for neighbor in adjacency[current] - seen:
+            seen.add(neighbor)
+            frontier.append(neighbor)
+    return len(seen) == vertex_count
 
 
 def interval_matrix_product(left, right):
@@ -351,6 +515,74 @@ def certify():
     gap_00 = polar_covariance_values[0][0] - inverse_00 / 36
     if gap_00.high >= 0:
         raise AssertionError("the covariance-Hessian violation is not certified")
+    covariance_trace = sum(
+        (
+            covariance_values[row][column]
+            * polar_covariance_values[column][row]
+            for row in range(4)
+            for column in range(4)
+        ),
+        Interval(0),
+    )
+    if covariance_trace.high >= Fraction(1, 9):
+        raise AssertionError("the strict covariance-trace gap is not certified")
+
+    reference = paffenholz_24_cell()
+    (
+        center_primal_vertices,
+        center_polar_vertices,
+        _,
+        _,
+        _,
+    ) = projective_pair_data(center)
+    center_primal_normals = center_polar_vertices
+    center_polar_normals = polar_normals_in_facet_order(
+        reference, center_primal_vertices
+    )
+    primal_dimensions = terminal_dimensions_from_reference(
+        reference, center_primal_normals
+    )
+    polar_reference = reference.polar()
+    polar_dimensions = terminal_dimensions_from_reference(
+        polar_reference, center_polar_normals
+    )
+    if set(primal_dimensions) != {5} or set(polar_dimensions) != {5}:
+        raise AssertionError("the rational box center is not pair-terminal")
+
+    primal_supports = minimal_facet_circuit_supports(reference)
+    polar_supports = minimal_facet_circuit_supports(polar_reference)
+    if not circuit_support_connected(len(reference.vertices), primal_supports):
+        raise AssertionError("the primal circuit support is disconnected")
+    if not circuit_support_connected(
+        len(polar_reference.vertices), polar_supports
+    ):
+        raise AssertionError("the polar circuit support is disconnected")
+
+    (
+        box_primal_vertices,
+        box_polar_vertices,
+        facet_denominators,
+        projective_denominators,
+        _,
+    ) = projective_pair_data(box)
+    box_primal_normals = box_polar_vertices
+    box_polar_normals = polar_normals_in_facet_order(
+        reference, box_primal_vertices
+    )
+    primal_determinants = certify_nonzero_four_normal_determinants(
+        center_primal_normals, box_primal_normals
+    )
+    polar_determinants = certify_nonzero_four_normal_determinants(
+        center_polar_normals, box_polar_normals
+    )
+    facet_denominator_lower = min(
+        denominator.low for denominator in facet_denominators
+    )
+    projective_denominator_lower = min(
+        denominator.low for denominator in projective_denominators
+    )
+    if facet_denominator_lower <= 0 or projective_denominator_lower <= 0:
+        raise AssertionError("a projective denominator may vanish in the box")
 
     print("box-radius", radius)
     print(
@@ -359,6 +591,33 @@ def certify():
     )
     print("unique-bicenter-root", True)
     print("covariance-gap-e1-upper", gap_00.high)
+    print(
+        "covariance-trace-enclosure",
+        (covariance_trace.low, covariance_trace.high),
+    )
+    print("covariance-trace-below-one-ninth", True)
+    print(
+        "rational-center-normal-flats",
+        (len(primal_dimensions), len(polar_dimensions)),
+    )
+    print("rational-center-pair-terminal", True)
+    print(
+        "circuit-supports",
+        (
+            len(primal_supports),
+            tuple(sorted({len(support) for support in primal_supports})),
+            len(polar_supports),
+            tuple(sorted({len(support) for support in polar_supports})),
+        ),
+    )
+    print("circuit-support-connected", True)
+    print("primal-four-normal-determinants", primal_determinants)
+    print("polar-four-normal-determinants", polar_determinants)
+    print(
+        "projective-denominator-lower-bounds",
+        (facet_denominator_lower, projective_denominator_lower),
+    )
+    print("bi-centered-root-pair-terminal", True)
     print("projective-local-minimum", False)
 
 

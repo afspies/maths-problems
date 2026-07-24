@@ -9,16 +9,22 @@ from polytope import (
     full_rank_24_cell,
     full_rank_24_cell_invariants,
     inverse,
+    join_covariance_trace,
     join_mahler_factor,
     join_segment_square_4,
+    nullspace,
     paffenholz_24_cell,
     product_free_sum_mahler_factor,
+    product_free_sum_covariance_trace,
     pyramid_mahler_factor,
     pyramid_over_cube_3,
     rank,
     simplex_volume,
 )
 from variation import (
+    boundary_trace_deficit,
+    constrained_reduced_log_bilinear,
+    incidence_kkt_multiplier,
     incidence_stress_bilinear,
     incidence_stress_quadratic,
     incidence_tangent_and_stress_bases,
@@ -30,6 +36,8 @@ from variation import (
     projective_vertex_path,
     reduced_log_mahler_second,
     second_order_incidence_rhs,
+    simplex_pair_energy,
+    triangulation_slack_mass_trace,
 )
 
 
@@ -122,6 +130,43 @@ class ExactPolytopeHarnessTests(unittest.TestCase):
             joined.volume_and_centroid()[0]
             * joined.polar().volume_and_centroid()[0],
             join_mahler_factor(1, 2) * segment_product * Fraction(8),
+        )
+
+    def test_product_free_sum_and_join_covariance_trace_factors(self):
+        segment_trace = Fraction(1, 9)
+        triangle_trace = Fraction(1, 8)
+        square_trace = Fraction(1, 9)
+        self.assertEqual(
+            join_covariance_trace(
+                1, 2, segment_trace, triangle_trace
+            ),
+            Fraction(1, 9),
+        )
+        self.assertEqual(
+            join_covariance_trace(
+                1, 2, segment_trace, square_trace
+            ),
+            Fraction(17, 162),
+        )
+        joined = join_segment_square_4()
+        _, _, joined_covariance = joined.volume_centroid_covariance()
+        _, _, joined_polar_covariance = (
+            joined.polar().volume_centroid_covariance()
+        )
+        self.assertEqual(
+            sum(
+                joined_covariance[row][column]
+                * joined_polar_covariance[column][row]
+                for row in range(4)
+                for column in range(4)
+            ),
+            Fraction(17, 162),
+        )
+        self.assertEqual(
+            product_free_sum_covariance_trace(
+                1, 2, segment_trace, square_trace
+            ),
+            Fraction(1, 10),
         )
 
     def test_direction_flat_enumeration_matches_known_examples(self):
@@ -269,6 +314,169 @@ class ExactPolytopeHarnessTests(unittest.TestCase):
         )
         self.assertEqual(rank((*regular_projective, parameter_tangent)), 25)
 
+    def test_regular_24_cell_constrained_hessian_and_stress_radical(self):
+        polytope = paffenholz_24_cell((0, 0, 0, 0))
+        multiplier = incidence_kkt_multiplier(polytope)
+        self.assertEqual(len(multiplier), 144)
+        self.assertEqual(sum(value != 0 for value in multiplier), 120)
+        self.assertEqual((min(multiplier), max(multiplier)), (
+            Fraction(-7, 48), Fraction(7, 48)
+        ))
+        self.assertEqual(sum(multiplier), 4)
+
+        projective = projective_orbit_tangent_vectors(polytope)
+        denominator = projective[20:]
+        realization = []
+        for coordinate in range(4):
+            direction = [0, 0, 0, 0]
+            direction[coordinate] = 1
+            first, _ = paffenholz_parameter_path(direction)
+            realization.append(
+                paired_tangent_from_vertex_path(polytope, first)
+            )
+
+        def diagonal_matrix(value):
+            return tuple(
+                tuple(
+                    value if row == column else Fraction()
+                    for column in range(4)
+                )
+                for row in range(4)
+            )
+
+        projective_block = tuple(
+            tuple(
+                constrained_reduced_log_bilinear(
+                    polytope, multiplier, left, right
+                )
+                for right in denominator
+            )
+            for left in denominator
+        )
+        mixed_block = tuple(
+            tuple(
+                constrained_reduced_log_bilinear(
+                    polytope, multiplier, left, right
+                )
+                for right in realization
+            )
+            for left in denominator
+        )
+        realization_block = tuple(
+            tuple(
+                constrained_reduced_log_bilinear(
+                    polytope, multiplier, left, right
+                )
+                for right in realization
+            )
+            for left in realization
+        )
+        self.assertEqual(
+            projective_block, diagonal_matrix(Fraction(-31, 13))
+        )
+        self.assertEqual(
+            mixed_block, diagonal_matrix(Fraction(-31, 78))
+        )
+        self.assertEqual(
+            realization_block, diagonal_matrix(Fraction(-61, 234))
+        )
+
+        tangent_basis, stress_basis = incidence_tangent_and_stress_bases(
+            polytope
+        )
+        self.assertEqual((len(tangent_basis), len(stress_basis)), (52, 4))
+        for stress in stress_basis:
+            for projective_velocity in projective:
+                for tangent in tangent_basis:
+                    self.assertEqual(
+                        incidence_stress_bilinear(
+                            polytope,
+                            stress,
+                            projective_velocity,
+                            tangent,
+                        ),
+                        0,
+                    )
+
+    def test_regular_24_cell_global_slack_mass_identity(self):
+        polytope = paffenholz_24_cell((0, 0, 0, 0))
+        polar = polytope.polar()
+        _, _, primal_covariance = polytope.volume_centroid_covariance()
+        _, _, polar_covariance = polar.volume_centroid_covariance()
+        covariance_trace = sum(
+            primal_covariance[row][column]
+            * polar_covariance[column][row]
+            for row in range(4)
+            for column in range(4)
+        )
+        self.assertEqual(covariance_trace, Fraction(169, 1800))
+        self.assertEqual(
+            triangulation_slack_mass_trace(polytope),
+            900 * covariance_trace,
+        )
+        circuit_matrix = polytope.admissible_matrix_waiving(())
+        self.assertEqual(rank(circuit_matrix), len(polytope.vertices) - 5)
+        for circuit in circuit_matrix:
+            for polar_vertex in polar.vertices:
+                self.assertEqual(
+                    sum(
+                        (
+                            coefficient
+                            * sum(
+                                left * right
+                                for left, right in zip(
+                                    polytope.vertices[index],
+                                    polar_vertex,
+                                )
+                            )
+                            for index, coefficient in enumerate(circuit)
+                        ),
+                        Fraction(),
+                    ),
+                    0,
+                )
+
+        energies = []
+        for primal_simplex in polytope.pulling_triangulation():
+            primal_vertices = [
+                polytope.vertices[index] for index in primal_simplex
+            ]
+            for polar_simplex in polar.pulling_triangulation():
+                polar_vertices = [
+                    polar.vertices[index] for index in polar_simplex
+                ]
+                energies.append(
+                    simplex_pair_energy(primal_vertices, polar_vertices)
+                )
+        self.assertEqual(len(energies), 72 * 72)
+        self.assertEqual(sum(value > 100 for value in energies), 1784)
+        self.assertEqual(max(energies), 344)
+        boundary_deficit, local_deficits = boundary_trace_deficit(polytope)
+        self.assertEqual(
+            boundary_deficit,
+            Fraction(1, 4) - Fraction(9, 4) * covariance_trace,
+        )
+        self.assertEqual(boundary_deficit, Fraction(31, 800))
+        self.assertEqual(len(local_deficits), 24 * 24)
+        self.assertEqual(
+            sum(entry["bracket"] < 0 for entry in local_deficits), 288
+        )
+        self.assertEqual(
+            sum(entry["bracket"] > 0 for entry in local_deficits), 288
+        )
+        self.assertEqual(
+            {entry["bracket"] for entry in local_deficits},
+            {Fraction(-11, 100), Fraction(3, 16)},
+        )
+        incident = [
+            entry for entry in local_deficits if entry["incident"]
+        ]
+        self.assertEqual(len(incident), 144)
+        self.assertEqual(
+            {entry["bracket"] for entry in incident},
+            {Fraction(3, 16)},
+        )
+
     def test_full_rank_24_cell_family_exact_invariants_and_covariance_gap(self):
         parameter = Fraction(1, 2)
         polytope = full_rank_24_cell(parameter, (1, -1, 1))
@@ -344,6 +552,29 @@ class ExactPolytopeHarnessTests(unittest.TestCase):
             for stress in stress_basis
         )
         self.assertEqual(rank(stress_derivative), 2)
+        kernel_coordinates = tuple(nullspace(stress_derivative))
+        self.assertEqual(len(kernel_coordinates), 48)
+        kernel_velocities = tuple(
+            tuple(
+                sum(
+                    coefficient * tangent_basis[index][coordinate]
+                    for index, coefficient in enumerate(coefficients)
+                )
+                for coordinate in range(len(tangent_basis[0]))
+            )
+            for coefficients in kernel_coordinates
+        )
+        second_normal_outputs = tuple(
+            tuple(
+                incidence_stress_quadratic(
+                    polytope, stress, kernel_velocity
+                )
+                for stress in stress_basis
+            )
+            for kernel_velocity in kernel_velocities
+        )
+        self.assertEqual(rank(second_normal_outputs), 2)
+        self.assertEqual(rank(second_normal_outputs[1:3]), 2)
 
         right = second_order_incidence_rhs(polytope, velocity)
         augmented = tuple(
@@ -352,6 +583,18 @@ class ExactPolytopeHarnessTests(unittest.TestCase):
         self.assertEqual(rank(augmented), rank(tangent_matrix))
 
         projective = projective_orbit_tangent_vectors(polytope)
+        for stress in stress_basis:
+            for projective_velocity in projective:
+                for tangent in tangent_basis:
+                    self.assertEqual(
+                        incidence_stress_bilinear(
+                            polytope,
+                            stress,
+                            projective_velocity,
+                            tangent,
+                        ),
+                        0,
+                    )
         self.assertEqual(rank((*projective, velocity)), 25)
         paffenholz_tangents = []
         for coordinate in range(4):

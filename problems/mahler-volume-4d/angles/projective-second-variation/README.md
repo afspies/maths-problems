@@ -25,13 +25,17 @@ The exact interval harness certifies a unique bi-centered representative in
 a nonregular Paffenholz 24-cell projective chart and proves that its
 covariance Hessian has a negative \(e_1\)-direction. By nonsingularity and
 strictness, this excludes an open four-parameter branch of non-pyramidal
-24-cell critical bodies from local minimality.
+24-cell critical bodies from local minimality. Interval normal determinants
+also prove the exact representative is connected and pair-terminal; it is
+therefore a fully certified object satisfying the first two filters and
+failing the third.
 
 ## Next proof target
 
-Derive the second variation for arbitrary realization-space motions of a
-polytope, not only projective motions. For a pair-terminal non-simplex,
-combine:
+The arbitrary realization-space second variation is now the exact
+stress-corrected KKT form in `../realization-stress/README.md`. The next
+target is a volume-specific sign theorem for its Schur complement on the
+q-regular stress cone. For a pair-terminal non-simplex, combine:
 
 - the facet-coplanarity tangent equations;
 - exact first and second moment formulas from a fixed triangulation; and

@@ -151,6 +151,107 @@ and
 
 Both exceed \(3125/576\).
 
+## Covariance-trace calculus
+
+For a bi-centered \(m\)-body \(K\), write
+
+\[
+T(K)=\operatorname{tr}\bigl(
+\operatorname{cov}(K)\operatorname{cov}(K^\circ)
+\bigr).
+\]
+
+The same beta integrations, now with second moments, give
+
+\[
+\boxed{
+T(K\times L)=T(K\oplus L)
+=
+\frac{
+(p+1)(p+2)T(K)+(q+1)(q+2)T(L)
+}{
+(p+q+1)(p+q+2)
+}.
+}
+\]
+
+For example, the \(K^\circ\) covariance block in
+\((K\times L)^\circ\) is
+
+\[
+\frac{(p+1)(p+2)}
+{(p+q+1)(p+q+2)}
+\operatorname{cov}(K^\circ);
+\]
+
+this follows by inserting the extra squared radial factor into the beta
+integral. The other blocks and the free-sum identity follow symmetrically.
+
+For the Santaló-centered affine join,
+
+\[
+\boxed{
+T(K*L)
+=
+\frac{
+1+(p+2)^2T(K)+(q+2)^2T(L)
+}{
+(p+q+3)^2
+}.
+}
+\]
+
+Here the horizontal blocks follow from beta second moments of the join
+height and its polar height. Their one-dimensional height blocks contribute
+the constant \(1\). Cross blocks vanish because both factors are
+bi-centered.
+
+These formulas pressure-test the connected trace-gap conjecture. A
+segment--triangle join is a simplex and has \(T=1/9\), while the exact
+segment--square join has
+
+\[
+T=\frac{17}{162}<\frac19.
+\]
+
+The formulas also show why decomposable bodies cannot be controlled by a
+connected-circuit argument: the join height carries an independent harmonic
+mode.
+
+The normalized defect
+
+\[
+\delta_d(K)=(d+2)^2T(K)-d
+\]
+
+linearizes the join formula:
+
+\[
+\boxed{
+\delta_{p+q+1}(K*L)=\delta_p(K)+\delta_q(L).
+}
+\]
+
+Thus the trace ceiling is closed under joins and strictness is additive.
+For products and free sums, with \(d=p+q\),
+
+\[
+\begin{aligned}
+\delta_d(K\times L)=\delta_d(K\oplus L)
+={}&-\frac{pq(d+4)}
+{(d+1)(p+2)(q+2)}\\
+&+\frac{d+2}{d+1}
+\left(
+\frac{p+1}{p+2}\delta_p(K)
++\frac{q+1}{q+2}\delta_q(L)
+\right).
+\end{aligned}
+\]
+
+So factors satisfying their trace ceilings give a strict product/free-sum
+gap. In dimension four this conditional calculation gives
+\(T\le23/225\) for a \(1+3\) split and \(T\le1/10\) for a \(2+2\) split.
+
 ## Exact checks
 
 `harness/test_polytope.py` checks all factors as rational numbers. It also
@@ -161,4 +262,5 @@ independently that
 \mathcal P([-1,1]*[-1,1]^2)=\frac{3125}{486},
 \]
 
-matching the factorization exactly.
+matching the factorization exactly. Its exact covariance matrices
+independently reproduce \(T=17/162\).

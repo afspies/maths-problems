@@ -123,9 +123,44 @@ At singular realization points, not every element of \(\ker J\) integrates.
 Moreover, the constrained Hessian is the Lagrangian Hessian, including the
 incidence-stress cross term, not the raw ambient volume Hessian.
 
+At a constrained-critical pair, choose
+
+\[
+\nabla(\log|P|+\log|P^\circ|)=J^\mathsf T\lambda.
+\]
+
+If \(H_0\) is the straight ambient Santaló-envelope Hessian, the exact
+Lagrangian form on every second-liftable tangent is
+
+\[
+Q_\lambda(u)=H_0(u)-2q_\lambda(u).
+\]
+
+The acceleration drops out because
+\(Jz''=-2c(u,u)\). Multiplier ambiguity also drops out on the common
+stress cone.
+
+More strongly, the polarization of every self-stress quadric has the entire
+24-dimensional PGL tangent space in its radical. Thus q-regularity descends
+to realization moduli and is unaffected by optimizing the four genuine
+denominator-projective directions. This is the precise compatibility
+between the 24-dimensional projective realization quotient and the
+20-dimensional affine Mahler gauge quotient.
+
+At the regular 24-cell, the exact KKT multiplier and the four projective
+plus four Paffenholz directions give
+
+\[
+A=-\frac{31}{13}I_4,\qquad
+B=-\frac{31}{78}I_4,\qquad
+C=-\frac{61}{234}I_4.
+\]
+
+The nonzero mixed block \(B\) is an exact warning that discarding all 24
+projective directions changes the realization Hessian.
+
 The q-regular arc lemma in `../../results/24cell-stress-arc.md` removes the
-need for base-point smoothness. The next go/no-go target is the exact Hessian
-on the regular stress cone \(q^{-1}(0)\), after quotienting 20 affine gauges
-and Schur-complementing any positive four-dimensional projective covariance
-block. Compress a surviving negative direction into a coordinate-free
-stress/Gale certificate.
+need for base-point smoothness. But stress-cone dimension and spanning alone
+cannot force a quadratic form to be negative. The next go/no-go target is a
+volume-specific sign identity for the Schur complement on
+\(q^{-1}(0)\), not a purely incidence-theoretic dimension argument.

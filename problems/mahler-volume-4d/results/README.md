@@ -8,7 +8,8 @@
   proposed global bridge.
 - `24cell-projective-saddle.md`: rational interval-Newton and covariance
   certificate excluding an open critical branch of nonregular 24-cells from
-  local Mahler minimality.
+  local Mahler minimality; interval normal determinants prove the exact
+  bi-centered root is connected and pair-terminal with trace below \(1/9\).
 - `join-product-exclusion.md`: exact Mahler factorizations proving the sharp
   conjecture for every 4D affine join and strict gaps for all products and
   free sums.
@@ -23,3 +24,7 @@
   pair-terminal 24-cell, proving a genuinely new analytic deformation into
   the smooth full-rank stratum and correcting the Mahler gauge count from
   24 projective to 20 affine directions.
+- `connected-trace-stress-reduction.md`: proves the projective-radical
+  stress lemma and exact KKT Hessian formula, replaces the dead circuit
+  Poincare route by a volume-mass/determinant target, and certifies the full
+  regular-24-cell projective/realization Hessian blocks.

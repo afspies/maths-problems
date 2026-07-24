@@ -39,6 +39,8 @@ Partial results:
 - strict sharp-constant gaps for all \(1+3\) and \(2+2\) Cartesian products
   and free sums;
 - an exact counterexample to the general terminal-pair bridge;
+- an interval-certified bi-centered connected pair-terminal non-simplex
+  24-cell whose covariance trace is strictly below \(1/9\);
 - two open 24-cell realization neighborhoods excluded by second variation:
   one by a rational interval projective certificate and one by an exact
   negative-definite four-parameter realization Hessian at the regular cell;
@@ -47,6 +49,14 @@ Partial results:
   stratum, by a strict projective covariance violation;
 - an exact q-regular stress-cone velocity integrating the singular
   pair-terminal 24-cell into a new nonprojective smooth realization family.
+- an exact projective-radical stress lemma and KKT-corrected Santaló
+  Hessian, including all projective/realization blocks at the regular
+  24-cell;
+- a global volume-mass/determinant formulation of the connected trace gap,
+  together with a proof that the naive circuit-Poincare route cannot work.
+- a second-fundamental-form criterion proving the singular Paffenholz
+  q-regular germ spans its full 50-dimensional incidence tangent, plus a
+  facet-boundary integration formula for the trace defect.
 
 ## Certificate + verifier
 
@@ -82,6 +92,9 @@ Partial results:
   and free sums have a strict gap.
 - Pair-terminality alone does not force a simplex: the checked rational
   24-cell and its genuine Santaló polar are pair-terminal.
+- Even bi-centering and connected pair-terminality do not force a simplex:
+  the unique certified Paffenholz root has all three properties and strict
+  covariance trace below \(1/9\), but is a projective saddle.
 - Pair-terminality does not imply realization-space smoothness. The
   pair-terminal 24-cell has incidence rank 142 and a two-dimensional stress
   cokernel, but an exact regular point of its quadratic stress cone
@@ -100,6 +113,19 @@ Partial results:
   \operatorname{cov}(K^\circ)\succeq
   \frac1{36}\operatorname{cov}(K)^{-1}.
   \]
+- Facet circuits annihilate the entire vertex--polar-vertex pairing matrix.
+  Terminality identifies its affine harmonic space but supplies no circuit
+  spectral gap on it. The remaining trace route is a comparison of
+  volume-derived mass forms, equivalently a determinant-weighted global
+  simplex identity.
+- Every incidence-stress quadric has the 24-dimensional PGL tangent in its
+  radical. Thus integrability descends modulo PGL, while curvature still
+  retains four denominator-projective directions after quotienting only the
+  20 affine gauges.
+- At the singular Paffenholz cell, the quadratic second fundamental form on
+  \(\ker Dq_u\) surjects onto the two-dimensional stress cokernel. Hence
+  nearby integrable q-regular directions span the entire tangent and do
+  justify the KKT multiplier there.
 - Necessary bounds, with \(\Delta\) the largest facet size and \(\delta\) the
   largest vertex--facet degree, are
   \[
@@ -129,11 +155,11 @@ Partial results:
 ## First steps
 
 1. Read `LEARNINGS.md` and the source audit.
-2. Attack the connected terminal trace gap using the explicit weighted
-   slack energy in `angles/slack-concentration/`; seek a circuit/Hodge
-   Poincare inequality or an exact counterexample.
-3. Seek a coordinate-free stress/Gale lemma forcing a negative quotient
-   direction on the q-regular integrable stress cone. Quotient only the 20
-   affine gauges and retain the four projective directions through the
-   covariance Schur complement. The disconnected branch is an affine join
-   and is now solved. Do not return to terminal face-lattice enumeration.
+2. Attack the connected terminal trace gap through the determinant-weighted
+   global sum in `angles/slack-concentration/`. Do not retry an ordinary
+   circuit Poincare inequality: the polarity matrix is exactly harmonic.
+3. On any candidate passing the projective covariance test, use the exact
+   KKT multiplier and Schur complement on the q-regular stress cone.
+   Dimension counts alone cannot force a negative sign. The disconnected
+   branch is an affine join and is solved. Do not return to terminal
+   face-lattice enumeration.

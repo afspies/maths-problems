@@ -177,6 +177,38 @@ def join_mahler_factor(left_dimension, right_dimension):
     return beta**2 * santalo_height
 
 
+def product_free_sum_covariance_trace(
+    left_dimension, right_dimension, left_trace, right_trace
+):
+    """Trace Cov(P)Cov(P°) for products/free sums of bi-centered factors."""
+    if left_dimension < 1 or right_dimension < 1:
+        raise ValueError("product/free-sum factors must have positive dimensions")
+    dimension = left_dimension + right_dimension
+    denominator = (dimension + 1) * (dimension + 2)
+    return (
+        (left_dimension + 1)
+        * (left_dimension + 2)
+        * Q(left_trace)
+        + (right_dimension + 1)
+        * (right_dimension + 2)
+        * Q(right_trace)
+    ) / denominator
+
+
+def join_covariance_trace(
+    left_dimension, right_dimension, left_trace, right_trace
+):
+    """Trace Cov(P)Cov(P°) for the Santaló-centered affine join."""
+    if left_dimension < 0 or right_dimension < 0:
+        raise ValueError("join factors cannot have negative dimensions")
+    denominator = (left_dimension + right_dimension + 3) ** 2
+    return (
+        1
+        + (left_dimension + 2) ** 2 * Q(left_trace)
+        + (right_dimension + 2) ** 2 * Q(right_trace)
+    ) / denominator
+
+
 class RationalPolytope:
     """A small full-dimensional rational polytope containing the origin."""
 

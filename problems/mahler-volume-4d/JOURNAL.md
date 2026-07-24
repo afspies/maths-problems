@@ -501,3 +501,201 @@ the smooth full-dimensional 24-cell stratum, proves a singular
 pair-terminal point has a q-regular analytic deformation into that stratum,
 and replaces an invalid 24-direction Hessian quotient by the correct
 affine/projective Schur test.
+
+## 2026-07-24 — harmonic slack obstruction and projective-radical stress
+
+### Scope and independent review
+
+Worked on branch
+`problem/mahler-volume-4d/2026-07-24-slack-stress-gap`, inside this problem
+folder plus the generated board. Three independent agents attacked the
+slack/Hodge route, the constrained incidence Hessian, and route selection.
+GPT-5.6 Sol at xhigh effort selected the global trace route over a
+sign-free stress-dimension argument and independently audited the exact
+mass and KKT formulas. No agent edited repository files.
+
+### Exact constrained Hessian and projective-radical lemma
+
+For paired incidences \(F_{vF}=x_v\cdot y_F-1\), implemented the exact
+paired volume gradient and solved
+
+\[
+\nabla(\log|P|+\log|P^\circ|)=J^\mathsf T\lambda.
+\]
+
+If \(H_0\) is the straight ambient Santaló-envelope Hessian, the actual
+second derivative on a second-liftable tangent is
+
+\[
+Q_\lambda(u)=H_0(u)-2q_\lambda(u).
+\]
+
+The acceleration disappears through \(Jz''=-2c(u,u)\), and multiplier
+ambiguity disappears on the stress cone. A new coordinate-free lemma proves
+that every self-stress quadric has the full 24-dimensional PGL tangent in
+its bilinear radical. Thus integrability descends modulo PGL, even though
+only 20 affine directions are Mahler gauges.
+
+At the regular 24-cell, the deterministic exact multiplier has 120 nonzero
+entries, global sum four, and range \([-7/48,7/48]\). Exact polarization on
+the four denominator-projective and four Paffenholz directions gives
+
+\[
+A=-31I_4/13,\qquad B=-31I_4/78,\qquad C=-61I_4/234.
+\]
+
+The nonzero mixed block is a concrete certificate that discarding all 24
+projective directions changes the realization Hessian.
+
+### Spanning the singular stress cone
+
+Derived the second-fundamental spanning criterion for a homogeneous
+quadratic map \(q:V\to W\). At a regular zero \(u\), if
+
+\[
+\operatorname{span}\{q(v):v\in\ker Dq_u\}=W,
+\]
+
+then the local regular zero germ spans \(V\). At the rational singular
+Paffenholz cell, \(\dim V=50\), \(\dim W=2\),
+\(\dim\ker Dq_u=48\), and the exact quadratic outputs have rank two.
+Therefore nearby q-regular integrable directions span all 50 tangent
+dimensions. This closes the KKT-existence gap at that singularity for a
+hypothetical local minimizer.
+
+### Harmonic obstruction and corrected trace target
+
+The naive circuit-Poincare plan fails identically. Facet-supported affine
+circuits annihilate the entire polarity pairing \(N_{vF}=x_v\cdot y_F\) and
+the slack matrix. At a terminal polytope these matrices are wholly in the
+five-dimensional affine harmonic space, so their circuit Dirichlet energy
+is zero.
+
+The corrected exact barycentric mass identity is
+
+\[
+900\operatorname{tr}(\operatorname{cov}P\operatorname{cov}P^\circ)
+=
+\operatorname{tr}(\mathsf M_PN\mathsf M_{P^\circ}N^\mathsf T).
+\]
+
+For simplex cells,
+
+\[
+|\det(1-x_i\cdot y_j)|=(4!)^2|S||T|.
+\]
+
+Thus the trace gap is a global determinant-weighted energy inequality,
+independent of triangulation. Pointwise control is false: in the canonical
+regular-24-cell pulling triangulations, 1,784 of 5,184 blocks exceed 100
+and the maximum is 344, while the weighted average is \(169/2\).
+
+Cone-measure divergence gives the sharper boundary identity
+
+\[
+\frac14-\frac94\operatorname{tr}(
+\operatorname{cov}P\operatorname{cov}P^\circ)
+=
+\sum_{F,v}r_Fs_v\left[
+(x_v\cdot y_F)(c_F\cdot d_v)-\operatorname{tr}(H_FH_v^\circ)
+\right].
+\]
+
+For the regular 24-cell the total is \(31/800\); among 576 facet pairs,
+288 brackets are \(-11/100\) and 288 are \(3/16\). All 144 incidences are
+positive. Hence the remaining trace theorem is a genuinely global
+circuit-network transport inequality, not local facet positivity.
+
+Beta second moments also give exact covariance-trace recursions under
+products, free sums, and joins. The normalized trace defect is additive
+under joins, and the segment--square join has trace \(17/162\).
+
+### Certified trace interval and failed terminal-root attempt
+
+Extended the rational Krawczyk certificate to the full covariance trace on
+the nonregular Paffenholz bi-centering box:
+
+\[
+0.0999343391445795
+<
+\operatorname{tr}(\operatorname{cov}P\operatorname{cov}P^\circ)
+<
+0.0999343606091986
+<
+1/9.
+\]
+
+This remains supporting evidence because pair-terminality at the exact
+irrational root is not certified. An exact terminality check at the rational
+box center was attempted, but the \(10^{12}\)-scale coordinate
+denominators caused rational RREF denominator explosion before the
+direction-flat enumeration completed. The run was interrupted after about
+90 seconds. A future certificate must transport preselected rank minors
+with intervals rather than reconstruct all exact direction flats at the
+large-denominator center.
+
+### Commands and compute
+
+```text
+python3 -m py_compile problems/mahler-volume-4d/harness/*.py
+python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
+PYTHONPATH=problems/mahler-volume-4d/harness \
+python3 -B problems/mahler-volume-4d/harness/verify_bridge_counterexample.py
+PYTHONPATH=problems/mahler-volume-4d/harness \
+python3 -B problems/mahler-volume-4d/harness/bicenter_certificate.py
+python3 tools/board.py
+```
+
+The first full intermediate suite passed 18 exact tests in 58.394 seconds;
+after caching paired geometry and Hessian values, the final suite was rerun
+as recorded below. The interval certificate completed in 7.5 seconds.
+Exploratory floating Paffenholz samples were used only to pressure-test the
+trace conjecture; every committed identity and numerical enclosure is exact.
+
+The full connected non-pyramidal conjecture remains open. This session
+passes the continuation gate with two new general lemmas, a full
+50-dimensional singular-germ classification at the Paffenholz cell, exact
+join/product trace recursions, and a sharper global boundary formulation of
+the remaining trace inequality.
+
+### Same-session correction: the exact root is pair-terminal
+
+The failed large-denominator RREF attempt above diagnosed an implementation
+problem, not a mathematical obstruction. The xhigh reviewer found the
+correct certificate and the main harness reproduced it exactly.
+
+For a projective image
+\(\widehat{T(x_v)}=H\hat x_v/d_v\), affine circuit coefficients transform as
+\(\lambda_v=d_v\mu_v\). Hence every fixed-active-facet circuit matrix changes
+only by an invertible diagonal column scaling. Terminality can fail only if
+an independent set of four facet normals becomes dependent.
+
+At the rational center of the Krawczyk box, exact normal-flat enumeration
+using the transformed normals but the small-denominator reference circuit
+matrices gives 1,941 primal flats and 1,911 polar flats, all of speed
+dimension five. Minimal facet-circuit supports are connected on both sides:
+120 primal circuits of sizes four and five, and 72 polar circuits of size
+four.
+
+Outward-rounded interval determinants over the entire radius-\(10^{-10}\)
+box certify:
+
+```text
+                         nonzero   zero   unresolved
+primal four-normal sets    10498    128       0
+polar four-normal sets     10488    138       0
+```
+
+Both projective denominator families have strictly positive lower bounds.
+Therefore no new four-normal dependency appears anywhere in the box, and
+the unique Krawczyk root is an exact bi-centered connected pair-terminal
+non-simplex. Its certified covariance trace is strictly below \(1/9\), so it
+becomes the canonical exact test object for the remaining terminal trace
+conjecture. The upgraded certificate completed successfully in about 60
+seconds without any interval RREF.
+
+Final verification after all edits: byte-compilation passed; all 18 exact
+unit tests passed in 54.344 seconds; the strengthened bi-centering,
+connectivity, terminality, trace, and covariance certificate passed in about
+60 seconds; and the independent terminal-bridge certificate again checked
+1,941 primal and 580 polar flats in 26.3 seconds.

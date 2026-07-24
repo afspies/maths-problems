@@ -29,6 +29,19 @@ has trace \(169/1800<1/9\). Projectively critical pentagons do not falsify
 the target: polygon edges have no affine circuit equations, so nontriangles
 are not terminal.
 
+The interval-certified nonregular Paffenholz root is bi-centered,
+pair-terminal, and connected on both primal and polar circuit supports. It
+satisfies
+
+\[
+0.0999343391<
+\operatorname{tr}(
+\operatorname{cov}P\operatorname{cov}P^\circ)
+<0.0999343607<1/9.
+\]
+
+Thus the target survives its strongest exact nonregular pressure test.
+
 ## Probabilistic identity
 
 Let \(X\) and \(Y\) be independent uniform points of \(P\) and \(P^\circ\),
@@ -95,19 +108,96 @@ volume-weighted average of \(E(S,T)\) is at most \(100\), with strictness in
 the connected non-simplex case. A simplex has diagonal normalized slack
 entries five and attains \(100\).
 
-## Why terminality must enter quantitatively
+Equivalently, if \(X,Y\) are the global vertex matrices,
+\(N=X^\mathsf TY\), \(R_S\) selects the vertices of a simplex, and
+\(G=I_5+\mathbf1\mathbf1^\mathsf T\), put
+
+\[
+\mathsf M_P=\sum_S\frac{|S|}{|P|}R_SGR_S^\mathsf T.
+\]
+
+Then the exact global identity is
+
+\[
+900\operatorname{tr}(
+\operatorname{cov}P\operatorname{cov}P^\circ)
+=
+\operatorname{tr}(
+\mathsf M_PN\mathsf M_{P^\circ}N^\mathsf T).
+\]
+
+For the simplex slack minor \(L_{ST}=(1-x_i\cdot y_j)\),
+
+\[
+|\det L_{ST}|=(4!)^2|S||T|.
+\]
+
+Thus the target is also
+
+\[
+\sum_{S,T}|\det L_{ST}|(E(S,T)-100)<0.
+\]
+
+This expression is independent of the chosen triangulations, although its
+individual summands are not.
+
+The divergence theorem gives an even more terminality-facing boundary form.
+With cone-volume facet weights \(r_F,s_v\), facet centroids \(c_F,d_v\),
+and uncentered facet second moments \(H_F,H_v^\circ\),
+
+\[
+\frac14-\frac94\operatorname{tr}(
+\operatorname{cov}P\operatorname{cov}P^\circ)
+=
+\sum_{F,v}r_Fs_v
+\left[
+(x_v\cdot y_F)(c_F\cdot d_v)
+-\operatorname{tr}(H_FH_v^\circ)
+\right].
+\]
+
+At the regular 24-cell all 144 incidence brackets equal \(3/16\), while the
+nonincidences contribute another 144 positive brackets and 288 negative
+brackets \(-11/100\). Their total is \(31/800\). The remaining theorem is
+therefore a global circuit-network transport inequality, not local facet
+positivity.
+
+## A dead Hodge route
+
+Let \(D_P\) stack all facet-supported affine circuit rows. Every such row
+annihilates constants and all coordinate functions. Therefore, for
+\(N_{vF}=x_v\cdot y_F\) and \(L=\mathbf1\mathbf1^\mathsf T-N\),
+
+\[
+D_PN=D_PL=0,\qquad
+ND_{P^\circ}^\mathsf T=LD_{P^\circ}^\mathsf T=0.
+\]
+
+At a terminal realization, \(\ker D_P\) is exactly the five-dimensional
+space of affine vertex functions. Hence the polarity matrix is entirely
+harmonic. A conventional circuit-Poincare inequality has zero Dirichlet
+energy on the very matrix it is meant to control and cannot prove the
+trace gap.
+
+The corrected Hodge target compares the two geometry-dependent volume mass
+forms on the four-dimensional nonconstant affine harmonic spaces. Support
+connectivity identifies these spaces and kills projective stabilizers, but
+does not quantitatively compare their mass forms.
+
+## Pointwise control is false
 
 Arbitrary nonincidence slacks can be large, so positivity and incidence
-counts alone cannot prove this energy bound. The plausible missing input is
-a volume-weighted Poincare or Hodge inequality on the facet-circuit support
-complex:
+counts alone cannot prove this energy bound. In the canonical pulling
+triangulations of the regular 24-cell, 1,784 of 5,184 simplex pairs have
+\(E>100\), and the maximum is \(344\), even though the determinant-weighted
+average is
 
-- facet circuits supply local cancellation relations among slack rows;
-- connected support removes the affine-join zero mode;
-- pair-terminality supplies the same control after deleting any
-  direction-parallel normal flat.
+\[
+900\cdot\frac{169}{1800}=\frac{169}{2}<100.
+\]
 
-The route is **GO** only if those qualitative spanning statements can be
-upgraded to a quantitative energy inequality. It should be abandoned upon
-finding an exact bi-centered connected pair-terminal example with trace
-above \(1/9\).
+So neither a blockwise estimate nor an unsigned circuit spectral gap can
+work. The route remains **GO** only for a genuinely global
+determinant-weighted flip/divergence identity, or an equivalent comparison
+of the two volume Hodge stars. It should be abandoned upon finding an exact
+bi-centered connected pair-terminal example with trace above \(1/9\).

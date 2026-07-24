@@ -6,12 +6,15 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 
 ## What the next session should do first
 
-- Work only on the connected circuit-support branch. Try to prove or
-  falsify the terminal trace gap through the explicit volume-weighted slack
-  energy in `angles/slack-concentration/`. In parallel, derive the
-  constrained Santaló/Lagrangian Hessian on the q-regular stress cone,
-  quotienting only 20 affine gauges and retaining the four genuine
-  projective directions through the covariance Schur complement.
+- Work only on the connected circuit-support branch. Seek a global
+  determinant-weighted flip/divergence identity for
+  \(\sum|\det L_{ST}|(E_{ST}-100)\), or falsify the trace gap with an exact
+  bi-centered pair-terminal example. Do not retry a conventional
+  circuit-Poincare estimate: the polarity matrix is exactly circuit-harmonic.
+- If a candidate passes the projective covariance block, compute the exact
+  KKT multiplier and search the correctly stress-adjusted Schur complement
+  on q-regular moduli directions. Pure dimension/spanning arguments cannot
+  force negative curvature.
 
 ## Dead ends (and why)
 
@@ -26,9 +29,9 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 - The primary bridge is false. A rational non-simplex 24-cell and its actual
   Santaló polar are both terminal in every direction. Further
   terminal-face-lattice classification cannot prove Mahler by itself.
-- “Bi-centered + pair-terminal implies simplex” is not established. Nearby
-  rational realizations are pair-terminal and the exact bi-centering root is
-  certified, but openness does not transfer terminal rank to the root.
+- “Bi-centered + pair-terminal implies simplex” is false. The interval
+  normal-determinant certificate proves the exact nonregular Paffenholz
+  bi-centering root is a connected pair-terminal non-simplex.
 - Raw vectors in the paired incidence kernel need not integrate at a singular
   realization. A proof must use a smooth chart or a higher-order obstruction,
   and the constrained Hessian must include incidence-stress terms.
@@ -42,6 +45,18 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 - High realization Jacobian rank does not imply shadow terminality. At
   \(x=1/2\), each signed smooth 24-cell tested still has four primal and four
   polar direction flats of speed dimension six.
+- The naive circuit-Hodge route is structurally impossible. Every
+  facet-supported affine circuit annihilates both the polarity pairing and
+  slack matrices, so their circuit Dirichlet energy is identically zero.
+- A blockwise simplex-slack estimate is false. In the canonical regular
+  24-cell triangulations, 1,784 of 5,184 blocks exceed 100 and the maximum is
+  344, although the determinant-weighted average is \(169/2\).
+- Facet-pair positivity is also false. The regular 24-cell's exact boundary
+  deficit has 288 negative and 288 positive brackets; terminality must
+  control their global transport, not each pair.
+- Stress-cone dimension or q-regular spanning cannot by itself force a
+  quadratic form to have a negative direction; a volume-specific sign
+  identity is indispensable.
 
 ## Surprises / structure discovered
 
@@ -95,6 +110,38 @@ Keep this short enough to read in two minutes — the journal holds the detail.
   equals the variance of the normalized slack \(1-\langle X,Y\rangle\).
   This turns the connected trace-gap conjecture into a concrete
   volume-weighted discrete slack-energy inequality.
+- The finite slack energy has an exact global mass-matrix form, and
+  \(|\det(1-x_i\cdot y_j)|=(4!)^2|S||T|\). The trace gap is therefore the
+  triangulation-independent sign of
+  \(\sum|\det L_{ST}|(E_{ST}-100)\).
+- Every incidence-stress quadric has the full 24-dimensional PGL tangent in
+  its bilinear radical. Integrability descends modulo PGL even though only
+  20 affine directions are Mahler gauges.
+- At a constrained-critical pair the actual Hessian on a second-liftable
+  tangent is \(H_0-2q_\lambda\). The regular 24-cell gives exact blocks
+  \(A=-31I/13\), \(B=-31I/78\), \(C=-61I/234\); the nonzero mixed block
+  proves that discarding denominator-projective directions changes the
+  answer.
+- A q-regular quadratic germ spans the whole tangent space when the
+  restricted quadratic second fundamental form
+  \(\operatorname{Sym}^2\ker Dq_u\to\Omega^*\) is onto. This exact rank is
+  two at the singular Paffenholz 24-cell, so its local integrable germ spans
+  all 50 incidence-tangent dimensions and closes the KKT-existence gap
+  there.
+- Cone-measure integration by parts rewrites the trace defect as a weighted
+  sum over primal-facet/polar-facet pairs. All regular-24-cell incidences are
+  positive; all 288 negative terms are nonincidences. This is the cleanest
+  terminality-facing target now available.
+- Covariance trace obeys exact beta-recursion formulas under products, free
+  sums, and joins. The segment--square join has trace \(17/162\).
+- The nonregular Paffenholz Krawczyk box certifies both pair-terminality at
+  its exact irrational bi-centering root and the full trace interval
+  \(0.0999343391<\operatorname{tr}(AB)<0.0999343607<1/9\).
+- Fixed-active-set circuit rank is projectively invariant: projective vertex
+  denominators only rescale circuit-matrix columns. Terminality transports
+  one-sidedly if no independent four-normal set becomes dependent. This
+  reduced the interval proof to 20,986 nonvanishing determinant checks and
+  avoided interval RREF.
 - Pulling moments were independently cross-checked by a boundary-facet cone
   triangulation. Outward dyadic rounding keeps rigorous rational interval
   arithmetic fast enough for the Krawczyk certificate.

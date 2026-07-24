@@ -1,9 +1,18 @@
 """Exact second variations of Santaló Mahler volume in a fixed chamber."""
 
 from fractions import Fraction
+from functools import lru_cache
 from itertools import permutations
 
-from polytope import affine_rank, dot, inverse, nullspace, rank
+from polytope import (
+    affine_rank,
+    dot,
+    inverse,
+    nullspace,
+    rank,
+    rref,
+    simplex_volume,
+)
 
 
 def Q(value):
@@ -68,6 +77,18 @@ class Jet2:
 
 def as_jet(value):
     return value if isinstance(value, Jet2) else Jet2(value)
+
+
+@lru_cache(maxsize=None)
+def paired_geometry(polytope):
+    """Cache the expensive polar/fixed-triangulation data for one realization."""
+    polar = polytope.polar()
+    return (
+        polar,
+        polytope.pulling_triangulation(),
+        polar.pulling_triangulation(),
+        polar.volume_centroid_covariance()[2],
+    )
 
 
 def determinant_jet(matrix):
@@ -184,6 +205,393 @@ def quadratic_form(matrix, vector):
         ),
         Fraction(),
     )
+
+
+def log_volume_gradient(vertices, simplices):
+    """Exact gradient of log volume in flattened vertex coordinates."""
+    dimension = len(vertices[0])
+    gradient = []
+    for vertex_index in range(len(vertices)):
+        for coordinate in range(dimension):
+            jets = tuple(
+                tuple(
+                    Jet2(
+                        entry,
+                        int(
+                            index == vertex_index
+                            and inner == coordinate
+                        ),
+                    )
+                    for inner, entry in enumerate(vertex)
+                )
+                for index, vertex in enumerate(vertices)
+            )
+            volume, _ = volume_centroid_jets(jets, simplices)
+            gradient.append(log_first(volume))
+    return tuple(gradient)
+
+
+def paired_log_volume_gradient(polytope):
+    """Gradient of log|conv X|+log|conv Y| in paired incidence coordinates."""
+    polar, primal_simplices, polar_simplices, _ = paired_geometry(polytope)
+    return (
+        *log_volume_gradient(
+            polytope.vertices, primal_simplices
+        ),
+        *log_volume_gradient(
+            polar.vertices, polar_simplices
+        ),
+    )
+
+
+def solve_consistent_linear_system(matrix, right):
+    """Return one exact solution, setting all free variables to zero."""
+    augmented = tuple(
+        tuple((*row, value)) for row, value in zip(matrix, right)
+    )
+    reduced, pivots = rref(augmented)
+    variable_count = len(matrix[0])
+    if any(
+        not any(row[:variable_count]) and row[variable_count]
+        for row in reduced
+    ):
+        raise ValueError("linear system is inconsistent")
+    solution = [Fraction() for _ in range(variable_count)]
+    for row_index, pivot in enumerate(pivots):
+        if pivot < variable_count:
+            solution[pivot] = reduced[row_index][variable_count]
+    return tuple(solution)
+
+
+def incidence_kkt_multiplier(polytope):
+    """Solve grad(log|X|+log|Y|)=J^T lambda exactly."""
+    tangent_matrix = incidence_tangent_matrix(polytope)
+    transpose = tuple(
+        tuple(
+            tangent_matrix[row][column]
+            for row in range(len(tangent_matrix))
+        )
+        for column in range(len(tangent_matrix[0]))
+    )
+    gradient = paired_log_volume_gradient(polytope)
+    multiplier = solve_consistent_linear_system(transpose, gradient)
+    if any(
+        sum(
+            coefficient * value
+            for coefficient, value in zip(row, multiplier)
+        )
+        != target
+        for row, target in zip(transpose, gradient)
+    ):
+        raise AssertionError("the returned KKT multiplier is not exact")
+    return multiplier
+
+
+@lru_cache(maxsize=None)
+def paired_straight_reduced_log_second(polytope, velocity):
+    """Ambient Santaló-envelope Hessian on a paired straight velocity.
+
+    This does not impose second-order incidence preservation.  The missing
+    Lagrange-stress term is added by ``constrained_reduced_log_second``.
+    """
+    polar, primal_simplices, polar_simplices, polar_covariance = (
+        paired_geometry(polytope)
+    )
+    dimension = polytope.dimension
+    vertex_count = len(polytope.vertices)
+    expected = dimension * (vertex_count + len(polar.vertices))
+    if len(velocity) != expected:
+        raise ValueError("paired velocity has the wrong length")
+    primal_velocity = tuple(
+        velocity[
+            dimension * index : dimension * (index + 1)
+        ]
+        for index in range(vertex_count)
+    )
+    polar_offset = dimension * vertex_count
+    polar_velocity = tuple(
+        velocity[
+            polar_offset
+            + dimension * index : polar_offset
+            + dimension * (index + 1)
+        ]
+        for index in range(len(polar.vertices))
+    )
+
+    def straight_jets(vertices, velocities):
+        return tuple(
+            tuple(
+                Jet2(entry, velocities[index][coordinate])
+                for coordinate, entry in enumerate(vertex)
+            )
+            for index, vertex in enumerate(vertices)
+        )
+
+    primal_volume, _ = volume_centroid_jets(
+        straight_jets(polytope.vertices, primal_velocity),
+        primal_simplices,
+    )
+    polar_volume, polar_centroid = volume_centroid_jets(
+        straight_jets(polar.vertices, polar_velocity),
+        polar_simplices,
+    )
+    if any(entry.value for entry in polar_centroid):
+        raise ValueError("the paired base is not bi-centered")
+    santalo_hessian = tuple(
+        tuple(
+            (dimension + 1)
+            * (dimension + 2)
+            * polar_covariance[row][column]
+            for column in range(dimension)
+        )
+        for row in range(dimension)
+    )
+    cross = tuple(
+        (dimension + 1) * entry.first for entry in polar_centroid
+    )
+    correction = quadratic_form(inverse(santalo_hessian), cross)
+    return (
+        log_second(primal_volume)
+        + log_second(polar_volume)
+        - correction
+    )
+
+
+@lru_cache(maxsize=None)
+def constrained_reduced_log_second(polytope, velocity, multiplier):
+    """Lagrangian Hessian on an incidence tangent at a critical pair."""
+    ambient = paired_straight_reduced_log_second(polytope, velocity)
+    stress = incidence_stress_quadratic(
+        polytope, multiplier, velocity
+    )
+    return ambient - 2 * stress
+
+
+def constrained_reduced_log_bilinear(
+    polytope, multiplier, left, right
+):
+    """Polarization of the exact constrained Santaló Hessian."""
+    summed = tuple(a + b for a, b in zip(left, right))
+    return (
+        constrained_reduced_log_second(
+            polytope, summed, multiplier
+        )
+        - constrained_reduced_log_second(
+            polytope, left, multiplier
+        )
+        - constrained_reduced_log_second(
+            polytope, right, multiplier
+        )
+    ) / 2
+
+
+@lru_cache(maxsize=None)
+def triangulation_vertex_mass_matrix(polytope):
+    """Global barycentric second-moment mass matrix for a triangulation.
+
+    If R_S selects a pulling simplex and G=I+11^T, this returns
+    sum_S (|S|/|P|) R_S G R_S^T.
+    """
+    simplices = polytope.pulling_triangulation()
+    weights = tuple(
+        simplex_volume(
+            [polytope.vertices[index] for index in simplex]
+        )
+        for simplex in simplices
+    )
+    total = sum(weights, Fraction())
+    size = len(polytope.vertices)
+    matrix = [
+        [Fraction() for _ in range(size)] for _ in range(size)
+    ]
+    for simplex, weight in zip(simplices, weights):
+        normalized = weight / total
+        for left in simplex:
+            for right in simplex:
+                matrix[left][right] += normalized * (
+                    2 if left == right else 1
+                )
+    return tuple(tuple(row) for row in matrix)
+
+
+def simplex_pair_energy(primal_vertices, polar_vertices):
+    """The exact 900-scaled second moment for a pair of 4-simplices."""
+    pairing = tuple(
+        tuple(dot(left, right) for right in polar_vertices)
+        for left in primal_vertices
+    )
+    row_sums = tuple(sum(row, Fraction()) for row in pairing)
+    column_sums = tuple(
+        sum((pairing[row][column] for row in range(5)), Fraction())
+        for column in range(5)
+    )
+    total = sum(row_sums, Fraction())
+    return (
+        total**2
+        + sum((value**2 for value in row_sums), Fraction())
+        + sum((value**2 for value in column_sums), Fraction())
+        + sum(
+            (value**2 for row in pairing for value in row),
+            Fraction(),
+        )
+    )
+
+
+def triangulation_slack_mass_trace(polytope):
+    """Return tr(M_P N M_Q N^T) for the primal-polar vertex pairing."""
+    polar, _, _, _ = paired_geometry(polytope)
+    primal_mass = triangulation_vertex_mass_matrix(polytope)
+    polar_mass = triangulation_vertex_mass_matrix(polar)
+    pairing = tuple(
+        tuple(dot(left, right) for right in polar.vertices)
+        for left in polytope.vertices
+    )
+    return sum(
+        (
+            primal_mass[left][right]
+            * pairing[right][facet]
+            * polar_mass[facet][other_facet]
+            * pairing[left][other_facet]
+            for left in range(len(polytope.vertices))
+            for right in range(len(polytope.vertices))
+            for facet in range(len(polar.vertices))
+            for other_facet in range(len(polar.vertices))
+        ),
+        Fraction(),
+    )
+
+
+def facet_cone_moment_data(polytope):
+    """Cone weights, centroids, and second moments of 4-polytope facets.
+
+    This exact helper currently requires triangular ridges, as in the
+    24-cell. Four-dimensional cone volumes are proportional to intrinsic
+    facet volumes within each supporting hyperplane, so no square roots
+    enter the normalized facet moments.
+    """
+    if polytope.dimension != 4:
+        raise ValueError("facet moment helper is specialized to dimension four")
+    origin = (Fraction(),) * 4
+    facet_sets = [frozenset(incident) for incident, _, _ in polytope.facets]
+    raw = []
+    for facet_index, facet in enumerate(facet_sets):
+        apex = min(facet)
+        ridges = set()
+        for other_index, other in enumerate(facet_sets):
+            if other_index == facet_index:
+                continue
+            intersection = tuple(sorted(facet.intersection(other)))
+            if (
+                intersection
+                and affine_rank(
+                    [polytope.vertices[index] for index in intersection]
+                )
+                == 2
+            ):
+                ridges.add(intersection)
+        tetrahedra = tuple(
+            tuple((apex, *ridge))
+            for ridge in sorted(ridges)
+            if apex not in ridge
+        )
+        if not tetrahedra or any(len(tetrahedron) != 4 for tetrahedron in tetrahedra):
+            raise ValueError("facet moment helper requires triangular ridges")
+        volume = Fraction()
+        first = [Fraction() for _ in range(4)]
+        second = [[Fraction() for _ in range(4)] for _ in range(4)]
+        for tetrahedron in tetrahedra:
+            vertices = [
+                polytope.vertices[index] for index in tetrahedron
+            ]
+            weight = simplex_volume([origin, *vertices])
+            volume += weight
+            sums = [
+                sum(
+                    (vertex[coordinate] for vertex in vertices),
+                    Fraction(),
+                )
+                for coordinate in range(4)
+            ]
+            for row in range(4):
+                first[row] += weight * sums[row] / 4
+                for column in range(4):
+                    diagonal = sum(
+                        (
+                            vertex[row] * vertex[column]
+                            for vertex in vertices
+                        ),
+                        Fraction(),
+                    )
+                    second[row][column] += weight * (
+                        sums[row] * sums[column] + diagonal
+                    ) / 20
+        raw.append(
+            (
+                volume,
+                tuple(value / volume for value in first),
+                tuple(
+                    tuple(value / volume for value in row)
+                    for row in second
+                ),
+            )
+        )
+    total = sum((entry[0] for entry in raw), Fraction())
+    return tuple(
+        (volume / total, centroid, second)
+        for volume, centroid, second in raw
+    )
+
+
+def boundary_trace_deficit(polytope):
+    """Facet-pair divergence decomposition of 1/4-(9/4)tr(CovP CovP°)."""
+    polar, _, _, _ = paired_geometry(polytope)
+    primal_data = facet_cone_moment_data(polytope)
+    polar_data = facet_cone_moment_data(polar)
+    polar_facet_for_vertex = []
+    for vertex in polytope.vertices:
+        matches = [
+            index
+            for index, (_, normal, offset) in enumerate(polar.facets)
+            if tuple(value / offset for value in normal) == vertex
+        ]
+        if len(matches) != 1:
+            raise ValueError("could not match a primal vertex to its dual facet")
+        polar_facet_for_vertex.append(matches[0])
+
+    local = []
+    for facet_index, (_, normal, offset) in enumerate(polytope.facets):
+        polar_vertex = tuple(value / offset for value in normal)
+        primal_weight, primal_centroid, primal_second = primal_data[facet_index]
+        for vertex_index, vertex in enumerate(polytope.vertices):
+            polar_facet_index = polar_facet_for_vertex[vertex_index]
+            polar_weight, polar_centroid, polar_second = polar_data[
+                polar_facet_index
+            ]
+            moment_pairing = sum(
+                (
+                    primal_second[row][column]
+                    * polar_second[column][row]
+                    for row in range(4)
+                    for column in range(4)
+                ),
+                Fraction(),
+            )
+            bracket = (
+                dot(vertex, polar_vertex)
+                * dot(primal_centroid, polar_centroid)
+                - moment_pairing
+            )
+            local.append(
+                {
+                    "facet": facet_index,
+                    "vertex": vertex_index,
+                    "incident": vertex_index
+                    in polytope.facets[facet_index][0],
+                    "bracket": bracket,
+                    "weighted": primal_weight * polar_weight * bracket,
+                }
+            )
+    return sum((entry["weighted"] for entry in local), Fraction()), tuple(local)
 
 
 def reduced_log_mahler_second(polytope, first_velocities, second_velocities=None):
@@ -306,7 +714,7 @@ def paired_tangent_from_vertex_path(polytope, first_velocities):
 
 def incidence_tangent_matrix(polytope):
     """Linearization of x_v·y_F=1 in paired primal/polar coordinates."""
-    polar = polytope.polar()
+    polar, _, _, _ = paired_geometry(polytope)
     vertex_count = len(polytope.vertices)
     facet_count = len(polytope.facets)
     dimension = polytope.dimension
@@ -409,7 +817,7 @@ def projective_orbit_tangent_vectors(polytope):
     """Return the 24 standard infinitesimal PGL(5) directions in dimension 4."""
     if polytope.dimension != 4:
         raise ValueError("the standard basis below is specialized to dimension four")
-    polar = polytope.polar()
+    polar, _, _, _ = paired_geometry(polytope)
     vectors = []
 
     def pack(primal_velocities, polar_velocities):

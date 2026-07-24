@@ -29,8 +29,10 @@ Current priorities (update each session):
 - Read `results/24cell-projective-saddle.md`. A rational interval Krawczyk
   certificate isolates a unique bi-centering root for a nonregular
   Paffenholz 24-cell and proves a strict negative projective covariance
-  direction. This excludes an open four-parameter critical branch from local
-  minimality.
+  direction. Interval normal determinants additionally prove the exact root
+  is connected and pair-terminal, with covariance trace strictly below
+  \(1/9\). This excludes an open four-parameter critical branch from local
+  minimality and supplies the canonical trace-gap test object.
 - Read `results/join-product-exclusion.md`. Mahler volume now factorizes
   exactly for products, free sums, and joins. Every 4D affine join satisfies
   the sharp conjecture, including the non-pyramidal \(1+2\) split; all
@@ -46,8 +48,16 @@ Current priorities (update each session):
   the singular pair-terminal counterexample into a genuinely new
   nonprojective rank-144 realization family.
 - Read `angles/slack-concentration/README.md`: the connected trace-gap
-  conjecture is equivalent to a sharp variance bound for normalized slack
-  and has an explicit finite weighted slack-energy form.
+  conjecture is equivalent to a sharp variance bound for normalized slack.
+  Its exact global mass/determinant form is now known, but the naive
+  circuit-Poincare route is proved impossible because the polarity matrix
+  is entirely circuit-harmonic.
+- Read `results/connected-trace-stress-reduction.md`: it proves the
+  projective-radical stress lemma, the exact KKT Lagrangian-Hessian formula,
+  and the regular-24-cell blocks
+  \(A=-31I/13,B=-31I/78,C=-61I/234\). It also proves the exact Paffenholz
+  q-regular germ spans all 50 tangent dimensions and gives a facet-boundary
+  formula for the trace defect.
 - Terminality plus disconnected facet-circuit support gives an affine join,
   now solved. In the connected branch the projective orbit has dimension 24
   and the realization-moduli quotient tangent count is
@@ -56,11 +66,13 @@ Current priorities (update each session):
   affine directions are gauges; the four denominator-projective directions
   carry the covariance block and must be retained or Schur-complemented.
 - Do not return to terminal face-lattice enumeration. The next theorem-shaped
-  target is a coordinate-free Gale/stress lemma forcing negative curvature
-  on the q-regular integrable stress cone. Raw incidence-kernel vectors may
-  fail to integrate at singular points, but
-  `results/24cell-stress-arc.md` proves a q-regular analytic arc can bypass
-  base-point singularity.
+  target is a global transport inequality on the facet-boundary deficit:
+  positive incidence brackets must dominate negative nonincidence brackets.
+  Equivalently seek a determinant-weighted flip/divergence identity forcing
+  \(\sum|\det L_{ST}|(E_{ST}-100)<0\). Pointwise estimates and ordinary
+  circuit spectral gaps are dead. On candidates passing the projective
+  covariance test, use the KKT-corrected Schur complement on the q-regular
+  moduli cone.
 - Run the exact harness before and after changes:
   `python3 -m unittest discover -s problems/mahler-volume-4d/harness -v`,
   `verify_bridge_counterexample.py`, and `bicenter_certificate.py` as

@@ -20,8 +20,12 @@ an independent interval certificate excludes a second nonregular critical
 branch. Exact covariance formulas now exclude eight full-rank signed
 24-cell curves, while a q-regular stress-cone velocity integrates the
 singular pair-terminal counterexample into an open smooth family whose
-bi-centered representatives remain projective saddles. The full
-four-dimensional conjecture is not proved.
+bi-centered representatives remain projective saddles. We further derive
+the exact KKT stress correction, prove every stress quadric has the full PGL
+tangent in its radical, prove the singular q-regular germ spans all 50
+tangent dimensions, and reduce the connected trace gap to a global
+facet-boundary transport inequality. The full four-dimensional conjecture
+is not proved.
 
 ## Principal negative result
 
@@ -64,6 +68,22 @@ e_1^\mathsf T\left(
 Thus the exact critical representative is a saddle. Nonsingularity of the
 centroid Jacobian and strictness of the inequality exclude an open
 four-parameter critical branch of nonregular 24-cells from local minimality.
+
+Fixed-active-set circuit rank is preserved by projective diagonal column
+scaling. At the rational box center, exact transported circuit ranks give
+1,941 primal and 1,911 polar normal flats, all with speed dimension five.
+Across the interval box, all 10,498 primal and 10,488 polar four-normal
+determinants that are nonzero at the center remain separated from zero.
+Hence no new normal dependency appears and terminality transports to the
+unique root. Its primal and polar facet-circuit support graphs are connected.
+The exact root is therefore a bi-centered connected pair-terminal
+non-simplex, and
+\[
+0.0999343391<
+\operatorname{tr}(
+\operatorname{cov}K\operatorname{cov}K^\circ)
+<0.0999343607<1/9.
+\]
 
 ### Theorem 0.2: smooth full-rank 24-cell exclusions
 
@@ -218,6 +238,77 @@ Continuity excludes an open neighborhood of the regular realization from
 local Mahler minimality. This is a genuine nonprojective realization-space
 descent, not merely the earlier projective covariance direction.
 
+## Connected trace and stress reductions
+
+At a constrained-critical paired realization, choose the exact multiplier
+\[
+\nabla(\log|P|+\log|P^\circ|)=J^\mathsf T\lambda.
+\]
+If \(H_0\) is the straight ambient Santaló-envelope Hessian, the true
+second derivative on every second-liftable tangent is
+\[
+Q_\lambda(u)=H_0(u)-2q_\lambda(u).
+\]
+Every self-stress quadric has the entire 24-dimensional PGL tangent in its
+bilinear radical. Thus the stress cone descends modulo PGL, although the
+Mahler Hessian still retains four denominator-projective directions after
+quotienting only the 20 affine gauges.
+
+At the regular 24-cell the exact KKT multiplier has global sum four, and the
+four denominator-projective plus four Paffenholz directions give
+\[
+A=-\frac{31}{13}I_4,\qquad
+B=-\frac{31}{78}I_4,\qquad
+C=-\frac{61}{234}I_4.
+\]
+The nonzero mixed block is a direct certificate that quotienting all 24 PGL
+directions would change the Hessian.
+
+For a homogeneous quadratic stress map \(q:V\to W\), a q-regular zero \(u\)
+has a locally spanning regular zero germ whenever
+\[
+\operatorname{span}\{q(v):v\in\ker Dq_u\}=W.
+\]
+At the singular Paffenholz cell this exact rank is two. Hence nearby
+integrable q-regular directions span the full 50-dimensional incidence
+tangent, closing the KKT-existence gap for any hypothetical local minimum
+at that singularity.
+
+For the global route, the facet-circuit matrices annihilate the entire
+polarity pairing \(N_{vF}=x_v\cdot y_F\). The naive circuit-Poincare route is
+therefore impossible: \(N\) is wholly affine-harmonic. The corrected
+barycentric mass identity is
+\[
+900\operatorname{tr}(
+\operatorname{cov}P\operatorname{cov}P^\circ)
+=
+\operatorname{tr}(
+\mathsf M_PN\mathsf M_{P^\circ}N^\mathsf T).
+\]
+For simplex cells,
+\[
+|\det(1-x_i\cdot y_j)|=(4!)^2|S||T|,
+\]
+so the trace gap is a determinant-weighted global energy inequality.
+Pointwise control is false: the regular 24-cell has 1,784 of 5,184 blocks
+above 100, with maximum 344, although their weighted average is \(169/2\).
+
+Cone-measure integration by parts gives the sharp facet target
+\[
+\frac14-\frac94\operatorname{tr}(
+\operatorname{cov}P\operatorname{cov}P^\circ)
+=
+\sum_{F,v}r_Fs_v
+\left[
+(x_v\cdot y_F)(c_F\cdot d_v)
+-\operatorname{tr}(H_FH_v^\circ)
+\right].
+\]
+At the regular 24-cell all 144 incidence brackets are \(3/16\), but the 576
+facet pairs split into 288 positive and 288 negative values; the total is
+\(31/800\). The remaining theorem must globally transport positive
+incidence contributions across the connected circuit network.
+
 ## Verification
 
 Run:
@@ -226,7 +317,7 @@ Run:
 python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ```
 
-Expected: fifteen tests pass. The harness uses rational arithmetic only. It checks
+Expected: eighteen tests pass. The harness uses rational arithmetic only. It checks
 the centered simplex's polar, incidences, speed dimension, and exact product
 \(3125/576\); verifies cube/cross-polytope polarity; and supplies negative
 speed controls for the cross-polytope, cube, and pyramid over a cube.
@@ -243,13 +334,21 @@ python3 -B problems/mahler-volume-4d/harness/bicenter_certificate.py
 
 The first uses exact fractions. The second uses outward-rounded dyadic
 rational intervals; its Krawczyk inclusion and negative covariance bound are
-checked, not inferred from the floating-point discovery run.
+checked, not inferred from the floating-point discovery run. It also
+certifies
+\[
+0.0999343391<
+\operatorname{tr}(\operatorname{cov}P\operatorname{cov}P^\circ)
+<0.0999343607<1/9.
+\]
 
 The unit suite also checks the exact product/join factors, a centered
 segment--square join, the incidence tangent ranks, all 24 projective tangent
 vectors, the four diagonal plus six polarized entries of the Paffenholz
 realization Hessian, the smooth signed-family covariance formulas, and the
-q-regular analytic-arc rank certificate.
+q-regular analytic-arc and second-fundamental spanning certificates. It also
+checks the global slack mass identity, the facet-boundary deficit, and the
+full KKT projective/realization block.
 
 This computation verifies the finite linear-algebra interfaces. The
 infinite-family results are proofs, not extrapolations from tested examples.
@@ -275,9 +374,12 @@ comes from summing Euler over 3-facets and using polygonal edge links.
 Independent GPT-5.6 Sol xhigh reviews checked the algebra, the repaired
 dimension-free persistence proof, the exact 24-cell counterexample, the
 projective polar sign, the covariance pivot, both beta factorizations, and
-the realization-Hessian normalization. The reviewer caught that
-terminality at nearby rational points does not certify terminality at the
-exact bi-centering root; no such claim is made here.
+the realization-Hessian normalization. This session's xhigh review selected
+the global mass route over a sign-free stress-dimension argument and audited
+the projective-radical/KKT formulas. The reviewer first caught that nearby
+rational terminal points do not certify the exact bi-centering root, then
+supplied and audited the normal-determinant transport certificate which
+closes that gap without a limiting argument.
 
 ## What we tried that didn't work
 
@@ -289,6 +391,12 @@ coefficients vary with the realization. Raw incidence-kernel vectors at a
 singular realization also need not integrate. The remaining route must build
 smooth realization charts and study the constrained Santaló Hessian, not
 enumerate terminal face lattices.
+
+The ordinary circuit-Hodge route is now ruled out more strongly: circuit
+operators annihilate the polarity matrix identically. Local simplex and
+facet-pair trace inequalities also fail on the regular 24-cell. Any global
+proof must compare the two volume mass forms on the affine harmonic spaces,
+or establish the equivalent boundary transport inequality.
 
 ## Relation to prior work
 

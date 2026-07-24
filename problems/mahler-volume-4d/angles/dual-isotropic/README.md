@@ -53,11 +53,11 @@ does not characterize simplices.
 
 ## Stop/go tests
 
-1. Certify terminality and the trace at the exact Paffenholz bi-centering
-   root. A terminal example with trace above \(1/9\) kills the trace route.
+1. **Passed:** the exact Paffenholz bi-centering root is connected and
+   pair-terminal, with certified trace strictly below \(1/9\).
 2. Search structured pair-terminal realization charts for
    \(L_KL_{K^\circ}>L_{\Delta_4}^2\). One certified example kills the paired
    isotropic route.
-3. If both inequalities survive, derive their first variations using the
-   paired incidence-stress coordinates rather than trying to prove the full
-   strong slicing conjecture.
+3. Attack the trace ceiling through the facet-boundary transport identity in
+   `../slack-concentration/`; ordinary circuit Poincare and pointwise facet
+   positivity are now ruled out.
