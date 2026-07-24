@@ -231,3 +231,56 @@ excluding an exact-action Milnor/ephemeral term in the continuation
 telescope.  The interval
 \(\mathbb k_{[a,a+\varepsilon)}\) is the exact persistence countermodel:
 its lifetime vanishes while its left-end microstalk remains non-zero.
+
+### Fixed-input localization and wild boundary audit
+
+Oh's localization theorem for engulfable Hamiltonian paths
+[OhLocalization] replaces \(C^2\)-smallness by \(C^0\)-smallness of the
+time-one map plus a full engulfable isotopy. Under the full cotangent
+hypotheses, its maximum-principle construction identifies the relevant local
+and global complexes and fundamental-class spectral invariant. It does not
+identify Asano--Ike's twisted \(v\)-complex or compare the original relative
+rotation with the cutoff. The source also warns that thin trajectories may
+have large area and that there is no uniform action or filtration control.
+
+This does not control Asano--Ike's critical \(v\).  Their microlocalization
+maps
+\[
+v\longmapsto v\otimes1+1\otimes v,
+\]
+which restricts to zero on the clean diagonal over \(\mathbb F_2\).  It is
+also a class in their twisted quantization with endomorphism algebra
+\(H^*(S^1)\), not the ordinary top class of \(C_0\times C_0\).
+
+Fixing the first input does not make microlocal Hom continuous under the
+completeness telescope. For bounded finite-stalk constructible sheaves
+\[
+F=\mathbb k_{(0,1)},\qquad G_n=\mathbb k_{(1/n,1)},
+\]
+every finite \(\mu hom(F,G_n)\) vanishes over \(T^*_0\mathbb R\), but
+\(\operatorname{hocolim}G_n=F\) and \(\mu hom(F,F)\) is rank one on the
+negative conormal. The composite \(\mu hom(F,-)\) is therefore not
+cocontinuous: the fixed sheaf remains a contravariant internal-Hom test
+object, while microlocal specialization also contains an open-embedding
+\(Rj_*\). The left fronts are literal translates with a fixed right cutoff.
+The failure remains after external product with a positive-\(\tau\) Tamarkin
+factor.
+
+Hugelmeyer's full cross-time relation also gives no winding sign.  The exact
+square path
+\[
+z(t)=e^{-t+(i/20)\sin(\pi t/\log2)},\qquad
+(a,b,c,d)=(z,2z,(1+i)z,(2+i)z)
+\]
+avoids every outer--inner cross-time collision and admits strict
+exterior/interior separation by a triangular Jordan domain, but its
+synchronized outer strands form alternating positive and negative lenses.
+See `../results/envelope-cross-time-no-go.md`.
+
+Finally, an explicit square-test zero with Jacobian determinant \(-2\) can
+be scaled into a shrinking bump on a locally square-free \(1/4\)-Lipschitz
+Jordan graph.  The regular local mod-two degree one collapses to the unique
+total-collision orbit of the cyclic gap simplex while retaining an exact
+square screen and fixed prime-end side.  See
+`../angles/wild-configuration-degree/README.md`.  This is a local
+configuration no-go, not a global parity computation.

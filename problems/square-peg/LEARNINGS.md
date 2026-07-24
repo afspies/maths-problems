@@ -2,18 +2,17 @@
 
 ## What the next session should do first
 
-- Compute the Milnor boundary term of the normalized null-spiral telescope.
-  The corrected action-retaining eye has no intrinsic \(!\)-versus-\(*\)
-  obstruction and its deep tail is arbitrarily torsion; the only possible
-  survivor is an exact-action defect in the continuation maps.
-- Attack the persistent diagonal-locality theorem in
-  `angles/diagonal-microlocal/README.md` via a genuine no-ephemeral theorem.
-  Small Hofer norm and zero interleaving distance do not control endpoint
-  microstalks.
-- On the finite-dimensional side, try to upgrade Hugelmeyer's square
-  envelope to simple compactified ribbons or the explicit outer/inner
-  winding bounds in `square-envelope-area.md`; the exact signed-area identity
-  would then give an immediate contradiction.
+- Compute the actual GKS continuation maps in the normalized null-spiral
+  telescope. Formal fixed-input cocontinuity is false: a translated open
+  front creates a new microlocal boundary class in the homotopy colimit.
+- Any persistent diagonal-locality theorem must identify a
+  **GKS-specific uniform gap or positivity property** which excludes that
+  translated-front model. Bounded constructibility, small Hofer norm, square
+  duality, and multiplicativity have all been audited.
+- On the finite-dimensional side, search for a genuinely global two-ended
+  envelope invariant or a nonlocal correction to square degree. Cross-time
+  avoidance permits alternating winding, and the unique total-collision
+  orbit can absorb odd local degree.
 
 ## Results
 
@@ -109,6 +108,25 @@
   \(a+J(b-a),b+J(b-a)\), the two ribbon areas differ only by half the
   endpoint side-length squares.  A simple compactified square envelope is
   therefore impossible.
+- Oh's engulfable localization identifies the cotangent local/global complex
+  and fundamental invariant under a full engulfable homotopy, but it does
+  not identify Asano--Ike's twisted \(v\)-complex. Asano--Ike's
+  distinguished \(v\) microlocalizes to \(v\otimes1+1\otimes v\), which
+  restricts to zero on the clean diagonal; it is not Oh's fundamental class.
+- Fixed-first-input microlocal Hom fails to preserve the exact translated
+  homotopy colimit used by completeness:
+  \(F=\mathbb k_{(0,1)}\), \(G_n=\mathbb k_{(1/n,1)}\) have zero finite
+  restriction at \(T^*_0\mathbb R\), while
+  \(\operatorname{hocolim}G_n=F\) and \(\mu hom(F,F)\) has a rank-one
+  boundary microstalk.
+- Hugelmeyer's cross-time avoidance admits the exact shrinking square path
+  \((z,2z,(1+i)z,(2+i)z)\) with
+  \(z=e^{-t+(i/20)\sin(\pi t/\log2)}\). It is strictly separated by a
+  Jordan domain but has infinitely many alternating-winding lenses.
+- A square-test zero with exact Jacobian determinant \(-2\) can collapse into
+  a locally square-free \(1/4\)-Lipschitz Jordan germ. The exact square
+  screen and prime-end side persist, so local odd square degree is not
+  \(C^0\)-closed.
 
 ## Dead ends and cautions
 
@@ -156,6 +174,17 @@
 - Ordinary Fulton--MacPherson collision screens require tangent data.
   Arbitrary Jordan arcs can have normalized square screens, so the standard
   compactification has no curve-independent nonzero boundary test map.
+- The stronger compactification by cyclic gaps, a normalized secant screen,
+  and prime-end side also fails locally: the four total-collision vertices
+  are one cyclic orbit, and an odd regular square zero can be absorbed there.
+- Do not invoke fixed-first-input constructibility to commute \(\mu hom\)
+  with the metric-completion telescope. The fixed sheaf is a contravariant
+  internal-Hom test object, and microlocal specialization also contains
+  \(Rj_*\); both obstruct a generic cocontinuity theorem.
+- Do not identify Asano--Ike's \(v\) with the clean diagonal fundamental
+  class or use Oh's fundamental-class spectral bound for it.
+- Cross-time relation avoidance is already implied by exterior/interior
+  separation and does not give a sign for envelope winding.
 - The finite-\(p\) theorem is likely a short, nearly formal synthesis rather
   than deep novelty.  Targeted search found no explicit statement, but that
   does not establish priority. The independent audit recommends “apparently

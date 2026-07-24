@@ -21,7 +21,10 @@ Read, in order:
 14. `angles/diagonal-microlocal/README.md`.
 15. `results/null-spiral-conformal-concentration.md`.
 16. `results/null-spiral-microlocal-eye.md`.
-17. the latest `JOURNAL.md` section.
+17. `angles/local-floer-engulfing/README.md`.
+18. `results/envelope-cross-time-no-go.md`.
+19. `angles/wild-configuration-degree/README.md`.
+20. the latest `JOURNAL.md` section.
 
 The finite-\(p<2\) proof has now received an independent primary-source audit
 and been packaged as `writeup/p-variation-note.md`. The audit verdict is
@@ -162,3 +165,43 @@ hygiene only. Consult GPT-5.6 Sol at xhigh for any proposed microlocal
 vanishing theorem. Preserve both claim boundaries: the general Square Peg
 conjecture remains open, and failure of the primitive criterion does not
 refute the weaker diagonal-cohomology criterion.
+
+The newest session closes three additional formal shortcuts.
+
+First, Oh's engulfable \(C^0\)-localization identifies the relevant
+cotangent local/global complexes and fundamental-class invariant under a full
+engulfable homotopy. It does not identify Asano--Ike's twisted
+\(v\)-complex or compare the original rotation with the cutoff. Their
+critical \(v\) microlocalizes to \(v\otimes1+1\otimes v\), which restricts
+to zero on the clean diagonal over \(\mathbb F_2\). A formal two-parameter
+\(\mathbb k[v]/(v^2)\)-module germ shows that zero endpoint \(v\)-action,
+nonzero angle-continuation of \(wv\), and \(A\leftrightarrow\pi-A\) duality
+are compatible; it is not a realization of the full \(R_\pi\) barcode or
+GKS geometry.
+
+Second, even fixing a bounded finite-stalk constructible first input does not
+make microlocal Hom commute with the exact completeness telescope:
+\[
+F=\mathbb k_{(0,1)},\qquad G_n=\mathbb k_{(1/n,1)},\qquad
+\operatorname{hocolim}G_n=F.
+\]
+Every finite restriction over \(T^*_0\mathbb R\) is zero, while
+\(\mu hom(F,F)\) has a rank-one negative-conormal microstalk. The failure
+already appears in the internal-Hom germ, and microlocal specialization also
+contains an open-embedding \(Rj_*\). The next sheaf attack must find a
+property special to completed GKS continuation maps which excludes this
+translated-left-front model.
+
+Third, Hugelmeyer's cross-time avoidance does not control winding. The
+exact square path in `results/envelope-cross-time-no-go.md` is smooth,
+strictly exterior/interior separated, and relation avoiding, but has
+alternating signed lenses. Any envelope proof must use a genuinely global
+two-ended consequence of total outer winding one.
+
+Finally, local configuration degree can really escape. The note
+`angles/wild-configuration-degree/README.md` constructs a regular square
+zero with determinant \(-2\) which collapses into a locally square-free
+\(1/4\)-Lipschitz Jordan germ while retaining an exact square screen and
+fixed prime-end side. Exact square zeros escape only through the unique
+cyclic orbit of total-collision vertices, and that orbit can absorb odd
+local degree. A viable degree proof needs a nonlocal boundary correction.

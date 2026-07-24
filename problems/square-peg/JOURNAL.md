@@ -786,3 +786,179 @@ python3 -c 'import tomllib; tomllib.load(open("problems/square-peg/STATUS.toml",
 python3 tools/board.py
 git diff --check
 ```
+
+## 2026-07-24 — unrestricted synthesis: three boundary no-go theorems
+
+### Fresh parallel attacks
+
+Ran three independent proof-first attacks rather than extending one formal
+heuristic:
+
+1. a GPT-5.6 Sol xhigh audit of square duality, Verdier duality,
+   multiplicativity, and ordinary local Floer localization;
+2. a full cross-time audit of Hugelmeyer's square-envelope construction; and
+3. a tangent-free configuration-degree compactification with an explicit
+   wild collision model.
+
+The unrestricted Square Peg conjecture was **not** solved.  Each attack
+returned a proof-grade obstruction delimiting what a successful theorem must
+add.
+
+### Oh localization and the distinguished-class mismatch
+
+Audited Oh, arXiv:1111.5996v4, directly from the official source.  For an
+engulfable Hamiltonian path with \(C^0\)-small time-one map, the
+maximum-principle thick--thin decomposition defines local Floer homology and,
+along a full engulfable homotopy, identifies it with ordinary Lagrangian
+homology.  The source explicitly states that thin strips may have large area,
+the decomposition does not respect action filtration, and local continuation
+has no uniform filtration bound.
+
+Oh's local/global spectral comparison controls the ordinary fundamental
+class.  Asano--Ike's critical class is different: their microlocalization
+formula sends
+\[
+v\longmapsto v\otimes1+1\otimes v,
+\]
+which restricts to \(v+v=0\) on the clean diagonal over \(\mathbb F_2\).
+Their twisted \(F_0\) also has
+\(\operatorname{End}(F_0)\simeq H^*(S^1)\), rather than the ordinary
+\(H^*(T^2)\) of the torus zero section.
+
+A two-parameter \(H=\mathbb k[v]/(v^2)\)-module with
+\[
+M_r=Hu\ (r<B),\qquad M_r=H/(v)u\ (B\le r<A),\qquad
+M_r=0\ (r\ge A)
+\]
+shows that zero \(v\)-action on the action-\(A\) endpoint is compatible with
+nonzero continuation of \(wv\) in the independent angle direction and with
+\(A\leftrightarrow\pi-A\) duality. This is a formal germ model, not a
+realization of the full \(R_\pi\) barcode or GKS geometry. The first
+attempted one-parameter toy,
+in which \(uv\) outlived \(u\), was rejected because its transition was not
+\(H\)-linear and was not recorded as a result.
+
+### Fixed-input microlocal Hom still creates a boundary class
+
+Audited Asano--Ike's completeness paper, arXiv:2201.02598, Theorem 4.3 and
+Corollary 4.5.  After a summable subsequence the limit is an actual translated
+homotopy colimit.  Fixing the first input does not make \(\mu hom\)
+cocontinuous.
+
+The exact bounded counterexample is
+\[
+F=\mathbb k_{(0,1)},\qquad G_n=\mathbb k_{(1/n,1)}.
+\]
+Filtered colimits are exact, so \(\operatorname{hocolim}G_n=F\).  Every
+\(G_n\) vanishes near \(0\), hence every finite
+\(\mu hom(F,G_n)|_{T^*_0\mathbb R}\) is zero.  But \(F\) is simple on the
+negative conormal at \(0\), so \(\mu hom(F,F)\) has a rank-one microstalk
+there. The composite is not cocontinuous: the fixed singular sheaf remains a
+contravariant internal-Hom test object, and microlocal specialization also
+contains an open-embedding \(Rj_*\). External product with a
+positive-\(\tau\) factor gives the Tamarkin analogue at any action.
+
+This eliminates the strongest formal colimit shortcut.  A valid
+no-ephemeral theorem must use a property special to GKS continuation maps
+which excludes this translated-left-front telescope with fixed right cutoff.
+
+### Cross-time envelope countermodel
+
+For
+\[
+z(t)=\exp\!\left(-t+\frac{i}{20}\sin\frac{\pi t}{\log2}\right)
+\]
+the moving square with outer vertices \(z,2z\) and inner vertices
+\((1+i)z,(2+i)z\) has no outer--inner collision at any two times: the
+angular oscillation is at most \(0.1\), while every required constant ratio
+has argument at least \(\arctan(1/2)>0.4\).
+
+The triangle
+\[
+\operatorname{conv}\{0,10e^{i/5},10e^{6i/5}\}
+\]
+strictly separates the outer and inner vertices.  Nevertheless
+\(a(n\log2)=b((n+1)\log2)\), and consecutive outer strands form simple
+lenses in disjoint annuli with alternating winding signs.  Thus full
+cross-time avoidance and a common endpoint limit do not imply one-sided
+envelope winding.
+
+An independent regular-level model
+\[
+r_N(x,\delta)=e^{2\pi i(x-N\delta)}
+\]
+has degree one and a single proper level component whose coordinate strands
+wind \(N\) and \(N+1\) times.  The regular-level mechanism itself supplies
+no coordinate monotonicity.
+
+### Wild collision absorbs odd local square degree
+
+For the square test map
+\[
+\Psi=(z_1+z_3-z_2-z_4,\,
+|z_2-z_1|^2-|z_3-z_2|^2,\,
+(z_2-z_1)\cdot(z_3-z_2)),
+\]
+the explicit square and four prescribed curve tangents in
+`angles/wild-configuration-degree/README.md` give
+\[
+D\Psi=
+\begin{pmatrix}
+1&-1&-1&1\\
+0&-1&1&0\\
+-2&4&-2&0\\
+0&0&-1&0
+\end{pmatrix},
+\qquad\det D\Psi=-2.
+\]
+The determinant was independently recomputed exactly with Python.
+
+Similarity copies of the corresponding embedded bump collapse into the
+straight side of a \(1/4\)-Lipschitz Jordan graph with no tangent at the
+accumulation point.  The limit germ has no square because any two chord
+slopes have absolute value at most \(1/4\) and hence cannot be
+perpendicular.  The approximant's local square orbit has mod-two degree one,
+while its normalized screen remains the same exact square on one fixed
+prime-end side.
+
+For exact squares, failure to converge to a nondegenerate limiting square
+forces all four parameters to one parameter of the injective limit.  In
+cyclic gap coordinates, three gaps tend to zero and the complementary gap
+to one.  The four such vertices are one orbit under cyclic relabelling.
+Therefore this unique total-collision orbit really can absorb odd **local**
+degree.  No claim is made about the global number of squares on the
+approximants.
+
+### Claim boundary, compute, and verification
+
+The three results are no-go theorems, not a proof of Square Peg.  The live
+alternatives are now a GKS-specific boundary-exclusion theorem, a genuinely
+global two-ended envelope invariant, or a configuration degree with a
+nonlocal boundary correction.
+
+GPT-5.6 Sol at xhigh performed the required final adversarial audit. It
+corrected the internal-Hom attribution, required the formal two-parameter
+module to be fully specified and explicitly non-geometric, fixed the
+collision-screen normalization, and tightened three envelope qualifiers.
+After those corrections its final verdict was **MERGE**.
+
+All substantive work ran locally in the repository worktree; no private
+compute infrastructure was used.  Source downloads were limited to the
+official arXiv records for the cited papers.  Commands included:
+
+```text
+python3 -m unittest discover -s problems/square-peg/harness -p 'test_*.py' -v
+python3 -m py_compile problems/square-peg/harness/geometry.py problems/square-peg/harness/test_geometry.py
+xmllint --html --noout problems/square-peg/writeup/report.html problems/square-peg/writeup/artifact-template.html
+python3 -c 'import tomllib; tomllib.load(open("problems/square-peg/STATUS.toml","rb")); print("STATUS.toml OK")'
+python3 -c 'import sympy as s; ...'
+# failed: ModuleNotFoundError: No module named 'sympy'
+python3 -c 'import itertools; ...'
+# exact determinant output: -2
+python3 tools/board.py
+git diff --check
+```
+
+The rational harness passed 5/5 tests in 0.001 seconds.  Python compilation,
+both HTML parses, TOML parsing, board regeneration (19 problems), and
+`git diff --check` completed without error.

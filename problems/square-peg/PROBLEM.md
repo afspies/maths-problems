@@ -80,6 +80,17 @@ after retaining the action circle, the \(!\)-versus-\(*\) difference has
 datum is instead a possible exact-action Milnor defect in the metric
 completion's continuation telescope.
 
+The latest audit rules out a formal continuity repair even after fixing the
+first microlocal-Hom input.  The bounded constructible telescope
+\[
+F=\mathbb k_{(0,1)},\qquad G_n=\mathbb k_{(1/n,1)}
+\]
+has zero finite-stage microlocal restriction at \(0\), while
+\(\operatorname{hocolim}G_n=F\) and \(\mu hom(F,F)\) has a rank-one boundary
+microstalk.  Thus the missing theorem must use special geometry of completed
+GKS kernels; bounded finite-stalk constructibility and an actual translated
+homotopy colimit do not suffice.
+
 At the critical exponent, `angles/critical-p2/osgood-area-anomaly.md` proves
 that finite \(2\)-variation plus parameter-aligned embedded \(C^0\)
 approximation does not force primitive convergence. A positive-area,
@@ -133,6 +144,16 @@ to the existential Asano--Ike criterion.
 - Fixed-vertex Hamiltonian twists can assign arbitrary action to an exact
   shrinking square while remaining \(C^0\)-small.  The missing theorem must
   pair such generators into persistence bars of vanishing length.
+- Oh's engulfable local Floer theory identifies the relevant local/global
+  cotangent complexes and a fundamental-class invariant under a full
+  engulfable homotopy, but it does not identify Asano--Ike's twisted
+  \(v\)-complex or compare the original rotation with the cutoff.
+- Hugelmeyer's full cross-time avoidance permits a smooth separated
+  half-envelope with infinitely many alternating-winding lenses.
+- A regular local square orbit of mod-two degree one can collapse into a
+  locally square-free Lipschitz Jordan germ with a fixed exact square screen.
+  Hence cyclic gap data, a finite screen, and prime-end side do not make the
+  configuration degree \(C^0\)-closed.
 - Antonelli--Young's all-partitions signed-area theorem turns
   \(1/2\)-Hölder regularity plus \(\sigma(c)<\infty\) into a
   partition-independent local primitive. Combined with embedded Jordan
@@ -151,7 +172,8 @@ to the existential Asano--Ike criterion.
 - **Square envelopes:** combine Hugelmeyer's outer/inner envelope with the
   exact ribbon-area identity in
   `angles/configuration-degeneration/square-envelope-area.md`; it remains to
-  obtain simple ribbons or the required outer/inner winding bounds.
+  obtain a genuinely global two-ended invariant.  Cross-time avoidance alone
+  cannot give the required winding bounds.
 - **Conformal concentration:** compute the diagonal \(\mu hom\) of the null
   double spiral by identifying the metric-limit extension of its
   vanishing-width eye.
@@ -168,9 +190,11 @@ to the existential Asano--Ike criterion.
 1. Compute the derived inverse-limit/Milnor term of the explicit
    null-spiral continuation telescope.  The \(!\)-versus-\(*\) distinction is
    not the obstruction in the positive-\(\tau\) category.
-2. Prove a no-ephemeral theorem for restricted diagonal \(\mu hom\), or show
-   directly that the spiral's cross-stage tower is pro-zero away from
-   \(\pi\mathbb Z\).
-3. Do not try to bound individual shrinking-square actions: fixed-vertex
+2. Any no-ephemeral theorem must be GKS-specific and must exclude the
+   translated-front counterexample in `angles/local-floer-engulfing/`.
+3. On the finite-dimensional side, seek a global boundary correction to the
+   square degree; the local total-collision orbit really can absorb odd
+   degree.
+4. Do not try to bound individual shrinking-square actions: fixed-vertex
    Hamiltonian twists make them arbitrary.  Do not spend time on numerical
    square searches.

@@ -32,7 +32,11 @@ cannot cover all Jordan curves.  Its conformal exhaustion realizes a fixed
 action spike on intervals of exponentially small harmonic measure and
 vanishing critical trace capacity.  At the microlocal level this becomes an
 infinitely winding eye of vanishing phase width.  The universal conjecture
-remains open.
+remains open.  Three further exact audits show why the most natural
+unrestricted shortcuts fail: fixed-first-input microlocal Hom can create a
+new boundary class under a translated telescope; Hugelmeyer's cross-time
+avoidance permits alternating winding; and an odd local square degree can be
+absorbed by a wild total-collision face.
 
 ## Main result
 
@@ -375,6 +379,71 @@ not simple ribbons or the stronger bounds
 also need not have a joint geometric rough lift.  Signed areas can cancel
 through repeated positive and negative winding.  Matschke's connected
 carrier need not even contain a spanning path.
+
+## Three exact unrestricted no-go theorems
+
+First, fixing the constructible input does not make microlocal Hom continuous
+under the completeness telescope.  On \(\mathbb R\), put
+\[
+F=\mathbb k_{(0,1)},\qquad G_n=\mathbb k_{(1/n,1)}.
+\]
+Then \(\operatorname{hocolim}G_n=F\), every \(G_n\) vanishes near \(0\), and
+therefore every finite
+\(\mu hom(F,G_n)|_{T^*_0\mathbb R}\) is zero.  Nevertheless
+\(\mu hom(F,F)\) has a rank-one microstalk on the negative conormal at
+\(0\). This proves that the composite \(\mu hom(F,-)\) is not cocontinuous
+even for a fixed bounded finite-stalk constructible first input. Both
+internal Hom's contravariant test object and microlocal specialization's
+open-embedding \(Rj_*\) obstruct a generic preservation theorem. External
+products place the same defect over the diagonal at any action.
+
+Oh's engulfable-localization theorem does not repair this. Under a full
+engulfable cotangent homotopy it identifies the relevant local and global
+complexes and fundamental-class invariant, but it does not identify
+Asano--Ike's twisted \(v\)-complex or compare the original rotation to the
+cutoff. Moreover, thin strips may have large area and there is no uniform
+filtration control. Asano--Ike's distinguished class maps to
+\[
+v\otimes1+1\otimes v
+\]
+and restricts to \(v+v=0\) on the clean diagonal over \(\mathbb F_2\); it is
+not Oh's local fundamental class. A formal two-parameter
+\(\mathbb k[v]/(v^2)\)-module germ is compatible with an arbitrary critical
+action, zero endpoint \(v\)-action, complementary square duality, and
+nonzero angle-continuation of the product. It is not asserted to realize the
+full \(R_\pi\) barcode or GKS geometry. Thus the cited formal symmetry and
+multiplicativity constraints do not close the gap.
+
+Second, full cross-time avoidance does not give one-sided envelope winding.
+With
+\[
+z(t)=\exp\!\left(-t+\frac{i}{20}\sin\frac{\pi t}{\log2}\right),
+\quad
+(a,b,c,d)=(z,2z,(1+i)z,(2+i)z),
+\]
+outer--inner collisions are impossible because their angular offsets exceed
+\(0.4\), while the oscillation is at most \(0.1\).  Yet
+\(a(n\log2)=b((n+1)\log2)\), and consecutive strands form disjoint-annulus
+lenses whose winding signs alternate.  A triangular Jordan domain places
+\(a,b\) outside and \(c,d\) inside, so this is a genuinely separated
+shrinking half-envelope.
+
+Third, local square parity is not \(C^0\)-closed.  For the standard
+four-equation square test map, a square with prescribed curve tangents has
+Jacobian determinant \(-2\), hence local mod-two degree one.  Similarity
+copies of that embedded bump can collapse into the straight side of a
+\(1/4\)-Lipschitz Jordan graph.  The limit germ has no square at all—two
+graph chords cannot be perpendicular—while the normalized collision screen
+remains an exact square on one fixed prime-end side. For parameter-aligned
+uniform approximations to a Jordan parametrization, exact square zeros can
+escape only through the four total-collision vertices of the cyclic gap
+simplex, one orbit after cyclic quotient, and this construction shows that
+orbit can absorb odd local degree.
+
+These are no-go theorems, not a solution.  Together they sharpen the live
+unrestricted alternatives to a GKS-specific theorem excluding boundary
+creation, a genuinely global two-ended envelope invariant, or a
+configuration degree with a nonlocal boundary correction.
 
 ## Relation to prior work and novelty boundary
 
