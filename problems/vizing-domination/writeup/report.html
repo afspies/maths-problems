@@ -1,0 +1,214 @@
+<!-- Self-contained presentation layer; canonical source: report.md. -->
+<title>Peeling defect in Steiner's subset-domination lemma</title>
+<style>
+  :root {
+    --paper:#fbfaf7; --ink:#21211d; --muted:#6b6a62; --accent:#1e4f8f;
+    --rule:#ddd9cf; --env-bg:#f3f1ea; --mono-bg:#eef0f2;
+    --open:#5b5b66; --open-bg:#ececef; --warn:#7a4a12; --warn-bg:#f5ecdc;
+  }
+  @media (prefers-color-scheme:dark) {
+    :root {
+      --paper:#191a1c; --ink:#e6e4dd; --muted:#9b998f; --accent:#7aa7dd;
+      --rule:#3a3b3e; --env-bg:#212226; --mono-bg:#232529;
+      --open:#a9a9b4; --open-bg:#26262b; --warn:#d9a866; --warn-bg:#2b2419;
+    }
+  }
+  body {
+    background:var(--paper); color:var(--ink);
+    font-family:Charter,"Bitstream Charter","Iowan Old Style",Georgia,serif;
+    font-size:1.05rem; line-height:1.58; margin:0 auto;
+    padding:3rem 1.25rem 4rem; max-width:46rem;
+  }
+  h1,h2,h3 { line-height:1.25; font-weight:600; }
+  h1 { font-size:1.75rem; margin:0 0 .35rem; }
+  h2 { font-size:1.25rem; margin:2.2rem 0 .7rem; }
+  h3 { font-size:1.05rem; margin:1.5rem 0 .45rem; }
+  .subtitle { color:var(--muted); margin:0 0 .9rem; }
+  .meta {
+    display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; align-items:center;
+    color:var(--muted); font-size:.85rem; padding-bottom:1rem;
+    border-bottom:1px solid var(--rule);
+  }
+  .badge {
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:.72rem; letter-spacing:.06em; text-transform:uppercase;
+    padding:.15rem .5rem; border-radius:3px; color:var(--open);
+    background:var(--open-bg);
+  }
+  .abstract { margin:1.4rem 0 0; padding:0 1.4rem; font-size:.97rem; }
+  .abstract .label {
+    display:block; text-align:center; font-variant:small-caps;
+    letter-spacing:.08em; margin-bottom:.3rem;
+  }
+  .env {
+    margin:1.2rem 0; padding:.8rem 1rem; background:var(--env-bg);
+    border-left:3px solid var(--accent); border-radius:0 4px 4px 0;
+  }
+  .env .label { font-weight:700; font-style:normal; }
+  .theorem { font-style:italic; }
+  .proof { margin:1rem 0; }
+  .proof .label { font-style:italic; }
+  .proof::after { content:"∎"; float:right; color:var(--muted); }
+  .eqn {
+    display:flex; align-items:center; gap:1rem; margin:1rem 0;
+    overflow-x:auto;
+  }
+  .eqn .body { flex:1; text-align:center; white-space:nowrap; }
+  .eqn .no { color:var(--muted); }
+  code,pre {
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:.86em;
+  }
+  code { background:var(--mono-bg); padding:.1em .35em; border-radius:3px; }
+  pre {
+    background:var(--mono-bg); border:1px solid var(--rule); border-radius:5px;
+    padding:.8rem 1rem; overflow-x:auto; line-height:1.45;
+  }
+  .warning {
+    background:var(--warn-bg); border-left-color:var(--warn);
+    font-style:normal;
+  }
+  .footer {
+    margin-top:3rem; padding-top:1rem; border-top:1px solid var(--rule);
+    font-size:.85rem; color:var(--muted);
+  }
+</style>
+
+<h1>Peeling defect in Steiner’s subset-domination lemma</h1>
+<p class="subtitle">A proof-first partial result towards Vizing’s domination conjecture</p>
+<div class="meta">
+  <span class="badge">partial results</span>
+  <span><code>problems/vizing-domination</code></span>
+  <span>23 July 2026</span>
+</div>
+
+<div class="abstract">
+  <span class="label">Abstract</span>
+  We reconstruct the exact optimization behind Steiner’s 0.5643 bound, locate
+  the algebraic failure in the withdrawn 0.5809 claim, and prove a strict
+  instance-sensitive strengthening of Steiner’s key subset lemma. The new
+  peeling-defect term propagates to the Cartesian-product bound, but no improved
+  universal constant is claimed.
+</div>
+
+<h2>1 · Setup</h2>
+<p>Let γ<sub><var>G</var></sub>(<var>S</var>) be the minimum number of vertices
+needed to dominate <var>S</var>⊆<var>V</var>(<var>G</var>), and let
+ρ<sup>{2}</sup>(<var>G</var>) be the maximum total weight of a nonnegative
+integer function <var>f</var> satisfying
+<var>f</var>(<var>N</var>[<var>v</var>])≤2 for every vertex. Define the exact
+slack</p>
+<div class="eqn">
+  <span class="body">δ<sub><var>G</var></sub>(<var>S</var>) =
+  |<var>S</var>| + ρ<sup>{2}</sup>(<var>G</var>) −
+  3γ<sub><var>G</var></sub>(<var>S</var>).</span><span class="no">(1)</span>
+</div>
+<p>Steiner’s Lemma 2.3 is precisely δ<sub><var>G</var></sub>(<var>S</var>)≥0.</p>
+
+<h2>2 · Exact equality and stability</h2>
+<div class="env theorem">
+  <span class="label">Slack theorem.</span>
+  Suppose <var>q</var>=|<var>N</var>[<var>v</var>]∩<var>S</var>|≥3,
+  put <var>S</var>′=<var>S</var>\<var>N</var>[<var>v</var>] and
+  <var>e</var>=γ<sub><var>G</var></sub>(<var>S</var>′)+1−
+  γ<sub><var>G</var></sub>(<var>S</var>). Then
+  δ(<var>S</var>)=δ(<var>S</var>′)+(<var>q</var>−3)+3<var>e</var>.
+  At a terminal set meeting every closed neighborhood at most twice, if
+  <var>r</var>=ρ<sub><var>G</var></sub>(<var>S</var>), then
+  δ=(ρ<sup>{2}</sup>−<var>r</var>−γ)+(|<var>S</var>|+<var>r</var>−2γ),
+  with both summands nonnegative integers.
+</div>
+<div class="proof">
+  <span class="label">Proof.</span>
+  The first identity is direct subtraction after observing that adding
+  <var>v</var> to a dominator of <var>S</var>′ dominates <var>S</var>. The
+  second is the sum of the slacks in Steiner’s two terminal matching bounds.
+</div>
+<p>Thus equality is recursive: every dense step removes exactly three target
+vertices and lowers γ by exactly one; the terminal set must make both auxiliary
+bounds tight. If δ≤2, no dense step can lose a unit of domination, because that
+would contribute 3 to the slack.</p>
+
+<h2>3 · The peeling-defect inequality</h2>
+<p>Repeatedly choose <var>v</var><sub><var>i</var></sub> whose closed
+neighborhood hits the current target in
+<var>q</var><sub><var>i</var></sub>≥3 vertices, and delete that hit. Let</p>
+<div class="eqn">
+  <span class="body"><var>p</var><sub><var>G</var></sub>(<var>S</var>) =
+  max Σ<sub><var>i</var></sub>(<var>q</var><sub><var>i</var></sub>−3).</span>
+  <span class="no">(2)</span>
+</div>
+<div class="env theorem">
+  <span class="label">Peeling-defect inequality.</span>
+  For every finite graph <var>G</var> and <var>S</var>⊆<var>V</var>(<var>G</var>),
+  <div class="eqn"><span class="body">
+  3γ<sub><var>G</var></sub>(<var>S</var>) ≤ |<var>S</var>| +
+  ρ<sup>{2}</sup>(<var>G</var>) −
+  <var>p</var><sub><var>G</var></sub>(<var>S</var>).
+  </span><span class="no">(3)</span></div>
+</div>
+<div class="proof">
+  <span class="label">Proof.</span>
+  A sequence of length <var>t</var> gives γ(<var>S</var>)≤γ(<var>S</var><sub>
+  <var>t</var></sub>)+<var>t</var>. Apply Steiner’s lemma only to the residual
+  target, substitute |<var>S</var><sub><var>t</var></sub>|=|<var>S</var>|−Σ
+  <var>q</var><sub><var>i</var></sub>, and maximize the subtracted excess.
+</div>
+
+<h2>4 · Cartesian-product consequence</h2>
+<p>For the vertically dominated fibre sets
+<var>L</var><sub>1</sub>,…,<var>L</var><sub>γ(<var>H</var>)</sub> in
+Steiner’s proof, the same counting now yields</p>
+<div class="eqn">
+  <span class="body">γ(<var>G</var>□<var>H</var>) ≥
+  ¼(3γ(<var>G</var>)−ρ<sup>{2}</sup>(<var>G</var>))γ(<var>H</var>) +
+  ¼Σ<sub><var>i</var></sub><var>p</var><sub><var>G</var></sub>
+  (<var>L</var><sub><var>i</var></sub>).</span><span class="no">(4)</span>
+</div>
+<p>The last term is new and nonnegative. A universal improvement requires a
+positive aggregate lower bound for it; none is asserted here.</p>
+
+<h2>5 · Two algebraic obstructions</h2>
+<div class="env warning">
+  <span class="label">Withdrawn 0.5809 argument.</span>
+  With <var>A</var>=γ(<var>G</var>), <var>B</var>=γ(<var>H</var>),
+  <var>x</var>=<var>A</var>−ρ(<var>G</var>), and
+  <var>y</var>=<var>B</var>−ρ(<var>H</var>), the quoted
+  Chen–Piotrowski–Shreve expression equals
+  <var>A</var>(<var>B</var>−<var>y</var>)+
+  (<var>A</var>−<var>x</var>)<var>y</var>=<var>AB</var>−<var>xy</var>.
+  The proof replaces it by
+  3<var>AB</var>−2<var>Ay</var>−2<var>xB</var>+<var>xy</var>.
+  At <var>A</var>=<var>B</var>=10, <var>x</var>=<var>y</var>=7 these are
+  51 and 69. The 0.5809 claim is unusable.
+</div>
+<p>The natural higher-capacity guess
+4γ<sub><var>G</var></sub>(<var>S</var>)≤|<var>S</var>|+
+ρ<sup>{3}</sup>(<var>G</var>) also fails on an exact five-vertex witness.
+The corrected theorem
+5γ<sub><var>G</var></sub>(<var>S</var>)≤2|<var>S</var>|+
+ρ<sup>{3}</sup>(<var>G</var>) does hold: add Steiner’s two subset bounds and
+use ρ<sup>{3}</sup>≥ρ<sup>{2}</sup>+ρ<sub><var>G</var></sub>(<var>S</var>).
+It yields γ(<var>G</var>□<var>H</var>)≥
+(5γ(<var>G</var>)−ρ<sup>{3}</sup>(<var>G</var>))γ(<var>H</var>)/7.
+The old exact equality point extends to this new parameter, so the universal
+constant remains 0.5643 without another structural constraint.</p>
+
+<h2>6 · Exact verification and next gate</h2>
+<pre><code>$ cd problems/vizing-domination/harness
+$ python3 -m unittest -v
+Ran 11 tests
+OK</code></pre>
+<p>The checks use integers, rational numbers, and exact elements of
+ℚ(√73). They validate definitions and finite witnesses, not the universal
+conjecture. The next proof session must force positive aggregate fibre defect,
+sharpen terminal equality, or pivot to a different bridge. Reoptimizing
+Steiner’s existing six inequalities cannot beat 0.5643 because their relaxed
+minimax attains equality.</p>
+
+<div class="footer">
+  <p><strong>Status:</strong> partial result. Vizing’s domination conjecture
+  remains open.</p>
+  <p>Canonical source: <code>writeup/report.md</code>. Citations:
+  <code>literature/refs.bib</code>.</p>
+</div>

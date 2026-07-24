@@ -1,0 +1,11 @@
+slug = "vizing-domination"
+title = "Vizing’s domination conjecture"
+question = "Do all finite simple graphs satisfy γ(G □ H) ≥ γ(G)γ(H)?"
+# proposed | scaffolded | active | partial-results | solved | excluded | retired
+status = "partial-results"
+best_result = "Peeling-defect strengthening + exact equality/stability theorem; corrected k=3 subset/product inequality (no constant above 0.5643 yet)"
+doi = ""
+sessions = [
+    "2026-07-23 scaffolded from template",
+    "2026-07-23 proof-first: reconstructed Steiner; audited withdrawn 0.5809; proved peeling-defect and corrected k=3 inequalities",
+]
