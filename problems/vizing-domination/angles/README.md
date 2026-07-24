@@ -83,13 +83,38 @@
   at zero vertical/column slack these transitions form labelled Eulerian
   cell cycles and compose with external-private holes to give local
   expansion cuts. Pre-prescribed triangle demands remain uncontrolled.
+- `adaptive-triangle-conservation/` — **exact credit and STOP:** adaptive
+  atom credits saturate every selected point at zero vertical slack; a
+  balanced eleven-vertex exchange shows the adaptive targets need not form
+  a two-packing. Any triangle surplus needs a genuinely cross-atom proof.
+- `componentwise-calibration/` — **proved equality classification:** every
+  connected equality component satisfies `3R_C=Γ_C+4r_C`, reducing the
+  local obstruction to singleton `(2,1,2)` and triangle `(5,1,3)`
+  primitives.
+- `neutral-core-coordinate-tax/` — **new product-sensitive obstruction:**
+  a row set avoided by all terminal supports must be dominated separately at
+  every cell coordinate. This excludes an exact connected triangle primitive
+  and its calibrated mixture from all zero-defect Steiner products.
+- `triangle-support-coverage/` — **exact adversarial model:** terminal
+  triangles can cover every vertex with separated minimum complement
+  dominators and `ρ=1,ρ²=3`; the symmetric block design pays exactly two
+  units of additivity defect through a transversal three-dominator.
+- `joint-dependency-stability/` — **proved defect lemma:** a subset of a
+  complement dominator has a full dependency region of domination number
+  at least its size minus `p_i+d_i`; common crowns show this does not
+  automatically control selected private targets.
+- `weighted-expansion-limits/` — **proved structure and STOP:** equality
+  averages the canonical packings to a cap-`1/2` maximum fractional packing,
+  but its tensor value is weak and connected true-twin reservoirs absorb
+  every scalar row-weighted provider cut.
 - `anchored-domination/` — **exact duality and STOP results:** the optimized
   saturation-defect slice is an anchored fractional-domination parameter and
   stays below Steiner on formal-ratio mixtures; even independently capped
   rank-one diffuseness fails jointly with both anchored arms.
 
-Next work must be explicitly indexed-triangle and product-correlated:
-make the prescribed triangle-energy witnesses compatible with the adaptive
-provider cycles, or exploit their local weighted expansion cuts with the
-full defect budget. Generic escape closure and factor-invariant
-reoptimization are now hard stops.
+Next work must prove a product-scale support/coordinate dichotomy for
+`(5,1,3)` components: broad terminal-triple coverage forces additivity
+defect, or an avoided hard set leaves coordinate holes in linearly many
+cells. Common avoidance by itself loses a factor `γ(H)`. Generic escape
+closure, weighted cut scalarization, and factor-invariant reoptimization are
+hard stops.

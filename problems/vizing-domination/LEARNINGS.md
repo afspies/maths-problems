@@ -336,3 +336,62 @@ denominator, or bare escape counts. Their exact limitations are now known.
 Do not return to generic escape closure, factor-only invariant relations,
 local `K₁/K₃` parity, per-index overlap taxes, or numerical optimization of
 Steiner's existing region.
+
+## Session 8 deltas
+
+- Correct notation matters: Steiner's `L_i` is the set of rows whose entire
+  cell is vertically dominated from outside that cell. Universally `X_i`
+  dominates `V\L_i`; the stronger equality `N[X_i]=V\L_i` needs the later
+  zero-defect separation hypotheses.
+- Full equality localizes to connected components. Every component satisfies
+  `3R_C=Γ_C+4r_C`, or `Γ_C=2z_C+5τ_C`. The equality skeleton therefore
+  consists componentwise of singleton `(2,1,2)` and triangle `(5,1,3)`
+  primitives.
+- The triangle primitive is realizable. A symmetric random construction
+  gives a connected graph with `(Γ,r,R)=(5,1,3)`, two zero-defect terminal
+  triples, and no other feasible unit triple.
+- A genuinely Cartesian support-avoidance lemma now exists. A row set
+  avoided by every `L_i` must be horizontally dominated separately at every
+  coordinate of every cell:
+
+  `|D_{i,C}|≥|π_i|(γ_C(U)-v_C)`.
+
+  It excludes the symmetric triangle primitive and its formal `C₄` mixture
+  from all zero-defect Steiner products.
+- The sharp near-equality aggregate from that lemma loses the factor
+  `γ(H)`: one occupied avoided row pays one unit of `v_C` and can be reused
+  in every cell. For the calibrated mixture it yields only
+  `(11√73-89)/(192γ(H))`. Common support avoidance alone is therefore a
+  universal-constant STOP.
+- A dense paired-triple block design shows that terminal supports can cover
+  every vertex while retaining separated minimum complement dominators and
+  `ρ=1,ρ²=3`. Its transversal three-dominator pays exactly `d=2` per
+  support. This is a sharp model for coverage forcing additivity defect, not
+  a universal proof.
+- The dependency-region inequality
+  `|S|-γ(C_X(S))≤p_i+d_i` is exact, but common crowns show why it cannot be
+  projected onto arbitrarily selected private targets.
+- Adaptive atom credit already saturates every selected point at `v=0`.
+  Adding a triangle's local energy by charging its selected witness again is
+  a double charge. A new cross-atom inequality is still logically possible.
+- Balanced Eulerian cell exchanges do not make adaptive targets a
+  two-packing; an exact eleven-vertex counterexample survives all those row
+  conditions.
+- Cap-half averaging and scalar weighted expansion are closed. The cap-only
+  tensor is far below `c`, and connected true-twin reservoirs absorb every
+  row weighting without changing the singleton equality data.
+
+## Revised next move after session 8
+
+1. Classify connected `(5,1,3)` graphs by the hypergraph of feasible
+   terminal triples. Prove that broad coverage forces a quantified
+   domination-additivity defect, as in the exact block model.
+2. If a hard set is avoided, charge the coordinate holes left by each
+   occupied avoided row in linearly many cells. The existing aggregate
+   stability inequality has already been optimized and is too weak.
+3. Only then reinsert the result into Steiner's global slack identity and
+   solve the resulting exact minimax.
+
+Do not return to scalar weighted cuts, cap-only tensors, component-blind
+factor mixtures, unit-capacity charging of the triangle energy, or common
+support avoidance without a per-cell reuse charge.

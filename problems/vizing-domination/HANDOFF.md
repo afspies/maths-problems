@@ -1,15 +1,14 @@
 # Handoff — Vizing’s domination conjecture
 
-Read these session-seven notes first:
+Read these first:
 
-- `angles/overlap-tax/README.md`
-- `angles/provider-nonreuse/README.md`
+- `angles/componentwise-calibration/README.md`
+- `angles/neutral-core-coordinate-tax/README.md`
+- `angles/adaptive-triangle-conservation/README.md`
+- `angles/joint-dependency-stability/README.md`
 - `angles/adaptive-provider-cycles/README.md`
-- `angles/escape-realization/README.md`
-- `angles/factor-invariant-calibration/README.md`
-- `angles/incidence-balance/README.md`
-- `angles/external-private-holes/README.md`
 - `angles/fibre-slack/README.md`
+- `angles/incidence-balance/README.md`
 
 The best universal constant remains
 
@@ -17,192 +16,158 @@ The best universal constant remains
 
 The withdrawn `0.5809` claim is not a theorem and was not used.
 
-## Decisive session-seven results
+## Decisive session-eight results
 
-### 1. Corrected two-direction repair ledger
+### 1. Equality is componentwise
 
-For typed-feasible `A`, factor fractional packings `q,p`, and the notation
-of `angles/typed-fractional-charging`, retain
-
-```text
-α_H=Σ_gq_g(|A_g|-γ_H(C_g)),
-α_G=Σ_hp_h(|B_h|-γ_G(D_h)).
-```
-
-Then
+Under the full equality conditions
+`v=p_i=d_i=δ_i=B_i=0`, every connected component `C` satisfies
 
 ```text
-|A|≥PQ+Z+max{E_H+α_H,E_G+α_G}.                              (1)
+3R_C=Γ_C+4r_C,
+Γ_C=2z_C+5τ_C,
 ```
 
-The `α` terms cannot be discarded: a minimum dominator of `P₃□P₃` makes
-(1) sharp with `E_H=E_G=0` and `α_H=1`.
+where `z_C,τ_C` are the fixed numbers of singleton and triangle terminal
+atoms in every `L_i∩C`. All packing, projection, and domination-additivity
+equalities localize to `C`.
 
-Let `I` be the selected cells isolated from both open-coordinate import
-systems, `J` the cells imported in both directions, and put
-
-`K=w(A\I)+w(J)`.
-
-For an actual product dominator,
+The numerical primitives are therefore exactly
 
 ```text
-|A|=PQ+Z+E_H+E_G+α_H+α_G-K,                                (2)
-E_H+E_G+α_H+α_G=2K+R+Δ,                                    (3)
+singleton: (Γ,r,R)=(2,1,2),
+triangle:  (Γ,r,R)=(5,1,3).
 ```
 
-where `R` counts repeated same-direction owners and `Δ` is factor-packing
-load slack. These identities explain exactly why the two repair energies
-cannot be added. Minimum dominators of `K₂□K₂` and `P₃□P₃` make the scalar
-bound sharp.
+Global factor-invariant mixtures do not satisfy this stronger equality
+condition componentwise.
 
-### 2. Generic escape closure is a hard STOP
+### 2. The triangle primitive exists
 
-At zero isolation/collision/cross-redundancy defect, the dominator is a
-perfect code and its mixed escape relation is undirected.
-
-Every finite bipartite graph `F` without isolated vertices is realized as
-such an escape graph: subdivide every edge of `F`, take the product with
-`K₂`, and place codewords from the two parts in opposite rows. Subdivided
-stars have cyclic fraction `2/(k+1)→0` and only one unit of Vizing surplus;
-paths have arbitrarily long in-trees.
-
-Therefore no generic cycle-density, bounded-return, matching, or
-`ε|T|`-credit theorem can follow from the present escape defects. Any
-surviving dynamic theorem must use the indexed Steiner fibres themselves.
-
-### 3. Factor-invariant relations cannot cut the optimizer
-
-For every fixed `L`, there are finite graphs with
+There is a finite connected graph `P` with anticomplete triples `L,X` and
+remainder `Z` such that
 
 ```text
-γ>L,       ρ=1,       ρ^{\{2\}}=2.
+(γ,ρ,ρ²)=(5,1,3),
+γ(L)=γ(X)=2,
+γ(V\L)=γ(V\X)=γ(Z)=3,
 ```
 
-A direct `G(n,1/2)` union bound proves this. Mixing these graphs with
-isolated vertices and `C₅` components in exact domination-mass proportions
+and `L,X` are the only feasible unit triples for an integral 2-packing.
+An explicit `N=1000` probabilistic construction has a union-bound failure
+probability below `5.4·10^-13`. This is a deductive existence proof.
+
+Thus a factor-only argument cannot eliminate the triangle primitive.
+
+### 3. Product coordinates eliminate the symmetric primitive
+
+If a set `U` in a component `C` is disjoint from every vertical fibre, then
 
 ```text
-c=(5+√73)/24,
-t=(47-5√73)/24,
-s=(√73-7)/6
+|D_i∩(C×π_i)|
+≥|π_i|(γ_C(U)-|R_U|)
+≥|π_i|(γ_C(U)-v_C),
 ```
 
-makes
+where `R_U` is the set of occupied rows in `U` and `v_C` is the component
+vertical slack.
 
-```text
-ρ/γ→a=(11-√73)/8,
-ρ²/(2γ)→b=(13-√73)/12.
-```
+At zero slack, the primitive's common core `Z` is avoided by every allowable
+terminal triple and has domination number three, while
+`|D_i∩(C×π_i)|=3`. Every partition cell would have to be singleton, making
+`H` edgeless and vertical domination impossible. Hence no full-zero-defect
+Steiner product can contain this primitive.
 
-Thus Steiner's formal minimizer is a limit of actual graph invariants.
-Relations using only `γ,ρ,ρ²` are a hard STOP, including stronger scalar
-packing hierarchies or connectedness-free realizability objections.
+For `z` copies of `C₄` plus `τ` copies of `P`, a size-two cell pays
 
-### 4. Provider reuse is Hall deficiency, but indexed atoms do not control it
+`p_i≥3τ-z`.
 
-For a fixed row, form the provider graph from indexed demands to selected
-row labels. Reuse is exactly
+At the formal ratios,
 
-```text
-|I|-ν(P)=max_{J⊆I}(|J|-|N(J)|).                             (4)
-```
+`(3τ-z)/Γ=(11√73-89)/24>0`.
 
-The external-private theorem makes incoming holes indexed by `J_g` a
-two-packing. Terminal triangle demands are indexed by outgoing cells
-`I_g`. There is no proved coordinate-preserving map between them.
-
-An explicit actual dominator of `C₅□H_m` has:
-
-- exact terminal `K₃` fibres;
-- globally optimal canonical 2-packings;
-- exact minimum row exchanges; and
-- one selected point serving all `m` indexed demands.
-
-The natural per-index overlap tax is zero. The example has linear exact
-Steiner defects, so it does not refute a theorem using the full defect
-package. It does prove that terminal atoms, optimality, and row exchange
-alone are insufficient.
-
-### 5. The constant requirement is severe
-
-At the formal ratios, even disjoint row and column triangle credits yield
+This is the first exact Cartesian incompatibility for a realized
+componentwise equality skeleton. Its strongest near-equality aggregate gives
 only
 
-`b²+2b(b-a)=(13-√73)/24≈0.18567<c`.
+`c+(11√73-89)/(192γ(H))`,
 
-Starting from `b²`, the required number of independently additive copies is
+which vanishes as `γ(H)` grows. One occupied core row pays one vertical
+slack unit and can be reused in every cell. Common support avoidance without
+a per-cell reuse charge is therefore a universal-constant STOP.
 
-```text
-N>(c-b²)/(b(b-a))
- =(249+21√73)/24
- ≈17.851.
-```
+### 4. Two supporting lemmas and two hard stops
 
-A useful bridge must therefore create at least eighteen-fold effective
-amplification. A one- or two-direction local improvement cannot move the
-universal constant.
-
-### 6. Adaptive providers do match perfectly
-
-The fixed-demand obstruction has a universal adaptive counterpart. For
-every row `g`, Hall's theorem gives an injection
+For a complement dominator `X`,
 
 ```text
-μ_g:I_g→A_g,
-μ_g(i)∉π_i,
-N_H[μ_g(i)]∩π_i≠∅.
+C_X(S)={v∈V\L:∅≠N[v]∩X⊆S},
+|S|-γ(C_X(S))≤p_i+d_i.
 ```
 
-The matching chooses the target inside `π_i` after choosing its distinct
-provider. Globally it leaves exactly
+This controls the complete dependency region. Common crowns show it does not
+control one chosen private target per member of `S`.
 
-`v=|D|-Σ_i|L_i|`
+Adaptive Hall atom credits total exactly `|D|-v`. At `v=0`, every selected
+point is saturated once. The local triangle repair energy cannot be added by
+charging its selected witness a second time. A balanced eleven-vertex
+exchange also shows adaptive targets need not form a two-packing.
 
-selected points unused. At `v=0` and column equality, its loopless cell
-transitions form an Eulerian labelled digraph. Under the full
-external-private hypotheses, they transfer injectively to singleton holes
-and give, for every row set `U`,
+Cap-half averaging and scalar row-weighted expansion are hard stops:
+the former gives only `(4/3)b²≈0.18385`, and connected true-twin reservoirs
+make the latter arbitrarily slack.
 
-```text
-Σ_{g∈U}|I_g|
-≤ρ(H)|N_G(U)|+2Σ_{x∈N_G(U)}e_x.
-```
-
-This theorem survives the `C₅□H_m` obstruction by choosing `t_i` with
-provider `a_i`; it does not match the pre-prescribed `s_i`. Its
-triangle-only scalar consequence is weaker than the old all-incidence
-bound, so there is still no constant improvement.
+A paired-triple covering design is the mandatory positive-defect benchmark:
+its terminal triangles cover every vertex, each has a separated minimum
+complement dominator, and `ρ=1,ρ²=3`, but a transversal three-dominator
+forces exactly `d=2` per support.
 
 ## Only live attack
 
-Work on the adaptive labelled cycles from
-`angles/adaptive-provider-cycles`, retaining all coordinates. The target is
-compatibility with the triangle-energy witness:
+Prove a **product-scale support/coordinate dichotomy** for connected
+`(5,1,3)` equality components.
 
-1. choose the point in each terminal triangle so it is both detected by the
-   parity/repair energy and adjacent to the matched distinct provider;
-2. use the local expansion cuts before aggregating, and prove that every
-   failure of external-private transport consumes a quantified unit of
-   `v`, `p_i`, `d_i`, or `δ_i`;
-3. aggregate the resulting credit at product scale; and
-4. calculate the coefficient before investing in a long proof, because
-   less than eighteen-fold basic triangle credit cannot beat Steiner.
+Let `𝒯` be the hypergraph of feasible terminal triples that can occur as
+`L_i∩C`. Establish one of:
 
-The alternative is a genuinely high-rank labelled dual whose constraints
-couple the fibre indices before taking factor marginals. It must be tested
-against both the `C₅□H_m` provider obstruction and the actual
-factor-invariant mixture.
+1. broad coverage by `𝒯` forces a uniform positive domination-additivity or
+   packing defect, generalizing the exact paired-block witness; or
+2. an avoided hard set leaves coordinate holes that charge each occupied
+   repair row in linearly many distinct cells, preventing one-time reuse.
+
+Then:
+
+1. make this product-scale dichotomy quantitative with
+   `v_C,p_i,d_i,δ_i`;
+2. sum it over components and partition cells;
+3. insert the resulting term into
+   `4|D|-k(3Γ-R)=v+3Σ(p_i+d_i)+Σδ_i`; and
+4. only after obtaining a new combinatorial coefficient, solve the exact
+   minimax.
+
+Any proposed dichotomy or stability proof requires a fresh GPT-5.6 Sol
+xhigh audit.
+
+## Mandatory adversarial checks
+
+- the symmetric `(5,1,3)` primitive in
+  `angles/neutral-core-coordinate-tax`;
+- the balanced eleven-vertex adaptive-target obstruction;
+- common-crown dependency regions;
+- the paired-triple covering design with exact `d=2`;
+- true-twin reservoirs for scalar weighted cuts; and
+- the actual `C₅□H_m` positive-defect provider obstruction.
 
 ## Hard stops
 
-- No numerical reoptimization of Steiner's six inequalities.
-- No relation using only `γ,ρ,ρ²` or the additive packing hierarchy.
-- No generic escape closure, positive cycle density, or bounded path length.
-- No local `K₁/K₃` parity theorem or per-index rank-one overlap tax.
-- No provider non-reuse theorem that ignores `v,p_i,d_i,δ_i`.
-- No cap, saturation-defect, anchored, or ordinary-packing residual slice.
-- No unrestricted square-clique or owner-averaged factor LP.
+- No numerical reoptimization of Steiner's existing six inequalities.
+- No relation using only `γ,ρ,ρ²`, even componentwise without product
+  support labels.
+- No scalar weighted expansion or cap-only tensor.
+- No inference that adaptive Hall targets form a packing.
+- No extra triangle unit charged to an already Hall-saturated selected point.
+- No common-avoidance claim without controlling reuse of occupied core rows
+  across cells.
+- No generic escape closure, additive packing hierarchy, anchored/blocker
+  slice, or unrestricted square-clique LP.
 - Finite verification remains hygiene and falsification only.
-
-Any proposed defect-weighted Hall or high-rank labelled theorem requires a
-fresh independent GPT-5.6 Sol xhigh audit.

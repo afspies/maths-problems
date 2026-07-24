@@ -37,7 +37,10 @@ identities, completely classifies the freedom of zero-defect escape graphs,
 and realizes Steiner's formal factor-invariant optimizer as a limit of
 actual graphs. It also proves a universal adaptive-provider Hall matching
 whose tight transitions form labelled Eulerian cell cycles and local
-expansion cuts.
+expansion cuts. An eighth session localizes the entire equality skeleton to
+connected components, constructs the missing `(5,1,3)` triangle primitive,
+and proves a Cartesian-coordinate tax excluding that primitive and its
+calibrated singleton mixture from every zero-defect Steiner product.
 
 ## Definitions
 
@@ -920,6 +923,174 @@ which is weaker than the existing all-incidence inequality
 bridge is compatibility between the triangle-energy witness and the
 adaptive matching, or a useful exploitation of the local weighted cuts.
 
+## Componentwise equality calibration
+
+Let `C` be a connected component of `G`, and write
+
+`Γ_C=γ(C)`, `r_C=ρ(C)`, `R_C=ρ^{\{2\}}(C)`.
+
+Under the full equality conditions
+`v=p_i=d_i=δ_i=B_i=0`, the canonical ordinary and integral 2-packings on
+every `L_i` saturate their optima separately in each component. If `z_C`
+and `τ_C` are the numbers of terminal singleton and triangle atoms in
+`L_i∩C`, then
+
+```text
+z_C=3r_C-R_C,          τ_C=R_C-2r_C,
+|L_i∩C|=2R_C-3r_C,     γ_C(L_i∩C)=R_C-r_C.                 (49)
+```
+
+Projection and additivity equality also localize:
+
+`|D_i∩(C×π_i)|=|X_i∩C|=Γ_C-R_C+r_C`.
+
+Finally the pointwise row balance, summed only over `C`, gives
+
+`3R_C=Γ_C+4r_C`.                                            (50)
+
+Equivalently `Γ_C=2z_C+5τ_C`. Thus the only local numerical atoms are
+the singleton primitive `(2,1,2)` and triangle primitive `(5,1,3)`.
+This is stronger than the previous global calibration: disconnected
+components cannot cancel their deviations from (50).
+
+## A connected triangle primitive
+
+There exists a finite connected graph `P` with anticomplete triples `L,X`
+and common remainder `Z` such that
+
+```text
+(γ(P),ρ(P),ρ²(P))=(5,1,3),
+γ_P(L)=γ_P(X)=2,
+γ_P(V\L)=γ_P(V\X)=γ_P(Z)=3.                                (51)
+```
+
+Moreover, `L,X` are the only feasible unit triples for an integral
+2-packing, and each dominates the complement of the other.
+
+For the construction, take `N` copies of a vertex adjacent to each chosen
+pair from `L` and each chosen pair from `X`, and `N` copies adjacent to each
+specified pair `(ℓ_p,x_q)`. Put independent probability-`1/2` edges among
+these `18N` auxiliary vertices. With positive probability:
+
+- every triple except `L,X` lies in a closed neighborhood; and
+- every set of at most four vertices not containing all of `L` or `X`
+  misses an auxiliary vertex.
+
+For a fixed triple the failure probability is at most `(7/8)^{N-3}`; for
+a fixed four-set it is at most `(15/16)^{N-4}`. The union bound tends to
+zero, and `N=1000` already makes the sum less than `5.4·10^-13`.
+The two events imply all claims in (51), while the deterministic incidences
+make the graph connected. This is a deductive existence proof, not
+finite-search evidence.
+
+## Support-avoidance coordinate tax
+
+Let `U` lie in one component `C` and be disjoint from every `L_i`. Let
+`R_U` be the rows of `U` containing a selected product point, and let
+
+`v_C=Σ_{g∈C}(|A_g|-|I_g|)`.
+
+Then `|R_U|≤v_C`, and every cell satisfies
+
+`|D_i∩(C×π_i)|≥|π_i|(γ_C(U)-|R_U|)
+              ≥|π_i|(γ_C(U)-v_C)`.                         (52)
+
+Indeed, for each `h∈π_i`, the same-coordinate support
+`{g∈C:(g,h)∈D}` must horizontally dominate `U\R_U`; adjoining `R_U`
+dominates all of `U`. Summing this domination lower bound over the distinct
+coordinates `h` proves (52).
+
+At zero vertical slack, the primitive's only terminal triples are `L,X`, so
+their common remainder `Z` is avoided by every `L_i`. Equations (51)--(52)
+give
+
+`3|π_i|≤|D_i∩(C×π_i)|=5-3+1=3`.
+
+Every partition cell is therefore a singleton. This forces
+`|V(H)|=γ(H)`, hence `H` is edgeless, in which case no nonempty cell is
+vertically dominated from outside. This contradiction proves:
+
+> No full-zero-defect Steiner product can contain this connected triangle
+> primitive as a component.
+
+For `z` copies of `C₄` and `τ` copies of the primitive, a cell of size two
+forces projection defect at least
+
+`p_i≥3τ-z`.                                                  (53)
+
+At the formal Steiner ratios,
+
+`(3τ-z)/Γ=8b-9a=(11√73-89)/24>0`.                           (54)
+
+Thus the natural componentwise-calibrated mixture cannot lift either.
+Equations (52)--(54) are the first exact incompatibility between a realized
+triangle equality skeleton and the Cartesian coordinates. They do not
+exclude other `(5,1,3)` components whose allowable terminal triples cover
+all hard subsets.
+
+There is also an exact near-equality audit. With
+`x_{i,C}=Γ_C-γ_C(L_i)`, (52) implies
+
+```text
+Σ_i(p_{i,C}+d_{i,C})
+≥[|V(H)|(γ_C(U)-v_C)-Σ_i x_{i,C}]_+.                       (55)
+```
+
+Optimizing the resulting contribution to the full Steiner slack over the
+integer `v_C` gives only
+
+`E≥ceil([γ_C(U)-(Σ_i x_{i,C})/|V(H)|]_+)`.                  (56)
+
+For the calibrated mixture this is `ceil((3τ-z)/2)`, so its normalized
+gain is only `(11√73-89)/(192γ(H))`. It vanishes as `γ(H)` grows. Thus
+support avoidance alone is a universal-constant STOP: the missing theorem
+must charge an occupied avoided row in linearly many cells.
+
+The opposite coverage extreme has an exact benchmark. Partition a graph
+into paired independent triples `B_p`; put no edges between partners and
+join unequal coordinate labels between every pair of nonpartner blocks.
+The terminal triples partition the vertex set, each partner is a separated
+minimum complement dominator, and `ρ=1,R=3`. Nevertheless three vertices
+with distinct labels dominate the graph. Thus every support pays exactly
+
+`γ(V\B_p)+γ(B_p)-γ(G)=3+2-3=2`.                             (57)
+
+Coverage and all packing/complement conditions can coexist; in this
+symmetric model, a transversal dominator exposes the additivity defect.
+
+## Dependency-region stability and remaining obstruction
+
+If `X` dominates `T=V(G)\L`, put
+
+```text
+e=|X|-γ_G(T),
+d=γ_G(T)+γ_G(L)-γ(G),
+C_X(S)={v∈T: ∅≠N[v]∩X⊆S}.
+```
+
+Then
+
+`|S|-γ_G(C_X(S))≤e+d`.                                      (58)
+
+The proof replaces `S` inside `X` by a minimum dominator of its complete
+dependency region and then adds a minimum dominator of `L`. In a Steiner
+column, the right side is at most `p_i+d_i`. Common-crown graphs show that
+(58) cannot be transferred to one arbitrarily chosen private target per
+member of `S`: the omitted parts of the dependency regions carry the
+required domination number.
+
+The adaptive atom ledger is also exactly conservative. At `v=0`, Hall
+matching assigns one base unit to every selected point. A local triangle
+repair-energy unit is real, but charging its distinguished selected point as
+an additional unit double-counts that point. An exact eleven-vertex balanced
+row-exchange example further shows that the adaptive targets need not form a
+two-packing even when the cell transitions are Eulerian.
+
+The remaining universal target is therefore stronger than common support
+avoidance: every `(5,1,3)` equality component must force hard coordinate
+holes in linearly many cells, or pay a product-scale packing, additivity, or
+projection defect.
+
 ## Withdrawn 0.5809 claim
 
 With `A=γ(G)`, `B=γ(H)`, `x=A-ρ(G)`, `y=B-ρ(H)`, the valid
@@ -940,7 +1111,7 @@ From `problems/vizing-domination/harness` run:
 python3 -m unittest -v
 ```
 
-Thirty-eight exact tests check named graph products, domination and `k`-function
+Forty-one exact tests check named graph products, domination and `k`-function
 definitions, Steiner's subset inequality, equation (3), the exact
 `Q(√73)` threshold identities, the withdrawn algebra witness, and the
 five-vertex `k=3` counterexample together with corrected inequality (5).
@@ -956,6 +1127,10 @@ the recovered cardinality slack, the one-subdivision realization of
 arbitrary bipartite escape graphs, and the indexed-provider reuse
 obstruction together with its adaptive matching. These are hygiene and
 adversarial checks, not a finite proof of the universal conjecture.
+Session-eight fixtures exhaust the dependency-region defect lemma on named
+small graphs, verify the balanced eleven-vertex adaptive-target obstruction
+and the covering triangle block design, and check the exact cap-half and
+triangle-surplus identities in `Q(√73)`.
 
 ## Relation to prior work and next gate
 
@@ -975,6 +1150,8 @@ Cayley obstruction, and (38) turns isolation into a density of labelled
 escape obligations. The universal escape-realization theorem closes generic
 path/cycle arguments, while (42) closes factor-invariant reoptimization.
 Equation (46) resolves adaptive cell-level provider reuse and adds labelled
-cycle and local-cut structure. Future work must make its adaptive witnesses
-compatible with the prescribed terminal-triangle energy witnesses, using
-the full Steiner defect budget.
+cycle and local-cut structure. Equations (50) and (52) now exclude a
+realized componentwise equality family using actual coordinate labels.
+Future work must make the resulting support-coverage alternative universal
+and quantitative; scalar weighted expansion and cap-only averaging are
+closed.

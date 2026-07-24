@@ -38,4 +38,7 @@ fixtures verify the four-region overlap and multiplicity identities,
 cardinality-slack correction, the realization of arbitrary bipartite escape
 graphs by one-subdivision perfect codes, and the indexed-provider reuse
 obstruction together with its distinct adaptive provider matching. The
-suite currently contains 38 tests.
+session-eight fixtures exhaust the joint-dependency stability lemma on named
+small graphs, verify the balanced eleven-vertex adaptive-target obstruction,
+the covering triangle block design, and the cap-half and triangle-mixture
+identities in `Q(√73)`. The suite currently contains 41 tests.

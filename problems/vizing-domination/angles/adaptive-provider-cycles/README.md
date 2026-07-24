@@ -22,12 +22,16 @@ Fix a minimum dominating set `{h₁,...,h_k}` of `H` and a partition
 
 ```text
 D_i=D∩(G×π_i),
-X_i=P_G(D_i),
-L_i=V(G)\N_G[X_i].
+X_i=P_G(D_i).
 ```
 
-Thus `g∈L_i` means that no point of `D_i` in a closed neighboring
-`G`-row can dominate the `i`-cell at row `g`. For a row `g`, define
+Let `L_i` be Steiner's vertical set: `g∈L_i` exactly when the whole cell
+`{g}×π_i` is dominated inside row `g` by selected coordinates outside
+`π_i`. Equivalently, `A_g\π_i` dominates `π_i`.
+
+The projection `X_i` dominates `V(G)\L_i`, but in general
+`L_i≠V(G)\N_G[X_i]`. Equality of those sets follows only under the later
+zero-defect column-separation hypotheses. For a row `g`, define
 
 ```text
 I_g={i:g∈L_i},
@@ -59,10 +63,9 @@ pre-prescribed points of the cells.
 
 ### Proof
 
-The row set `A_g` dominates `π_{I_g}=⋃_{i∈I_g}π_i`. Indeed, for
-`g∈L_i`, no point of `D_i` in a closed neighboring `G`-row can own a cell
-point `(g,h)`, so product domination forces an owner with first coordinate
-`g`.
+For each `i∈I_g`, the set `A_g\π_i` dominates `π_i` by the definition
+of the vertical set. Hence `A_g` dominates
+`π_{I_g}=⋃_{i∈I_g}π_i`.
 
 Moreover,
 
@@ -85,9 +88,9 @@ N(J)∪{h_l:l∈I_g\J}
 dominates `π_{I_g}`. Equation (3) forces `|N(J)|≥|J|`.
 Hall's theorem proves (1).
 
-The exclusion in (2) also follows directly from the product notation: a
-point of `D_i` in row `g` would put `g` in `N_G[X_i]`, contradicting
-`g∈L_i`. Hence every matched incidence gives a genuine cell transition
+The exclusion in (2) is built into the Hall graph and is justified by the
+stronger fact that `A_g\π_i` already dominates the source cell. Hence every
+matched incidence gives a genuine cell transition
 
 `i→j`, where `μ_g(i)∈π_j` and `j≠i`.                         (4)
 

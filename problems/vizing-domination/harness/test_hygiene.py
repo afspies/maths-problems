@@ -188,6 +188,22 @@ class GraphHygieneTests(unittest.TestCase):
             c - triangle_provider_bound,
             Surd73(Fraction(-65, 72), Fraction(11, 72)),
         )
+        triangle_surplus = b.scale(8) - a.scale(9)
+        self.assertEqual(
+            triangle_surplus,
+            Surd73(Fraction(-89, 24), Fraction(11, 24)),
+        )
+        self.assertGreater(11 * 11 * 73 - 89 * 89, 0)
+        capped_half_tensor = (b * b).scale(Fraction(4, 3))
+        self.assertEqual(
+            capped_half_tensor,
+            Surd73(Fraction(121, 54), Fraction(-13, 54)),
+        )
+        self.assertEqual(
+            c - capped_half_tensor,
+            Surd73(Fraction(-439, 216), Fraction(61, 216)),
+        )
+        self.assertGreater(61 * 61 * 73 - 439 * 439, 0)
         anchored_limit = Surd73(Fraction(1273, 576), Fraction(-115, 576))
         anchored_gap = c - anchored_limit
         self.assertEqual(
@@ -1318,6 +1334,182 @@ class GraphHygieneTests(unittest.TestCase):
                     product_graph.closed_neighborhood(private) & chosen,
                     {source},
                 )
+
+    def test_joint_dependency_stability(self) -> None:
+        # Exhaust the exact defect inequality on named small graphs:
+        # |S|-gamma(C_X(S)) <= (|X|-gamma(T))
+        #                         +(gamma(T)+gamma(L)-gamma(G)).
+        for graph in (path(4), cycle(4), cycle(5), complete(4)):
+            vertices = set(range(graph.n))
+            gamma = graph.domination_number()
+            for l_mask in range(1 << graph.n):
+                terminal = {v for v in vertices if l_mask & (1 << v)}
+                target = vertices - terminal
+                gamma_target = graph.domination_number(target)
+                defect = gamma_target + graph.domination_number(terminal) - gamma
+                for x_mask in range(1 << graph.n):
+                    projection = {v for v in vertices if x_mask & (1 << v)}
+                    if not graph.dominates(projection, target):
+                        continue
+                    excess = len(projection) - gamma_target
+                    projection_list = sorted(projection)
+                    for s_mask in range(1 << len(projection_list)):
+                        source = {
+                            x
+                            for j, x in enumerate(projection_list)
+                            if s_mask & (1 << j)
+                        }
+                        dependency = {
+                            v
+                            for v in target
+                            if (
+                                graph.closed_neighborhood(v) & projection
+                                and graph.closed_neighborhood(v) & projection <= source
+                            )
+                        }
+                        self.assertLessEqual(
+                            len(source) - graph.domination_number(dependency),
+                            excess + defect,
+                        )
+
+    def test_adaptive_targets_need_not_form_a_two_packing(self) -> None:
+        # A balanced pair of row exchanges whose first adaptive Hall targets
+        # cannot be chosen as a two-packing.
+        graph = Graph.from_edges(
+            11,
+            [
+                (0, 3),
+                (0, 5),
+                (0, 7),
+                (0, 8),
+                (0, 9),
+                (1, 2),
+                (1, 3),
+                (1, 9),
+                (2, 8),
+                (2, 4),
+                (3, 6),
+                (3, 9),
+                (4, 5),
+                (5, 8),
+                (5, 9),
+                (5, 10),
+                (6, 8),
+                (6, 9),
+                (8, 9),
+            ],
+        )
+        centers = (0, 5, 8, 9)
+        cells = (
+            {3, 7, 8},
+            {4, 9, 10},
+            {2, 5, 6},
+            {0, 1},
+        )
+        self.assertEqual(graph.domination_number(), 4)
+        self.assertTrue(graph.dominates(centers))
+        self.assertEqual(set().union(*cells), set(range(graph.n)))
+        for center, cell in zip(centers, cells, strict=True):
+            self.assertLessEqual(cell, graph.closed_neighborhood(center))
+
+        self.assertTrue(graph.dominates({3, 4}, cells[2]))
+        self.assertTrue(graph.dominates({3, 4}, cells[3]))
+        self.assertTrue(graph.dominates({0, 5}, cells[0]))
+        self.assertTrue(graph.dominates({0, 5}, cells[1]))
+
+        # Sources 2,3 use distinct touching providers 4,3, hence transitions
+        # 2->1 and 3->0.  The reciprocal exchange uses 0,5, giving 0->3,1->2.
+        for source, provider in ((2, 4), (3, 3), (0, 0), (1, 5)):
+            self.assertNotIn(provider, cells[source])
+            self.assertTrue(graph.closed_neighborhood(provider) & cells[source])
+        targets_two = graph.closed_neighborhood(4) & cells[2]
+        targets_three = graph.closed_neighborhood(3) & cells[3]
+        self.assertEqual(targets_two, {2, 5})
+        self.assertEqual(targets_three, {0, 1})
+        self.assertTrue(
+            all(
+                not graph.is_two_packing((u, v))
+                for u in targets_two
+                for v in targets_three
+            )
+        )
+
+    def test_covering_triangle_block_design_pays_additivity(self) -> None:
+        # Eight paired independent triples. Nonpartner blocks are joined by
+        # K_3,3 minus the equal-coordinate matching.
+        block_count = 8
+        graph = Graph.from_edges(
+            3 * block_count,
+            (
+                (3 * p + i, 3 * q + j)
+                for p in range(block_count)
+                for q in range(p + 1, block_count)
+                if q != (p ^ 1)
+                for i in range(3)
+                for j in range(3)
+                if i != j
+            ),
+        )
+        blocks = tuple({3 * p + i for i in range(3)} for p in range(block_count))
+
+        chosen = {3 * 0 + 0, 3 * 2 + 1, 3 * 4 + 2}
+        self.assertTrue(graph.dominates(chosen))
+        self.assertEqual(graph.domination_number(), 3)
+
+        terminal = blocks[0]
+        partner = blocks[1]
+        complement = set(range(graph.n)) - terminal
+        self.assertTrue(graph.dominates(partner, complement))
+        self.assertEqual(graph.domination_number(complement), 3)
+        self.assertEqual(graph.domination_number(terminal), 2)
+        self.assertTrue(
+            all(
+                graph.closed_neighborhood(v).isdisjoint(terminal)
+                for v in partner
+            )
+        )
+        self.assertTrue(
+            all(
+                len(graph.closed_neighborhood(v) & terminal) <= 2
+                for v in range(graph.n)
+            )
+        )
+        self.assertTrue(
+            all(
+                any(
+                    {u, v} <= graph.closed_neighborhood(w)
+                    for w in range(graph.n)
+                )
+                for u, v in combinations(terminal, 2)
+            )
+        )
+
+        # Every pair is caught, and every four-set contains a caught triple.
+        self.assertTrue(
+            all(
+                any(
+                    {u, v} <= graph.closed_neighborhood(w)
+                    for w in range(graph.n)
+                )
+                for u, v in combinations(range(graph.n), 2)
+            )
+        )
+        self.assertTrue(
+            all(
+                any(
+                    triple <= graph.closed_neighborhood(w)
+                    for triple in map(set, combinations(four_set, 3))
+                    for w in range(graph.n)
+                )
+                for four_set in combinations(range(graph.n), 4)
+            )
+        )
+        self.assertEqual(
+            graph.domination_number(complement)
+            + graph.domination_number(terminal)
+            - graph.domination_number(),
+            2,
+        )
 
 
 if __name__ == "__main__":

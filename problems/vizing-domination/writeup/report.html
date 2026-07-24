@@ -106,6 +106,10 @@
   realizes Steiner’s factor-invariant optimizer as an actual graph limit.
   It also proves a universal adaptive-provider Hall matching whose tight
   transitions form labelled Eulerian cell cycles and local expansion cuts.
+  Session eight localizes equality to connected components, constructs the
+  missing (5,1,3) triangle primitive, and proves a Cartesian-coordinate tax
+  excluding that primitive and its calibrated singleton mixture from every
+  zero-defect Steiner product.
   No improved universal constant is claimed.
 </div>
 
@@ -666,10 +670,123 @@ pre-prescribed s<sub>i</sub> demands still all require a<sub>0</sub>.
 The triangle-only scalar consequence is weaker than the existing
 all-incidence row-hole inequality, so no new constant follows.</p>
 
-<h2>22 · Exact verification and next gate</h2>
+<h2>22 · Componentwise equality calibration</h2>
+<div class="env theorem">
+  <span class="label">Component theorem.</span>
+  Under full Steiner equality, every connected component C satisfies
+  3ρ<sup>{2}</sup>(C)=γ(C)+4ρ(C).
+</div>
+<p>If Γ<sub>C</sub>,r<sub>C</sub>,R<sub>C</sub> denote the three component
+parameters, then every terminal fibre restriction has fixed atom counts</p>
+<div class="eqn">
+  <span class="body">z<sub>C</sub>=3r<sub>C</sub>−R<sub>C</sub>,
+  &nbsp;τ<sub>C</sub>=R<sub>C</sub>−2r<sub>C</sub>,
+  &nbsp;Γ<sub>C</sub>=2z<sub>C</sub>+5τ<sub>C</sub>.</span>
+  <span class="no">(28)</span>
+</div>
+<p>The proof restricts the globally optimal ordinary and integral
+2-packings, the zero additivity defect, and the injective minimum projection
+to each connected component. Pointwise row balance then gives the displayed
+identity componentwise. Thus disconnected components cannot cancel their
+deviations: the local numerical primitives are exactly (2,1,2) singleton
+atoms and (5,1,3) triangle atoms.</p>
+
+<h2>23 · A connected triangle primitive</h2>
+<p>There is a finite connected graph P with anticomplete triples L,X and
+common remainder Z such that</p>
+<div class="eqn">
+  <span class="body">(γ(P),ρ(P),ρ<sup>{2}</sup>(P))=(5,1,3),
+  &nbsp;γ<sub>P</sub>(V∖L)=γ<sub>P</sub>(V∖X)
+  =γ<sub>P</sub>(Z)=3.</span>
+  <span class="no">(29)</span>
+</div>
+<p>Moreover L and X are the only feasible unit triples for an integral
+2-packing. Construct 18N auxiliary vertices: N for every pair from L and
+pair from X, adjacent to those four vertices, and N for each specified pair
+(ℓ<sub>p</sub>,x<sub>q</sub>). Add independent probability-½ edges among
+the auxiliaries. A union bound gives positive probability that every triple
+except L,X lies in one closed neighborhood and every four-set not containing
+all of L or X misses an auxiliary vertex. For N=1000 the total displayed
+failure bound is below 5.4·10<sup>−13</sup>. These two events imply (29) and
+all packing claims. This is a deductive finite-existence proof, not search
+evidence.</p>
+
+<h2>24 · Support-avoidance coordinate tax</h2>
+<div class="env theorem">
+  <span class="label">Coordinate-tax lemma.</span>
+  Let U lie in a component C and be disjoint from every vertical fibre
+  L<sub>i</sub>. If R<sub>U</sub> is the set of its occupied rows and
+  v<sub>C</sub> is the component vertical slack, then
+  <div class="eqn">
+    <span class="body">|D<sub>i,C</sub>|
+    ≥|π<sub>i</sub>|[γ<sub>C</sub>(U)−|R<sub>U</sub>|]
+    ≥|π<sub>i</sub>|[γ<sub>C</sub>(U)−v<sub>C</sub>].</span>
+    <span class="no">(30)</span>
+  </div>
+</div>
+<p>For each coordinate h∈π<sub>i</sub>, its same-coordinate horizontal
+support must dominate U∖R<sub>U</sub>; adjoining R<sub>U</sub> dominates U.
+Summing over h proves (30). This is an intrinsically Cartesian, label-sensitive
+inequality.</p>
+<p>At zero slack, the primitive’s only terminal triples are L,X, so their
+common core Z is avoided by every fibre. Equations (29)–(30) force
+3|π<sub>i</sub>|≤|D<sub>i,C</sub>|=3, making every cell a singleton.
+Then |V(H)|=γ(H), so H is edgeless and no nonempty cell can be vertically
+dominated from outside—a contradiction.</p>
+<p>For z copies of C<sub>4</sub> and τ copies of the primitive, any cell
+of size two forces projection defect at least 3τ−z. At the formal ratios,</p>
+<div class="eqn">
+  <span class="body">(3τ−z)/Γ=8b−9a=(11√73−89)/24&gt;0.</span>
+  <span class="no">(31)</span>
+</div>
+<p>Thus the natural componentwise-calibrated equality mixture cannot lift.
+This excludes a genuine realized obstruction class, but not every possible
+(5,1,3) component.</p>
+<p>The robust audit exposes an exact limitation. Writing
+x<sub>i,C</sub>=Γ<sub>C</sub>−γ<sub>C</sub>(L<sub>i</sub>), summation and
+integer optimization over v<sub>C</sub> give only</p>
+<div class="eqn">
+  <span class="body">E≥ceil([γ<sub>C</sub>(U)
+  −Σ<sub>i</sub>x<sub>i,C</sub>/|V(H)|]<sub>+</sub>).</span>
+  <span class="no">(32)</span>
+</div>
+<p>For the calibrated mixture the normalized gain is at most
+(11√73−89)/(192γ(H)), which vanishes as γ(H) grows. Common support
+avoidance is therefore a universal-constant stop unless an occupied avoided
+row is charged in linearly many cells.</p>
+<p>The opposite coverage extreme has an exact benchmark. Paired independent
+triples, joined between nonpartners whenever their coordinate labels differ,
+partition the vertex set into terminal supports. Every partner is a separated
+minimum complement dominator and ρ=1, ρ<sup>{2}</sup>=3. Nevertheless a
+transversal of the three labels dominates the graph, so every support pays
+additivity defect 3+2−3=2. Broad coverage can coexist with all packing and
+complement conditions; here it is exposed precisely by additivity.</p>
+
+<h2>25 · Dependency stability and the live dichotomy</h2>
+<p>If X dominates T=V(G)∖L and
+C<sub>X</sub>(S)={v∈T:∅≠N[v]∩X⊆S}, then the exact defect inequality is</p>
+<div class="eqn">
+  <span class="body">|S|−γ<sub>G</sub>(C<sub>X</sub>(S))
+  ≤[|X|−γ<sub>G</sub>(T)]
+   +[γ<sub>G</sub>(T)+γ<sub>G</sub>(L)−γ(G)].</span>
+  <span class="no">(34)</span>
+</div>
+<p>In a Steiner column the right side is at most p<sub>i</sub>+d<sub>i</sub>.
+Common crowns show that (34) controls complete dependency regions, not one
+arbitrarily selected private target per owner.</p>
+<p>The adaptive atom ledger is exactly conservative: at zero vertical slack
+Hall matching already assigns one base unit to every selected point. Charging
+a triangle’s distinguished point again is a literal double charge. An exact
+eleven-vertex balanced exchange also shows that its adaptive targets need not
+form a two-packing. The live target is therefore stronger than common support
+avoidance: every (5,1,3) equality component must force hard coordinate holes
+in linearly many cells, or pay a product-scale packing, additivity, or
+projection defect.</p>
+
+<h2>26 · Exact verification and next gate</h2>
 <pre><code>$ cd problems/vizing-domination/harness
 $ python3 -m unittest -v
-Ran 38 tests
+Ran 41 tests
 OK</code></pre>
 <p>The checks use integers, rational numbers, and exact elements of
 ℚ(√73). They validate definitions and finite witnesses, not the universal
@@ -678,9 +795,10 @@ fibre-incidence classification, and strengthened by the external-private and
 row hole-packing theorems. Every averaged blocker/fractional hybrid attempted
 here is now closed. The typed profile clears the mandatory Cayley benchmark.
 Generic escape closure and factor-invariant relations are now exact stops.
-The adaptive Hall theorem resolves cell-level provider reuse. Further work
-must make its adaptive witnesses compatible with the prescribed terminal
-triangle-energy witnesses, using the full Steiner defect budget.</p>
+The adaptive Hall theorem resolves cell-level provider reuse, while the
+coordinate tax excludes a realized componentwise equality family. Further
+work must make the support-coverage alternative universal and quantitative;
+scalar weighted expansion and cap-only averaging are now closed.</p>
 
 <div class="footer">
   <p><strong>Status:</strong> partial-results. Vizing’s domination conjecture

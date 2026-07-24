@@ -145,6 +145,30 @@ its precise failure is audited in
   transfer injectively to singleton holes and give local expansion cuts.
   The unresolved issue is compatibility with pre-prescribed
   triangle-energy witnesses.
+- Full Steiner equality localizes to connected components:
+  `3ρ²(C)=γ(C)+4ρ(C)`. Every component's terminal fibres contain fixed
+  counts of singleton `(2,1,2)` and triangle `(5,1,3)` primitives; global
+  mixtures cannot hide componentwise imbalance.
+- A connected symmetric `(5,1,3)` triangle primitive exists by an explicit
+  probabilistic construction. Its two possible terminal triples avoid a
+  common set of domination number three. The new support-avoidance lemma
+  forces that set to be dominated horizontally at every coordinate of every
+  partition cell, excluding the primitive—and its formal `C₄` mixture—from
+  any full-zero-defect Steiner product.
+- The sharp near-equality aggregation of that lemma loses a factor
+  `γ(H)`: one occupied avoided row can be reused in every cell. Conversely,
+  an exact paired-triple covering design retains terminal atomicity,
+  separated minimum complement dominators, and `ρ=1,ρ²=3`, but pays
+  additivity defect two via a transversal three-dominator.
+- Complement dominators satisfy the joint-dependency stability inequality
+  `|S|-γ(C_X(S))≤p_i+d_i`. It controls complete dependency regions, not
+  arbitrary private-target selections; common crowns make that distinction
+  sharp.
+- Averaging the canonical equality packings yields a maximum fractional
+  packing capped pointwise by `1/2`, but the resulting tensor is far below
+  Steiner. Connected true-twin reservoirs make all scalar row-weighted
+  adaptive cuts arbitrarily slack, so the next advance must retain terminal
+  supports and actual product coordinates.
 - The formal-ratio three-arm counterfamily can also be connected through
   safe zero-weight ports while preserving `γ,ρ,ρ²` and only decreasing its
   anchored/capped values. Connectedness alone does not repair the marginal
@@ -175,12 +199,15 @@ its precise failure is audited in
 
 ## First steps
 
-1. Make the terminal-triangle repair witness compatible with the universal
-   adaptive row-provider matching, or quantify the cost of incompatibility.
-2. Exploit the local weighted expansion cuts from the adaptive
-   provider-to-private-hole transfer before aggregating over rows.
+1. Prove a product-scale support/coordinate dichotomy for connected
+   `(5,1,3)` components: broad terminal-triple coverage forces additivity
+   defect, or an avoided hard set leaves coordinate holes in linearly many
+   cells.
+2. Prevent one-time vertical repair rows from being reused across all cells;
+   the optimized neutral-core aggregate without this input is a STOP.
 3. Use the near-cover and fractional defect identities only with actual
    fibre labels; their scalar relaxations remain insufficient on `C₄□C₄`.
-4. Do not pursue generic escape closure, factor-invariant relations,
-   additive `k`-packing, saturation-defect, capped-rank-one, or
-   ordinary-packing residual slices further: each now has an exact STOP.
+4. Do not pursue scalar weighted cuts, generic escape closure,
+   factor-invariant relations, additive `k`-packing, saturation-defect,
+   capped-rank-one, or ordinary-packing residual slices further: each now
+   has an exact STOP.

@@ -3,7 +3,7 @@ title = "Vizing’s domination conjecture"
 question = "Do all finite simple graphs satisfy γ(G □ H) ≥ γ(G)γ(H)?"
 # proposed | scaffolded | active | partial-results | solved | excluded | retired
 status = "partial-results"
-best_result = "Corrected repair/overlap ledgers; adaptive provider Hall matching with labelled cycles and local cuts; escape/invariant no-gos (best constant still 0.5643)"
+best_result = "Componentwise equality calibration and a Cartesian support-avoidance tax exclude an exact connected (5,1,3) primitive and its formal mixture at zero defect (best constant still 0.5643)"
 doi = ""
 sessions = [
     "2026-07-23 scaffolded from template",
@@ -14,4 +14,5 @@ sessions = [
     "2026-07-24 session 5: anchored correction, connected independent-cap counterfamily, labelled escape dynamics, typed fibre relaxation, Cayley zero-factor lift obstructions",
     "2026-07-24 session 6: typed partial-cover profile, robust Cayley calibration, fractional repair energy, isolation-to-escape density",
     "2026-07-24 session 7: corrected overlap ledger, escape/invariant no-gos, fixed-demand obstruction, adaptive provider Hall cycles and local cuts",
+    "2026-07-24 session 8: componentwise primitive classification, connected (5,1,3) construction, support-avoidance coordinate tax and zero-defect exclusion",
 ]

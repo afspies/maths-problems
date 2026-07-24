@@ -1353,3 +1353,242 @@ triangle witnesses, a defect-weighted version of that compatibility, or an
 equally strong product-correlated invariant. **STOP/PIVOT** for numerical
 reoptimization, factor invariants, generic escape dynamics, local triangle
 parity, or fixed-demand provider atoms without the complete defect budget.
+
+## 2026-07-24 — Session 8: componentwise primitives and coordinate tax
+
+### Hygiene correction
+
+The previous adaptive-provider note had accidentally identified Steiner's
+vertical set with `V(G)\N[X_i]` before imposing equality. This is false in
+general. The correct definition is:
+
+```text
+g∈L_i  iff  A_g\π_i dominates π_i vertically in row g.
+```
+
+Universally, `X_i=P_G(D_i)` only dominates `V(G)\L_i`. The set equality
+`N[X_i]=V(G)\L_i` follows later from zero projection/additivity defect and
+column separation. The Hall proof itself is unaffected because it uses the
+correct vertical statement `A_g\π_i` dominates `π_i`. The angle note was
+repaired before building on it.
+
+### Parallel proof attacks and independent audits
+
+Three GPT-5.6 Sol agents at xhigh effort attacked:
+
+1. triangle/adaptive-provider compatibility and adversarial small graphs;
+2. weighted local cuts and equality-packaging consequences; and
+3. the soundness of the combined component/primitive/coordinate argument.
+
+The final referee accepted the componentwise theorem and zero-defect
+coordinate obstruction after requiring all projection and support counts to
+be restricted explicitly to a connected component. It rejected any stronger
+claim that Hall-credit conservation alone forbids a new cross-atom energy
+inequality. That limitation is recorded below.
+
+### Componentwise calibration
+
+Under the full equality conditions
+`v=p_i=d_i=δ_i=B_i=0`, packing, domination, and projection equality all
+localize to every connected component `C`. With
+
+```text
+Γ_C=γ(C),       r_C=ρ(C),       R_C=ρ^{\{2\}}(C),
+```
+
+every `L_i∩C` has fixed singleton/triangle counts
+
+```text
+z_C=3r_C-R_C,       τ_C=R_C-2r_C,
+|L_i∩C|=2R_C-3r_C,  γ_C(L_i∩C)=R_C-r_C.
+```
+
+Also
+
+`|D_i∩(C×π_i)|=|X_i∩C|=Γ_C-R_C+r_C`.
+
+Summing the pointwise equality
+`#{i:g∈L_i}=#{i:g∈X_i}` only over `g∈C` gives
+
+```text
+3R_C=Γ_C+4r_C,
+Γ_C=2z_C+5τ_C.                                             (8.1)
+```
+
+Thus the full obstruction decomposes componentwise into singleton
+`(2,1,2)` and triangle `(5,1,3)` primitives. The old dense/isolated/`C₅`
+factor calibration does not satisfy this stronger product-equality
+condition componentwise.
+
+### Exact connected triangle primitive
+
+A symmetric probabilistic construction realizes the missing triangle
+primitive. Take anticomplete triples `L,X`. For each pair from `L` and pair
+from `X`, add `N` vertices adjacent to those four core vertices. For every
+`(ℓ_p,x_q)`, add `N` vertices adjacent to that pair. Put independent
+probability-`1/2` edges among all `18N` auxiliary vertices `Z`.
+
+With positive probability:
+
+1. every triple except `L,X` lies in one closed neighborhood; and
+2. every at-most-four-set not containing all of `L` or `X` misses an
+   auxiliary vertex.
+
+The fixed-event failure probabilities are at most `(7/8)^{N-3}` and
+`(15/16)^{N-4}`. At `N=1000`, the union bounds are respectively below
+`1.5·10^-46` and `5.4·10^-13`. Therefore a finite connected graph exists
+with
+
+```text
+(γ,ρ,ρ²)=(5,1,3),
+γ(L)=γ(X)=2,
+γ(V\L)=γ(V\X)=γ(Z)=3,
+```
+
+and `L,X` as its only feasible unit triples. Both orientations have zero
+additivity and projection-size defect. This proves that the factor-level
+triangle primitive is real rather than a numerical fiction.
+
+### Support-avoidance coordinate tax
+
+Let `U` lie in a component `C` and avoid every vertical fibre `L_i`. Let
+`R_U` be its occupied rows and
+
+`v_C=Σ_{g∈C}(|A_g|-|I_g|)`.
+
+For each coordinate `h∈π_i`, the same-coordinate horizontal support in
+`D_i∩(C×π_i)` dominates `U\R_U`. Hence
+
+```text
+|D_i∩(C×π_i)|
+≥|π_i|(γ_C(U)-|R_U|)
+≥|π_i|(γ_C(U)-v_C).                                       (8.2)
+```
+
+This is a new product-label inequality. At `v=0`, the primitive's common
+core `Z` is avoided by every allowable terminal triple, so (8.2) gives
+
+`3|π_i|≤|D_i∩(C×π_i)|=3`.
+
+All partition cells would be singleton, forcing
+`|V(H)|=γ(H)` and hence `H` edgeless, contradicting the nonempty vertical
+fibres. Therefore no full-zero-defect Steiner product can contain this
+primitive component.
+
+For `z` copies of `C₄` and `τ` primitive copies, every cell of size at least
+two pays
+
+`p_i≥3τ-z`.
+
+At the formal ratios,
+
+```text
+(3τ-z)/Γ=8b-9a=(11√73-89)/24>0.                            (8.3)
+```
+
+Thus the exact componentwise-calibrated mixture is also incompatible with
+zero product defect.
+
+### Dependency stability, atom conservation, and no-gos
+
+If `X` dominates `T=V\L`, define
+
+`C_X(S)={v∈T:∅≠N[v]∩X⊆S}`.
+
+Replacing `S` by a minimum dominator of its complete dependency region gives
+the exact inequality
+
+```text
+|S|-γ(C_X(S))
+≤(|X|-γ(T))+(γ(T)+γ(L)-γ(G)).                              (8.4)
+```
+
+For a Steiner column, the right side is at most `p_i+d_i`. Common-crown
+examples show that (8.4) does not control one arbitrarily chosen private
+target per owner.
+
+Adaptive atom credits are exactly conservative: a singleton contributes
+one base unit and a triangle contributes three, totaling `|D|-v`. At
+`v=0`, every selected point is saturated once. The triangle repair energy
+is locally real, but charging its distinguished selected point as one more
+unit is a literal double charge. This only kills that proof method; it does
+not rule out a genuinely structural cross-atom inequality.
+
+An exact eleven-vertex graph supplies two reciprocal balanced row exchanges
+whose adaptive targets in one exchange cannot be chosen as a two-packing.
+Thus Hall matching, minimal partition cells, and Eulerian cell cycles still
+do not imply target compatibility.
+
+Finally, equality averaging gives a maximum fractional packing capped by
+`1/2`, but its best cap-only tensor is
+
+`(4/3)b²=(121-13√73)/54≈0.18385<c`.
+
+Blowing one vertex of `C₄` into an arbitrarily large true-twin clique
+preserves the singleton equality skeleton while making every nonnegative
+row-weighted local cut arbitrarily slack. Scalar weighted expansion is a
+STOP.
+
+The support-avoidance lemma itself has a sharp near-equality loss. With
+`x_{i,C}=Γ_C-γ_C(L_i)`,
+
+```text
+Σ_i(p_{i,C}+d_{i,C})
+≥[|V(H)|(γ_C(U)-v_C)-Σ_i x_{i,C}]_+.
+```
+
+Integer optimization inside the exact Steiner slack gives only
+
+```text
+E≥ceil([γ_C(U)-(Σ_i x_{i,C})/|V(H)|]_+).
+```
+
+For the calibrated mixture this is `ceil((3τ-z)/2)`, yielding normalized
+gain `(11√73-89)/(192γ(H))`. It vanishes as `γ(H)→∞`: one occupied core row
+costs one vertical-slack unit but can be reused in every cell. Therefore
+common support avoidance alone is a universal-constant STOP. A successful
+lemma must charge the coordinate holes left by that occupied row in
+linearly many cells.
+
+An adversarial support-coverage design sharpened the alternative. Take
+paired independent triples `B_p,B_{p*}` and, between nonpartner blocks,
+join unequal coordinate labels. The blocks cover all vertices, every `B_p`
+is a feasible terminal triangle, its partner is a separated complement
+dominator, and `ρ=1,R=3`. However three vertices with distinct labels from
+distinct partner pairs dominate the graph, so `γ=3`, not five. Sparse
+matching variants retain domination size but lose the conflict/packing
+hypotheses. This exactly kills the natural symmetric block-design route to
+a covering primitive, but is not a proof that all covering primitives are
+impossible.
+
+### Verification and compute
+
+```text
+cd problems/vizing-domination/harness
+python3 -m unittest test_hygiene.py
+# Ran 41 tests — OK
+```
+
+New fixtures exhaust (8.4) on named small graphs, verify the eleven-vertex
+balanced target-packing obstruction and the covering block design, and check
+the cap-half and triangle-mixture surd identities exactly. The primitive is
+proved by union bounds; random sampling is not used as evidence.
+
+Interactive wall time: approximately two hours across the main and three
+parallel Sol attacks. External compute: none.
+
+### Gate verdict
+
+No constant above `0.5643` is certified, and Vizing's conjecture remains
+open. The session nevertheless passes the continuation gate with a new
+componentwise equality classification and the first exact
+Cartesian-coordinate obstruction to a realized triangle equality primitive.
+
+**GO** for a product-scale support/coordinate dichotomy: every `(5,1,3)`
+component must force hard coordinate holes in linearly many cells or pay a
+uniform product-scale packing/additivity/projection defect.
+
+**STOP/PIVOT** for scalar weighted cuts, cap-only tensors, or adding the
+local triangle energy by charging an already Hall-saturated selected point.
+Common support avoidance without a per-cell charge is also a constant-scale
+STOP.
