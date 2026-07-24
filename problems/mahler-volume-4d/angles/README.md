@@ -5,7 +5,10 @@
   simple/simplicial subclass.
 - `pyramids/`: sharp volume-product factorization for all pyramids and an
   independent terminality-descent classification.
+- `projective-second-variation/`: bi-centering, the covariance Hessian, and a
+  certified projective saddle in the Paffenholz 24-cell family.
 
-Next rotations should test operation-level reductions (wedges/truncations) and
-affine-rigidity/Gale-dual formulations. Do not enumerate arbitrary 4-polytope
-face lattices.
+The terminal-pair classification route is false. The next rotation should
+derive full realization-space first and second variations and seek a
+coordinate-free descent lemma. Do not enumerate arbitrary 4-polytope face
+lattices.

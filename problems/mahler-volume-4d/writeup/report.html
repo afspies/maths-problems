@@ -1,4 +1,4 @@
-<title>Four-dimensional Mahler volume conjecture — partial results</title>
+<title>Four-dimensional Mahler volume conjecture — terminality and second variation</title>
 <style>
   :root {
     --paper: #fbfaf7; --ink: #21211d; --muted: #6b6a62;
@@ -52,23 +52,67 @@
 </style>
 
 <h1>Four-dimensional Mahler volume conjecture</h1>
-<p class="subtitle">A proof-first first attack: terminal polytopes and a sharp infinite-family theorem</p>
+<p class="subtitle">An exact terminal-bridge counterexample and a certified projective saddle</p>
 <div class="meta">
   <span class="badge">partial results</span>
   <span><code>problems/mahler-volume-4d</code></span>
-  <span>23 July 2026</span>
+  <span>24 July 2026</span>
 </div>
 
 <div class="abstract">
   <span class="label">Abstract</span>
-  We audit the new three-dimensional shadow-flow proof, repair its
-  dimension-specific persistence paragraph for dimension four, derive a
-  necessary terminal-incidence inequality, classify simple, simplicial, and
-  pyramid subclasses, and prove the sharp Mahler inequality for every
-  four-dimensional pyramid. The general 4D conjecture remains open.
+  We audit the new three-dimensional shadow-flow proof and verify its
+  minimizer-to-terminal reduction in dimension four. We then disprove the
+  proposed terminal classification bridge with an exact rational 24-cell.
+  Rational interval Newton and a covariance bound certify a bi-centered
+  24-cell critical point as a projective saddle. The sharp pyramid theorem
+  survives; the general 4D conjecture remains open.
 </div>
 
-<h2>1 · Sharp result for all 4-pyramids</h2>
+<h2>1 · The terminal-pair bridge is false</h2>
+<div class="env">
+  <span class="label">Theorem 0.</span>
+  There is a rational non-simplex 4-polytope <var>Q</var> in Santaló
+  position such that both <var>Q</var> and <var>Q</var>° admit only globally
+  affine admissible speeds in every direction.
+</div>
+<p>Take the Paffenholz 24-cell realization with
+<var>a</var>=(1/5,2/5,3/5,4/5), put
+<var>g</var>=c(<var>P</var><sub>0</sub>°), and set</p>
+<div class="eqn">
+  <var>Q</var> = {x/(1−<var>g</var>·x) : x∈<var>P</var><sub>0</sub>}.
+</div>
+<p>Directly from polarity,
+<var>Q</var>°=<var>P</var><sub>0</sub>°−<var>g</var>, so the origin is
+exactly s(<var>Q</var>). Exhaustive facet-normal-flat enumeration gives
+1,941 primal and 580 polar direction types; every speed space has dimension
+five. Two independent exact triangulations agree on both centroids.</p>
+<pre><code>labelled-24-cell-incidence True
+santalo-polar-centroid-zero True
+primal-centroid-zero False
+primal-direction-flats 1941
+polar-direction-flats 580
+all-speed-dimensions 5
+terminal-pair-implies-simplex False</code></pre>
+<p>The nonzero primal centroid means this body cannot be a local Mahler
+minimizer. The example kills the classification bridge, not the conjecture.</p>
+
+<h2>2 · A certified projective saddle</h2>
+<p>Every local minimizer in Santaló position is bi-centered. In dimension
+four, the Klartag projective second variation additionally requires</p>
+<div class="eqn">
+  cov(<var>K</var>°) ⪰ (1/36) cov(<var>K</var>)<sup>−1</sup>.
+</div>
+<p>A rational interval Krawczyk inclusion isolates a unique bi-centering root
+for the Paffenholz chart in a radius-10<sup>−10</sup> box centered at</p>
+<pre><code>(0.065348617243, 0.127816191744,
+ 0.153467113574, 0.022269205148)</code></pre>
+<p>On the entire box the e<sub>1</sub> covariance gap is less than
+−0.0075809. Hence the exact critical body is a projective saddle.
+Nonsingularity and strictness exclude an open four-parameter critical branch
+of nonregular 24-cells from local minimality.</p>
+
+<h2>3 · Sharp result for all 4-pyramids</h2>
 <div class="env">
   <span class="label">Theorem 1.</span>
   Every four-dimensional pyramid <var>P</var> satisfies
@@ -94,7 +138,7 @@ vanishes at τ=1/(d+1). Integration gives
 </div>
 <p>Equality in dimension three forces the base to be a tetrahedron.</p>
 
-<h2>2 · Terminal-polytope bridge</h2>
+<h2>4 · Surviving terminal subclasses</h2>
 <p>For a facet <var>F</var>, admissibility is the family of exact equations
 λ<sup>T</sup>α|<sub>F</sub>=0 over all affine dependences λ of its vertices.
 Choosing a direction parallel to a largest facet gives, for every
@@ -112,31 +156,41 @@ A<sub>(u,0)</sub>(pyr <var>Q</var>) ≅ A<sub>u</sub>(<var>Q</var>)⊕ℝ.
 The polar is again a pyramid over a dual 3-polytope, so the audited 3D
 dual-pair count forces a tetrahedral base.</p>
 
-<h2>3 · Source audit</h2>
+<h2>5 · Source audit</h2>
 <p>The Meyer–Reisner convexity/rigidity theorem, volume-affinity, compactness,
 and the minimizer/polar chain are dimension-independent. The printed
 Chen–Li–Xi–Xu persistence proof follows intersections of two and three facets
 and is specifically 3D. In 4D, choose four independent active moved facets:
 their limiting intersection and the moved old vertex give a dimension-free
-replacement. The terminal classification—not the analytic reduction—is the
-remaining global obstacle.</p>
+replacement. The analytic reduction survives, but terminal classification
+cannot be the global bridge; full second variation is the remaining
+obstacle.</p>
 
-<h2>4 · Exact verification</h2>
+<h2>6 · Exact verification</h2>
 <pre><code>$ python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ...
-Ran 6 tests in 0.494s
+Ran 10 tests in 4.201s
 
-OK</code></pre>
+OK
+
+$ python3 problems/mahler-volume-4d/harness/verify_bridge_counterexample.py
+...
+terminal-pair-implies-simplex False
+
+$ python3 problems/mahler-volume-4d/harness/bicenter_certificate.py
+...
+unique-bicenter-root True
+projective-local-minimum False</code></pre>
 <p>The rational harness checks simplex polarity and product, cube/cross
 polarity, admissible-speed ranks, and the pyramid factor arithmetic. It is a
 falsification tool, not a substitute for classification.</p>
 
-<h2>5 · Limits and next route</h2>
+<h2>7 · Limits and next route</h2>
 <p>Generic rigidity is too weak: the cube is rigid generically but not in
-facet-parallel directions. Incidence does not determine affine-dependence
-coefficients, and the present inequality leaves non-simple, non-simplicial,
-non-pyramidal types. The next proof campaign should test descent under wedges
-or truncations and seek rank gains from overlaps among facet constraints.</p>
+facet-parallel directions. More decisively, exact pair-terminality does not
+force a simplex. The next proof campaign must derive the Mahler Hessian on
+the full realization-space tangent cone and seek a coordinate-free negative
+direction for terminal non-simplices.</p>
 
 <div class="footer">
   <p><strong>Status:</strong> partial results. The full four-dimensional

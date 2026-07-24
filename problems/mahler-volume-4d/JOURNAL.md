@@ -121,3 +121,116 @@ Local exact tests used under one CPU-second in the final run. External work
 was one xhigh independent-review turn and source retrieval; there was no
 search compute. Verdict: **continue**. The gate is met by both a new
 incidence/dimension inequality and nontrivial infinite-family theorems.
+
+## 2026-07-24 — the terminal bridge fails; projective second variation
+
+### Exact all-direction harness
+
+Worked on branch
+`problem/mahler-volume-4d/2026-07-24-24cell-rigidity`, within the problem
+folder plus the generated board.
+
+Extended the rational harness with exact enumeration of every
+facet-normal-arrangement flat; Paffenholz's rational 24-cell realization;
+exact pulling triangulations, volumes, centroids and covariance matrices; an
+independent boundary-facet cone integration for 24-cell centroids; and exact
+projective Santaló normalization.
+
+The regular 24-cell is not terminal: twelve rank-three direction flats have
+speed dimension six. A generic projective deformation removes those extra
+speeds, exposing realization dependence missed by pure incidence counts.
+
+### Counterexample to the proposed bridge
+
+For \(a=(1/5,2/5,3/5,4/5)\), let \(P_0\) be the Paffenholz 24-cell and
+\(g=c(P_0^\circ)\). The rational projective image
+\[
+Q=\{x/(1-g\cdot x):x\in P_0\}
+\]
+satisfies \(Q^\circ=P_0^\circ-g\), hence \(s(Q)=0\).
+
+The exact exhaustive check found 1,941 primal direction flats and 580 polar
+direction flats. Every admissible-speed space has dimension five on both
+sides. The labeled incidence agrees with the regular \(a=0\) family member,
+and two independent exact centroid integrations agree. Thus \(Q\) is a
+rational non-simplex whose genuine Santaló polar is also terminal. The
+primary bridge lemma is false.
+
+```text
+PYTHONPATH=problems/mahler-volume-4d/harness \
+python3 -B problems/mahler-volume-4d/harness/verify_bridge_counterexample.py
+
+labelled-24-cell-incidence True
+santalo-polar-centroid-zero True
+primal-centroid-zero False
+primal-direction-flats 1941
+polar-direction-flats 580
+all-speed-dimensions 5
+terminal-pair-implies-simplex False
+```
+
+Wall clock was approximately 13 seconds in the final parallel verification.
+
+### Bi-centering and the covariance saddle
+
+Independently derived the first projective variation. If \(s(K)=0\), local
+minimality under \(x\mapsto x/(1+t\,u\cdot x)\) forces \(c(K)=0\); hence a
+minimizer is bi-centered.
+
+A floating-point Newton discovery run located the bi-centering translation
+near
+\[
+(0.065348617243,\ 0.127816191744,\ 0.153467113574,\ 0.022269205148).
+\]
+No theorem relies on that run. `bicenter_certificate.py` reconstructs the
+claim using outward-rounded dyadic rational intervals. A Krawczyk inclusion
+proves a unique exact centroid root in the radius-\(10^{-10}\) box. On the
+whole box it proves
+\[
+e_1^\mathsf T\left(\operatorname{cov}(K^\circ)
+-\frac1{36}\operatorname{cov}(K)^{-1}\right)e_1<0.
+\]
+The exact root therefore violates the Klartag/Balacheff--Solanes--Tzanev
+projective second-order condition and is a saddle. The centroid Jacobian is
+nonsingular and the violation strict, so the implicit-function theorem
+excludes an open four-parameter critical branch of nonregular 24-cells.
+
+The final interval command completed in 7.1 seconds:
+
+```text
+PYTHONPATH=problems/mahler-volume-4d/harness \
+python3 -B problems/mahler-volume-4d/harness/bicenter_certificate.py
+```
+
+The certified covariance-gap upper bound was
+
+```text
+-2769897430741000129485066521703178181068461843
+ /365375409332725729550921208179070754913983135744
+```
+
+### Verification and independent review
+
+```text
+python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
+Ran 10 tests in 4.201s
+OK
+```
+
+Consulted GPT-5.6 Sol at xhigh effort at the classification pivot and on the
+proposed proof. It independently reran the rational bridge counterexample,
+checked the sign in \(Q^\circ=P_0^\circ-g\), validated the bi-centering
+lemma, and identified the covariance Hessian as the correct next condition.
+It also caught two proof-quality issues: nearby rational terminal points do
+not certify terminality at the exact centroid root, and the pulling centroid
+needed an independent integration. The report makes no terminality claim at
+that root, and the facet-cone calculation supplies the independent check.
+
+### Verdict
+
+The full four-dimensional conjecture remains open. The session nevertheless
+passes the continuation gate twice: it decisively falsifies the campaign's
+central bridge with an exact certificate, and it excludes an open
+non-pyramidal 24-cell critical branch by a rigorous second variation.
+Terminal face-lattice classification is now a dead route. The next proof
+campaign must use full realization-space variations.

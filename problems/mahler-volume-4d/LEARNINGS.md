@@ -6,8 +6,10 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 
 ## What the next session should do first
 
-- Test whether terminality descends under wedges or controlled
-  truncations, aiming for another infinite-family theorem.
+- Derive first and second variations of Mahler volume on the full
+  realization-space tangent cone of a 4-polytope. Test the formula on the
+  certified Paffenholz 24-cell saddle, then seek a coordinate-free negative
+  direction theorem for terminal non-simplices.
 
 ## Dead ends (and why)
 
@@ -19,6 +21,12 @@ Keep this short enough to read in two minutes — the journal holds the detail.
   \(2f_{03}\ge5(f_0+f_3)-10\) alone is far from decisive.
 - Incidence is not a complete speed-space encoding: affine-dependence
   coefficients vary with the realization.
+- The primary bridge is false. A rational non-simplex 24-cell and its actual
+  Santaló polar are both terminal in every direction. Further
+  terminal-face-lattice classification cannot prove Mahler by itself.
+- “Bi-centered + pair-terminal implies simplex” is not established. Nearby
+  rational realizations are pair-terminal and the exact bi-centering root is
+  certified, but openness does not transfer terminal rank to the root.
 
 ## Surprises / structure discovered
 
@@ -33,3 +41,16 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 - Simplicial facets impose no speed constraints in dimension four, so a
   terminal simplicial 4-polytope is immediately a simplex; duality handles
   simple polytopes.
+- Projective normalization is an exact way to manufacture Santaló position:
+  if \(g=c(P^\circ)\), then
+  \(Q=\{x/(1-g\cdot x):x\in P\}\) has \(Q^\circ=P^\circ-g\).
+- Local minimizers are bi-centered. The first projective derivative forces
+  \(c(K)=0\) once \(s(K)=0\).
+- Second order is a real separator. Rational interval Newton certifies a
+  unique bi-centering root for a nonregular Paffenholz 24-cell, and the
+  Klartag covariance matrix has a strictly negative \(e_1\)-direction there.
+  Nonsingularity and strictness exclude an open four-parameter critical
+  branch from local minimality.
+- Pulling moments were independently cross-checked by a boundary-facet cone
+  triangulation. Outward dyadic rounding keeps rigorous rational interval
+  arithmetic fast enough for the Krawczyk certificate.

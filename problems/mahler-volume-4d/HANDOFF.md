@@ -23,10 +23,19 @@ Current priorities (update each session):
   it derived a new pair-terminal flag inequality, classified simple,
   simplicial, and pyramid subclasses, and proved the sharp Mahler inequality
   for all 4-pyramids.
-- The dimension-free persistence proof is now formalized in
-  `literature/shadow-flow-audit.md`.
-- Next attack wedges/truncations or strengthen rank bounds using overlap among
-  facet affine-dependence constraints. Stop/pivot if this becomes uncontrolled
-  face-lattice enumeration.
+- The original global bridge is decisively false. Read
+  `results/terminal-bridge-counterexample.md`: an exact rational
+  Santaló-normalized 24-cell and its polar are both terminal.
+- Read `results/24cell-projective-saddle.md`. A rational interval Krawczyk
+  certificate isolates a unique bi-centering root for a nonregular
+  Paffenholz 24-cell and proves a strict negative projective covariance
+  direction. This excludes an open four-parameter critical branch from local
+  minimality.
+- Do not return to terminal face-lattice enumeration. The next theorem-shaped
+  target is the Mahler Hessian on the full infinitesimal realization space,
+  followed by a coordinate-free negative-direction lemma for terminal
+  non-simplices.
 - Run the exact harness before and after changes:
-  `python3 -m unittest discover -s problems/mahler-volume-4d/harness -v`.
+  `python3 -m unittest discover -s problems/mahler-volume-4d/harness -v`,
+  `verify_bridge_counterexample.py`, and `bicenter_certificate.py` as
+  documented in `harness/README.md`.

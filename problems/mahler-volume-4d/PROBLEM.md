@@ -20,18 +20,23 @@ dimension-independent Meyer--Reisner convexity and rigidity theorem
 
 This campaign independently reconstructed the preprint's argument. The
 minimizer-to-terminal step extends to dimension four after replacing one
-specifically 3D paragraph in its face-lattice persistence proof. The missing
-global bridge remains: classify all 4-polytopes \(P\) for which both \(P\) and
-its Santaló polar have only globally affine admissible speeds.
+specifically 3D paragraph in its face-lattice persistence proof. The
+originally proposed global bridge is false: an exact rational
+Santaló-normalized realization of the 24-cell is terminal on both sides but
+is not a simplex. Shadow terminality is a valid necessary condition for
+minimizers, not a classification principle.
 
 Partial results:
 
 - a new necessary pair-terminality inequality
   \(2f_{03}\ge5(f_0+f_3)-10\);
 - the bridge lemma for all simple or simplicial 4-polytopes;
-- the bridge lemma for all 4-dimensional pyramids; and
+- the bridge lemma for all 4-dimensional pyramids;
 - directly, the sharp Mahler inequality with equality classification for all
-  4-dimensional pyramids.
+  4-dimensional pyramids;
+- an exact counterexample to the general terminal-pair bridge; and
+- a rational interval certificate excluding an open critical branch of
+  nonregular 24-cell realizations by a negative projective second variation.
 
 ## Certificate + verifier
 
@@ -41,13 +46,15 @@ Partial results:
   \(\sum_{v\in F}\lambda_v\alpha_v=0\) and computes exact rank.
 - **Verifier:** `harness/polytope.py` uses `fractions.Fraction` only. It
   enumerates small rational facets, constructs the origin polar, computes
-  incidence data and admissible-speed ranks, and verifies simplex volumes.
+  incidence data, admissible-speed ranks, all direction flats, moments and
+  covariance matrices.
 - **Validated object:** the centered 4-simplex has speed dimension five and
   exact volume product \(3125/576\). The cube, cross-polytope, and pyramid over
   a cube are negative controls.
 - **Limit:** a finite realized-polytope check cannot certify the global
-  terminal classification. A proof over all face lattices/realizations is
-  required; uncontrolled enumeration is explicitly out of scope.
+  Mahler conjecture. The interval certificate proves a specific critical
+  branch is a saddle; a coordinate-free proof over all minimizer
+  realizations is still required.
 
 ## Known structure (bake into any search)
 
@@ -59,6 +66,13 @@ Partial results:
 - A pair-terminal 4-polytope must be non-simple and non-simplicial unless it is
   a simplex.
 - A pair-terminal 4-pyramid is a simplex.
+- Pair-terminality alone does not force a simplex: the checked rational
+  24-cell and its genuine Santaló polar are pair-terminal.
+- A local minimizer in Santaló position is bi-centered and satisfies
+  \[
+  \operatorname{cov}(K^\circ)\succeq
+  \frac1{36}\operatorname{cov}(K)^{-1}.
+  \]
 - Necessary bounds, with \(\Delta\) the largest facet size and \(\delta\) the
   largest vertex--facet degree, are
   \[
@@ -71,8 +85,11 @@ Partial results:
 
 ## Angle-of-attack menu (be exploratory — draw from different fields)
 
-- **Incidence/affine rigidity:** sharpen rank subadditivity using overlaps of
-  facet affine-dependence spaces and flag-vector identities.
+- **Realization-space second variation:** combine facet-coplanarity tangent
+  equations with exact moment Hessians and seek a nonprojective descent
+  direction for every terminal non-simplex.
+- **Incidence/affine rigidity:** use rank structure as one input to the
+  second-variation problem; terminality alone is now known insufficient.
 - **Pyramid and wedge reductions:** terminality inheritance under operations
   that reduce dimension; pyramids are complete.
 - **Stress-matrix duality:** reinterpret facet compatibility as an affine
@@ -85,7 +102,8 @@ Partial results:
 ## First steps
 
 1. Read `LEARNINGS.md` and the source audit.
-2. Test whether terminality descends through wedges or vertex truncations, as
-   it does through pyramids.
-3. Seek a rank-overlap improvement to inequality (3) in
-   `angles/incidence-terminal/README.md`.
+2. Derive the Mahler Hessian on the full infinitesimal realization space of a
+   4-polytope and test it on the certified Paffenholz 24-cell branch.
+3. Seek a coordinate-free lemma forcing a negative realization-space
+   direction for every pair-terminal non-simplex satisfying the centroid
+   equations. Do not return to terminal face-lattice enumeration.

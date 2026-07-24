@@ -2,8 +2,9 @@
 
 `polytope.py` implements dependency-free rational arithmetic for small realized
 polytopes. It enumerates supporting facets and incidences, constructs the
-origin polar, builds admissible-speed matrices, and computes rational ranks and
-simplex volumes.
+origin polar, builds admissible-speed matrices, computes rational ranks,
+volumes, centroids and covariance matrices, and enumerates every
+facet-normal-arrangement direction flat.
 
 For each constrained facet `F`, a matrix row is an affine dependence `lambda`
 of its vertices, and the verified speed equation is
@@ -15,6 +16,12 @@ Run:
 
 ```bash
 python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
+
+PYTHONPATH=problems/mahler-volume-4d/harness \
+python3 -B problems/mahler-volume-4d/harness/verify_bridge_counterexample.py
+
+PYTHONPATH=problems/mahler-volume-4d/harness \
+python3 -B problems/mahler-volume-4d/harness/bicenter_certificate.py
 ```
 
 The positive object is the centered 4-simplex: its polar, incidences,
@@ -22,6 +29,17 @@ five-dimensional speed space, and exact Mahler product `3125/576` are checked.
 Negative controls are the 4-cross-polytope, the 4-cube in a facet-parallel
 direction, and a pyramid over the 3-cube; each has certified non-globally
 affine admissible speeds.
+
+`verify_bridge_counterexample.py` exhausts every direction flat for a
+rational Santaló-normalized Paffenholz 24-cell. It proves that the polytope
+and its actual Santaló polar are both terminal, disproving the proposed
+terminal-pair classification bridge.
+
+`bicenter_certificate.py` uses outward-rounded dyadic rational interval
+arithmetic. A Krawczyk inclusion certifies the unique bi-centering root in a
+specified box, and an interval covariance calculation proves that the
+projective Hessian has a negative direction there. `explore_bicenter.py` is
+only a floating-point discovery aid and makes no certified claim.
 
 This is a discovery/falsification harness, not a verifier of the full Mahler
 conjecture. A classification proof cannot be replaced by checking finitely

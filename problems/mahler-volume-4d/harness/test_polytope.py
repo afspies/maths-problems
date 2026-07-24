@@ -2,9 +2,12 @@ import unittest
 from fractions import Fraction
 
 from polytope import (
+    cell_24,
     centered_simplex_4,
     cross_polytope_4,
     cube_4,
+    inverse,
+    paffenholz_24_cell,
     pyramid_mahler_factor,
     pyramid_over_cube_3,
     simplex_volume,
@@ -67,6 +70,75 @@ class ExactPolytopeHarnessTests(unittest.TestCase):
         self.assertEqual(
             pyramid_mahler_factor(4) * Fraction(64, 9),
             Fraction(3125, 576),
+        )
+
+    def test_direction_flat_enumeration_matches_known_examples(self):
+        simplex = centered_simplex_4()
+        self.assertEqual(
+            {case["dimension"] for case in simplex.direction_flat_dimensions()},
+            {5},
+        )
+        cube = cube_4()
+        self.assertEqual(
+            min(case["dimension"] for case in cube.direction_flat_dimensions()),
+            5,
+        )
+        self.assertGreater(
+            max(case["dimension"] for case in cube.direction_flat_dimensions()),
+            5,
+        )
+
+    def test_24_cell_incidence_and_polar(self):
+        polytope = cell_24()
+        expected = {
+            "f0": 24,
+            "f3": 24,
+            "f03": 144,
+            "Delta": 6,
+            "delta": 6,
+            "facet_sizes": (6,) * 24,
+            "vertex_facet_degrees": (6,) * 24,
+        }
+        self.assertEqual(polytope.incidence_summary(), expected)
+        self.assertEqual(polytope.polar().incidence_summary(), expected)
+
+    def test_exact_pulling_volumes_and_centroids(self):
+        simplex = centered_simplex_4()
+        self.assertEqual(simplex.volume_and_centroid()[0], simplex_volume(simplex.vertices))
+        self.assertEqual(simplex.volume_and_centroid()[1], (0, 0, 0, 0))
+        self.assertEqual(cube_4().volume_and_centroid(), (16, (0, 0, 0, 0)))
+        self.assertEqual(
+            cross_polytope_4().volume_and_centroid(),
+            (Fraction(2, 3), (0, 0, 0, 0)),
+        )
+        cube_volume, cube_centroid, cube_covariance = (
+            cube_4().volume_centroid_covariance()
+        )
+        self.assertEqual((cube_volume, cube_centroid), (16, (0, 0, 0, 0)))
+        self.assertEqual(
+            cube_covariance,
+            tuple(
+                tuple(Fraction(int(row == column), 3) for column in range(4))
+                for row in range(4)
+            ),
+        )
+        self.assertEqual(
+            inverse(((2, 1), (1, 1))),
+            ((1, -1), (-1, 2)),
+        )
+
+    def test_paffenholz_realization_has_24_cell_incidence(self):
+        polytope = paffenholz_24_cell()
+        self.assertEqual(polytope.incidence_summary()["facet_sizes"], (6,) * 24)
+        self.assertEqual(polytope.incidence_summary()["vertex_facet_degrees"], (6,) * 24)
+        regular_family_member = paffenholz_24_cell((0, 0, 0, 0))
+        self.assertEqual(
+            tuple(incident for incident, _, _ in polytope.facets),
+            tuple(incident for incident, _, _ in regular_family_member.facets),
+        )
+        self.assertEqual(
+            polytope.volume_and_centroid(),
+            polytope.facet_cone_volume_and_centroid(),
         )
 
 

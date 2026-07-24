@@ -130,3 +130,19 @@ determines the face lattice of a polytope, the face lattice persists. \(\square\
 - Vertex--facet incidence determines where admissibility equations live, but
   not their coefficients. Those depend on affine relations in the chosen
   realization.
+
+## 2026-07-24 correction: terminality is not the 4D bridge
+
+The reduction above remains valid, but the final sentence of the
+minimizer-to-terminal section must not be read as evidence that a terminal
+classification exists in dimension four. The exact certificate in
+`../results/terminal-bridge-counterexample.md` constructs a rational
+non-simplex 24-cell \(Q\) for which both \(Q\) and its genuine Santaló polar
+are terminal.
+
+The correct necessary-condition stack for a local minimizer is stronger:
+after Santaló centering it is pair-terminal, it satisfies
+\(c(K)=c(K^\circ)=0\), and its projective covariance Hessian is positive
+semidefinite [klartag-2018; balacheff-solanes-tzanev-2023]. The last two
+conditions are independent variational inputs, not consequences of shadow
+terminality.
