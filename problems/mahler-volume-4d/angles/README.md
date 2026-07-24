@@ -11,9 +11,13 @@
   projective-orbit reduction, and the exact Santaló-envelope Hessian.
 - `dual-isotropic/`: determinant and trace covariance targets, with explicit
   stop/go falsification tests.
+- `slack-concentration/`: the connected-terminal trace-gap conjecture,
+  its probabilistic slack-variance form, and an exact volume-weighted
+  finite slack-energy target.
 
 The terminal-pair classification route is false. The next rotation should
-build a smooth integrable realization chart for a connected pair-terminal
-candidate and seek a coordinate-free stress/Gale descent lemma. Disconnected
-circuit configurations are affine joins and are now solved. Do not enumerate
-arbitrary 4-polytope face lattices.
+work on the q-regular integrable stress cone and seek either a
+coordinate-free negative Hessian direction or the terminal
+slack-concentration inequality. Disconnected circuit configurations are
+affine joins and are now solved. Do not enumerate arbitrary 4-polytope face
+lattices.

@@ -15,3 +15,11 @@
 - `24cell-realization-hessian.md`: exact Santaló-reduced Hessian
   \(-61I_4/234\) on the Paffenholz realization chart, excluding an open
   neighborhood of the regular 24-cell.
+- `full-rank-24cell-exclusion.md`: closed volume/covariance formulas for
+  eight smooth centrally symmetric 24-cell families; every parameter
+  violates the projective local-minimum condition, excluding open subsets
+  of the full 48-dimensional realization stratum.
+- `24cell-stress-arc.md`: an exact q-regular stress-cone velocity through the
+  pair-terminal 24-cell, proving a genuinely new analytic deformation into
+  the smooth full-rank stratum and correcting the Mahler gauge count from
+  24 projective to 20 affine directions.

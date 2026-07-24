@@ -6,6 +6,8 @@ from polytope import (
     centered_simplex_4,
     cross_polytope_4,
     cube_4,
+    full_rank_24_cell,
+    full_rank_24_cell_invariants,
     inverse,
     join_mahler_factor,
     join_segment_square_4,
@@ -17,6 +19,9 @@ from polytope import (
     simplex_volume,
 )
 from variation import (
+    incidence_stress_bilinear,
+    incidence_stress_quadratic,
+    incidence_tangent_and_stress_bases,
     incidence_tangent_dimension,
     incidence_tangent_matrix,
     paffenholz_parameter_path,
@@ -24,6 +29,7 @@ from variation import (
     projective_orbit_tangent_vectors,
     projective_vertex_path,
     reduced_log_mahler_second,
+    second_order_incidence_rhs,
 )
 
 
@@ -262,6 +268,103 @@ class ExactPolytopeHarnessTests(unittest.TestCase):
             regular, parameter_first
         )
         self.assertEqual(rank((*regular_projective, parameter_tangent)), 25)
+
+    def test_full_rank_24_cell_family_exact_invariants_and_covariance_gap(self):
+        parameter = Fraction(1, 2)
+        polytope = full_rank_24_cell(parameter, (1, -1, 1))
+        self.assertEqual(len(polytope.facets), 24)
+        self.assertEqual(sum(len(facet[0]) for facet in polytope.facets), 144)
+        self.assertEqual(incidence_tangent_dimension(polytope), 48)
+
+        invariants = full_rank_24_cell_invariants(parameter)
+        primal_volume, primal_centroid, primal_covariance = (
+            polytope.volume_centroid_covariance()
+        )
+        polar_volume, polar_centroid, polar_covariance = (
+            polytope.polar().volume_centroid_covariance()
+        )
+        self.assertEqual(primal_centroid, (0, 0, 0, 0))
+        self.assertEqual(polar_centroid, (0, 0, 0, 0))
+        self.assertEqual(primal_volume, invariants["primal_volume"])
+        self.assertEqual(polar_volume, invariants["polar_volume"])
+        self.assertEqual(primal_volume * polar_volume, invariants["mahler"])
+
+        primal_scalar = invariants["primal_covariance_scalar"]
+        polar_scalar = invariants["polar_covariance_scalar"]
+        self.assertEqual(
+            primal_covariance,
+            tuple(
+                tuple(
+                    primal_scalar if row == column else Fraction()
+                    for column in range(4)
+                )
+                for row in range(4)
+            ),
+        )
+        self.assertEqual(
+            polar_covariance,
+            tuple(
+                tuple(
+                    polar_scalar if row == column else Fraction()
+                    for column in range(4)
+                )
+                for row in range(4)
+            ),
+        )
+        self.assertLess(primal_scalar * polar_scalar, Fraction(1, 36))
+
+    def test_24_cell_has_q_regular_integrable_tangent(self):
+        polytope = paffenholz_24_cell()
+        tangent_matrix = incidence_tangent_matrix(polytope)
+        tangent_basis, stress_basis = incidence_tangent_and_stress_bases(
+            polytope
+        )
+        self.assertEqual(len(tangent_basis), 50)
+        self.assertEqual(len(stress_basis), 2)
+
+        velocity = tuple(
+            tangent_basis[0][index]
+            + Fraction(659, 667) * tangent_basis[1][index]
+            for index in range(len(tangent_basis[0]))
+        )
+        self.assertEqual(
+            tuple(
+                incidence_stress_quadratic(polytope, stress, velocity)
+                for stress in stress_basis
+            ),
+            (0, 0),
+        )
+        stress_derivative = tuple(
+            tuple(
+                incidence_stress_bilinear(
+                    polytope, stress, velocity, tangent
+                )
+                for tangent in tangent_basis
+            )
+            for stress in stress_basis
+        )
+        self.assertEqual(rank(stress_derivative), 2)
+
+        right = second_order_incidence_rhs(polytope, velocity)
+        augmented = tuple(
+            (*row, right[index]) for index, row in enumerate(tangent_matrix)
+        )
+        self.assertEqual(rank(augmented), rank(tangent_matrix))
+
+        projective = projective_orbit_tangent_vectors(polytope)
+        self.assertEqual(rank((*projective, velocity)), 25)
+        paffenholz_tangents = []
+        for coordinate in range(4):
+            direction = [0, 0, 0, 0]
+            direction[coordinate] = 1
+            first, _ = paffenholz_parameter_path(direction)
+            paffenholz_tangents.append(
+                paired_tangent_from_vertex_path(polytope, first)
+            )
+        self.assertEqual(rank((*projective, *paffenholz_tangents)), 28)
+        self.assertEqual(
+            rank((*projective, *paffenholz_tangents, velocity)), 29
+        )
 
 
 if __name__ == "__main__":

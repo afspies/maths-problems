@@ -67,7 +67,9 @@
   strictly separate all products and free sums from equality. An exact
   Santaló-reduced Hessian excludes an open realization neighborhood of the
   regular 24-cell; interval covariance excludes a second nonregular branch.
-  The general 4D conjecture remains open.
+  Closed covariance formulas exclude eight smooth 24-cell curves, and a
+  q-regular stress arc enters an open smooth pair-terminal family. The
+  general 4D conjecture remains open.
 </div>
 
 <h2>1 · The terminal-pair bridge is false</h2>
@@ -112,6 +114,27 @@ for the Paffenholz chart in a radius-10<sup>−10</sup> box centered at</p>
 −0.0075809. Hence the exact critical body is a projective saddle.
 Nonsingularity and strictness exclude an open four-parameter critical branch
 of nonregular 24-cells from local minimality.</p>
+<div class="env">
+  <span class="label">Theorem 0.2.</span>
+  Every member of the eight signed full-rank 24-cell curves violates the
+  projective covariance condition.
+</div>
+<p>Writing r=x<sup>2</sup>, exact pyramid and polar-cap integration gives</p>
+<div class="eqn">
+  ℘(<var>K</var><sub>x</sub>) =
+  16(3+r)/(3(1+r)),
+</div>
+<div class="eqn">
+  cov(<var>K</var><sub>x</sub>) =
+  ((13+22r+5r<sup>2</sup>)/(30(1+r)<sup>2</sup>))I,
+</div>
+<div class="eqn">
+  cov(<var>K</var><sub>x</sub>°) =
+  ((39+27r−3r<sup>2</sup>+r<sup>3</sup>)/(240(3+r)))I.
+</div>
+<p>Their scalar product is strictly below 1/36 for 0≤r&lt;1. The incidence
+Jacobian has full rank 144 away from the regular endpoint, so continuity
+excludes open subsets of the smooth 48-dimensional realization stratum.</p>
 
 <h2>3 · Sharp result for every 4D affine join</h2>
 <div class="env">
@@ -177,7 +200,25 @@ tangent dimension is</p>
 Disconnected circuit support is an affine join, already settled. Otherwise
 the labeled projective stabilizer is scalar, the projective orbit has
 dimension 24, and the quotient tangent dimension is the displayed number
-minus 24.</p>
+minus 24. This is a realization-moduli quotient. Only the 20 affine
+directions are Mahler gauges; the remaining four projective directions carry
+the covariance Hessian.</p>
+<p>At a singular point, a tangent u=(a<sub>v</sub>,b<sub>F</sub>) lifts to
+second order exactly when every incidence stress λ satisfies</p>
+<div class="eqn">
+  q<sub>λ</sub>(u)=Σ<sub>v∈F</sub>λ<sub>vF</sub>
+  a<sub>v</sub>·b<sub>F</sub>=0.
+</div>
+<p>If Dq<sub>u</sub> is onto the stress cokernel, a blow-up implicit-function
+argument integrates u analytically. At the exact pair-terminal 24-cell,</p>
+<div class="eqn">
+  u=τ<sub>0</sub>+(659/667)τ<sub>1</sub>, &nbsp;
+  q(u)=0, &nbsp; rank Dq<sub>u</sub>=2.
+</div>
+<p>This genuinely new nonprojective arc enters the rank-144 smooth stratum.
+Together with openness of pair-terminality and the certified covariance
+violation, it excludes an open 24-dimensional moduli family of smooth
+pair-terminal 24-cells.</p>
 <p>Exact second-order jets eliminate the moving Santaló point by subtracting
 the Schur term</p>
 <div class="eqn">
@@ -224,7 +265,7 @@ obstacle.</p>
 <h2>8 · Exact verification</h2>
 <pre><code>$ python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ...
-Ran 13 tests
+Ran 15 tests
 
 OK
 
@@ -238,8 +279,9 @@ unique-bicenter-root True
 projective-local-minimum False</code></pre>
 <p>The rational harness also checks join/product/free-sum factors, a centered
 segment–square join, incidence tangent ranks, the 24 projective directions,
-and the complete four-parameter realization Hessian. It is a falsification
-tool, not a substitute for classification.</p>
+the complete four-parameter realization Hessian, the signed smooth-family
+covariances, and the q-regular stress-arc ranks. It is a falsification tool,
+not a substitute for classification.</p>
 
 <h2>9 · Limits and next route</h2>
 <p>Generic rigidity is too weak: the cube is rigid generically but not in

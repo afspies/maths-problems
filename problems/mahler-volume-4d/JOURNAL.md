@@ -335,7 +335,7 @@ stronger separator only with extra terminal/minimality structure.
 
 ```text
 python3 -m py_compile problems/mahler-volume-4d/harness/*.py
-python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
+python3 -m unittest discover -s problems/mahler-volume-4d/harness -q
 PYTHONPATH=problems/mahler-volume-4d/harness \
 python3 -B problems/mahler-volume-4d/harness/verify_bridge_counterexample.py
 PYTHONPATH=problems/mahler-volume-4d/harness \
@@ -354,3 +354,150 @@ passes the continuation gate with a sharp infinite-family theorem, a new
 incidence/stress dimension formula, and a second open non-pyramidal
 realization-family exclusion. The remaining proof problem is the connected,
 integrable realization-space branch, not face-lattice enumeration.
+
+## 2026-07-24 — smooth stress cone and full-rank 24-cell exclusions
+
+### Push and scope
+
+Pushed the previously merged local `main` through commit `e4c79f9` to
+`origin/main`, then opened branch
+`problem/mahler-volume-4d/2026-07-24-connected-hessian-rigidity`.
+Work remained inside this problem folder plus the generated board.
+
+Three independent agents attacked the connected case: exact
+slack-variety integrability, a covariance/slack-concentration route, and an
+xhigh Sol adversarial synthesis. No agent edited repository files.
+
+### Primary-source audit and smooth signed families
+
+Inspected Proposition 5.8(3) of Rastanawi--Sinn--Ziegler directly from the
+primary paper. It gives eight centrally symmetric one-parameter 24-cell
+families with incidence Jacobian rank 144 for \(0<x<1\). Transcribed the
+displayed coordinates and checked them independently with the rational
+harness.
+
+Writing \(r=x^2\), direct cube-pyramid and cross-polytope-cap integration
+gave
+\[
+|K_x|=\frac{32}{1+r},\qquad
+|K_x^\circ|=\frac{3+r}{6},
+\qquad
+\mathcal P(K_x)=\frac{16(3+r)}{3(1+r)}.
+\]
+The order-24 symmetry and exact second moments give
+\[
+\operatorname{cov}(K_x)=
+\frac{13+22r+5r^2}{30(1+r)^2}I,
+\]
+\[
+\operatorname{cov}(K_x^\circ)=
+\frac{39+27r-3r^2+r^3}{240(3+r)}I.
+\]
+Their scalar product is strictly below \(1/36\), because the numerator of
+the difference is
+\[
+93+191r+250r^2+106r^3+r^3(1-r)(5r+12)>0.
+\]
+Thus every parameter in all eight signed families violates the projective
+local-minimum condition. Continuous Santaló normalization excludes open
+subsets of the full smooth 48-dimensional realization stratum.
+
+### Exact q-regular analytic arc
+
+For the paired incidence equations
+\[
+F_{vF}=x_v\cdot y_F-1,
+\]
+defined the stress quadrics
+\[
+q_\lambda(u)=
+\sum_{v\in F}\lambda_{vF}a_v\cdot b_F,
+\qquad \lambda\in\ker J^\mathsf T.
+\]
+A tangent has a formal second-order lift exactly when every stress quadric
+vanishes. More strongly, Lyapunov--Schmidt reduction followed by the blow-up
+\(r^{-2}\Phi(ru)\) proves that
+\[
+q(u)=0,\qquad Dq_u\text{ surjective}
+\]
+integrates to a two-sided real-analytic incidence arc, even when the base
+realization is singular.
+
+At the rational Paffenholz member, exact nullspace arithmetic gives
+\[
+\operatorname{rank}J=142,\quad \dim\ker J=50,\quad
+\dim\ker J^\mathsf T=2.
+\]
+The deterministic witness
+\[
+u=\tau_0+\frac{659}{667}\tau_1
+\]
+satisfies both quadrics and has \(\operatorname{rank}Dq_u=2\).
+The augmented second-order system has rank 142. Adjoining \(u\) raises the
+PGL tangent rank from 24 to 25 and the PGL-plus-Paffenholz rank from 28 to
+29, proving this is a genuinely new realization direction. Nearby nonzero
+arc points have Jacobian rank 144.
+
+Transport to the exact pair-terminal Santaló-normalized counterexample,
+openness of its finite speed-rank minors, the nonsingular bi-centering
+certificate, and the strict covariance violation together exclude an open
+24-dimensional moduli family of smooth pair-terminal 24-cells.
+
+### Mandatory correction and new global target
+
+The xhigh Sol reviewer caught an error in the previous handoff language:
+only the 20-dimensional affine subgroup is a Mahler gauge. The four
+denominator-projective directions are genuine and carry the covariance
+Hessian. After quotienting affine motion, the correct block test is
+\[
+\begin{pmatrix}A&B\\B^\mathsf T&C\end{pmatrix}\succeq0,
+\]
+which requires
+\[
+A\succeq0,\qquad
+\ker A\subseteq\ker B^\mathsf T,\qquad
+C-B^\mathsf T A^\dagger B\succeq0.
+\]
+All current documents now distinguish PGL realization moduli from affine
+Mahler gauges.
+
+The global exploratory route rewrites the trace target as slack
+concentration. For independent uniform \(X\in K\), \(Y\in K^\circ\),
+bi-centering gives
+\[
+\operatorname{tr}(
+\operatorname{cov}K\operatorname{cov}K^\circ)
+=\operatorname{Var}(1-\langle X,Y\rangle).
+\]
+Vertex triangulations turn the desired connected-terminal ceiling \(<1/9\)
+into an explicit volume-weighted quadratic energy of normalized slack
+submatrices. This is now the cleanest theorem-shaped global target, but it
+remains a conjecture.
+
+### Verification and verdict
+
+Commands:
+
+```text
+python3 -m py_compile problems/mahler-volume-4d/harness/*.py
+python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
+PYTHONPATH=problems/mahler-volume-4d/harness \
+python3 -B problems/mahler-volume-4d/harness/verify_bridge_counterexample.py
+PYTHONPATH=problems/mahler-volume-4d/harness \
+python3 -B problems/mahler-volume-4d/harness/bicenter_certificate.py
+python3 tools/board.py
+```
+
+Byte-compilation passed; the final isolated run passed all 15 exact tests in
+32.161 seconds. The exhaustive terminal-pair certificate completed in 12.6
+seconds, and the interval bi-centering/covariance certificate completed in
+7.6 seconds with the same strict rational bounds. Exploratory floating
+sampling and rational interpolation only suggested formulas; every recorded
+formula was rederived geometrically and checked with exact fractions.
+
+The full connected non-pyramidal conjecture remains open. This session
+nevertheless advances the hard case in three ways: it excludes open sets in
+the smooth full-dimensional 24-cell stratum, proves a singular
+pair-terminal point has a q-regular analytic deformation into that stratum,
+and replaces an invalid 24-direction Hessian quotient by the correct
+affine/projective Schur test.

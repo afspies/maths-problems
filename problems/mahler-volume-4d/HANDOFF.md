@@ -39,15 +39,28 @@ Current priorities (update each session):
   `results/24cell-realization-hessian.md`. The exact Santaló-envelope Hessian
   is implemented. It equals \(-61I_4/234\) on the full Paffenholz parameter
   block at the regular 24-cell, excluding another open neighborhood.
+- Read `results/full-rank-24cell-exclusion.md`: all eight smooth signed
+  24-cell curves violate the covariance condition for every parameter,
+  excluding open subsets of the 48-dimensional smooth stratum.
+- Read `results/24cell-stress-arc.md`: a q-regular exact velocity integrates
+  the singular pair-terminal counterexample into a genuinely new
+  nonprojective rank-144 realization family.
+- Read `angles/slack-concentration/README.md`: the connected trace-gap
+  conjecture is equivalent to a sharp variance bound for normalized slack
+  and has an explicit finite weighted slack-energy form.
 - Terminality plus disconnected facet-circuit support gives an affine join,
   now solved. In the connected branch the projective orbit has dimension 24
-  and the quotient tangent count is
+  and the realization-moduli quotient tangent count is
   \(4(f_0+f_3)-f_{03}+\omega-24\).
+- Do not quotient all 24 PGL directions in the Mahler Hessian. Only the 20
+  affine directions are gauges; the four denominator-projective directions
+  carry the covariance block and must be retained or Schur-complemented.
 - Do not return to terminal face-lattice enumeration. The next theorem-shaped
-  target is a smooth full-rank realization chart for a connected
-  pair-terminal candidate, followed by a coordinate-free Gale/stress lemma
-  forcing a negative integrable quotient direction. Raw incidence-kernel
-  vectors may fail to integrate at singular points.
+  target is a coordinate-free Gale/stress lemma forcing negative curvature
+  on the q-regular integrable stress cone. Raw incidence-kernel vectors may
+  fail to integrate at singular points, but
+  `results/24cell-stress-arc.md` proves a q-regular analytic arc can bypass
+  base-point singularity.
 - Run the exact harness before and after changes:
   `python3 -m unittest discover -s problems/mahler-volume-4d/harness -v`,
   `verify_bridge_counterexample.py`, and `bicenter_certificate.py` as

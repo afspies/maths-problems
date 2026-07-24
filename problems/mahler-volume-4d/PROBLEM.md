@@ -38,10 +38,15 @@ Partial results:
   four-dimensional affine join, including the non-pyramidal \(1+2\) split;
 - strict sharp-constant gaps for all \(1+3\) and \(2+2\) Cartesian products
   and free sums;
-- an exact counterexample to the general terminal-pair bridge; and
+- an exact counterexample to the general terminal-pair bridge;
 - two open 24-cell realization neighborhoods excluded by second variation:
   one by a rational interval projective certificate and one by an exact
-  negative-definite four-parameter realization Hessian at the regular cell.
+  negative-definite four-parameter realization Hessian at the regular cell;
+- exact formulas excluding all eight smooth signed one-parameter 24-cell
+  families, and open neighborhoods in the full 48-dimensional realization
+  stratum, by a strict projective covariance violation;
+- an exact q-regular stress-cone velocity integrating the singular
+  pair-terminal 24-cell into a new nonprojective smooth realization family.
 
 ## Certificate + verifier
 
@@ -77,6 +82,10 @@ Partial results:
   and free sums have a strict gap.
 - Pair-terminality alone does not force a simplex: the checked rational
   24-cell and its genuine Santaló polar are pair-terminal.
+- Pair-terminality does not imply realization-space smoothness. The
+  pair-terminal 24-cell has incidence rank 142 and a two-dimensional stress
+  cokernel, but an exact regular point of its quadratic stress cone
+  integrates analytically to nearby rank-144 realizations.
 - In paired coordinates \(x_v\cdot y_F=1\), the fixed-incidence tangent
   dimension is
   \[
@@ -84,7 +93,8 @@ Partial results:
   \]
   where \(\omega\) is the incidence-stress dimension. A terminal non-join
   has a 24-dimensional labeled projective orbit, so the quotient dimension
-  is this number minus 24.
+  of its realization moduli is this number minus 24. This is not a Mahler
+  Hessian quotient: only the 20 affine directions are volume-product gauges.
 - A local minimizer in Santaló position is bi-centered and satisfies
   \[
   \operatorname{cov}(K^\circ)\succeq
@@ -119,10 +129,11 @@ Partial results:
 ## First steps
 
 1. Read `LEARNINGS.md` and the source audit.
-2. Construct a smooth full-rank realization chart at a bi-centered
-   pair-terminal candidate, quotient its exact Santaló Hessian by the
-   24-dimensional projective orbit, and retain only integrable tangents.
+2. Attack the connected terminal trace gap using the explicit weighted
+   slack energy in `angles/slack-concentration/`; seek a circuit/Hodge
+   Poincare inequality or an exact counterexample.
 3. Seek a coordinate-free stress/Gale lemma forcing a negative quotient
-   direction for every connected pair-terminal non-simplex. The disconnected
-   branch is an affine join and is now solved. Do not return to terminal
-   face-lattice enumeration.
+   direction on the q-regular integrable stress cone. Quotient only the 20
+   affine gauges and retain the four projective directions through the
+   covariance Schur complement. The disconnected branch is an affine join
+   and is now solved. Do not return to terminal face-lattice enumeration.

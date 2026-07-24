@@ -57,6 +57,29 @@ orbit dimension exactly 24, and
 
 This is a structural reduction, not yet a descent theorem.
 
+It is a quotient for realization moduli, not for Mahler volume. Only the
+20-dimensional affine subgroup is a Mahler gauge. The other four projective
+directions are genuine variations governed by the covariance Hessian.
+
+After quotienting the affine gauges, split the constrained Hessian into the
+four denominator-projective directions and the remaining realization
+directions:
+
+\[
+H=\begin{pmatrix}A&B\\B^\mathsf T&C\end{pmatrix}.
+\]
+
+Here \(A\) is the covariance block. If \(A\) has a negative direction, the
+candidate is excluded. If \(A\succeq0\), positivity of \(H\) additionally
+requires
+
+\[
+\ker A\subseteq\ker B^\mathsf T,\qquad
+C-B^\mathsf T A^\dagger B\succeq0.
+\]
+
+Thus even a semidefinite projective block cannot simply be removed.
+
 ## Exact Santaló-envelope Hessian
 
 For an integrable \(C^2\) fixed-chamber path \(K_t\), put
@@ -100,7 +123,9 @@ At singular realization points, not every element of \(\ker J\) integrates.
 Moreover, the constrained Hessian is the Lagrangian Hessian, including the
 incidence-stress cross term, not the raw ambient volume Hessian.
 
-The next go/no-go target is a smooth full-rank realization chart at a
-bi-centered pair-terminal candidate. Quotient its exact Hessian by the
-24-dimensional projective orbit and compress any negative eigenvector into a
-coordinate-free stress/Gale certificate.
+The q-regular arc lemma in `../../results/24cell-stress-arc.md` removes the
+need for base-point smoothness. The next go/no-go target is the exact Hessian
+on the regular stress cone \(q^{-1}(0)\), after quotienting 20 affine gauges
+and Schur-complementing any positive four-dimensional projective covariance
+block. Compress a surviving negative direction into a coordinate-free
+stress/Gale certificate.

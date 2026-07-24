@@ -17,7 +17,11 @@ including the non-pyramidal \(1+2\) split, and give strict gaps for all
 products and free sums. An exact Santaló-envelope Hessian is
 \(-61I_4/234\) on the Paffenholz realization chart at the regular 24-cell;
 an independent interval certificate excludes a second nonregular critical
-branch. The full four-dimensional conjecture is not proved.
+branch. Exact covariance formulas now exclude eight full-rank signed
+24-cell curves, while a q-regular stress-cone velocity integrates the
+singular pair-terminal counterexample into an open smooth family whose
+bi-centered representatives remain projective saddles. The full
+four-dimensional conjecture is not proved.
 
 ## Principal negative result
 
@@ -60,6 +64,30 @@ e_1^\mathsf T\left(
 Thus the exact critical representative is a saddle. Nonsingularity of the
 centroid Jacobian and strictness of the inequality exclude an open
 four-parameter critical branch of nonregular 24-cells from local minimality.
+
+### Theorem 0.2: smooth full-rank 24-cell exclusions
+
+For each of Rastanawi--Sinn--Ziegler's eight signed 24-cell families, put
+\(r=x^2\), \(0\le x<1\). Direct pyramid/cap integration gives
+\[
+\mathcal P(K_x)=\frac{16(3+r)}{3(1+r)}
+\]
+and scalar covariances
+\[
+a(r)=\frac{13+22r+5r^2}{30(1+r)^2},\qquad
+b(r)=\frac{39+27r-3r^2+r^3}{240(3+r)}.
+\]
+The exact factorization
+\[
+\frac1{36}-a(r)b(r)
+=\frac{
+93+191r+250r^2+118r^3-7r^4-5r^5
+}{7200(1+r)^2(3+r)}
+>0
+\]
+excludes every parameter by projective second variation. For
+\(0<x<1\), the incidence Jacobian has full rank 144, so continuity excludes
+open subsets of the smooth 48-dimensional realization stratum.
 
 ## Sharp infinite families
 
@@ -153,6 +181,27 @@ projective orbit has dimension 24 and the quotient tangent dimension is
 \[
 4(f_0+f_3)-f_{03}+\omega-24.
 \]
+This is a realization-moduli quotient. Mahler volume is invariant only under
+the 20-dimensional affine subgroup; the other four projective directions
+carry the covariance Hessian and cannot be discarded.
+
+At a singular realization, a tangent \(u=(a_v,b_F)\) has a second-order lift
+exactly when every incidence stress \(\lambda\) satisfies
+\[
+q_\lambda(u)=
+\sum_{v\in F}\lambda_{vF}a_v\cdot b_F=0.
+\]
+If \(Dq_u\) surjects onto the stress cokernel, a blow-up
+implicit-function argument integrates \(u\) to a real-analytic arc.
+For the exact pair-terminal 24-cell, the harness proves
+\[
+u=\tau_0+\frac{659}{667}\tau_1,\qquad
+q(u)=0,\qquad \operatorname{rank}Dq_u=2.
+\]
+This new nonprojective, non-Paffenholz arc enters the rank-144 smooth
+stratum. Combining openness of terminality with the certified nonsingular
+bi-centering branch and strict covariance violation excludes an open
+24-dimensional moduli family of smooth pair-terminal 24-cells.
 
 For an integrable fixed-chamber path at a bi-centered body, eliminating the
 moving Santaló point subtracts
@@ -177,7 +226,7 @@ Run:
 python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ```
 
-Expected: thirteen tests pass. The harness uses rational arithmetic only. It checks
+Expected: fifteen tests pass. The harness uses rational arithmetic only. It checks
 the centered simplex's polar, incidences, speed dimension, and exact product
 \(3125/576\); verifies cube/cross-polytope polarity; and supplies negative
 speed controls for the cross-polytope, cube, and pyramid over a cube.
@@ -198,8 +247,9 @@ checked, not inferred from the floating-point discovery run.
 
 The unit suite also checks the exact product/join factors, a centered
 segment--square join, the incidence tangent ranks, all 24 projective tangent
-vectors, and the four diagonal plus six polarized entries of the Paffenholz
-realization Hessian.
+vectors, the four diagonal plus six polarized entries of the Paffenholz
+realization Hessian, the smooth signed-family covariance formulas, and the
+q-regular analytic-arc rank certificate.
 
 This computation verifies the finite linear-algebra interfaces. The
 infinite-family results are proofs, not extrapolations from tested examples.

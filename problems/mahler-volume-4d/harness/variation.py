@@ -3,7 +3,7 @@
 from fractions import Fraction
 from itertools import permutations
 
-from polytope import affine_rank, dot, inverse, rank
+from polytope import affine_rank, dot, inverse, nullspace, rank
 
 
 def Q(value):
@@ -329,6 +329,72 @@ def incidence_tangent_matrix(polytope):
                 ] = polytope.vertices[vertex_index][coordinate]
             rows.append(tuple(row))
     return tuple(rows)
+
+
+def incidence_pairs(polytope):
+    """Incidence labels in exactly the row order of incidence_tangent_matrix."""
+    return tuple(
+        (vertex_index, facet_index)
+        for facet_index, (incident, _, _) in enumerate(polytope.facets)
+        for vertex_index in incident
+    )
+
+
+def incidence_tangent_and_stress_bases(polytope):
+    """Return exact bases for ker J and ker J^T."""
+    matrix = incidence_tangent_matrix(polytope)
+    transpose = tuple(
+        tuple(matrix[row][column] for row in range(len(matrix)))
+        for column in range(len(matrix[0]))
+    )
+    return tuple(nullspace(matrix)), tuple(nullspace(transpose))
+
+
+def split_paired_velocity(polytope, velocity, vertex_index, facet_index):
+    dimension = polytope.dimension
+    vertex_count = len(polytope.vertices)
+    primal_start = dimension * vertex_index
+    polar_start = dimension * vertex_count + dimension * facet_index
+    return (
+        velocity[primal_start : primal_start + dimension],
+        velocity[polar_start : polar_start + dimension],
+    )
+
+
+def incidence_stress_bilinear(polytope, stress, left, right):
+    """Polarization of sum stress[v,F] * left_v dot left_F."""
+    result = Fraction()
+    for coefficient, (vertex_index, facet_index) in zip(
+        stress, incidence_pairs(polytope)
+    ):
+        left_vertex, left_facet = split_paired_velocity(
+            polytope, left, vertex_index, facet_index
+        )
+        right_vertex, right_facet = split_paired_velocity(
+            polytope, right, vertex_index, facet_index
+        )
+        result += coefficient * (
+            dot(left_vertex, right_facet)
+            + dot(right_vertex, left_facet)
+        ) / 2
+    return result
+
+
+def incidence_stress_quadratic(polytope, stress, velocity):
+    return incidence_stress_bilinear(
+        polytope, stress, velocity, velocity
+    )
+
+
+def second_order_incidence_rhs(polytope, velocity):
+    """Right side J*w=-c(u,u) for z(t)=z+t*u+t^2*w+... ."""
+    result = []
+    for vertex_index, facet_index in incidence_pairs(polytope):
+        vertex_velocity, facet_velocity = split_paired_velocity(
+            polytope, velocity, vertex_index, facet_index
+        )
+        result.append(-dot(vertex_velocity, facet_velocity))
+    return tuple(result)
 
 
 def incidence_tangent_dimension(polytope):

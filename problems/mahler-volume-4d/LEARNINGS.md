@@ -6,11 +6,12 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 
 ## What the next session should do first
 
-- Work only on the connected circuit-support branch. Build a smooth,
-  full-rank realization chart at a bi-centered pair-terminal candidate,
-  quotient the exact Santaló-envelope Hessian by the 24 projective
-  directions, and turn any negative integrable direction into a
-  coordinate-free Gale/stress lemma.
+- Work only on the connected circuit-support branch. Try to prove or
+  falsify the terminal trace gap through the explicit volume-weighted slack
+  energy in `angles/slack-concentration/`. In parallel, derive the
+  constrained Santaló/Lagrangian Hessian on the q-regular stress cone,
+  quotienting only 20 affine gauges and retaining the four genuine
+  projective directions through the covariance Schur complement.
 
 ## Dead ends (and why)
 
@@ -31,10 +32,16 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 - Raw vectors in the paired incidence kernel need not integrate at a singular
   realization. A proof must use a smooth chart or a higher-order obstruction,
   and the constrained Hessian must include incidence-stress terms.
+- Pair-terminality does not imply realization-space smoothness: the exact
+  pair-terminal 24-cell has a two-dimensional stress cokernel and
+  non-liftable tangents.
 - The covariance trace ceiling is false without terminality/minimality
   structure; projectively critical planar pentagons already violate the
   analogous naive bound. Covariance equality alone also does not characterize
   simplices.
+- High realization Jacobian rank does not imply shadow terminality. At
+  \(x=1/2\), each signed smooth 24-cell tested still has four primal and four
+  polar direction flats of speed dimension six.
 
 ## Surprises / structure discovered
 
@@ -69,11 +76,25 @@ Keep this short enough to read in two minutes — the journal holds the detail.
   the projective orbit has dimension 24.
 - In paired coordinates, the exact quotient tangent count is
   \(4(f_0+f_3)-f_{03}+\omega-24\), where \(\omega\) is the incidence-stress
-  dimension. This guarantees many nonprojective infinitesimal directions but
-  not their integrability or Hessian sign.
+  dimension modulo PGL as a realization-space statement. For Mahler volume,
+  only the 20 affine directions are gauges; the remaining four projective
+  directions carry the covariance Hessian.
 - Exact second-order jets give the complete Paffenholz realization Hessian
   \(-61I_4/234\) at the regular 24-cell. Continuity excludes an open
   non-pyramidal neighborhood from local minimality.
+- The eight centrally symmetric full-rank 24-cell curves have closed
+  volume and covariance formulas. Every parameter has
+  \(a(r)b(r)<1/36\), so open subsets of the smooth 48-dimensional
+  realization stratum fail the projective local-minimum condition.
+- Singularity is no longer a blanket obstruction. The exact velocity
+  \(\tau_0+(659/667)\tau_1\) is a regular zero of both 24-cell stress
+  quadrics, so a blow-up implicit-function argument integrates it to a
+  genuinely new analytic arc with nearby Jacobian rank 144.
+- For bi-centered \(X\in K\), \(Y\in K^\circ\),
+  \(\operatorname{tr}(\operatorname{cov}K\operatorname{cov}K^\circ)\)
+  equals the variance of the normalized slack \(1-\langle X,Y\rangle\).
+  This turns the connected trace-gap conjecture into a concrete
+  volume-weighted discrete slack-energy inequality.
 - Pulling moments were independently cross-checked by a boundary-facet cone
   triangulation. Outward dyadic rounding keeps rigorous rational interval
   arithmetic fast enough for the Krawczyk certificate.

@@ -557,3 +557,52 @@ def paffenholz_24_cell(
             vertex[coordinate] = 2 * side - parameters[coordinate]
             vertices.append(tuple(vertex))
     return RationalPolytope(vertices)
+
+
+def full_rank_24_cell(parameter=Fraction(1, 2), signs=(1, 1, 1)):
+    """Rastanawi--Sinn--Ziegler's smooth one-parameter 24-cell family."""
+    parameter = Q(parameter)
+    signs = tuple(signs)
+    if not 0 <= parameter < 1:
+        raise ValueError("expected a parameter in [0, 1)")
+    if len(signs) != 3 or any(sign not in (-1, 1) for sign in signs):
+        raise ValueError("expected three signs in {-1, 1}")
+    denominator = 1 + parameter**2
+    axial = Fraction(2) / denominator
+    first, second, third = (
+        Fraction(2 * sign) * parameter / denominator for sign in signs
+    )
+    extra = [
+        (-axial, -first, -second, -third),
+        (axial, first, second, third),
+        (first, -axial, third, -second),
+        (-first, axial, -third, second),
+        (second, -third, -axial, first),
+        (-second, third, axial, -first),
+        (third, second, -first, -axial),
+        (-third, -second, first, axial),
+    ]
+    return RationalPolytope([*product((-1, 1), repeat=4), *extra])
+
+
+def full_rank_24_cell_invariants(parameter):
+    """Closed exact invariants for the centrally symmetric smooth family."""
+    parameter = Q(parameter)
+    if not 0 <= parameter < 1:
+        raise ValueError("expected a parameter in [0, 1)")
+    squared = parameter**2
+    primal_volume = Fraction(32) / (1 + squared)
+    polar_volume = (3 + squared) / 6
+    primal_covariance_scalar = (
+        13 + 22 * squared + 5 * squared**2
+    ) / (30 * (1 + squared) ** 2)
+    polar_covariance_scalar = (
+        39 + 27 * squared - 3 * squared**2 + squared**3
+    ) / (240 * (3 + squared))
+    return {
+        "primal_volume": primal_volume,
+        "polar_volume": polar_volume,
+        "mahler": primal_volume * polar_volume,
+        "primal_covariance_scalar": primal_covariance_scalar,
+        "polar_covariance_scalar": polar_covariance_scalar,
+    }

@@ -53,6 +53,13 @@ dimensions for two 24-cell realizations; and the complete four-dimensional
 Paffenholz Hessian
 \(-61I_4/234\) at the regular 24-cell.
 
+It also checks Rastanawi--Sinn--Ziegler's smooth signed 24-cell family:
+24 facets, 144 incidences, full Jacobian rank at \(x=1/2\), and the exact
+closed volume and scalar-covariance formulas. The incidence-stress routines
+verify the q-regular velocity
+\(\tau_0+(659/667)\tau_1\), second-order solvability, and its independence
+from both PGL motion and the four Paffenholz parameters.
+
 This is a discovery/falsification harness, not a verifier of the full Mahler
 conjecture. A classification proof cannot be replaced by checking finitely
 many face lattices.
