@@ -3,7 +3,7 @@ title = "Four-dimensional Mahler volume conjecture"
 question = "For every convex body K⊂R^4, prove |K| |(K-s(K))°| ≥ 3125/576, with equality only for simplices."
 # proposed | scaffolded | active | partial-results | solved | excluded | retired
 status = "partial-results"
-best_result = "Sharp inequality for every 4D affine join; terminal non-pyramids have at least six nonsimplicial facets and satisfy 2f03≥5(f0+f3)-4; universal unweighted quadratic and fixed-geometry flip ansatzes ruled out."
+best_result = "Sharp inequality for every 4D affine join; terminal non-simplices have quadratic rank ≥3 and at least 8 vertices; pair-terminal non-pyramids satisfy 2f03≥5(f0+f3)-4 and have ≥6 nonsimplicial facets."
 doi = ""
 sessions = [
     "2026-07-23 scaffolded from template",
@@ -14,4 +14,5 @@ sessions = [
     "2026-07-24 certified the exact connected pair-terminal bi-centered root, proved KKT/projective-radical and q-germ spanning lemmas, and derived the facet-boundary trace identity",
     "2026-07-24 identified the boundary deficit as an entropic Laplacian, proved the robust-support terminal lemma, and gave an exact hypersimplex concentration no-go",
     "2026-07-24 proved weighted terminal-excess and six-nonsimplicial-facet theorems, and exactly falsified universal unweighted quadratic and fixed-geometry flip ansatzes",
+    "2026-07-24 identified quadratic coupling with the Hadamard-square slack obstruction, proved terminal quadratic rank at least 3, and derived the exact oriented cofactor cancellation",
 ]

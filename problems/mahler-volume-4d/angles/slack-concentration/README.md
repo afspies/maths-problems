@@ -250,11 +250,20 @@ orthogonal to the bilinear target, and a fixed-geometry one-sided
 bistellar flip energy cancels. A terminality-dependent Hodge operator,
 separate primal/dual Gram data, and geometric two-sided flips remain open.
 
-The finite surviving gate is
+The coupling now has an exact slack-geometric interpretation:
 \[
-D_P(N\circ N)D_{P^\circ}^{\mathsf T}\ne0
+D_P(N\circ N)D_{P^\circ}^{\mathsf T}=0
+\iff
+\dot S=S\circ S
 \]
-for connected pair-terminal non-simplices.  A sufficient dimension target
-is \(\rho(P)+\rho(P^\circ)>10\).  Even this would prove only nonzero
-quadratic coupling, not the trace sign.  A completion must use a global
-oriented determinant/cofactor transport operator, not a local tensor norm.
+is a fixed-support rank-five Zariski tangent; no integrating curve is
+asserted. Every terminal
+non-simplex has quadratic Hilbert excess \(\rho\ge3\), but the sufficient
+rank-sum target cannot cover \(f_0+f_3\le20\). On two affine circuits the
+coupling is the first oriented cofactor response of
+\(\det(S+t(S\circ S))\), while the four simplex-moment pieces cancel as
+\(C-C-C+C\). A completion must therefore use global Veronese gluing or a
+terminality-dependent nonlocal Hodge/Green weight applied before this
+cancellation. Uniform barycentric Plucker residues and local tensor norms
+are insufficient; geometry-dependent or nonlocal cofactor weights remain
+open.

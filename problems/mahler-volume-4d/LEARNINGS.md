@@ -6,13 +6,14 @@ Keep this short enough to read in two minutes — the journal holds the detail.
 
 ## What the next session should do first
 
-- Work only on the connected circuit-support branch. First prove or
-  falsify the robust quadratic-coupling gate
-  \(D_P(N\circ N)D_{P^\circ}^{\mathsf T}\ne0\), preferably through the
-  rank-sum target \(\rho(P)+\rho(P^\circ)>10\). Completion requires a
-  global oriented cofactor transport identity. The universal unweighted
-  contraction, raw regression residual, and fixed-geometry one-sided flip
-  energies are exactly dead; a terminality-dependent Hodge operator is not.
+- Work only on the connected circuit-support branch. Do not make
+  \(\rho(P)+\rho(P^\circ)>10\) a prerequisite: it is impossible when
+  \(f_0+f_3\le20\), a range not yet excluded. Use the exact identity
+  \(C=0\iff\dot S=S\circ S\) as a fixed-support rank-five slack Zariski
+  tangent, not an automatically integrating curve. Attack global Veronese
+  gluing, especially the two-level boundary case and \(f_0+f_3\le20\), or
+  construct a terminality-dependent nonlocal Hodge/Green weight before the
+  \(C-C-C+C\) cofactor cancellation.
 - If a candidate passes the projective covariance block, compute the exact
   KKT multiplier and search the correctly stress-adjusted Schur complement
   on q-regular moduli directions. Pure dimension/spanning arguments cannot
@@ -81,8 +82,34 @@ Keep this short enough to read in two minutes — the journal holds the detail.
   \(U^\mathsf TTW\), including \(Z=U\cdot W\). The fixed-geometry
   one-sided bistellar flip contribution cancels for the same second-moment
   reason; geometric or oriented two-sided flips remain open.
+- Uniform oriented cofactor/Plucker residues are also dead. On two affine
+  circuits the quadratic coupling is the first cofactor response, but the
+  four exact barycentric moment pieces contribute \(C,-C,-C,C\).
+  Geometry-dependent, nonlinear, or nonlocal cofactor weights remain open.
+- Robust tensor rank alone cannot prove \(\rho\ge6\). Exact positive-spanning
+  Vandermonde models with correct triangular-bipyramid inertia satisfy all
+  normal-flat erasure axioms for each \(\rho=3,4,5\). They are not global
+  polytope realizations; simultaneous Veronese gluing is the missing input.
 
 ## Surprises / structure discovered
+
+- Quadratic coupling has an exact geometric meaning:
+  \(D_P(N\circ N)D_{P^\circ}^{\mathsf T}=0\) iff the normalized slack
+  matrix admits the fixed-support Zariski tangent
+  \(\dot S=S\circ S\). No integrating rank-five curve is implied. Every
+  two-level polytope lies in this zero-coupling boundary.
+- A focused two-level target is Boolean--Veronese saturation: a connected,
+  terminal, non-simplex two-level four-polytope should have maximal
+  \(\rho=6\). The simplex, joins, cube/cross-polytope, 24-cell, and
+  \(\Delta(2,5)\) do not refute it. Combined on both sides with the
+  ten-dimensional trace pairing, it would put every pair-terminal
+  two-level body in the already-solved join branch.
+- A self-contained symmetric-pencil argument upgrades terminal rigidity to
+  \(\rho(P)\ge3\). Thus terminal non-simplices have \(f_0\ge8\), and
+  pair-terminal non-simplices have \(f_0,f_3\ge8\).
+- On a pair of six-point affine circuits, coupling is exactly
+  \(\frac d{dt}\det(S+t(N\circ N))|_{t=0}\). This is the correct oriented
+  cofactor atom even though the unweighted global energy cancels it.
 
 - The printed 3D persistence proof has a genuinely 3D sentence, but a
   dimension-free independent-active-facets argument repairs it.

@@ -38,3 +38,9 @@
   circuit object, and proves exact regression/flip cancellations which
   rule out a universal unweighted quadratic identity and a fixed-geometry
   one-sided flip ansatz.
+- `quadratic-slack-cofactor.md`: identifies zero quadratic coupling with
+  the fixed-support Hadamard-square Zariski tangent, proves
+  \(\rho(P)\ge3\) and hence \(f_0,f_3\ge8\) for pair-terminal
+  non-simplices, gives exact abstract sharpness models, and proves that
+  the displayed uniform oriented cofactor residues cancel as
+  \(C-C-C+C=0\).

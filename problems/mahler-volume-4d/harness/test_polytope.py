@@ -1,5 +1,6 @@
 import unittest
 from fractions import Fraction
+from itertools import combinations
 
 from polytope import (
     cell_24,
@@ -27,6 +28,7 @@ from polytope import (
 from variation import (
     boundary_regression_data,
     boundary_trace_deficit,
+    circuit_cofactor_response,
     constrained_reduced_log_bilinear,
     incidence_kkt_multiplier,
     incidence_stress_bilinear,
@@ -34,11 +36,13 @@ from variation import (
     incidence_tangent_and_stress_bases,
     incidence_tangent_dimension,
     incidence_tangent_matrix,
+    low_rank_terminal_quadratic_countermodel,
     paffenholz_parameter_path,
     paired_tangent_from_vertex_path,
     projective_orbit_tangent_vectors,
     projective_vertex_path,
     quadratic_circuit_coupling,
+    quadratic_slack_flex_data,
     reduced_log_mahler_second,
     second_order_incidence_rhs,
     simplex_pair_energy,
@@ -319,6 +323,87 @@ class ExactPolytopeHarnessTests(unittest.TestCase):
             data["normal_squared_moment"],
             data["linear_baseline"] + data["regression_residual"],
         )
+
+    def test_quadratic_slack_flex_and_oriented_cofactor_response(self):
+        regular = paffenholz_24_cell((0, 0, 0, 0))
+        self.assertEqual(
+            quadratic_slack_flex_data(regular),
+            {
+                "primal_relation_dimension": 19,
+                "polar_relation_dimension": 19,
+                "obstruction_rank": 9,
+                "is_hadamard_square_tangent": False,
+            },
+        )
+        self.assertEqual(
+            quadratic_slack_flex_data(centered_hypersimplex_2_5())[
+                "obstruction_rank"
+            ],
+            0,
+        )
+        self.assertTrue(
+            quadratic_slack_flex_data(join_segment_square_4())[
+                "is_hadamard_square_tangent"
+            ]
+        )
+
+        response = circuit_cofactor_response(
+            regular,
+            (0, 1, 2, 4, 8, 15),
+            (0, 1, 2, 3, 6, 12),
+        )
+        self.assertEqual(response["coupling"], -16)
+        self.assertEqual(response["determinant_derivative"], -16)
+        self.assertEqual(
+            response["component_residues"],
+            (-16, 16, 16, -16),
+        )
+        self.assertEqual(response["energy_residue"], 0)
+
+    def test_low_rank_terminal_quadratic_abstract_countermodels(self):
+        for quadratic_rank in (3, 4, 5):
+            data = low_rank_terminal_quadratic_countermodel(quadratic_rank)
+            normals = data["normals"]
+            matrices = data["matrices"]
+            weights = data["positive_weights"]
+            self.assertEqual(data["normal_rank"], 4)
+            self.assertEqual(data["matrix_rank"], quadratic_rank)
+            self.assertEqual(
+                tuple(
+                    sum(
+                        (
+                            weights[index] * normals[index][coordinate]
+                            for index in range(len(normals))
+                        ),
+                        Fraction(),
+                    )
+                    for coordinate in range(4)
+                ),
+                (0, 0, 0, 0),
+            )
+            for chosen in combinations(normals, 4):
+                self.assertEqual(rank(chosen), 4)
+            flattened = tuple(
+                tuple(value for row in matrix for value in row)
+                for matrix in matrices
+            )
+            for chosen in combinations(flattened, quadratic_rank):
+                self.assertEqual(rank(chosen), quadratic_rank)
+            for normal, matrix in zip(normals, matrices):
+                self.assertEqual(rank(matrix), 3)
+                self.assertEqual(
+                    tuple(
+                        sum(
+                            (
+                                matrix[row][column] * normal[column]
+                                for column in range(4)
+                            ),
+                            Fraction(),
+                        )
+                        for row in range(4)
+                    ),
+                    (0, 0, 0, 0),
+                )
 
     def test_direction_flat_enumeration_matches_known_examples(self):
         simplex = centered_simplex_4()

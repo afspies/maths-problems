@@ -76,6 +76,22 @@ Current priorities (update each session):
   unweighted quadratic contraction, the raw regression-residual energy,
   and a fixed-geometry one-sided bistellar-flip energy all cancel or miss
   the trace sign. A terminality-dependent Hodge operator remains possible.
+- Read `results/quadratic-slack-cofactor.md`. It proves
+  \[
+  \rho(P)=h_{V(P)}(2)-5\ge3
+  \]
+  for every terminal non-simplex, hence \(f_0,f_3\ge8\) for a
+  pair-terminal non-simplex. It identifies zero mixed coupling exactly with
+  the fixed-support determinantal slack Zariski tangent
+  \(\dot S=S\circ S\), without asserting integrability. On two affine
+  circuits the coupling is the first oriented cofactor response of
+  \(\det(S+t(S\circ S))\), but the actual simplex energy cancels its four
+  uniform barycentric pieces as \(C-C-C+C=0\).
+- The same note gives exact positive-spanning Vandermonde models with the
+  correct local facet-tensor inertia for every \(\rho=3,4,5\). They are not
+  global polytopes, but prove that robust erasure, normal matroids, and
+  local convex-facet data alone cannot establish the old \(\rho\ge6\)
+  target. Global Veronese gluing is indispensable.
 - Terminality plus disconnected facet-circuit support gives an affine join,
   now solved. In the connected branch the projective orbit has dimension 24
   and the realization-moduli quotient tangent count is
@@ -83,16 +99,21 @@ Current priorities (update each session):
 - Do not quotient all 24 PGL directions in the Mahler Hessian. Only the 20
   affine directions are gauges; the four denominator-projective directions
   carry the covariance block and must be retained or Schur-complemented.
-- Do not return to terminal face-lattice enumeration. First prove or falsify
-  the robust quadratic-coupling gate
-  \(D_P(N\circ N)D_{P^\circ}^{\mathsf T}\ne0\); the clean sufficient target
-  is \(\rho(P)+\rho(P^\circ)>10\). Even success gives curvature, not sign.
-  Completion requires a global oriented determinant/cofactor transport
-  identity which distinguishes positive and negative regular-24-cell local
-  brackets. Pointwise estimates, ordinary circuit spectral gaps,
-  cone-volume concentration, the universal unweighted quadratic
-  contraction, raw regression residual, and fixed-geometry one-sided flips
-  are dead. On candidates passing the
+- Do not return to terminal face-lattice enumeration. Do not use
+  \(\rho(P)+\rho(P^\circ)>10\) as the primary gate: it is impossible when
+  \(f_0+f_3\le20\), which current terminal inequalities do not exclude.
+  First attack the globally realizable low-Hilbert configurations through
+  the common tensors \(zz^\mathsf T-\operatorname{diag}(z)\), prioritizing
+  \(f_0+f_3\le20\) and terminal two-level exclusion. In parallel, seek a
+  terminality-dependent nonlocal Hodge/Green weighting which redistributes
+  the four oriented cofactor residues before they cancel. The first
+  two-level target is the Boolean--Veronese saturation lemma: connected
+  terminal non-simplex two-level \(P\) should satisfy \(\rho(P)=6\).
+  The displayed uniform Cauchy--Binet/Plucker residues, pointwise
+  estimates, ordinary circuit spectral gaps, cone-volume concentration,
+  the universal unweighted contraction, raw regression residual, and
+  fixed-geometry one-sided flips are dead. Geometry-dependent or nonlocal
+  cofactor weights remain open. On candidates passing the
   projective covariance test, use the KKT-corrected Schur complement on the
   q-regular moduli cone.
 - Run the exact harness before and after changes:

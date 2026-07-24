@@ -1043,3 +1043,247 @@ passed again in 7.095 seconds. The bridge verifier returned
 `circuit-support-connected True`, `bi-centered-root-pair-terminal True`,
 and `projective-local-minimum False`. The two standalone certificates took
 about 28 and 95 seconds.
+
+## 2026-07-24 — quadratic slack flex and oriented cofactor cancellation
+
+The full conjecture remains open. This session attacked the robust
+quadratic-coupling and oriented-transport gates selected in the previous
+handoff. It produced a new terminal Hilbert-rank theorem, an exact
+realization-space interpretation of coupling, and a two-sided no-go for
+pure cofactor transport.
+
+### Quadratic Hilbert rank and slack tangent
+
+For a vertex configuration \(X=(x_v)\), let
+\[
+\mathcal G_X=\ker[1\ X]^\mathsf T,\qquad
+\mathcal Q_X(\gamma)=\sum_v\gamma_vx_vx_v^\mathsf T.
+\]
+Quadratic evaluation modulo affine functions is the transpose map, so
+\[
+\rho(P):=\operatorname{rank}\mathcal Q_X=h_{V(P)}(2)-5.
+\]
+For terminal \(P\), facet circuits span \(\mathcal G_X\).
+
+The former sufficient target
+\(\rho(P)+\rho(P^\circ)>10\) has the cardinality obstruction
+\[
+\rho(P)+\rho(P^\circ)\le f_0+f_3-10.
+\]
+It cannot hold when \(f_0+f_3\le20\), a range not excluded by the current
+flag inequalities.
+
+With normalized slack
+\[
+S=1-N=[1\ X]\operatorname{diag}(1,-I_4)[1\ Y]^\mathsf T,
+\]
+the rank is five. Determinantal tangent-space linear algebra gives
+\[
+\boxed{
+D_P(N\circ N)D_{P^\circ}^\mathsf T=0
+\iff
+S\circ S\in T_S\{\operatorname{rank}\le5\}.
+}
+\]
+Because \(S\circ S\) vanishes on incidences, zero coupling is exactly the
+fixed-incidence infinitesimal slack flex \(\dot S=S\circ S\).
+
+Every two-level polytope has zero coupling: each slack column takes values
+\(\{0,c_F\}\), so \(S\circ S=S\operatorname{diag}(c_F)\). Terminal
+non-simplex two-level exclusion is therefore a mandatory boundary case.
+
+### Terminal quadratic rank is at least three
+
+For each nonsimplicial facet \(F\), its quadratic circuit image is nonzero.
+Otherwise all products of affine functions would again be affine on its
+vertices, making the four-dimensional affine evaluation space a separating
+unital algebra and hence the full function algebra.
+
+Every local tensor kills its facet normal. Rank one is impossible because
+the nonsimplicial-facet normals span \(\mathbb R^4\).
+
+Rank two reduces to a symmetric \(4\times4\) pencil. For a regular pencil,
+group normals by projective determinant roots. Corank is bounded by root
+multiplicity, whose total is four. Erasing the span of every root group
+except one removes a rank-at-most-three normal flat and leaves only one
+pencil line, contradicting robust terminal spanning.
+
+The identically singular case was independently audited at xhigh effort.
+After quotienting the common kernel, a self-contained Schur-complement
+argument shows that a common-kernel-free singular symmetric pencil in
+dimension at most four has all kernel directions in a subspace of
+codimension at least one. Maximal rank is \(n-1\); the Schur identity makes
+one cyclic span totally isotropic; Witt index one gives a linear polynomial
+kernel; and the adjugate has at most one exceptional member in dimension
+four. Restoring a common kernel either puts all normals in a rank-three
+flat or reduces to the regular root-erasure argument.
+
+Consequently
+\[
+\boxed{\rho(P)\ge3}
+\]
+for every terminal non-simplex. Hence \(f_0(P)\ge8\), and a pair-terminal
+non-simplex has \(f_0,f_3\ge8\).
+
+### Exact sharpness of abstract rank data
+
+The normal-flat axioms alone cannot improve three. For
+\(\rho=3,4,5\), exact rational Vandermonde models were built from
+\[
+y_i=(-1)^i(1,i,i^2,i^3)
+\]
+and
+\[
+A_d(z)=B(z)^\mathsf T
+\operatorname{diag}(1,-1,-(1+\cdots+z^d))B(z),
+\quad d=\rho-3,
+\]
+where
+\[
+B(z)=
+\begin{pmatrix}
+-z&1&0&0\\
+0&-z&1&0\\
+0&0&-z&1
+\end{pmatrix}.
+\]
+They have normal matroid \(U_{4,\rho+3}\), survive every rank-three-flat
+erasure with full block rank, positively span by a finite-difference
+identity, and have inertia \((1,2,1)\), matching a convex
+triangular-bipyramid facet circuit.
+
+These are abstract local models, not globally glued polytopes. They prove
+that a stronger theorem must use the common vertex configuration. After
+normalizing five vertices to \(0,e_1,\ldots,e_4\), the remaining vertices
+\(z\) generate
+\[
+\mathcal Q_z=zz^\mathsf T-\operatorname{diag}(z).
+\]
+
+### Oriented cofactor atom and cancellation
+
+For two six-point affine circuits,
+\[
+\gamma_i=(-1)^i\det U_{\widehat i},\qquad
+\delta_j=(-1)^j\det W_{\widehat j}.
+\]
+Cauchy--Binet gives \(\operatorname{Cof}_{ij}(S)=\gamma_i\delta_j\), hence
+\[
+\boxed{
+\left.\frac d{dt}\det(S+t(N\circ N))\right|_{t=0}
+=\gamma^\mathsf T(N\circ N)\delta.
+}
+\]
+Quadratic coupling is the first oriented cofactor response of the
+rank-five slack determinant.
+
+However, the four pieces of the \(900\)-scaled simplex moment energy have
+double-circuit residues
+\[
+C,\quad-C,\quad-C,\quad C.
+\]
+Thus the full energy cancels as
+\[
+\boxed{C-C-C+C=0.}
+\]
+Pure one-sided or simultaneous Cauchy--Binet/Plucker retriangulation is a
+valuation tautology. A successful Hodge/Green operator must introduce
+terminality-dependent nonlocal weights before these terms are combined.
+
+At the regular 24-cell, the exact circuit pair
+\[
+I=(0,1,2,4,8,15),\qquad J=(0,1,2,3,6,12)
+\]
+gives coupling and determinant derivative \(-16\), component residues
+\((-16,16,16,-16)\), and total energy residue zero.
+
+### Exploratory falsification
+
+An exact Gale search sampled 50,000 rational seven-vertex configurations.
+Only one passed the necessary six-nonsimplicial-facet and six-nonsimple-
+vertex screen; its primal maximum shadow-speed dimension was six while its
+polar maximum was five. This is finite discovery evidence only; the
+theorem \(f_0\ge8\) comes from the pencil proof.
+
+A possible inverse-covariance trace inequality was pressure-tested but not
+adopted. Ten exact centrally symmetric rational ten-vertex bodies had
+\[
+\operatorname{tr}
+\bigl((\operatorname{cov}P\operatorname{cov}P^\circ)^{-1}\bigr)
+\in[176.53,177.86],
+\]
+above the homogeneous value \(144\). No proof or counterexample was found,
+and this observation supports no claim.
+
+### GPT-5.6 Sol xhigh verdict
+
+The independent reviewer approved the Hilbert-function and slack-tangent
+identities, identified the small-cardinality obstruction to rank-sum,
+audited the regular-pencil proof, and replaced an initial Kronecker appeal
+with the self-contained singular-pencil lemma above. Its route verdict was:
+
+- **STOP** rank-sum as a prerequisite and pure oriented Plucker transport;
+- **GO** global low-Hilbert/Veronese gluing, terminal two-level exclusion,
+  and terminality-dependent nonlocal Hodge/Green weighting.
+
+### Commands and compute
+
+```text
+python3 -m py_compile \
+  problems/mahler-volume-4d/harness/variation.py \
+  problems/mahler-volume-4d/harness/test_polytope.py
+python3 -m unittest discover \
+  -s problems/mahler-volume-4d/harness \
+  -p test_polytope.py -k quadratic -v
+python3 -m unittest discover \
+  -s problems/mahler-volume-4d/harness -v
+python3 problems/mahler-volume-4d/harness/verify_bridge_counterexample.py
+python3 problems/mahler-volume-4d/harness/bicenter_certificate.py
+```
+
+The three focused quadratic tests passed in 9.064 seconds. The full exact
+suite passed `Ran 24 tests in 64.719s — OK`. The bridge certificate again
+returned `all-speed-dimensions 5` and
+`terminal-pair-implies-simplex False`. The interval certificate returned
+`unique-bicenter-root True`, `covariance-trace-below-one-ninth True`,
+`circuit-support-connected True`, `bi-centered-root-pair-terminal True`,
+and `projective-local-minimum False`.
+
+### Final xhigh proof audit and scope correction
+
+A second GPT-5.6 Sol xhigh pass returned **STOP as written / GO after
+narrow corrections**. The reviewer found no counterexample to
+\(\rho(P)\ge3\), but required the singular-pencil proof to expose:
+
+- the explicit kernel vector
+  \(k(s,t)=se+tu\), with \(e=(0,1)\), \(u=(-H^{-1}d,\alpha)\);
+- the primitive polynomial-kernel argument
+  \(\operatorname{adj}P=p\,kk^\mathsf T\);
+- the rank-one exceptional-member derivative certificate; and
+- the dimension count after restoring the common kernel.
+
+Those details are now written out in
+`results/quadratic-slack-cofactor.md`. The audit also caught two
+overstatements. First, \(\dot S=S\circ S\) is only a fixed-support
+Zariski tangent; no integrating rank-five slack curve is claimed. Second,
+the exact \(C-C-C+C\) calculation kills the displayed uniform barycentric
+cofactor residues, not every possible geometry-dependent, nonlinear, or
+nonlocal Plucker weighting. The result note, report, handoff, and
+learnings were narrowed accordingly.
+
+An independent exploratory pass identified the next concrete two-level
+target:
+
+> If \(P\) is a connected terminal non-simplex two-level four-polytope,
+> then \(\rho(P)=6\).
+
+This Boolean--Veronese saturation lemma survives the simplex, join,
+cube/cross-polytope, regular-24-cell, and \(\Delta(2,5)\) pressure tests.
+On both sides it would contradict the ten-dimensional trace pairing under
+zero coupling, forcing every pair-terminal two-level body into the solved
+join branch. It remains a conjectural next lemma, not a result of this
+session.
+
+The final exact rerun passed `Ran 24 tests in 64.401s — OK`; both standalone
+certificates and Python compilation also passed. After the corrections, the
+same xhigh reviewer returned **GO — no remaining exact issue**.

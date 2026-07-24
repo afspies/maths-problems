@@ -32,7 +32,12 @@ flag bound to \(2f_{03}\ge5(f_0+f_3)-4\) and proves every terminal
 non-pyramid has at least six nonsimplicial facets. Exact regression and flip
 cancellations rule out a universal unweighted quadratic identity, the raw
 regression-residual energy, and a fixed-geometry one-sided flip ansatz,
-isolating a global oriented cofactor transport problem. The full
+while a self-contained symmetric-pencil argument proves every terminal
+non-simplex has quadratic Hilbert excess at least three and hence at least
+eight vertices. Quadratic coupling is exactly the obstruction to the
+Hadamard-square slack Zariski tangent; its four uniform barycentric
+cofactor residues cancel as \(C-C-C+C\), isolating a
+terminality-dependent nonlocal transport problem. The full
 four-dimensional conjecture is not proved.
 
 ## Principal negative result
@@ -450,10 +455,55 @@ D_\partial=\frac14-\operatorname{tr}(HH^\circ)
 \]
 contains no direct nonlinear-residual energy. Retriangulating one fixed
 facet while holding the opposite tetrahedron and geometry fixed also
-cancels. This does not exclude a geometric or oriented two-sided flip.
-The surviving finite gate is nonvanishing of the mixed quadratic datum on
-every connected pair-terminal non-simplex; the sign still requires a
-global oriented cofactor transport identity.
+cancels.
+
+### Quadratic slack theorem and terminal rank three
+
+Let \(S=1-N\) be the normalized vertex--facet slack matrix. With complete
+primal and polar affine-dependency bases,
+\[
+\boxed{
+D_P(N\circ N)D_{P^\circ}^\mathsf T=0
+\iff
+S\circ S\in T_S\{\operatorname{rank}\le5\}.
+}
+\]
+Thus zero coupling is exactly the fixed-support determinantal Zariski
+tangent \(\dot S=S\circ S\); no integrating rank-five curve is asserted.
+The one-sided rank is projectively intrinsic:
+\[
+\rho(P)=h_{V(P)}(2)-5.
+\]
+A symmetric-pencil argument, including the identically singular case,
+proves
+\[
+\boxed{\rho(P)\ge3}
+\]
+for every terminal non-simplex. Therefore \(f_0\ge8\), and a pair-terminal
+non-simplex has \(f_0,f_3\ge8\).
+
+This does not reach the former sufficient rank-sum target. Exact
+positive-spanning Vandermonde models with valid local facet-tensor inertia
+satisfy all robust normal-flat erasure axioms for every
+\(\rho=3,4,5\). They are not global polytopes, and show that the missing
+input is simultaneous Veronese gluing rather than another abstract rank
+count.
+
+On two six-point affine circuits,
+\[
+\left.\frac d{dt}\det(S+t(S\circ S))\right|_{t=0}
+=\left.\frac d{dt}\det(S+t(N\circ N))\right|_{t=0}
+=\gamma^\mathsf T(N\circ N)\delta.
+\]
+This is the exact oriented cofactor atom. But the total-, row-, column-,
+and entry-square pieces of the simplex moment energy contribute
+\[
+C,\ -C,\ -C,\ C,
+\]
+so the displayed uniform one- or two-sided Plucker residues cancel
+identically. A successful argument must add geometry- or
+terminality-dependent weights before this cancellation, or classify the
+globally realizable low-Hilbert configurations.
 
 ## Verification
 
@@ -463,7 +513,7 @@ Run:
 python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ```
 
-Expected: twenty-two tests pass. The harness uses rational arithmetic only. It checks
+Expected: twenty-four tests pass. The harness uses rational arithmetic only. It checks
 the centered simplex's polar, incidences, speed dimension, and exact product
 \(3125/576\); verifies cube/cross-polytope polarity; and supplies negative
 speed controls for the cross-polytope, cube, and pyramid over a cube.
@@ -550,10 +600,11 @@ sign as superharmonicity of the cone-duality defect. Henk--Linke subspace
 concentration alone is insufficient, as the exact hypersimplex witness
 shows. Repartitioning incidence and nonincidence brackets alone is also
 tautological. The universal unweighted quadratic contraction, raw
-regression residual, and fixed-geometry one-sided flip now fail exactly,
-but a terminality-dependent Hodge operator remains possible. The next
-route is GO for the robust quadratic-coupling rank gate followed by a
-global oriented cofactor transport identity.
+regression residual, and uniform oriented Plucker residues now fail
+exactly; geometry-dependent or nonlocal cofactor weights remain open.
+The rank-sum shortcut also cannot cover \(f_0+f_3\le20\). The next route is
+GO for global low-Hilbert/Veronese gluing or a terminality-dependent
+nonlocal Hodge/Green operator acting before the \(C-C-C+C\) cancellation.
 
 ## Relation to prior work
 

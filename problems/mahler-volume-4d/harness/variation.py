@@ -3,9 +3,11 @@
 from fractions import Fraction
 from functools import lru_cache
 from itertools import combinations, permutations
+from math import comb
 
 from polytope import (
     affine_rank,
+    determinant,
     dot,
     inverse,
     nullspace,
@@ -691,6 +693,269 @@ def quadratic_circuit_coupling(polytope):
             quadratic_rows(polar.vertices, polar_circuits)
         ),
         "mixed_rank": rank(mixed),
+    }
+
+
+def quadratic_slack_flex_data(polytope):
+    """Global obstruction to the Hadamard-square slack tangent.
+
+    If ``S`` is the normalized vertex--facet slack matrix, then
+
+        S o S in T_S {matrices of rank at most 5}
+
+    exactly when the returned obstruction has rank zero.  Unlike
+    ``quadratic_circuit_coupling``, this uses bases of the complete affine
+    dependency spaces; the two agree when facet circuits span globally.
+    """
+    polar, _, _, _ = paired_geometry(polytope)
+    primal_relations = tuple(
+        nullspace(
+            [
+                [Fraction(1) for _ in polytope.vertices],
+                *[
+                    [vertex[coordinate] for vertex in polytope.vertices]
+                    for coordinate in range(4)
+                ],
+            ]
+        )
+    )
+    polar_relations = tuple(
+        nullspace(
+            [
+                [Fraction(1) for _ in polar.vertices],
+                *[
+                    [vertex[coordinate] for vertex in polar.vertices]
+                    for coordinate in range(4)
+                ],
+            ]
+        )
+    )
+    slack_squared = tuple(
+        tuple((1 - dot(vertex, dual)) ** 2 for dual in polar.vertices)
+        for vertex in polytope.vertices
+    )
+    obstruction = tuple(
+        tuple(
+            sum(
+                (
+                    primal[vertex]
+                    * slack_squared[vertex][facet]
+                    * dual[facet]
+                    for vertex in range(len(polytope.vertices))
+                    for facet in range(len(polar.vertices))
+                ),
+                Fraction(),
+            )
+            for dual in polar_relations
+        )
+        for primal in primal_relations
+    )
+    obstruction_rank = rank(obstruction)
+    return {
+        "primal_relation_dimension": len(primal_relations),
+        "polar_relation_dimension": len(polar_relations),
+        "obstruction_rank": obstruction_rank,
+        "is_hadamard_square_tangent": obstruction_rank == 0,
+    }
+
+
+def circuit_cofactor_response(
+        polytope,
+        primal_indices,
+        polar_indices,
+):
+    """Exact oriented response on two six-point affine circuits.
+
+    The first derivative of ``det(S + t (N o N))`` equals the mixed
+    quadratic-circuit contraction.  The four barycentric simplex-energy
+    components have residues ``(C, -C, -C, C)`` and therefore cancel.
+    """
+    polar, _, _, _ = paired_geometry(polytope)
+    if len(primal_indices) != 6 or len(polar_indices) != 6:
+        raise ValueError("expected two six-point affine circuits")
+    primal_rows = tuple(
+        (Fraction(1), *polytope.vertices[index])
+        for index in primal_indices
+    )
+    polar_rows = tuple(
+        (Fraction(1), *polar.vertices[index])
+        for index in polar_indices
+    )
+    primal_circuit = tuple(
+        Fraction((-1) ** omitted)
+        * determinant(
+            [
+                row
+                for index, row in enumerate(primal_rows)
+                if index != omitted
+            ]
+        )
+        for omitted in range(6)
+    )
+    polar_circuit = tuple(
+        Fraction((-1) ** omitted)
+        * determinant(
+            [
+                row
+                for index, row in enumerate(polar_rows)
+                if index != omitted
+            ]
+        )
+        for omitted in range(6)
+    )
+    if not all(primal_circuit) or not all(polar_circuit):
+        raise ValueError("each five-point deletion must be an affine basis")
+
+    pairing = tuple(
+        tuple(
+            dot(
+                polytope.vertices[primal_index],
+                polar.vertices[polar_index],
+            )
+            for polar_index in polar_indices
+        )
+        for primal_index in primal_indices
+    )
+    slack = tuple(
+        tuple(1 - value for value in row)
+        for row in pairing
+    )
+    coupling = sum(
+        (
+            primal_circuit[row]
+            * pairing[row][column] ** 2
+            * polar_circuit[column]
+            for row in range(6)
+            for column in range(6)
+        ),
+        Fraction(),
+    )
+    determinant_derivative = sum(
+        (
+            Fraction((-1) ** (row + column))
+            * determinant(
+                [
+                    [
+                        slack[inner_row][inner_column]
+                        for inner_column in range(6)
+                        if inner_column != column
+                    ]
+                    for inner_row in range(6)
+                    if inner_row != row
+                ]
+            )
+            * pairing[row][column] ** 2
+            for row in range(6)
+            for column in range(6)
+        ),
+        Fraction(),
+    )
+
+    component_residues = [Fraction() for _ in range(4)]
+    energy_residue = Fraction()
+    for omitted_row in range(6):
+        for omitted_column in range(6):
+            minor = tuple(
+                tuple(
+                    pairing[row][column]
+                    for column in range(6)
+                    if column != omitted_column
+                )
+                for row in range(6)
+                if row != omitted_row
+            )
+            row_sums = tuple(sum(row, Fraction()) for row in minor)
+            column_sums = tuple(
+                sum((minor[row][column] for row in range(5)), Fraction())
+                for column in range(5)
+            )
+            components = (
+                sum(row_sums, Fraction()) ** 2,
+                sum((value**2 for value in row_sums), Fraction()),
+                sum((value**2 for value in column_sums), Fraction()),
+                sum(
+                    (value**2 for row in minor for value in row),
+                    Fraction(),
+                ),
+            )
+            weight = (
+                primal_circuit[omitted_row]
+                * polar_circuit[omitted_column]
+            )
+            for index, component in enumerate(components):
+                component_residues[index] += weight * component
+            energy_residue += weight * (
+                sum(components, Fraction()) - 100
+            )
+    return {
+        "primal_circuit": primal_circuit,
+        "polar_circuit": polar_circuit,
+        "coupling": coupling,
+        "determinant_derivative": determinant_derivative,
+        "component_residues": tuple(component_residues),
+        "energy_residue": energy_residue,
+    }
+
+
+def low_rank_terminal_quadratic_countermodel(quadratic_rank):
+    """Abstract robust-terminal tensor data for ranks three through five.
+
+    These exact Vandermonde models satisfy normal-flat erasure, positive
+    normal spanning, the facet-kernel condition, and the local
+    triangular-bipyramid inertia.  They are not asserted to glue to a
+    polytope.
+    """
+    if quadratic_rank not in (3, 4, 5):
+        raise ValueError("the model is defined for ranks three, four, and five")
+    degree = quadratic_rank - 3
+    count = quadratic_rank + 3
+
+    def polynomial_sum(value):
+        return sum(
+            (value**power for power in range(degree + 1)),
+            Fraction(),
+        )
+
+    normals = []
+    matrices = []
+    for index in range(count):
+        value = Fraction(index)
+        sign = -1 if index % 2 else 1
+        normals.append(
+            tuple(
+                Fraction(sign) * value**power
+                for power in range(4)
+            )
+        )
+        polynomial = polynomial_sum(value)
+        matrices.append(
+            (
+                (value**2, -value, 0, 0),
+                (-value, 1 - value**2, value, 0),
+                (
+                    0,
+                    value,
+                    -1 - polynomial * value**2,
+                    polynomial * value,
+                ),
+                (0, 0, polynomial * value, -polynomial),
+            )
+        )
+    positive_weights = tuple(
+        Fraction(comb(count - 1, index))
+        for index in range(count)
+    )
+    return {
+        "normals": tuple(normals),
+        "matrices": tuple(matrices),
+        "positive_weights": positive_weights,
+        "normal_rank": rank(normals),
+        "matrix_rank": rank(
+            [
+                tuple(value for row in matrix for value in row)
+                for matrix in matrices
+            ]
+        ),
     }
 
 

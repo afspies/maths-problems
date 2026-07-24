@@ -73,8 +73,10 @@
   reductions now isolate the connected case. Robust terminality gives a
   stronger flag inequality and a six-nonsimplicial-facet theorem, while
   exact regression and flip cancellations rule out a universal unweighted
-  quadratic identity and a fixed-geometry one-sided flip ansatz. The
-  general 4D conjecture remains open.
+  quadratic identity and a fixed-geometry one-sided flip ansatz. Every
+  terminal non-simplex has quadratic Hilbert excess at least three, and
+  the displayed uniform barycentric cofactor residues cancel
+  componentwise. The general 4D conjecture remains open.
 </div>
 
 <h2>1 · The terminal-pair bridge is false</h2>
@@ -388,8 +390,23 @@ based only on that unweighted datum, not a terminality-dependent Hodge
 operator. At a bi-centered pair, boundary-normal regression makes the
 nonlinear residual orthogonal to every bilinear U<sup>T</sup>TW, and a
 fixed-geometry one-sided bistellar flip energy cancels. Geometric two-sided
-flips remain open. The surviving gate is global, oriented cofactor
-transport—not a local quadratic norm.</p>
+deformations remain open; the next calculation tests whether their raw
+oriented cofactors retain any residue.</p>
+<div class="env">
+  <span class="label">Theorem 6.</span>
+  If <var>P</var> is a terminal non-simplex, its quadratic circuit-image
+  rank satisfies ρ(<var>P</var>)≥3. Consequently f<sub>0</sub>≥8; for a
+  pair-terminal non-simplex, f<sub>0</sub>,f<sub>3</sub>≥8.
+</div>
+<p>With S=1−N, zero mixed coupling is exactly the determinantal tangent
+S∘S∈T<sub>S</sub>{rank≤5}, i.e. the fixed-support Zariski tangent
+Ṡ=S∘S; no integrating rank-five curve is asserted. On two affine circuits
+the coupling equals both d/dt det(S+t(S∘S)) and d/dt
+det(S+t(N∘N)) at t=0. However the total-, row-, column-, and entry-square
+moment pieces contribute C, −C, −C, C. The displayed uniform
+Cauchy–Binet/Plücker residues therefore cancel. The remaining route
+requires global Veronese gluing or geometry-dependent nonlocal Hodge/Green
+weights before this cancellation.</p>
 
 <h2>9 · Source audit</h2>
 <p>The Meyer–Reisner convexity/rigidity theorem, volume-affinity, compactness,
@@ -404,7 +421,7 @@ obstacle.</p>
 <h2>10 · Exact verification</h2>
 <pre><code>$ python3 -m unittest discover -s problems/mahler-volume-4d/harness -v
 ...
-Ran 22 tests
+Ran 24 tests
 
 OK
 
@@ -436,12 +453,13 @@ next campaign must prove or falsify superharmonicity of the cone-duality
 defect—equivalently the global boundary transport inequality—on the
 connected circuit-support branch. Incidence repartition alone is
 tautological, while the universal unweighted contraction, raw regression
-residual, and fixed-geometry one-sided flip fail exactly. A
-terminality-dependent Hodge operator remains possible. The route is GO for
-the robust quadratic-coupling rank gate followed by a global oriented
-cofactor identity. Any candidate passing
-the projective covariance test must then face the stress-corrected Schur
-complement.</p>
+residual, and uniform oriented Plücker residues fail exactly;
+geometry-dependent or nonlocal cofactor weights remain open. The rank-sum
+shortcut cannot cover f<sub>0</sub>+f<sub>3</sub>≤20. The route is GO for
+global low-Hilbert/Veronese gluing or a terminality-dependent nonlocal
+Hodge/Green operator acting before the C−C−C+C cancellation. Any candidate
+passing the projective covariance test must then face the stress-corrected
+Schur complement.</p>
 
 <div class="footer">
   <p><strong>Status:</strong> partial results. The full four-dimensional

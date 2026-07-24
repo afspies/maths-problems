@@ -93,6 +93,15 @@ boundary regression check gives
 These are falsification checks for the universal unweighted degree-two
 contraction ansatz, not a finite proof of a global sign.
 
+`quadratic_slack_flex_data` uses the complete affine-dependency spaces and
+checks the exact determinantal tangent obstruction to
+\(\dot S=S\circ S\). `circuit_cofactor_response` verifies that this
+coupling is the first oriented slack-determinant response, while the four
+simplex-energy residues cancel as \((C,-C,-C,C)\).
+`low_rank_terminal_quadratic_countermodel` verifies the rational
+Vandermonde models showing that robust normal-flat erasure and local
+facet-tensor inertia alone permit every quadratic rank \(3,4,5\).
+
 At the regular 24-cell the paired verifier checks the exact constrained
 blocks
 \[
